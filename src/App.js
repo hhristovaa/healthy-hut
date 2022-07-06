@@ -1,15 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PrivateRoute from './components/Layout/PrivateRoute';
 import Navbar from './components/Layout/Navbar';
-import Trending from './components/Pages/Trending';
-import Recipes from './components/Pages/Recipes';
-import Articles from './components/Pages/Articles';
-import Contacts from './components/Pages/Contacts';
-import Profile from './components/Pages/Profile';
-import SignIn from './components/Pages/SignIn';
-import SignUp from './components/Pages/SignUp';
-import ForgotPassword from './components/Pages/ForgotPassword';
+import Trending from './pages/Trending';
+import Recipes from './pages/Recipes';
+import Articles from './pages/Articles';
+import Contacts from './pages/Contacts';
+import Profile from './pages/Profile';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import ForgotPassword from './pages/ForgotPassword';
 
 function App() {
   return (
@@ -20,7 +21,10 @@ function App() {
           <Route path='/recipes' element={<Recipes />} />
           <Route path='/articles' element={<Articles />} />
           <Route path='/contacts' element={<Contacts />} />
+          <Route path='/profile' element={<PrivateRoute />} >
           <Route path='/profile' element={<Profile />} />
+
+            </Route>
           <Route path='/sign-in' element={<SignIn />} />
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />

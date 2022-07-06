@@ -3,7 +3,8 @@ import { toast } from 'react-toastify';
 import classes from './SignIn.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import visibilityIcon from '../../assets/svg/visibilityIcon.svg';
+import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+import OAuth from '../components/Layout/OAuth';
 
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -73,6 +74,8 @@ const SignIn = () => {
                 <Link to='/forgot-password' className='forgotPasswordLink'>
                     Forgot Password
                 </Link>
+
+                <OAuth/>
 
                 <div className="signInBar">
                     <p className="signInText">

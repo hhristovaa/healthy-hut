@@ -4,8 +4,9 @@ import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import {getAuth, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth';
 import {setDoc, doc, serverTimestamp} from 'firebase/firestore';
-import {db} from '../../firebase.config';
-import visibilityIcon from '../../assets/svg/visibilityIcon.svg';
+import {db} from '../firebase.config';
+import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+import OAuth from '../components/Layout/OAuth';
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -13,9 +14,10 @@ const SignUp = () => {
         firstName: '',
         lastName: '',
         email: '',
-        password: ''
+        password: '',
+        hasAdminRights: false
     });
-    const { firstName, lastName, email, password } = formData;
+    const { firstName, lastName, email, password, hasAdminRights } = formData;
 
     const navigate = useNavigate();
 
@@ -110,6 +112,8 @@ const SignUp = () => {
                     <button className="signInButton">Sign Up</button>
                 </div>
             </form>
+
+            <OAuth/>
 
             <Link to='/sign-in' className='registerLink'>Sign In Instead</Link>
         </>
