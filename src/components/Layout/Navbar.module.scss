@@ -1,0 +1,14 @@
+@use '../../styles/_colors.scss' as *;
+
+.navbarList {
+    display: flex;
+}
+.navbarItem {
+    color: $color-primary;
+    list-style-type: none;
+    margin: 0px 1em;
+}
+
+.active {
+    color: crimson; 
+}

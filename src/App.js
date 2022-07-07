@@ -5,12 +5,14 @@ import PrivateRoute from './components/Layout/PrivateRoute';
 import Navbar from './components/Layout/Navbar';
 import Trending from './pages/Trending';
 import Recipes from './pages/Recipes';
-import Articles from './pages/Articles';
+import Articles from './pages/articles/Articles';
 import Contacts from './pages/Contacts';
 import Profile from './pages/Profile';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
+import CreateArticle from './pages/articles/CreateArticle';
+import FullArticle from './pages/articles/FullArticle';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
           <Route path='/sign-in' element={<SignIn />} />
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/create-article' element={<CreateArticle />} />
+          <Route path='/articles/:articleId' element={<FullArticle />} />
         </Routes>
         <Navbar />
       </Router>

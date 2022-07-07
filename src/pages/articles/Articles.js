@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { collection, getDocs, query, where, orderBy, limit, startAfter, setDoc } from 'firebase/firestore';
-import { db } from '../firebase.config';
+import { db } from '../../firebase.config';
 import { toast } from 'react-toastify';
-import Spinner from '../components/UI/Spinner';
+import Spinner from '../../components/UI/Spinner';
+import ArticleItem from '../../components/Articles/ArticleItem';
 
 
 const Articles = () => {
@@ -49,12 +50,7 @@ const Articles = () => {
                 <>
                     <main>
                         <ul>{articles.map((article) => (
-                            <>
-                                <h3 key={article.id}>{article.data.name}</h3>
-                                <div> {article.data.content}</div>
-                                <img src={article.data.imageUrl} alt="" />
-                                Source:  <a href={article.data.source} target="_blank">{article.data.source}</a>
-                            </>
+                            <ArticleItem article={article.data} id={article.id} key={article.id}/>
                         ))}
 
                         </ul>

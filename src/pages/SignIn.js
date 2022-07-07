@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import visibilityIcon from '../assets/svg/visibilityIcon.svg';
 import OAuth from '../components/Layout/OAuth';
+import SubmitButton from '../components/UI/SubmitButton';
 
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
