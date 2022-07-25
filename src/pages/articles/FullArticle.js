@@ -4,6 +4,7 @@ import {getDoc, doc} from 'firebase/firestore';
 import {getAuth} from 'firebase/auth';
 import { db } from '../../firebase.config';
 import Spinner from '../../components/UI/Spinner';
+import classes from './Articles.module.scss';
 
 const FullArticle = () => {
     const [article, setArticle] = useState(null);
@@ -34,23 +35,22 @@ const FullArticle = () => {
 
 
     return (
-        <>
-        <h1>Full article</h1>
-
         <main>
 
-<p>{article.name}</p>
-<p>{article.content}</p>
-<p>{article.source}</p>
+        <h1 className={classes['g-heading']}>{article.name}</h1>
+
+        <div className={classes['article__img']}><img src={article.imageUrl}/></div>
+<p className={classes['article__content']}>{article.content}</p>
+<span>Source: </span><a className={classes['article__source']} href={article.source}>{article.source}</a> <br></br>
 {/* <p>{article.timestamp.toString()}</p> */}
-<img src={article.imageUrl}/>
+
 
 
 {auth.currentUser?.uid !== article.userRef && (
     <Link to={`/contacts/${article.userRef}?articleName=${article.name}`}>Access forbidden</Link>
 )}
-        </main>
-        </>
+       
+       </main>
     )
 
 }

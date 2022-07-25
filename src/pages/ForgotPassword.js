@@ -1,14 +1,14 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {getAuth, sendPasswordResetEmail} from 'firebase/auth';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { toast } from 'react-toastify';
 
 const ForgotPassword = () => {
 
     const [email, setEmail] = useState('');
 
-    const onChange = (e) => setEmail (e.target.value);
-    
+    const onChange = (e) => setEmail(e.target.value);
+
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -32,7 +32,7 @@ const ForgotPassword = () => {
                     <input type="email" name="email" id="email" placeholder='Email' value={email} onChange={onChange} />
                     <Link to='/sign-in'>Sign In</Link>
 
-<button>Send reset link</button>
+                    <button>Send reset link</button>
                 </form>
             </main>
         </div>

@@ -3,7 +3,7 @@ import classes from './Footer.module.scss';
 const Footer = () => {
     return (<>
     <footer className={classes.footer}>
-        <p>&copy; 2022 DrinksMarket </p>
+        <p>&copy; 2022 Healthy Hut </p>
     </footer>
     </>);
 }

@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import classes from './SignIn.module.css';  
+import classes from '../signin/SignIn.module.scss';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import {getAuth, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth';
 import {setDoc, doc, serverTimestamp} from 'firebase/firestore';
-import {db} from '../firebase.config';
-import visibilityIcon from '../assets/svg/visibilityIcon.svg';
-import OAuth from '../components/Layout/OAuth';
+import {db} from '../../firebase.config';
+import visibilityIcon from '../../assets/svg/visibilityIcon.svg';
+import OAuth from '../../components/Layout/OAuth';
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -17,6 +18,7 @@ const SignUp = () => {
         password: '',
         hasAdminRights: false
     });
+
     const { firstName, lastName, email, password, hasAdminRights } = formData;
 
     const navigate = useNavigate();
@@ -35,7 +37,7 @@ const SignUp = () => {
 
         try {
             const auth = getAuth();
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password, hasAdminRights);
             const user = userCredential.user;
 
             updateProfile(auth.currentUser, {
@@ -59,7 +61,7 @@ const SignUp = () => {
 
 
     return (
-        <>
+        <main>
             <div>
                 <h1>Welcome Back!</h1>
             </div>
@@ -116,7 +118,7 @@ const SignUp = () => {
             <OAuth/>
 
             <Link to='/sign-in' className='registerLink'>Sign In Instead</Link>
-        </>
+        </main>
     )
 }
 

@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 const Trending = () => {
     return (
         <main>
+            
 
     <h1>Trending</h1>
 

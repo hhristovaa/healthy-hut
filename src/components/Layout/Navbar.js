@@ -1,5 +1,5 @@
 import classes from './Navbar.module.scss';
-import {useNavigate, useLocation} from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 
 const Navbar = () => {
@@ -11,17 +11,19 @@ const Navbar = () => {
         if (route === location.pathname) {
             return true;
         }
-        
+
     }
-    const navbarItemClasses = `${classes.navbarItem} ${pathMatchRoute('/') ? classes.active : ''}`;
-    const isLinkActive = (({ isActive }) => (isActive ? classes.active : ""));
+    const navbarItemClasses = `${classes['navbar__item']} ${pathMatchRoute('/recipes') ? classes['is-active'] : ''}`;
+    const isLinkActive = (({ isActive }) => (isActive ? classes['is-active'] : ""));
 
 
     return (
-        <header>
-            <nav className='navbar'>
-                <ul className={classes.navbarList}>
-                    <li className={navbarItemClasses} onClick={() => navigate('/')}>Trending</li>
+        <header className={classes.header}>
+            <Link to='/' className={classes.logo}>HealthyHut</Link>
+
+            <nav>
+                <ul className={classes.navbar}>
+                    <li className={navbarItemClasses} onClick={() => navigate('/')}>Home</li>
                     <li className={navbarItemClasses} onClick={() => navigate('/recipes')}>Recipes</li>
                     <li className={navbarItemClasses} onClick={() => navigate('/articles')}>Articles</li>
                     <li className={navbarItemClasses} onClick={() => navigate('/contacts')}>Contacts</li>

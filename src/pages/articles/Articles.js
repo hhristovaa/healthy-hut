@@ -4,6 +4,7 @@ import { db } from '../../firebase.config';
 import { toast } from 'react-toastify';
 import Spinner from '../../components/UI/Spinner';
 import ArticleItem from '../../components/Articles/ArticleItem';
+import classes from './Articles.module.scss';
 
 
 const Articles = () => {
@@ -40,25 +41,25 @@ const Articles = () => {
     }, []);
 
     return (
-        <>
-            <h1>All Articles</h1>
+        <main>
+            <h1 className={classes['g-title']}>All Articles</h1>
             <div>
 
             </div>
 
             {loading ? (<Spinner />) : articles && articles.length > 0 ? (
                 <>
-                    <main>
+                    
                         <ul>{articles.map((article) => (
                             <ArticleItem article={article.data} id={article.id} key={article.id}/>
                         ))}
 
                         </ul>
-                    </main>
+                    
                 </>
             ) : (<p>No articles</p>)}
 
-        </>
+        </main>
     )
 }
 

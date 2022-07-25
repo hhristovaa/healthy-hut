@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import classes from './SignIn.module.css';
+import classes from './SignIn.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import visibilityIcon from '../assets/svg/visibilityIcon.svg';
-import OAuth from '../components/Layout/OAuth';
-import SubmitButton from '../components/UI/SubmitButton';
+import visibilityIcon from '../../assets/svg/visibilityIcon.svg';
+import OAuth from '../../components/Layout/OAuth';
+import SubmitButton from '../../components/UI/SubmitButton';
 
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -46,9 +46,9 @@ const SignIn = () => {
     }
 
     return (
-        <>
+        <main>
             <div>
-                <h1>Welcome Back!</h1>
+                <h1 className={classes['g-title']}>Welcome Back!</h1>
             </div>
 
             <form onSubmit={onSubmit}>
@@ -87,7 +87,7 @@ const SignIn = () => {
             </form>
 
             <Link to='/sign-up' className='registerLink'>Sign Up Instead</Link>
-        </>
+        </main>
     )
 }
 

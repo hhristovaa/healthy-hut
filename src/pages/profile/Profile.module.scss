@@ -1,0 +1,16 @@
+@use '../../styles/_mixins.scss' as *;
+@use '../../styles/_typography.scss' as *;
+@use '../../styles/_variables.scss' as *;
+
+.profile__btn {
+    background: $color-primary;
+    border: none;
+    color: $color-white;
+border-radius: 20px;
+padding: 5px 20px;
+cursor: pointer;
+
+&:hover {
+    background-color: $color-primary-dark;
+}
+}

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { updateDoc, doc, collection, getDocs, query, where, orderBy, deleteDoc } from 'firebase/firestore';
-import ArticleItem from '../components/Articles/ArticleItem';
-import { db } from '../firebase.config';
+import ArticleItem from '../../components/Articles/ArticleItem';
+import { db } from '../../firebase.config';
 import { toast } from 'react-toastify';
 import { useNavigate, Link } from 'react-router-dom';
+import classes from './Profile.module.scss';
 
 const Profile = () => {
     const auth = getAuth();
@@ -15,9 +16,12 @@ const Profile = () => {
     const [formData, setFormData] = useState({
         firstName: auth.currentUser.displayName,
         email: auth.currentUser.email,
+        isAdmin: auth.currentUser.hasAdminRights
     });
 
-    const { firstName, email } = formData;
+    console.log(auth.currentUser)
+
+    const { firstName, email, isAdmin } = formData;
 
     const navigate = useNavigate();
 
@@ -39,7 +43,7 @@ const Profile = () => {
             setArticles(articles);
             setLoading(false);
         }
-   
+
         fetchUserArticles()
     }, [auth.currentUser.uid]);
 
@@ -84,60 +88,61 @@ const Profile = () => {
         if (window.confirm('Sure bro?')) {
             await deleteDoc(doc(db, 'articles', articleId));
             const updatedArticles = articles.filter((article) => article.id !== articleId);
-                setArticles(updatedArticles);
-                toast.success('Successfully deleted');
+            setArticles(updatedArticles);
+            toast.success('Successfully deleted');
         }
-        
-        
-        
+
+
+
     }
 
 
 
     return (
-        <>
-            <h1>Profile</h1>
-            <h3>Hello {firstName}</h3>
-            <button type='button' className="logout" onClick={onLogout}>
-                Logout
-            </button>
+        <main>
+            <h1 className={classes['g-heading']}>Profile</h1>
+            <h3 className={classes['g-title']}>Hello {firstName} </h3>
+            <p>{isAdmin}</p>
 
-            <main>
+            <section>
                 <div>
                     <p>Personal Details</p>
-                    <p onClick={() => {
+                    <button type='button' className={classes['profile__btn']} onClick={() => {
                         updateDetails && onSubmit()
                         setUpdateDetails((prevState) => !prevState)
-                    }}>{updateDetails ? 'done' : 'change'}</p>
+                    }}>{updateDetails ? 'Done' : 'Change'}</button>
                 </div>
 
                 <div>
                     <form>
                         <input type="text" id="firstName" value={firstName} className={!updateDetails ? 'profileName' : 'profileNameActive'} disabled={!updateDetails} onChange={onChange} />
-                        <input type="text" id="email" value={email} className={!updateDetails ? 'profileName' : 'profileNameActive'} disabled/>
+                        <input type="text" id="email" value={email} className={!updateDetails ? 'profileName' : 'profileNameActive'} disabled />
                     </form>
-                </div>
+                </div>            <button type='button' className="logout" onClick={onLogout}>
+                    Logout
+                </button>
+
 
                 <Link to='/create-article'>Create new article</Link>
-    
+
 
                 {!loading && articles?.length > 0 && (
                     <>
-                    <p>Your articles</p>    
-                    <ul>
-                        {articles.map((article) => (
-             <ArticleItem key={article.id} article={article.data} id={article.id} onDelete={() => onDelete(article.id)}/>
-                        ))}
-                    </ul> 
-       
+                        <p>Your articles</p>
+                        <ul>
+                            {articles.map((article) => (
+                                <ArticleItem key={article.id} article={article.data} id={article.id} onDelete={() => onDelete(article.id)} />
+                            ))}
+                        </ul>
+
 
                     </>
                 )}
 
-                
-            </main>
 
-        </>
+            </section>
+
+        </main>
     )
 }
 

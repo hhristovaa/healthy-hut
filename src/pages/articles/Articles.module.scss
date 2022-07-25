@@ -1,0 +1,37 @@
+@use '../../styles/_mixins.scss' as *;
+@use '../../styles/_typography.scss' as *;
+@use '../../styles/_variables.scss' as *;
+
+
+.article {
+
+    &__img {
+        margin: 1.5rem 0px;
+        img {
+            height: 40vh;
+            width: 100%;
+            object-fit: cover;
+            margin: 0 auto;
+     
+        }
+
+    }
+
+    &__content {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 29px;
+        text-align: justify;
+
+    }
+
+    &__source {
+        font-size: 16px;
+        color: $color-primary-dark;
+
+        &:hover {
+            color: $color-primary-dark;
+        }
+
+    }
+}
