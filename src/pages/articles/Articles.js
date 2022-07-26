@@ -6,7 +6,6 @@ import Spinner from '../../components/UI/Spinner';
 import ArticleItem from '../../components/Articles/ArticleItem';
 import classes from './Articles.module.scss';
 
-
 const Articles = () => {
     const [articles, setArticles] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -43,20 +42,17 @@ const Articles = () => {
     return (
         <main>
             <h1 className={classes['g-title']}>All Articles</h1>
-            <div>
-
-            </div>
 
             {loading ? (<Spinner />) : articles && articles.length > 0 ? (
-                <>
-                    
-                        <ul>{articles.map((article) => (
-                            <ArticleItem article={article.data} id={article.id} key={article.id}/>
-                        ))}
 
-                        </ul>
-                    
-                </>
+
+                <section className={classes.articles}>{articles.map((article) => (
+                    <ArticleItem article={article.data} id={article.id} key={article.id} />
+                ))}
+
+                </section>
+
+
             ) : (<p>No articles</p>)}
 
         </main>

@@ -15,6 +15,7 @@ import CreateArticle from './pages/articles/CreateArticle';
 import FullArticle from './pages/articles/FullArticle';
 import Footer from './components/Layout/Footer';
 import './styles/Global.scss';
+import EditArticle from './pages/articles/EditArticle';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/create-article' element={<CreateArticle />} />
+          <Route path='/edit-article/:articleId' element={<EditArticle />} />
           <Route path='/articles/:articleId' element={<FullArticle />} />
         </Routes>
         

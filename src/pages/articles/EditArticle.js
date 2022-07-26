@@ -1,16 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { doc, updateDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { v4 as uuid4 } from 'uuid';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../../components/UI/Spinner';
 import { toast } from 'react-toastify';
 import { uuidv4 } from '@firebase/util';
 
-const CreateArticle = () => {
+const EditArticle = () => {
     const [loading, setLoading] = useState(false);
+    const [article, setArticle] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         articleImageUrl: '',
@@ -22,8 +23,60 @@ const CreateArticle = () => {
 
     const auth = getAuth();
     const navigate = useNavigate();
+    const params = useParams();
     const isMounted = useRef(true);
 
+    // useEffect(() => {
+    //     setLoading(true);
+    //     const getArticle = async () => {
+    //         const docRef = doc(db, 'articles', params.articleId);
+    //         const docSnap = await getDoc(docRef);
+            
+    //         if(docSnap.exists()){
+    //             setArticle(docSnap.data());
+    //             setFormData({...docSnap.data()});
+    //             setLoading(false);
+    //         } else {
+    //             navigate('/');
+    //             toast.error('Article does not exist!');
+    //         }
+
+    //     }
+
+    //     getArticle();
+
+    // }, [params.articleId, navigate]);
+//redirect if article is not user's
+
+useEffect(() => {
+    if (article && article.userRef !== auth.currentUser.uid) {
+        toast.error('You cannot edit that article');
+        navigate('/');
+    }
+});
+
+    //fetch articles to edit 
+    useEffect(() => {
+        
+        const fetchArticle = async () => {
+            const docRef = doc(db, 'articles', params.articleId);
+            console.log(docRef);
+         
+            const docSnap = await getDoc(docRef);
+            console.log(docSnap);
+            if (docSnap.exists()) {
+                setArticle(docSnap.data());
+                setFormData({...docSnap.data()});
+                console.log(docSnap.data());
+                setLoading(false);
+            }
+
+        }
+
+        fetchArticle();
+    }, [navigate, params.articleId]);
+
+    //set to logged user
     useEffect(() => {
         if (isMounted) {
             onAuthStateChanged(auth, (user) => {
@@ -46,6 +99,7 @@ const CreateArticle = () => {
         e.preventDefault();
         setLoading(true);
 
+        //edit validation
         if (articleImageUrl.length === 0) {
             setLoading(false);
             toast.error('Image is required');
@@ -116,9 +170,8 @@ const CreateArticle = () => {
 
         delete formDataCopy.articleImageUrl;
 
-        const docRef = await addDoc(collection(db, 'articles'), formDataCopy);
-
-        console.log(articleImageUrl);
+        const docRef = doc(db, 'articles', params.articleId);
+        await updateDoc(docRef, formDataCopy);
 
         setLoading(false);
         toast.success('Article created');
@@ -147,7 +200,7 @@ const CreateArticle = () => {
 
     return (
         <>
-            <header>Create an article</header>
+            <header>Edit Article</header>
             <main>
                 <form onSubmit={onSubmit}>
                     <label htmlFor='name'>Name</label>
@@ -159,11 +212,11 @@ const CreateArticle = () => {
                     <label htmlFor='image'>Image</label>
 
                     <input type="file" id="articleImageUrl" accept='.jpg, .png, .jpeg' onChange={onChange} />
-                    <button type="submit">Create Article</button>
+                    <button type="submit">Edit Article</button>
                 </form>
             </main>
         </>
     )
 }
 
-export default CreateArticle;
+export default EditArticle;

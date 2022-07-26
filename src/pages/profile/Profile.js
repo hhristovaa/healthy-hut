@@ -96,12 +96,13 @@ const Profile = () => {
 
     }
 
+    const onEdit = (articleId) => navigate(`/edit-article/${articleId}`);
 
 
     return (
         <main>
-            <h1 className={classes['g-heading']}>Profile</h1>
-            <h3 className={classes['g-title']}>Hello {firstName} </h3>
+            <h1 className={classes['g-title']}>Profile</h1>
+            <h3 className={classes['g-heading']}>Hello {firstName} </h3>
             <p>{isAdmin}</p>
 
             <section>
@@ -127,16 +128,16 @@ const Profile = () => {
 
 
                 {!loading && articles?.length > 0 && (
-                    <>
+                    <section>
                         <p>Your articles</p>
-                        <ul>
+                        <div className={classes.articles}>
                             {articles.map((article) => (
-                                <ArticleItem key={article.id} article={article.data} id={article.id} onDelete={() => onDelete(article.id)} />
+                                <ArticleItem key={article.id} article={article.data} id={article.id} onDelete={() => onDelete(article.id)} onEdit={() => onEdit(article.id)} />
                             ))}
-                        </ul>
+                        </div>
 
 
-                    </>
+                    </section>
                 )}
 
 

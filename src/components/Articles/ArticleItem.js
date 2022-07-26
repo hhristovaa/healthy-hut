@@ -1,23 +1,33 @@
 import { Link } from 'react-router-dom';
+import Card from '../UI/Card';
+import classes from './ArticleItem.module.scss';
 
 
-
-const ArticleItem = ({ article, id, onDelete }) => {
+const ArticleItem = ({ article, id, onDelete, onEdit }) => {
     return (
-        <li>
+        <Card className={classes['article__card']}>
             <Link to={`/articles/${id}`}>
-                <img src={article.imageUrl} alt={article.name} />
-                <h3 key={article.id}>{article.name}</h3>
-                {/* <div> {article.content}</div> */}
-              
-                {/* Source:  <a href={article.source} target="_blank">{article.source}</a> */}
-                <button>Read More</button>
-            </Link>
+                <div className={classes['article__img']}>
+                    <img src={article.imageUrl} alt={article.name} />
+                </div>
+                <div className={classes['article__content']}>
+                    <h3 className={classes['article__header']} key={article.id}>{article.name}</h3>
+                    <p className={classes['article__desc']}> {article.content}</p>
 
+                    {/* Source:  <a href={article.source} target="_blank">{article.source}</a> */}
+                    <button className={classes['btn-more']}>Read More</button>
+
+
+                </div>
+            </Link>
             {onDelete && (
-            <button onClick={() => onDelete(article.id, article.name)}>Delete</button>)
+                <button className={classes['btn-delete']} onClick={() => onDelete(article.id, article.name)}>Delete</button>)
             }
-        </li>
+            {onEdit && (
+                <button className={classes['btn-delete']} onClick={() => onEdit(id)}>Edit</button>)
+            }
+
+        </Card>
     )
 }
 
