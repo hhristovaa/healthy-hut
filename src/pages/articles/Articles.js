@@ -54,7 +54,6 @@ const Articles = () => {
 
 
             ) : (<p>No articles</p>)}
-
         </main>
     )
 }

@@ -13,11 +13,9 @@
 
 .navbar {
     display: flex;
-
-
     &__item {
         color: $color-white;
-        list-style-type: none;
+        text-decoration: none;
         margin: 0px 1em;
         cursor: pointer;
         text-transform: uppercase;
@@ -28,11 +26,14 @@
             color: $color-secondary-light;
             transition: ease-in-out all 0.4s;
         }
+
+        &:visited,
+        &:active {
+            text-decoration: none;
+           
+        }
     }
 
-    .is-active {
-        color: $color-secondary; 
-    }
 }
 
 .logo {
@@ -42,4 +43,9 @@
 line-height: 63px;
     color: $color-secondary;
     text-decoration: none;
+}
+
+
+.is-active {
+    color: $color-secondary; 
 }

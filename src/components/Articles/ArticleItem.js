@@ -2,6 +2,10 @@ import { Link } from 'react-router-dom';
 import Card from '../UI/Card';
 import classes from './ArticleItem.module.scss';
 
+import { IonIcon } from '@ionic/react';
+
+import { trashOutline, openOutline } from 'ionicons/icons';
+
 
 const ArticleItem = ({ article, id, onDelete, onEdit }) => {
     return (
@@ -17,16 +21,16 @@ const ArticleItem = ({ article, id, onDelete, onEdit }) => {
                     {/* Source:  <a href={article.source} target="_blank">{article.source}</a> */}
                     <button className={classes['btn-more']}>Read More</button>
 
-
                 </div>
             </Link>
-            {onDelete && (
-                <button className={classes['btn-delete']} onClick={() => onDelete(article.id, article.name)}>Delete</button>)
-            }
-            {onEdit && (
-                <button className={classes['btn-delete']} onClick={() => onEdit(id)}>Edit</button>)
-            }
-
+            <div className={classes.action}>
+                {onDelete && (
+                    <IonIcon className={classes['btn-delete']} icon={trashOutline} onClick={() => onDelete(article.id, article.name)} />
+                )}
+                {onEdit && (
+                    <IonIcon className={classes['btn-edit']} icon={openOutline} onClick={() => onEdit(id)} />
+                )}
+            </div>
         </Card>
     )
 }

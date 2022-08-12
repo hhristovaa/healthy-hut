@@ -6,22 +6,23 @@
     height: 20em;
     overflow: hidden;
     padding: 1.5rem;
+    position: relative;
 
     a {
         text-decoration: none;
         color: inherit;
         display: flex;
-
-        &:nth-of-type(odd){
-            flex-direction: row-reverse;
-        }
-        &:nth-child(even){
-            flex-direction: row;
-        }
+        // &:nth-of-type(odd){
+        //     flex-direction: row-reverse;
+        // }
+        // &:nth-child(even){
+        //     flex-direction: row;
+        // }
     }
 
 
  
+
 }
 
 .article__img {
@@ -62,8 +63,8 @@
 //     width: 120px;
 // height: 40px;
 padding: .6rem .8rem;
-background-color: $color-secondary;
-color: $color-gray-dark;
+background-color: $color-primary;
+color: $color-white;
 border: none;
 text-transform: uppercase;
 border-radius: 20px;
@@ -73,19 +74,35 @@ left: 50%;
 transform: translateX(-50%);
 
 &:hover {
-    background-color: lighten($color-secondary, 15%);
+    background-color: $color-primary-dark;
 }
 }
 
+.action {
+    display: flex;
+    position: absolute;
+    bottom: 25%;
+    
+}
+
 .btn-delete {
-    padding: .6rem .8rem;
-background-color: red;
-color: $color-white;
-border: none;
-text-transform: uppercase;
-border-radius: 20px;
+ 
+color: red;
+
 cursor: pointer;
+font-size: 22px;
+margin-right: 10px;
 &:hover {
-    background-color: darken(red, 10%);
+    color: darken(red, 10%);
+}
+}
+.btn-edit {
+
+color: orange;
+
+cursor: pointer;
+font-size: 22px;
+&:hover {
+    color: darken(orange, 10%);
 }
 }

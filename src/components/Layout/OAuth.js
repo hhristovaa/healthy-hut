@@ -4,7 +4,10 @@ import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { toast } from 'react-toastify';
 
+import Icon from '../UI/Icon';
+
 import { IonIcon } from '@ionic/react';
+
 import {logoGoogle} from 'ionicons/icons';
 
 const OAuth = () => {
@@ -45,6 +48,7 @@ const OAuth = () => {
     return (
         <div>Sign {location.pathname === '/sign-up' ? 'up' : 'in'} with Google
             <IonIcon icon={logoGoogle} size='large' onClick={onGoogleIconClick}/>
+            {/* <Icon name={logoGoogle} onClick={onGoogleIconClick}/> */}
             </div>
     )
 }
