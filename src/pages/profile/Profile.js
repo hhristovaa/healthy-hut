@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { useNavigate, Link } from 'react-router-dom';
 import classes from './Profile.module.scss';
 
+
 const Profile = () => {
     const auth = getAuth();
     const [loading, setLoading] = useState(true);
@@ -102,34 +103,34 @@ const Profile = () => {
     return (
         <main>
             <h1 className={classes['g-title']}>Profile</h1>
-            <h3 className={classes['g-heading']}>Hello {firstName} </h3>
+            <h2 className={classes['g-heading']}>Hello {firstName} </h2>
             <p>{isAdmin}</p>
+            <button type='button' className={classes['btn-logout']}  onClick={onLogout}>
+          Logout
+        </button>
 
-            <section>
-                <div>
-                    <p>Personal Details</p>
-                    <button type='button' className={classes['profile__btn']} onClick={() => {
+            <section className={classes['personal-details']}>
+                <div className={classes['personal-details__header']}>
+                    <h3 className={classes['g-description']}>Personal Details</h3>
+                 
+                  
+                    <form className={classes['personal-details__form']}>
+                        <input type="text" id="firstName" value={firstName} className={!updateDetails ? 'profileName' : 'profileNameActive'} disabled={!updateDetails} onChange={onChange} />
+                        <input type="text" id="email" value={email} className={!updateDetails ? 'profileName' : 'profileNameActive'} disabled />
+                        <button type='button' className={classes['btn']} onClick={() => {
                         updateDetails && onSubmit()
                         setUpdateDetails((prevState) => !prevState)
                     }}>{updateDetails ? 'Done' : 'Change'}</button>
-                </div>
-
-                <div>
-                    <form>
-                        <input type="text" id="firstName" value={firstName} className={!updateDetails ? 'profileName' : 'profileNameActive'} disabled={!updateDetails} onChange={onChange} />
-                        <input type="text" id="email" value={email} className={!updateDetails ? 'profileName' : 'profileNameActive'} disabled />
                     </form>
-                </div>            <button type='button' className="logout" onClick={onLogout}>
-                    Logout
-                </button>
+                    
+                </div>            
 
-
-                <Link to='/create-article'>Create new article</Link>
+                <button className={classes['btn-create']}><Link to='/create-article'>New article</Link></button>
 
 
                 {!loading && articles?.length > 0 && (
                     <section>
-                        <p>Your articles</p>
+                        <h3 className={classes['g-description']}>Your articles</h3>
                         <div className={classes.articles}>
                             {articles.map((article) => (
                                 <ArticleItem key={article.id} article={article.data} id={article.id} onDelete={() => onDelete(article.id)} onEdit={() => onEdit(article.id)} />

@@ -63,10 +63,10 @@ const SignUp = () => {
     return (
         <main>
             <div>
-                <h1>Welcome Back!</h1>
+                <h1 className={classes['g-title']}>Welcome!</h1>
             </div>
 
-            <form onSubmit={onSubmit}>
+            <form className={classes.form} onSubmit={onSubmit}>
                 <input
                     type='text'
                     className={classes.emailInput}
@@ -103,21 +103,21 @@ const SignUp = () => {
                     />
                     <img src={visibilityIcon} alt="show password" className={classes.showPassword} onClick={() => setShowPassword((prevState) => !prevState)} />
                 </fieldset>
-                <Link to='/forgot-password' className='forgotPasswordLink'>
+                <Link to='/forgot-password' className={classes.forgotPasswordLink}>
                     Forgot Password
                 </Link>
 
-                <div className="signInBar">
-                    <p className="signUpText">
-                        Sign In
-                    </p>
-                    <button className="signInButton">Sign Up</button>
-                </div>
+            
             </form>
 
-            <OAuth/>
 
-            <Link to='/sign-in' className='registerLink'>Sign In Instead</Link>
+            
+            <div className={classes.signInBar}>
+                <OAuth/>
+                    <button className={classes.signInButton}>Sign Up</button>
+                    <button className={classes.signUpButton}>   <Link to='/sign-in' className={classes.registerLink}>Sign In Instead</Link></button>
+                </div>
+
         </main>
     )
 }

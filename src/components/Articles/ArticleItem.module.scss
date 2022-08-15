@@ -82,27 +82,28 @@ transform: translateX(-50%);
     display: flex;
     position: absolute;
     bottom: 25%;
+    right: 10%;
     
 }
 
 .btn-delete {
  
-color: red;
+color: $color-red;
 
 cursor: pointer;
 font-size: 22px;
 margin-right: 10px;
 &:hover {
-    color: darken(red, 10%);
+    color: darken($color-red, 10%);
 }
 }
 .btn-edit {
 
-color: orange;
+color: $color-orange;
 
 cursor: pointer;
 font-size: 22px;
 &:hover {
-    color: darken(orange, 10%);
+    color: darken($color-orange, 10%);
 }
 }

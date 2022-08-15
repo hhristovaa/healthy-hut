@@ -51,7 +51,7 @@ const SignIn = () => {
                 <h1 className={classes['g-title']}>Welcome Back!</h1>
             </div>
 
-            <form onSubmit={onSubmit}>
+            <form className={classes.form} onSubmit={onSubmit}>
                 <input
                     type='email'
                     className={classes.emailInput}
@@ -72,21 +72,20 @@ const SignIn = () => {
                     />
                     <img src={visibilityIcon} alt="show password" className={classes.showPassword} onClick={() => setShowPassword((prevState) => !prevState)} />
                 </fieldset>
-                <Link to='/forgot-password' className='forgotPasswordLink'>
+                <Link to='/forgot-password' className={classes.forgotPasswordLink}>
                     Forgot Password
                 </Link>
 
-                <OAuth/>
+           
 
-                <div className="signInBar">
-                    <p className="signInText">
-                        Sign In
-                    </p>
-                    <button className="signInButton">Sign In</button>
+                <div className={classes.signInBar}>
+                <OAuth/>
+                    <button className={classes.signInButton}>Sign In</button>
+                    <button className={classes.signUpButton}>   <Link to='/sign-up' className={classes.registerLink}>Sign Up Instead</Link></button>
                 </div>
             </form>
 
-            <Link to='/sign-up' className='registerLink'>Sign Up Instead</Link>
+        
         </main>
     )
 }

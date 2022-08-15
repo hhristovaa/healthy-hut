@@ -23,8 +23,8 @@ function App() {
       <Router>
       <Navbar />
         <Routes>
-          <Route path='/' element={<></>} />
-          {/* <Route path='/' element={<Trending/>} /> */}
+          {/* <Route path='/' element={<></>} /> */}
+          <Route path='/' element={<Trending/>} />
           <Route path='/recipes' element={<Recipes />} />
           <Route path='/articles' element={<Articles />} />
           <Route path='/contacts' element={<Contacts />} />

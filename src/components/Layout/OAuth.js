@@ -3,9 +3,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { toast } from 'react-toastify';
-
-import Icon from '../UI/Icon';
-
+import classes from '../../pages/signin/SignIn.module.scss';
 import { IonIcon } from '@ionic/react';
 
 import {logoGoogle} from 'ionicons/icons';
@@ -46,10 +44,10 @@ const OAuth = () => {
     }
 
     return (
-        <div>Sign {location.pathname === '/sign-up' ? 'up' : 'in'} with Google
-            <IonIcon icon={logoGoogle} size='large' onClick={onGoogleIconClick}/>
+        <button className={classes.signInButton}>Sign {location.pathname === '/sign-up' ? 'up' : 'in'} 
+            <IonIcon icon={logoGoogle} size='small' onClick={onGoogleIconClick}/>
             {/* <Icon name={logoGoogle} onClick={onGoogleIconClick}/> */}
-            </div>
+            </button>
     )
 }
 
