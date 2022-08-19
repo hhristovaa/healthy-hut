@@ -3,27 +3,14 @@
 @use './_variables.scss' as *;
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Pacifico&family=Roboto:wght@300;400&display=swap');
 
-// body {
-//     font-family: 'Montserrat', sans-serif;
-//     font-family: 'Pacifico', cursive;
-//     font-family: 'Roboto', sans-serif;
-// }
-
 *,
 *::after,
-*::before{
+*::before {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
 }
 
-html {
-  //default font-size of the browser: 16px
-  // 1rem = 10px => 10px / 16px = 62.5%
-  // % allows the user to change the font-size of the browser
-
-
-}
 
 body {
   box-sizing: border-box;
@@ -34,10 +21,10 @@ body {
 }
 
 main {
-    max-width: 70rem;
-    min-height: 85vh;
-    margin: 0px auto;
-    padding: 2rem 3rem;
+  max-width: 70rem;
+  min-height: 85vh;
+  margin: 0px auto;
+  padding: 2rem 3rem;
 }
 
 img {

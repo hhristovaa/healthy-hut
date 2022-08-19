@@ -8,6 +8,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../../components/UI/Spinner';
 import { toast } from 'react-toastify';
 import { uuidv4 } from '@firebase/util';
+import Button from '../../components/UI/Button';
+import Input from '../../components/UI/Input';
 
 const EditArticle = () => {
     const [loading, setLoading] = useState(false);
@@ -203,16 +205,11 @@ useEffect(() => {
             <header>Edit Article</header>
             <main>
                 <form onSubmit={onSubmit}>
-                    <label htmlFor='name'>Name</label>
-                    <input type="text" id="name" onChange={onChange} value={name} />
-                    <label htmlFor='content'>Content</label>
-                    <textarea id="content" onChange={onChange} value={content} />
-                    <label htmlFor='source'>Source</label>
-                    <input type="text" id="source" onChange={onChange} value={source} />
-                    <label htmlFor='image'>Image</label>
-
-                    <input type="file" id="articleImageUrl" accept='.jpg, .png, .jpeg' onChange={onChange} />
-                    <button type="submit">Edit Article</button>
+                    <Input type='text' id='name' label='Name' onChange={onChange} value={name}/>
+                    <Input multiline type='text' id='content' label='Content' onChange={onChange} value={content}/>
+                    <Input type='text' id='source' label='Source' onChange={onChange} value={source}/>
+                    <Input type='file' id='articleImageUrl' label='Image' onChange={onChange} accept='.jpg, .png, .jpeg'/>
+                    <Button type="submit" version='change'>Edit Article</Button>
                 </form>
             </main>
         </>

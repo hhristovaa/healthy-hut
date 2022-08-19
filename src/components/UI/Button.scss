@@ -1,0 +1,51 @@
+@use '../../styles/_mixins.scss' as *;
+@use '../../styles/_variables.scss' as *;
+@use '../../styles/_typography.scss' as *;
+
+.btn {
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 0.6rem 0.8rem;
+    border: none;
+    text-transform: uppercase;
+    color: $color-white;
+    margin: 1rem 0;
+
+    &--primary {
+        background-color: $color-primary;
+
+        &:hover {
+            background-color: darken($color-primary, 10%);
+        }
+    }
+
+    &--secondary {
+        background-color: $color-secondary;
+        color: $color-black;
+    }
+
+    &--login,
+    &--create {
+        background-color: $color-green;
+        display: flex;
+        align-items: flex-end;
+
+        &:hover {
+            background-color: darken($color-green, 10%);
+        }
+    }
+
+    &--change {
+        background-color: $color-orange;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        &:hover {
+            background-color: darken($color-orange, 10%);
+        }
+    }
+
+    &--create {}
+
+}

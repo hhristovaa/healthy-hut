@@ -6,8 +6,9 @@ import { db } from '../../firebase.config';
 import { toast } from 'react-toastify';
 import { useNavigate, Link } from 'react-router-dom';
 import classes from './Profile.module.scss';
-
-
+import Button from '../../components/UI/Button';
+import Input
+ from '../../components/UI/Input';
 const Profile = () => {
     const auth = getAuth();
     const [loading, setLoading] = useState(true);
@@ -105,9 +106,9 @@ const Profile = () => {
             <h1 className={classes['g-title']}>Profile</h1>
             <h2 className={classes['g-heading']}>Hello {firstName} </h2>
             <p>{isAdmin}</p>
-            <button type='button' className={classes['btn-logout']}  onClick={onLogout}>
+            <Button type='button' version='change' onClick={onLogout}>
           Logout
-        </button>
+        </Button>
 
             <section className={classes['personal-details']}>
                 <div className={classes['personal-details__header']}>
@@ -116,16 +117,16 @@ const Profile = () => {
                   
                     <form className={classes['personal-details__form']}>
                         <input type="text" id="firstName" value={firstName} className={!updateDetails ? 'profileName' : 'profileNameActive'} disabled={!updateDetails} onChange={onChange} />
-                        <input type="text" id="email" value={email} className={!updateDetails ? 'profileName' : 'profileNameActive'} disabled />
-                        <button type='button' className={classes['btn']} onClick={() => {
+                        <Input type="text" id="email" value={email} disabled />
+                        <Button type='button'  version='secondary' onClick={() => {
                         updateDetails && onSubmit()
                         setUpdateDetails((prevState) => !prevState)
-                    }}>{updateDetails ? 'Done' : 'Change'}</button>
+                    }}>{updateDetails ? 'Done' : 'Change'}</Button>
                     </form>
                     
                 </div>            
 
-                <button className={classes['btn-create']}><Link to='/create-article'>New article</Link></button>
+                <Button version='create' type='button'><Link to='/create-article'>New article</Link></Button>
 
 
                 {!loading && articles?.length > 0 && (

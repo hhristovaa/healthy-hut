@@ -6,7 +6,8 @@ import { toast } from 'react-toastify';
 import classes from '../../pages/signin/SignIn.module.scss';
 import { IonIcon } from '@ionic/react';
 
-import {logoGoogle} from 'ionicons/icons';
+import { logoGoogle } from 'ionicons/icons';
+import Button from '../UI/Button';
 
 const OAuth = () => {
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ const OAuth = () => {
             const docSnap = await getDoc(docRef);
             const doesUserExist = docSnap.exists();
 
-            if (!doesUserExist){
+            if (!doesUserExist) {
                 await setDoc(doc, (db, 'users', user.uid), {
                     firstName: user.firstName,
                     lastName: user.lastName,
@@ -44,10 +45,9 @@ const OAuth = () => {
     }
 
     return (
-        <button className={classes.signInButton}>Sign {location.pathname === '/sign-up' ? 'up' : 'in'} 
-            <IonIcon icon={logoGoogle} size='small' onClick={onGoogleIconClick}/>
-            {/* <Icon name={logoGoogle} onClick={onGoogleIconClick}/> */}
-            </button>
+        <Button version='login' onClick={onGoogleIconClick}>Sign {location.pathname === '/sign-up' ? 'up' : 'in'}
+            <IonIcon icon={logoGoogle} size='small' />
+        </Button>
     )
 }
 

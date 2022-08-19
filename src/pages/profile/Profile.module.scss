@@ -5,10 +5,10 @@
 main {
     position: relative;
 }
-
 .personal-details {
     margin-top: 5%;
     &__header {
+
     }
 
     &__form {
@@ -59,44 +59,3 @@ main {
     }
 }
 
-.btn-create {
-    background-color: $color-green;
-    border: none;
-    color: $color-white;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 20px;
-    padding: 0.6rem 0.8rem;
-    margin: 1rem 0;
-    cursor: pointer;
-    display: flex;
-    align-items: flex-end;
-  
-    &:hover {
-        background-color: darken($color-green, 10%);
-    }
-  }
-
-.btn-logout {
-    background: $color-orange;
-    border: none;
-    color: $color-white;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 20px;
-    padding: 0.6rem 0.8rem;
-    margin: 1rem 0;
-    cursor: pointer;
-    position: absolute;
-    right: 0;
-    top: 0;
-
-    &:hover {
-        background-color: darken($color-orange, 10%);
-    }
-}
-
-button a {
-    text-decoration: none;
-    color: inherit;
-}

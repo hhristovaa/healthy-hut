@@ -38,18 +38,18 @@ const FullArticle = () => {
         <main>
 
             <h1 className={classes['g-heading']}>{article.name}</h1>
-<section className={classes.article}>
-            <div className={classes['article__img']}><img src={article.imageUrl} /></div>
-            <p className={classes['article__content']}>{article.content}</p>
-            <span>Source: </span><a className={classes['article__source']} href={article.source}>{article.source}</a> <br></br>
-            {/* <p>{article.timestamp.toString()}</p> */}
+            <section className={classes.article}>
+                <div className={classes['article__img']}><img src={article.imageUrl} /></div>
+                <p className={classes['article__content']}>{article.content}</p>
+                <span>Source: </span><a className={classes['article__source']} href={article.source}>{article.source}</a> <br></br>
+                {/* <p>{article.timestamp.toString()}</p> */}
 
 
 
-            {auth.currentUser?.uid !== article.userRef && (
-                <Link to={`/contacts/${article.userRef}?articleName=${article.name}`}>Access forbidden</Link>
-            )}
-</section>
+                {auth.currentUser?.uid !== article.userRef && (
+                    <Link to={`/contacts/${article.userRef}?articleName=${article.name}`}>Access forbidden</Link>
+                )}
+            </section>
         </main>
     )
 

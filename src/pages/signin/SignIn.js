@@ -5,7 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import visibilityIcon from '../../assets/svg/visibilityIcon.svg';
 import OAuth from '../../components/Layout/OAuth';
-import SubmitButton from '../../components/UI/SubmitButton';
+import Button from '../../components/UI/Button';
+import Input from '../../components/UI/Input';
 
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -39,7 +40,7 @@ const SignIn = () => {
 
             }
         } catch (err) {
-            console.error(err); 
+            console.error(err);
             toast.error('Wrong user credentials! Please try again.');
         }
 
@@ -52,9 +53,7 @@ const SignIn = () => {
             </div>
 
             <form className={classes.form} onSubmit={onSubmit}>
-                <input
-                    type='email'
-                    className={classes.emailInput}
+                <Input type='email'
                     placeholder='Email'
                     id='email'
                     value={email}
@@ -76,16 +75,18 @@ const SignIn = () => {
                     Forgot Password
                 </Link>
 
-           
+
 
                 <div className={classes.signInBar}>
-                <OAuth/>
-                    <button className={classes.signInButton}>Sign In</button>
-                    <button className={classes.signUpButton}>   <Link to='/sign-up' className={classes.registerLink}>Sign Up Instead</Link></button>
+                    <OAuth />
+                    <Button version='login'>Sign In</Button>
+                    <Button version='login'>
+                        <Link to='/sign-up' className={classes.registerLink}>Sign Up Instead</Link>
+                    </Button>
                 </div>
             </form>
 
-        
+
         </main>
     )
 }

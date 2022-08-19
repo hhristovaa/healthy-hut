@@ -7,6 +7,8 @@ import {setDoc, doc, serverTimestamp} from 'firebase/firestore';
 import {db} from '../../firebase.config';
 import visibilityIcon from '../../assets/svg/visibilityIcon.svg';
 import OAuth from '../../components/Layout/OAuth';
+import Button from '../../components/UI/Button';
+import  Input from '../../components/UI/Input';
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -67,15 +69,15 @@ const SignUp = () => {
             </div>
 
             <form className={classes.form} onSubmit={onSubmit}>
-                <input
+                
+                <Input
                     type='text'
-                    className={classes.emailInput}
                     placeholder='First Name'
                     id='firstName'
                     value={firstName}
                     onChange={onChange}
                 />
-                <input
+                <Input
                     type='text'
                     className={classes.emailInput}
                     placeholder='Last Name'
@@ -83,7 +85,7 @@ const SignUp = () => {
                     value={lastName}
                     onChange={onChange}
                 />
-                <input
+                <Input
                     type='email'
                     className={classes.emailInput}
                     placeholder='Email'
@@ -106,16 +108,15 @@ const SignUp = () => {
                 <Link to='/forgot-password' className={classes.forgotPasswordLink}>
                     Forgot Password
                 </Link>
-
-            
+         
             </form>
 
 
             
             <div className={classes.signInBar}>
                 <OAuth/>
-                    <button className={classes.signInButton}>Sign Up</button>
-                    <button className={classes.signUpButton}>   <Link to='/sign-in' className={classes.registerLink}>Sign In Instead</Link></button>
+                <Button version='login' type='submit'>Sign Up</Button>
+                <Button version='login'><Link to='/sign-in' className={classes.registerLink}>Sign In Instead</Link></Button>
                 </div>
 
         </main>
