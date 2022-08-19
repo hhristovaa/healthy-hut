@@ -1,0 +1,98 @@
+@use '../../styles/_mixins.scss' as *;
+@use '../../styles/_typography.scss' as *;
+@use '../../styles/_variables.scss' as *;
+
+.input,
+.passwordInput,
+.emailInput,
+.nameInput,
+.textarea {
+  box-shadow: rgba(0, 0, 0, 0.11);
+  border: none;
+  background: $color-white;
+  border-radius: 3rem;
+  height: 3rem;
+  width: 100%;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0 3rem;
+  font-size: 1rem;
+  margin-bottom: 1em;
+
+            border: 1px solid $color-primary-dark;
+}
+
+.forgotPasswordLink {
+    cursor: pointer;
+    color: $color-green;
+    font-weight: 600;
+    text-align: right;
+  }
+  
+  .signInBar,
+  .signUpBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: inherit;
+  }
+  
+  .signInButton,
+  .signUpButton,
+  .signInText,
+  .signUpText {
+    cursor: pointer;
+  }
+
+.passwordInputWrapper {
+  position: relative;
+}
+.showPassword {
+  cursor: pointer;
+  position: absolute;
+  top: -4%;
+  right: 1%;
+  padding: 1rem;
+  height: 2em;
+  width: 2em;
+}
+
+
+fieldset {
+  outline: none;
+  border: none;
+}
+
+.form {
+  width: 50%;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.5);
+  max-width: 500px;
+}
+
+.signInButton,
+.signUpButton {
+  background-color: $color-green;
+  border: none;
+  color: $color-white;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 20px;
+  padding: 0.6rem 0.8rem;
+  margin: 1rem 0;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+
+  &:hover {
+      background-color: darken($color-green, 10%);
+  }
+}
+
+.signUpButton a {
+  text-decoration: none;
+  color: inherit;
+}
