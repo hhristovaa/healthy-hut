@@ -2,11 +2,8 @@
 @use '../../styles/_typography.scss' as *;
 @use '../../styles/_variables.scss' as *;
 
-.input,
-.passwordInput,
-.emailInput,
-.nameInput,
-.textarea {
+
+.passwordInput{
   box-shadow: rgba(0, 0, 0, 0.11);
   border: none;
   background: $color-white;
@@ -71,28 +68,4 @@ fieldset {
   margin-top: 1rem;
   box-shadow: rgba(0, 0, 0, 0.5);
   max-width: 500px;
-}
-
-.signInButton,
-.signUpButton {
-  background-color: $color-green;
-  border: none;
-  color: $color-white;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 20px;
-  padding: 0.6rem 0.8rem;
-  margin: 1rem 0;
-  cursor: pointer;
-  display: flex;
-  align-items: flex-end;
-
-  &:hover {
-      background-color: darken($color-green, 10%);
-  }
-}
-
-.signUpButton a {
-  text-decoration: none;
-  color: inherit;
 }

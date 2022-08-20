@@ -52,7 +52,7 @@ const SignUp = () => {
             formDataCopy.timestamp = serverTimestamp();
 
             await setDoc(doc(db, 'users', user.uid), formDataCopy);
-            toast.success('You have create an account!');
+            toast.success('Your account has been successfully created!');
             navigate('/');
 
         }catch (err) {
@@ -60,7 +60,6 @@ const SignUp = () => {
             toast.error('Something went wrong! Please try again.');
         }
     }
-
 
     return (
         <main>
@@ -79,7 +78,6 @@ const SignUp = () => {
                 />
                 <Input
                     type='text'
-                    className={classes.emailInput}
                     placeholder='Last Name'
                     id='lastName'
                     value={lastName}
@@ -87,7 +85,6 @@ const SignUp = () => {
                 />
                 <Input
                     type='email'
-                    className={classes.emailInput}
                     placeholder='Email'
                     id='email'
                     value={email}
