@@ -14,6 +14,7 @@ const SignIn = () => {
         email: '',
         password: ''
     });
+    
     const { email, password } = formData;
 
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ const SignIn = () => {
 
             if (userCredential.user) {
                 navigate('/');
-                toast.success('Yeyy!');
+                toast.success('You have logged in successfully!');
 
             }
         } catch (err) {
