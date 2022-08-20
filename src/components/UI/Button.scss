@@ -9,7 +9,8 @@
     border: none;
     text-transform: uppercase;
     color: $color-white;
-    margin: 1rem 0;
+    margin: 1rem 0px;
+    min-width: 100px;
 
     &--primary {
         background-color: $color-primary;
@@ -22,6 +23,10 @@
     &--secondary {
         background-color: $color-secondary;
         color: $color-black;
+        
+        &:hover {
+            background-color: darken($color-secondary, 10%);
+        }
     }
 
     &--login,
@@ -37,13 +42,27 @@
 
     &--change {
         background-color: $color-orange;
-        position: absolute;
-        right: 0;
-        top: 0;
+        margin-left: 2em;
 
         &:hover {
             background-color: darken($color-orange, 10%);
         }
+    }
+
+    &--logout {
+        background-color: $color-red;
+        margin-left: 2em;
+
+        &:hover {
+            background-color: darken($color-red, 10%);
+        }
+    }
+
+    &--more {
+        @extend .btn--primary;
+        position: absolute;
+left: 50%;
+transform: translateX(-50%);
     }
 
     &--create {}

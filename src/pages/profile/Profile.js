@@ -7,8 +7,12 @@ import { toast } from 'react-toastify';
 import { useNavigate, Link } from 'react-router-dom';
 import classes from './Profile.module.scss';
 import Button from '../../components/UI/Button';
-import Input
- from '../../components/UI/Input';
+import Input from '../../components/UI/Input';
+import { IonIcon } from '@ionic/react';
+
+import { personCircleOutline } from 'ionicons/icons';
+
+
 const Profile = () => {
     const auth = getAuth();
     const [loading, setLoading] = useState(true);
@@ -104,29 +108,37 @@ const Profile = () => {
     return (
         <main>
             <h1 className={classes['g-title']}>Profile</h1>
-            <h2 className={classes['g-heading']}>Hello {firstName} </h2>
+            {/* <h2 className={classes['g-heading']}>Hello {firstName} </h2> */}
             <p>{isAdmin}</p>
-            <Button type='button' version='change' onClick={onLogout}>
-          Logout
-        </Button>
+
 
             <section className={classes['personal-details']}>
+                <h3 className={classes['g-description']}>Personal Details</h3>
+
                 <div className={classes['personal-details__header']}>
-                    <h3 className={classes['g-description']}>Personal Details</h3>
-                 
-                  
+                    <div className={classes['personal-details__info']}>
+                        <IonIcon icon={personCircleOutline} />
+                        <p>Hello {firstName}</p>
+                        <small>Admin</small>
+                        <Button version='create' type='button'><Link to='/create-article'>New article</Link></Button>
+
+                    </div>
                     <form className={classes['personal-details__form']}>
                         <input type="text" id="firstName" value={firstName} className={!updateDetails ? 'profileName' : 'profileNameActive'} disabled={!updateDetails} onChange={onChange} />
                         <Input type="text" id="email" value={email} disabled />
-                        <Button type='button'  version='secondary' onClick={() => {
-                        updateDetails && onSubmit()
-                        setUpdateDetails((prevState) => !prevState)
-                    }}>{updateDetails ? 'Done' : 'Change'}</Button>
+                        <div className={classes['personal-details__action']}>
+                            <Button type='button' version='secondary' onClick={() => {
+                                updateDetails && onSubmit()
+                                setUpdateDetails((prevState) => !prevState)
+                            }}>{updateDetails ? 'Done' : 'Change'}</Button>
+                            <Button type='button' version='logout' onClick={onLogout}>
+                                Logout
+                            </Button>
+                        </div>
                     </form>
-                    
-                </div>            
 
-                <Button version='create' type='button'><Link to='/create-article'>New article</Link></Button>
+                </div>
+
 
 
                 {!loading && articles?.length > 0 && (

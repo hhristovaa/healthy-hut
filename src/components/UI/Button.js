@@ -1,10 +1,11 @@
 import classes from './Button.scss';
 
-export default function Button ({children, version, type, isDisabled, onClick}) { 
+const Button = (props) => { 
     return(
-        <button type={type} disabled={isDisabled} className={`btn btn--${version}`} onClick={onClick}>
-            {children}
+        <button type={props.type} disabled={props.isDisabled} className={`btn btn--${props.version}`} onClick={props.onClick}>
+            {props.children}
         </button>
     );
 }
 
+export default Button;

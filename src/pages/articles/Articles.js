@@ -29,8 +29,7 @@ const Articles = () => {
                 setArticles(articles);
                 setLoading(false);
             } catch (err) {
-                toast.error('Could not fetch articles from db');
-
+                toast.error('An error occured while loading the articles.');
             }
 
 

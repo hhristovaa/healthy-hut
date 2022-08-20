@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 import { uuidv4 } from '@firebase/util';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
+import classes from './Articles.module.scss';
+import { isFieldEmpty } from '../../utils/utils';
 
 const CreateArticle = () => {
     const [loading, setLoading] = useState(false);
@@ -47,6 +49,14 @@ const CreateArticle = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+
+        if (name.length === 0|| content.length === 0 || source.length === 0) {
+            setLoading(false);
+            let isField = isFieldEmpty(name);
+            console.log(isField);
+            toast.error('Empty fields are not accepted.');
+            return;
+        }
 
         if (articleImageUrl.length === 0) {
             setLoading(false);
@@ -106,7 +116,7 @@ const CreateArticle = () => {
         const imageUrl = await Promise.all(
             [...articleImageUrl].map((img) => storeImage(img))).catch(() => {
                 setLoading(false);
-                toast.error('Image was not uplodaed');
+                toast.error('An error occured while uploading the image.');
                 return;
             });
 
@@ -123,18 +133,23 @@ const CreateArticle = () => {
         console.log(articleImageUrl);
 
         setLoading(false);
-        toast.success('Article created');
+        toast.success('The article was successfully created!');
         navigate(`/articles/${docRef.id}`)
     }
 
     const onChange = e => {
         let eTarget = e.target;
+        let uploadedFile = eTarget.files;
 
-        if (eTarget.files) {
+        if (uploadedFile) {
             setFormData((prevState) => ({
                 ...prevState,
-                articleImageUrl: eTarget.files
+                articleImageUrl: uploadedFile
             }));
+            
+            let fileName = uploadedFile[0]?.name;
+            console.log(fileName);
+            console.log(eTarget);
         } else {
             setFormData((prevState) => ({
                 ...prevState,
@@ -148,18 +163,18 @@ const CreateArticle = () => {
     }
 
     return (
-        <>
-            <header>Create an article</header>
+  
             <main>
-                <form onSubmit={onSubmit}>
+                 <h1 className={classes['g-title']}>Create Article</h1>
+                <form className={classes['articles__form']} onSubmit={onSubmit}>
                     <Input type='text' id='name' label='Name' onChange={onChange} value={name}/>
-                    <Input multiline type='text' id='content' label='Content' onChange={onChange} value={content}/>
                     <Input type='text' id='source' label='Source' onChange={onChange} value={source}/>
+                    <Input multiline type='text' id='content' label='Content' onChange={onChange} value={content}/>
                     <Input type='file' id='articleImageUrl' label='Image' onChange={onChange} accept='.jpg, .png, .jpeg'/>
                     <Button type='submit' version='primary'>Create Article</Button>
                 </form>
             </main>
-        </>
+     
     )
 }
 

@@ -5,6 +5,7 @@ import classes from './ArticleItem.module.scss';
 import { IonIcon } from '@ionic/react';
 
 import { trashOutline, openOutline } from 'ionicons/icons';
+import Button from '../UI/Button';
 
 
 const ArticleItem = ({ article, id, onDelete, onEdit }) => {
@@ -18,8 +19,7 @@ const ArticleItem = ({ article, id, onDelete, onEdit }) => {
                     <h3 className={classes['article__header']} key={article.id}>{article.name}</h3>
                     <p className={classes['article__desc']}> {article.content}</p>
 
-                    {/* Source:  <a href={article.source} target="_blank">{article.source}</a> */}
-                    <button className={classes['btn-more']}>Read More</button>
+                    <Button type='button' version='more'>Read More</Button>
 
                 </div>
             </Link>

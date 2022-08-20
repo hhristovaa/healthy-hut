@@ -1,22 +1,22 @@
 import classes from './Input.scss';
 
-const Input = ({ multiline, id, value, label, placeholder, disabled, type, fileTypes, onChange }) => (
+const Input = (props) => (
     <fieldset className='form-group'>
-        {label && <label className='form-group__label' htmlFor={id}>{label}</label>}
-        {multiline ? (<textarea
-        id={id}
-            value={value}
+        {props.label && <label className='form-group__label' htmlFor={props.id}>{props.label}</label>}
+        {props.multiline ? (<textarea
+        id={props.id}
+            value={props.value}
             className='form-group__textarea'
-            placeholder={placeholder}
-            onChange={onChange}></textarea>) : (<input
-                type={type}
-                value={value}
-                id={id}
+            placeholder={props.placeholder}
+            onChange={props.onChange}></textarea>) : (<input
+                type={props.type}
+                value={props.value}
+                id={props.id}
                 className='form-group__input'
-                placeholder={placeholder}
-                onChange={onChange}
-                accept={fileTypes}
-                disabled={disabled}
+                placeholder={props.placeholder}
+                onChange={props.onChange}
+                accept={props.fileTypes}
+                disabled={props.disabled}
             />)
         }
     </fieldset>

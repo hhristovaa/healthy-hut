@@ -39,12 +39,12 @@ const FullArticle = () => {
 
             <h1 className={classes['g-heading']}>{article.name}</h1>
             <section className={classes.article}>
-                <div className={classes['article__img']}><img src={article.imageUrl} /></div>
+                <div className={classes['article__img']}><img src={article.imageUrl} alt={article.name} /></div>
                 <p className={classes['article__content']}>{article.content}</p>
-                <span>Source: </span><a className={classes['article__source']} href={article.source}>{article.source}</a> <br></br>
+                <div className={classes['article__source']}>
+                <span>Source: </span><a className={classes['article__source-url']} href={article.source}>{article.source}</a> <br></br>
+                </div>
                 {/* <p>{article.timestamp.toString()}</p> */}
-
-
 
                 {auth.currentUser?.uid !== article.userRef && (
                     <Link to={`/contacts/${article.userRef}?articleName=${article.name}`}>Access forbidden</Link>

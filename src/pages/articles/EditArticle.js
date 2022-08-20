@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { uuidv4 } from '@firebase/util';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
+import classes from './Articles.module.scss';
 
 const EditArticle = () => {
     const [loading, setLoading] = useState(false);
@@ -33,7 +34,7 @@ const EditArticle = () => {
     //     const getArticle = async () => {
     //         const docRef = doc(db, 'articles', params.articleId);
     //         const docSnap = await getDoc(docRef);
-            
+
     //         if(docSnap.exists()){
     //             setArticle(docSnap.data());
     //             setFormData({...docSnap.data()});
@@ -48,27 +49,27 @@ const EditArticle = () => {
     //     getArticle();
 
     // }, [params.articleId, navigate]);
-//redirect if article is not user's
+    //redirect if article is not user's
 
-useEffect(() => {
-    if (article && article.userRef !== auth.currentUser.uid) {
-        toast.error('You cannot edit that article');
-        navigate('/');
-    }
-});
+    useEffect(() => {
+        if (article && article.userRef !== auth.currentUser.uid) {
+            toast.error('You cannot edit that article');
+            navigate('/');
+        }
+    });
 
     //fetch articles to edit 
     useEffect(() => {
-        
+
         const fetchArticle = async () => {
             const docRef = doc(db, 'articles', params.articleId);
             console.log(docRef);
-         
+
             const docSnap = await getDoc(docRef);
             console.log(docSnap);
             if (docSnap.exists()) {
                 setArticle(docSnap.data());
-                setFormData({...docSnap.data()});
+                setFormData({ ...docSnap.data() });
                 console.log(docSnap.data());
                 setLoading(false);
             }
@@ -160,7 +161,7 @@ useEffect(() => {
         const imageUrl = await Promise.all(
             [...articleImageUrl].map((img) => storeImage(img))).catch(() => {
                 setLoading(false);
-                toast.error('Image was not uplodaed');
+                toast.error('An error occured while uploading the image.');
                 return;
             });
 
@@ -176,7 +177,7 @@ useEffect(() => {
         await updateDoc(docRef, formDataCopy);
 
         setLoading(false);
-        toast.success('Article created');
+        toast.success('The article was successfully updated!');
         navigate(`/articles/${docRef.id}`)
     }
 
@@ -201,18 +202,16 @@ useEffect(() => {
     }
 
     return (
-        <>
-            <header>Edit Article</header>
-            <main>
-                <form onSubmit={onSubmit}>
-                    <Input type='text' id='name' label='Name' onChange={onChange} value={name}/>
-                    <Input multiline type='text' id='content' label='Content' onChange={onChange} value={content}/>
-                    <Input type='text' id='source' label='Source' onChange={onChange} value={source}/>
-                    <Input type='file' id='articleImageUrl' label='Image' onChange={onChange} accept='.jpg, .png, .jpeg'/>
-                    <Button type="submit" version='change'>Edit Article</Button>
-                </form>
-            </main>
-        </>
+        <main>
+            <h1 className={classes['g-title']}>Edit Article</h1>
+            <form onSubmit={onSubmit} className={classes['articles__form']}>
+                <Input type='text' id='name' label='Name' onChange={onChange} value={name} />
+                <Input type='text' id='source' label='Source' onChange={onChange} value={source} />
+                <Input multiline type='text' id='content' label='Content' onChange={onChange} value={content} />
+                <Input type='file' id='articleImageUrl' label='Image' onChange={onChange} accept='.jpg, .png, .jpeg' />
+                <Button type="submit" version='change'>Edit Article</Button>
+            </form>
+        </main>
     )
 }
 

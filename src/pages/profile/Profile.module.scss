@@ -2,13 +2,28 @@
 @use '../../styles/_typography.scss' as *;
 @use '../../styles/_variables.scss' as *;
  
-main {
-    position: relative;
-}
 .personal-details {
     margin-top: 5%;
-    &__header {
 
+    &__header {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+        background-color: lighten($color-gray-light, 20%);
+        padding: 1rem;
+        margin: 1.5em 0 2em 0;
+        border-radius: 14px;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        ion-icon {
+            font-size: 120px;
+            color: $color-gray-dark;
+        }   
     }
 
     &__form {
@@ -17,18 +32,12 @@ main {
         align-items: center;
         gap: 1rem;
         width: 50%;
-        background-color: lighten($color-gray-light, 20%);
-        border-radius: 1rem;
-        padding: 1rem;
-        box-shadow: rgba(0, 0, 0, 0.5);
-        max-width: 500px;
-
+       
         input {
             box-shadow: rgba(0, 0, 0, 0.11);
             border: none;
             border-radius: 3rem;
             height: 3rem;
-            width: 100%;
             font-family: 'Montserrat', sans-serif;
             padding: 0 3rem;
             font-size: 1rem;
@@ -40,22 +49,8 @@ main {
         }
     }
 
+    &__action {
 
-}
-.btn {
-    background: $color-primary;
-    border: none;
-    color: $color-white;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 20px;
-    padding: 0.6rem 0.8rem;
-    margin: 1rem 0;
-    cursor: pointer;
-    width: 6rem;
-
-    &:hover {
-        background-color: $color-primary-dark;
     }
-}
 
+}

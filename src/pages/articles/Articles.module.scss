@@ -8,7 +8,7 @@
     &__img {
         margin: 1.5rem 0px;
         img {
-            height: 40vh;
+            height: 44vh;
             width: 100%;
             object-fit: cover;
             margin: 0 auto;
@@ -22,10 +22,19 @@
         font-size: 18px;
         line-height: 29px;
         text-align: justify;
+       
 
     }
 
     &__source {
+        margin: 1.5rem 0px;
+        
+        span {
+            font-weight: 600;
+        }
+
+
+        &-url {
         font-size: 16px;
         color: $color-primary-dark;
 
@@ -35,10 +44,17 @@
 
     }
 }
+}
 
 .articles {
     display: flex;
     flex-wrap: wrap;
+
+    &__form {
+        margin: 0 auto;
+        padding-top: 2em;
+        width: 60%;
+    }
 
 
 }
