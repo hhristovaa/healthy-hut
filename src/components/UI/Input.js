@@ -17,6 +17,7 @@ const Input = (props) => (
                 onChange={props.onChange}
                 accept={props.fileTypes}
                 disabled={props.disabled}
+                required={props.required}
             />)
         }
     </fieldset>

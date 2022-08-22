@@ -12,6 +12,9 @@ import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
 import classes from './Articles.module.scss';
 import { isFieldEmpty } from '../../utils/utils';
+import FileUploader from '../../components/UI/FileUpload';
+import { cloudUploadOutline } from 'ionicons/icons';
+import { IonIcon } from '@ionic/react';
 
 const CreateArticle = () => {
     const [loading, setLoading] = useState(false);

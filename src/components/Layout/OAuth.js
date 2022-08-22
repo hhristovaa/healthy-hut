@@ -3,10 +3,9 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { toast } from 'react-toastify';
-import { IonIcon } from '@ionic/react';
-
-import { logoGoogle } from 'ionicons/icons';
 import Button from '../UI/Button';
+import GoogleIcon from '../UI/GoogleIcon';
+
 
 const OAuth = () => {
     const navigate = useNavigate();
@@ -44,9 +43,10 @@ const OAuth = () => {
     }
 
     return (
-        <Button version='login' onClick={onGoogleIconClick}>Sign {location.pathname === '/sign-up' ? 'up' : 'in'}
-            <IonIcon icon={logoGoogle} size='small' />
+        <Button version='google' onClick={onGoogleIconClick}>
+            <GoogleIcon/>Sign {location.pathname === '/sign-up' ? 'up' : 'in'}       
         </Button>
+
     )
 }
 

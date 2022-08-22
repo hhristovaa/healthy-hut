@@ -3,10 +3,11 @@ import { toast } from 'react-toastify';
 import classes from './SignIn.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import visibilityIcon from '../../assets/svg/visibilityIcon.svg';
 import OAuth from '../../components/Layout/OAuth';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
+import { eyeOutline, eyeOffOutline } from 'ionicons/icons';
+import { IonIcon } from '@ionic/react';
 
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -14,7 +15,7 @@ const SignIn = () => {
         email: '',
         password: ''
     });
-    
+
     const { email, password } = formData;
 
     const navigate = useNavigate();
@@ -49,9 +50,8 @@ const SignIn = () => {
 
     return (
         <main>
-            <div>
-                <h1 className={classes['g-title']}>Welcome Back!</h1>
-            </div>
+
+            <h1 className={classes['g-title']}>Welcome Back!</h1>
 
             <form className={classes.form} onSubmit={onSubmit}>
                 <Input type='email'
@@ -59,37 +59,34 @@ const SignIn = () => {
                     id='email'
                     value={email}
                     onChange={onChange}
+                    required
                 />
-
-                <fieldset className={classes.passwordInputWrapper}>
-                    <input
+                <div className={classes['password-wrapper']}>
+                    <Input
                         type={showPassword ? 'text' : 'password'}
                         className={classes.passwordInput}
                         placeholder='Password'
                         id='password'
                         value={password}
                         onChange={onChange}
+                        required
                     />
-                    <img src={visibilityIcon} alt="show password" className={classes.showPassword} onClick={() => setShowPassword((prevState) => !prevState)} />
-                </fieldset>
-                <Link to='/forgot-password' className={classes.forgotPasswordLink}>
-                    Forgot Password
-                </Link>
-
-
-
-                <div className={classes.signInBar}>
-                    <OAuth />
-                    <Button version='login'>Sign In</Button>
-                    <Button version='login'>
-                        <Link to='/sign-up' className={classes.registerLink}>Sign Up Instead</Link>
-                    </Button>
+                    <IonIcon icon={showPassword ? eyeOutline : eyeOffOutline} onClick={() => setShowPassword(prevState => !prevState)} />
+                </div>
+                <div className={classes['btn-container']}>
+                    <Link to='/forgot-password' className={classes['forgot-password']}>
+                        Forgot Password?
+                    </Link>
+                    <Link to='/sign-up' className={classes['signup-url']}>Sign Up Instead</Link>
                 </div>
             </form>
-
-
+            <div className={classes['btn-container__social']}>
+                <Button version='primary' type='submit'>Sign In</Button>
+                <strong>OR</strong>
+                <OAuth />
+            </div>
         </main>
-    )
+    );
 }
 
 export default SignIn;

@@ -16,6 +16,7 @@ import FullArticle from './pages/articles/FullArticle';
 import Footer from './components/Layout/Footer';
 import './styles/Global.scss';
 import EditArticle from './pages/articles/EditArticle';
+import NotFound from './pages/404/NotFound';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path='/create-article' element={<CreateArticle />} />
           <Route path='/edit-article/:articleId' element={<EditArticle />} />
           <Route path='/articles/:articleId' element={<FullArticle />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
         
 

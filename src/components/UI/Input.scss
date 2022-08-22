@@ -28,12 +28,21 @@
         border: 1px solid darken($color-primary-dark, 10%);
       }
 
+      &:required::after {
+        content: '*'
+      }
+
+      &:required:invalid {
+        border: 1px solid $color-red;
+      }
+
     
     }
 
     &__textarea {
       @extend .form-group__input;
       height: 10rem;
+      width: 101%;
       resize: none;
     }
   }

@@ -2,13 +2,14 @@ import { useState } from 'react';
 import classes from '../signin/SignIn.module.scss';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
-import {getAuth, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth';
-import {setDoc, doc, serverTimestamp} from 'firebase/firestore';
-import {db} from '../../firebase.config';
-import visibilityIcon from '../../assets/svg/visibilityIcon.svg';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../../firebase.config';
 import OAuth from '../../components/Layout/OAuth';
 import Button from '../../components/UI/Button';
-import  Input from '../../components/UI/Input';
+import Input from '../../components/UI/Input';
+import { eyeOutline, eyeOffOutline } from 'ionicons/icons';
+import { IonIcon } from '@ionic/react';
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -46,7 +47,7 @@ const SignUp = () => {
                 displayName: firstName,
             });
 
-            const formDataCopy = {...formData};
+            const formDataCopy = { ...formData };
 
             delete formDataCopy.password
             formDataCopy.timestamp = serverTimestamp();
@@ -55,7 +56,7 @@ const SignUp = () => {
             toast.success('Your account has been successfully created!');
             navigate('/');
 
-        }catch (err) {
+        } catch (err) {
             console.error(err);
             toast.error('Something went wrong! Please try again.');
         }
@@ -63,18 +64,15 @@ const SignUp = () => {
 
     return (
         <main>
-            <div>
-                <h1 className={classes['g-title']}>Welcome!</h1>
-            </div>
-
+            <h1 className={classes['g-title']}>Welcome!</h1>
             <form className={classes.form} onSubmit={onSubmit}>
-                
                 <Input
                     type='text'
                     placeholder='First Name'
                     id='firstName'
                     value={firstName}
                     onChange={onChange}
+                    required
                 />
                 <Input
                     type='text'
@@ -82,6 +80,7 @@ const SignUp = () => {
                     id='lastName'
                     value={lastName}
                     onChange={onChange}
+                    required
                 />
                 <Input
                     type='email'
@@ -89,35 +88,31 @@ const SignUp = () => {
                     id='email'
                     value={email}
                     onChange={onChange}
+                    required
                 />
-
-                <fieldset className={classes.passwordInputWrapper}>
-                    <input
+                <div className={classes['password-wrapper']}>
+                    <Input
                         type={showPassword ? 'text' : 'password'}
                         className={classes.passwordInput}
                         placeholder='Password'
                         id='password'
                         value={password}
                         onChange={onChange}
+                        required
                     />
-                    <img src={visibilityIcon} alt="show password" className={classes.showPassword} onClick={() => setShowPassword((prevState) => !prevState)} />
-                </fieldset>
-                <Link to='/forgot-password' className={classes.forgotPasswordLink}>
-                    Forgot Password
-                </Link>
-         
-            </form>
-
-
-            
-            <div className={classes.signInBar}>
-                <OAuth/>
-                <Button version='login' type='submit'>Sign Up</Button>
-                <Button version='login'><Link to='/sign-in' className={classes.registerLink}>Sign In Instead</Link></Button>
+                    <IonIcon icon={showPassword ? eyeOutline : eyeOffOutline} onClick={() => setShowPassword(prevState => !prevState)} />
                 </div>
-
+                <div className={classes['btn-container']}>
+                    <Button version='primary'><Link to='/sign-up' className={classes.registerLink}>Sign Up</Link></Button>
+                </div>
+            </form>
+            <div className={classes['btn-container__social']}>
+                <OAuth />
+                <strong>OR</strong>
+                <Link to='/sign-in' className={classes['signup-url']}>Sign Up Instead</Link>
+            </div>
         </main>
-    )
+    );
 }
 
 export default SignUp;

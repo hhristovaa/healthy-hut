@@ -1,12 +1,9 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import classes from './signin/SignIn.module.scss';
-
-import { IonIcon } from '@ionic/react';
-
-import { chevronForwardOutline } from 'ionicons/icons';
+import Button from '../components/UI/Button';
+import Input from '../components/UI/Input';
 
 const ForgotPassword = () => {
 
@@ -33,16 +30,13 @@ const ForgotPassword = () => {
 
 
             <form className={classes.form} onSubmit={onSubmit}>
-                <input className={classes.emailInput} type="email" name="email" id="email" placeholder='Email' value={email} onChange={onChange} />
-               
+                <Input type="email" name="email" id="email" placeholder='Email' value={email} onChange={onChange} />
 
-                <div className={classes.signInBar}>
-                  
-                    <button className={classes.signUpButton}>
-                    Send Reset Link <IonIcon icon={chevronForwardOutline} size='small' />
-                    </button>
-                </div>
-                <button className={classes.signUpButton}> <Link to='/sign-in'>Sign In</Link> </button>
+                <Button type='submit' version='login'>
+                    Send Reset Link
+                </Button>
+
+
             </form>
         </main>
 

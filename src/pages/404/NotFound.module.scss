@@ -1,0 +1,22 @@
+@use '../../styles/_mixins.scss' as *;
+@use '../../styles/_typography.scss' as *;
+@use '../../styles/_variables.scss' as *;
+
+.not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    &__image {
+        padding-top: 2rem;
+        width: 60%;
+    }
+
+    ion-icon {
+        color: $color-primary;
+        &:hover {
+            color: darken($color-primary, 10%);
+        }
+    }   
+}

@@ -5,7 +5,7 @@
 .btn {
     cursor: pointer;
     border-radius: 20px;
-    padding: 0.6rem 0.8rem;
+    padding: 0.6rem 1rem;
     border: none;
     text-transform: uppercase;
     color: $color-white;
@@ -23,17 +23,21 @@
     &--secondary {
         background-color: $color-secondary;
         color: $color-black;
-        
+
         &:hover {
             background-color: darken($color-secondary, 10%);
         }
     }
 
+    &--login {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
     &--login,
     &--create {
         background-color: $color-green;
-        display: flex;
-        align-items: flex-end;
 
         &:hover {
             background-color: darken($color-green, 10%);
@@ -61,10 +65,38 @@
     &--more {
         @extend .btn--primary;
         position: absolute;
-left: 50%;
-transform: translateX(-50%);
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     &--create {}
+
+    &--google {
+        background-color: #4285F4;
+        display: flex;
+        align-items: center;
+        padding: 0.42rem 0.8rem;
+
+        &:hover {
+            background-color: darken(#4285F4, 10%);
+        }
+
+        svg {
+            margin-right: 1rem;
+        }
+    }
+
+    &--loginIcon {
+        color: $color-primary;
+        background: transparent;
+
+        ion-icon {
+            font-size: 48px;
+        }
+
+        &:hover {
+            color: darken($color-primary, 10%);
+        }
+    }
 
 }
