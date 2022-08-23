@@ -10,7 +10,7 @@ import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
 import { IonIcon } from '@ionic/react';
 
-import { personCircleOutline } from 'ionicons/icons';
+import { personCircleOutline, mailOutline, personOutline } from 'ionicons/icons';
 
 
 const Profile = () => {
@@ -117,15 +117,26 @@ const Profile = () => {
 
                 <div className={classes['personal-details__header']}>
                     <div className={classes['personal-details__info']}>
-                        <IonIcon icon={personCircleOutline} />
+                        <IonIcon icon={personCircleOutline} className={classes['personal-details__icon']}/>
                         <p>Hello {firstName}</p>
                         <small>Admin</small>
                         <Button version='create' type='button'><Link to='/create-article'>New article</Link></Button>
 
                     </div>
                     <form className={classes['personal-details__form']}>
-                        <input type="text" id="firstName" value={firstName} className={!updateDetails ? 'profileName' : 'profileNameActive'} disabled={!updateDetails} onChange={onChange} />
-                        <Input type="text" id="email" value={email} disabled />
+                        <Input 
+                        type="text" 
+                        id="firstName" 
+                        value={firstName} 
+                        disabled={!updateDetails} onChange={onChange} 
+                        icon={personOutline}
+                        />
+                        <Input 
+                        type="text" 
+                        id="email" 
+                        value={email} 
+                        disabled icon={mailOutline}
+                        />
                         <div className={classes['personal-details__action']}>
                             <Button type='button' version='secondary' onClick={() => {
                                 updateDetails && onSubmit()
@@ -138,8 +149,6 @@ const Profile = () => {
                     </form>
 
                 </div>
-
-
 
                 {!loading && articles?.length > 0 && (
                     <section>

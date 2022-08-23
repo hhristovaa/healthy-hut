@@ -4,7 +4,6 @@
 
 .header {
     @include flex-setup($alItems: center, $justContent: space-evenly);
-    //height: 5vh;
     width: 100%;
     background-color: $color-primary;
 
@@ -12,6 +11,7 @@
 
 .navbar {
     display: flex;
+
     &__item {
         color: $color-white;
         text-decoration: none;
@@ -29,22 +29,20 @@
         &:visited,
         &:active {
             text-decoration: none;
-           
         }
     }
-
 }
 
 .logo {
     font-family: 'Pacifico', cursive;
-   // font-size: 1.5em;
+    // font-size: 1.5em;
     font-size: 24px;
-line-height: 63px;
+    line-height: 63px;
     color: $color-secondary;
     text-decoration: none;
 }
 
 
 .is-active {
-    color: $color-secondary; 
+    color: $color-secondary;
 }

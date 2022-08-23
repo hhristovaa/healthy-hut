@@ -3,9 +3,7 @@
 @use '../../styles/_variables.scss' as *;
 
 .not-found {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex-setup($direction: column, $alItems: center);
     gap: 1rem;
 
     &__image {

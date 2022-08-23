@@ -20,10 +20,12 @@
         flex-direction: column;
         align-items: center;
 
-        ion-icon {
-            font-size: 120px;
-            color: $color-gray-dark;
-        }   
+
+    }
+    
+    &__icon {
+          font-size: 120px;
+            color: $color-gray-dark;     
     }
 
     &__form {
@@ -32,25 +34,7 @@
         align-items: center;
         gap: 1rem;
         width: 50%;
-       
-        input {
-            box-shadow: rgba(0, 0, 0, 0.11);
-            border: none;
-            border-radius: 3rem;
-            height: 3rem;
-            font-family: 'Montserrat', sans-serif;
-            padding: 0 3rem;
-            font-size: 1rem;
-            border: 1px solid $color-primary-dark;
-        }
-
-        .profileName {
-            background: #424242;
-        }
     }
 
-    &__action {
-
-    }
 
 }

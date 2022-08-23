@@ -1,4 +1,5 @@
 import classes from './Input.scss';
+import { IonIcon } from '@ionic/react';
 
 const Input = (props) => (
     <fieldset className='form-group'>
@@ -20,6 +21,7 @@ const Input = (props) => (
                 required={props.required}
             />)
         }
+        {props.icon && <IonIcon icon={props.icon}/>}
     </fieldset>
 );
 

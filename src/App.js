@@ -10,7 +10,6 @@ import Contacts from './pages/contacts/Contacts';
 import Profile from './pages/profile/Profile';
 import SignIn from './pages/signin/SignIn';
 import SignUp from './pages/signup/SignUp';
-import ForgotPassword from './pages/ForgotPassword';
 import CreateArticle from './pages/articles/CreateArticle';
 import FullArticle from './pages/articles/FullArticle';
 import Footer from './components/Layout/Footer';
@@ -35,7 +34,6 @@ function App() {
             </Route>
           <Route path='/sign-in' element={<SignIn />} />
           <Route path='/sign-up' element={<SignUp />} />
-          <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/create-article' element={<CreateArticle />} />
           <Route path='/edit-article/:articleId' element={<EditArticle />} />
           <Route path='/articles/:articleId' element={<FullArticle />} />
@@ -46,7 +44,7 @@ function App() {
       </Router>
    
       <ToastContainer position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

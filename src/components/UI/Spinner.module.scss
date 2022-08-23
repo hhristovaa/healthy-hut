@@ -1,60 +1,65 @@
+@use '../../styles/_mixins.scss' as *;
+@use '../../styles/_variables.scss' as *;
+@use '../../styles/_typography.scss' as *;
+
 .overlay {
-  background-color: rgba(0, 0, 0, .2);
+  @include position-setup(fixed, $top: 0%, $left: 0%, $zIndex: 2);
+  background-color: rgba($color-black, .2);
   width: 100%;
   height: 100%;
-  position: fixed;
-  z-index: 2;
-  top: 0%;
-  left: 0%;
 }
 
-  .spinner {
-    display: inline-block;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100px;
-    height: 100px;
-  }
-  .spinner div {
+.spinner {
+  @include position-setup(relative, $top: 50%, $left: 50%);
+  display: inline-block;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+
+  div {
     position: absolute;
-    border: 4px solid #ff0088;
+    border: 5px solid $color-primary;
     opacity: 1;
     border-radius: 50%;
     animation: spinner 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-  }
-  .spinner div:nth-child(2) {
-    animation-delay: -0.5s;
-  }
-  @keyframes spinner {
-    0% {
-      top: 36px;
-      left: 36px;
-      width: 0;
-      height: 0;
-      opacity: 0;
-    }
-    4.9% {
-      top: 36px;
-      left: 36px;
-      width: 0;
-      height: 0;
-      opacity: 0;
-    }
-    5% {
-      top: 36px;
-      left: 36px;
-      width: 0;
-      height: 0;
-      opacity: 1;
-    }
-    100% {
-      top: 0px;
-      left: 0px;
-      width: 72px;
-      height: 72px;
-      opacity: 0;
+
+    &:nth-child(2) {
+      animation-delay: -0.5s;
     }
   }
-  
+
+}
+
+@keyframes spinner {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  4.9% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  5% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}

@@ -41,10 +41,7 @@ const Articles = () => {
     return (
         <main>
             <h1 className={classes['g-title']}>All Articles</h1>
-
             {loading ? (<Spinner />) : articles && articles.length > 0 ? (
-
-
                 <section className={classes.articles}>{articles.map((article) => (
                     <ArticleItem article={article.data} id={article.id} key={article.id} />
                 ))}
@@ -52,7 +49,7 @@ const Articles = () => {
                 </section>
 
 
-            ) : (<p>No articles</p>)}
+            ) : (<h3>No articles</h3>)}
         </main>
     )
 }

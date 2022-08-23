@@ -3,15 +3,14 @@
 @use '../../styles/_typography.scss' as *;
 
 .form-group {
-    display: flex; 
-    align-items: center;
     margin-bottom: 1rem;
     outline: none;
     border: none;
+    position: relative;
 
     &__label {
       font-weight: bold;
-      margin-right: 1rem;
+      margin: 1.5rem;
     }
 
     &__input {
@@ -20,7 +19,8 @@
       height: 3rem;
       width: 100%;
       font-family: 'Montserrat', sans-serif;
-      padding: 0 3rem;
+      padding: 0rem 3rem 0rem 1.5rem;
+      margin-top: 0.3rem;
       font-size: 1rem;
       border: 1px solid $color-primary-dark;
 
@@ -32,10 +32,9 @@
         content: '*'
       }
 
-      &:required:invalid {
-        border: 1px solid $color-red;
+      &:invalid {
+        border: 2px solid $color-red;
       }
-
     
     }
 
@@ -44,6 +43,11 @@
       height: 10rem;
       width: 101%;
       resize: none;
+    }
+
+    ion-icon {
+      @include position-setup(absolute, $right: 5%, $top: 50%);
+      transform: translateY(-50%);
     }
   }
   
@@ -56,8 +60,7 @@
   z-index: -1;
 }
 
-label[for=articleImageUrl] {
-  
+label[for=articleImageUrl] { 
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -72,9 +75,7 @@ label[for=articleImageUrl] {
 }
 
 #recipe-search {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  @include position-setup(absolute, $left: 50%, $top: -14rem, $zIndex: 5);
   width: 40%;
   transform: translate(-50%);
 }

@@ -8,7 +8,7 @@ import { db } from '../../firebase.config';
 import OAuth from '../../components/Layout/OAuth';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
-import { eyeOutline, eyeOffOutline } from 'ionicons/icons';
+import { eyeOutline, eyeOffOutline, mailOutline, personOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 
 const SignUp = () => {
@@ -73,6 +73,7 @@ const SignUp = () => {
                     value={firstName}
                     onChange={onChange}
                     required
+                    icon={personOutline}
                 />
                 <Input
                     type='text'
@@ -81,6 +82,7 @@ const SignUp = () => {
                     value={lastName}
                     onChange={onChange}
                     required
+                    icon={personOutline}
                 />
                 <Input
                     type='email'
@@ -89,6 +91,7 @@ const SignUp = () => {
                     value={email}
                     onChange={onChange}
                     required
+                    icon={mailOutline}
                 />
                 <div className={classes['password-wrapper']}>
                     <Input
@@ -109,7 +112,7 @@ const SignUp = () => {
             <div className={classes['btn-container__social']}>
                 <OAuth />
                 <strong>OR</strong>
-                <Link to='/sign-in' className={classes['signup-url']}>Sign Up Instead</Link>
+                <Link to='/sign-in' className={classes['signup-url']}>Sign In Instead</Link>
             </div>
         </main>
     );

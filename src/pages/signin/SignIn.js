@@ -6,11 +6,14 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import OAuth from '../../components/Layout/OAuth';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
-import { eyeOutline, eyeOffOutline } from 'ionicons/icons';
+import { eyeOutline, eyeOffOutline, personOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
+import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
 
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [isPasswordForgotten, setForgottenPassword] = useState(false);
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -48,6 +51,14 @@ const SignIn = () => {
 
     }
 
+    const openModal = () => {
+        setForgottenPassword(true);
+    }
+    const closeModal = () => {
+        setForgottenPassword(false);
+    }
+
+
     return (
         <main>
 
@@ -59,6 +70,7 @@ const SignIn = () => {
                     id='email'
                     value={email}
                     onChange={onChange}
+                    icon={personOutline}
                     required
                 />
                 <div className={classes['password-wrapper']}>
@@ -74,10 +86,11 @@ const SignIn = () => {
                     <IonIcon icon={showPassword ? eyeOutline : eyeOffOutline} onClick={() => setShowPassword(prevState => !prevState)} />
                 </div>
                 <div className={classes['btn-container']}>
-                    <Link to='/forgot-password' className={classes['forgot-password']}>
+                    <a href="" className={classes['forgot-password']} onClick={openModal}>
                         Forgot Password?
-                    </Link>
+                    </a>
                     <Link to='/sign-up' className={classes['signup-url']}>Sign Up Instead</Link>
+                    {isPasswordForgotten && <ForgotPassword onClose={closeModal}/>}
                 </div>
             </form>
             <div className={classes['btn-container__social']}>

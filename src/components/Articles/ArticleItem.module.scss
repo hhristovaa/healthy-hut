@@ -1,4 +1,5 @@
-@use '../../styles/variables' as *;
+@use '../../styles/_mixins.scss' as *;
+@use '../../styles/_variables.scss' as *;
 
 .article__card {
     background-color: $color-white;
@@ -57,15 +58,11 @@
     font-size: 1rem;
     margin-bottom: 1rem;
     text-align: justify;
-    //text-overflow: ellipsis;
-   // white-space: nowrap;
 }
 
 .action {
+    @include position-setup(absolute, $bottom: 12%, $right: 6%);
     display: flex;
-    position: absolute;
-    bottom: 12%;
-    right: 6%;   
 }
 
 .btn-delete {

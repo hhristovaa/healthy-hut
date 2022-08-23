@@ -11,7 +11,7 @@
             height: 44vh;
             width: 100%;
             object-fit: cover;
-            margin: 0 auto;
+            margin: 0px auto;
      
         }
 
@@ -47,14 +47,10 @@
 }
 
 .articles {
-    display: flex;
-    flex-wrap: wrap;
-
+    @include flex-setup($wrap: wrap);
     &__form {
-        margin: 0 auto;
+        margin: 0px auto;
         padding-top: 2em;
         width: 60%;
     }
-
-
 }
