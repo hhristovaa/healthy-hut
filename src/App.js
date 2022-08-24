@@ -25,7 +25,11 @@ function App() {
         <Routes>
           {/* <Route path='/' element={<></>} /> */}
           <Route path='/' element={<Trending/>} />
-          <Route path='/recipes' element={<Recipes />} />
+          <Route exact path='/recipes' element={<Recipes />}>
+            <Route path='/recipes/vegan' element={<Recipes/>}/>
+            <Route path='/recipes/vegetarian' element={<Recipes/>}/>
+
+          </Route>
           <Route path='/articles' element={<Articles />} />
           <Route path='/contacts' element={<Contacts />} />
           <Route path='/profile' element={<PrivateRoute />} >

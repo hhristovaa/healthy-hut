@@ -19,7 +19,7 @@ const ArticleItem = ({ article, id, onDelete, onEdit }) => {
                     <h3 className={classes['article__header']} key={article.id}>{article.name}</h3>
                     <p className={classes['article__desc']}> {article.content}</p>
 
-                    <Button type='button' version='more'>Read More</Button>
+                    <Button type='button' version='primary' outline>Read More</Button>
 
                 </div>
             </Link>

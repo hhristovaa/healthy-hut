@@ -64,7 +64,7 @@ const SignIn = () => {
 
             <h1 className={classes['g-title']}>Welcome Back!</h1>
 
-            <form className={classes.form} onSubmit={onSubmit}>
+            <form className={classes.form} >
                 <Input type='email'
                     placeholder='Email'
                     id='email'
@@ -94,7 +94,7 @@ const SignIn = () => {
                 </div>
             </form>
             <div className={classes['btn-container__social']}>
-                <Button version='primary' type='submit'>Sign In</Button>
+                <Button version='primary' type='submit' onClick={onSubmit}>Sign In</Button>
                 <strong>OR</strong>
                 <OAuth />
             </div>

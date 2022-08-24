@@ -25,6 +25,7 @@ const Profile = () => {
         isAdmin: auth.currentUser.hasAdminRights
     });
 
+    console.log(auth);
     console.log(auth.currentUser)
 
     const { firstName, email, isAdmin } = formData;
@@ -108,13 +109,10 @@ const Profile = () => {
     return (
         <main>
             <h1 className={classes['g-title']}>Profile</h1>
-            {/* <h2 className={classes['g-heading']}>Hello {firstName} </h2> */}
             <p>{isAdmin}</p>
-
 
             <section className={classes['personal-details']}>
                 <h3 className={classes['g-description']}>Personal Details</h3>
-
                 <div className={classes['personal-details__header']}>
                     <div className={classes['personal-details__info']}>
                         <IonIcon icon={personCircleOutline} className={classes['personal-details__icon']}/>
@@ -142,7 +140,7 @@ const Profile = () => {
                                 updateDetails && onSubmit()
                                 setUpdateDetails((prevState) => !prevState)
                             }}>{updateDetails ? 'Done' : 'Change'}</Button>
-                            <Button type='button' version='logout' onClick={onLogout}>
+                            <Button type='button' version='danger' outline onClick={onLogout}>
                                 Logout
                             </Button>
                         </div>
