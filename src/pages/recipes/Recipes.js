@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import RecipeItem from '../../components/Recipes/RecipeItem';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
+import Category from '../../components/Category/Category';
 
 const Recipes = () => {
     const [trending, setTrending] = useState([]);
@@ -37,14 +38,14 @@ const Recipes = () => {
     return (
         <main>
             <h1>Recipes</h1>
+            <Category/>
             <Splide options={{
                 perPage: 4,
                 gap: '5rem'
             }}>
 
 
-                {trending.map((recipe) => {
-                    console.log(recipe.id);
+                {trending.map((recipe) => {;
                     return (
                         <SplideSlide key={recipe.id}>
                             <RecipeItem key={recipe.id} recipe={recipe}>

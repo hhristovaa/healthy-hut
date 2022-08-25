@@ -16,6 +16,7 @@ import Footer from './components/Layout/Footer';
 import './styles/Global.scss';
 import EditArticle from './pages/articles/EditArticle';
 import NotFound from './pages/404/NotFound';
+import Vegan from './pages/recipes/Vegan';
 
 function App() {
   return (
@@ -26,11 +27,12 @@ function App() {
           {/* <Route path='/' element={<></>} /> */}
           <Route path='/' element={<Trending/>} />
           <Route exact path='/recipes' element={<Recipes />}>
-            <Route path='/recipes/vegan' element={<Recipes/>}/>
-            <Route path='/recipes/vegetarian' element={<Recipes/>}/>
+            {/* <Route path='/recipes/:type' element={<Vegan/>}/> */}
+            <Route path='/recipes/:type' element={<Recipes/>}/>
 
           </Route>
           <Route path='/articles' element={<Articles />} />
+          <Route path='/vegan' element={<Vegan />} />
           <Route path='/contacts' element={<Contacts />} />
           <Route path='/profile' element={<PrivateRoute />} >
           <Route path='/profile' element={<Profile />} />

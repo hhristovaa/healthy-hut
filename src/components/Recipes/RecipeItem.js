@@ -9,7 +9,7 @@ const RecipeItem = (props) => {
     let recipe = props.recipe;
 
     return (
-        <Link to={`/recipes/${recipe.id}`}>
+        <Link to={`/recipes/${recipe.id}`} className={classes['recipe-redirect']}>
         <Card className={classes['recipe__card']} recipe={props.recipe}>
             
             <div className={classes['recipe__card-img']}>

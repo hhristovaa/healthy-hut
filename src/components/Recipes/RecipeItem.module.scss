@@ -1,7 +1,6 @@
 @use '../../styles/_variables.scss' as *;
 
-.recipe__card {
-    
+.recipe__card {   
     display: flex;
     height: 19rem;
     flex-direction: column;
@@ -9,14 +8,20 @@
 
 }
 
+.recipe-redirect {
+    width: 33%;
+}
+
 .recipe__card-img {
     overflow: hidden;
     border-radius: 14px;
     &:hover {
         overflow: hidden;
+        filter: contrast(1.1);
         img {
+            
             transform: scale(1.2);
-            filter: contrast(1);
+    
         }
     }
 
