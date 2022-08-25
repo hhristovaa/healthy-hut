@@ -44,7 +44,7 @@ const OAuth = () => {
 
     return (
         <Button version='google' onClick={onGoogleIconClick}>
-            <GoogleIcon/>Sign {location.pathname === '/sign-up' ? 'up' : 'in'}       
+            <GoogleIcon/>{location.pathname === '/sign-up' ? 'Sign Up' : 'Log In'}       
         </Button>
 
     )

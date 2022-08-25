@@ -11,6 +11,7 @@
     color: $color-white;
     margin: 1rem 0px;
     min-width: 100px;
+    max-height: 44px;
 
     &--primary {
         background-color: $color-primary;
@@ -117,6 +118,19 @@
         }
     }
 
+    &--secondary {
+        border-color: $color-secondary;
+        color: $color-secondary;
+        margin: unset;
+ 
+
+
+        &:hover {
+            color: $color-black;
+            background-color: $color-secondary;
+        }
+    }
+
     &--danger {
         border-color: $color-red;
         color: $color-red;
@@ -125,6 +139,17 @@
         &:hover {
             color: $color-white;
             background-color: $color-red;
+        }
+    }
+
+    &--logged {
+        border-color: $color-white;
+        color: $color-white;
+        margin: 0 1rem;
+
+        &:hover {
+            color: $color-black;
+            background-color: $color-white;
         }
     }
 }

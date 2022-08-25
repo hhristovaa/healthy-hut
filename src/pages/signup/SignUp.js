@@ -112,7 +112,7 @@ const SignUp = () => {
             <div className={classes['btn-container__social']}>
                 <OAuth />
                 <strong>OR</strong>
-                <Link to='/sign-in' className={classes['signup-url']}>Sign In Instead</Link>
+                <Link to='/sign-in' className={classes['signup-url']}>Log In Instead</Link>
             </div>
         </main>
     );
