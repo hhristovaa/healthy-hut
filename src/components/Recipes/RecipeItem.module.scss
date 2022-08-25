@@ -1,10 +1,17 @@
 @use '../../styles/_variables.scss' as *;
 
 .recipe__card {
+    
+    display: flex;
+    height: 19rem;
+    flex-direction: column;
+    justify-content: space-around;
 
 }
 
 .recipe__card-img {
+    overflow: hidden;
+    border-radius: 14px;
     &:hover {
         overflow: hidden;
         img {
@@ -17,7 +24,7 @@
 
 .recipe__card-title {
     font-weight: 600;
-    margin-bottom: .5rem;
+    margin: .5rem 0;
 
 }
 
@@ -26,9 +33,14 @@
     display: flex;
     justify-content: space-between;
 
+}
+
+.recipe__card-details {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
     ion-icon {
-        
+        font-size: 14px;
     }
-
-
 }

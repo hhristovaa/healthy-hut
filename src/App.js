@@ -41,6 +41,7 @@ function App() {
           <Route path='/create-article' element={<CreateArticle />} />
           <Route path='/edit-article/:articleId' element={<EditArticle />} />
           <Route path='/articles/:articleId' element={<FullArticle />} />
+          <Route path='/recipe/:recipeId' element={<Recipes />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         
