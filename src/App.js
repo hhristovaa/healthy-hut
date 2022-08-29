@@ -17,6 +17,9 @@ import './styles/Global.scss';
 import EditArticle from './pages/articles/EditArticle';
 import NotFound from './pages/404/NotFound';
 import Vegan from './pages/recipes/Vegan';
+import Diet from './pages/recipes/Diet';
+import SearchResult from './pages/recipes/SearchResult';
+import FullRecipe from './pages/recipes/FullRecipe';
 
 function App() {
   return (
@@ -28,11 +31,16 @@ function App() {
           <Route path='/' element={<Trending/>} />
           <Route exact path='/recipes' element={<Recipes />}>
             {/* <Route path='/recipes/:type' element={<Vegan/>}/> */}
+            
             <Route path='/recipes/:type' element={<Recipes/>}/>
 
           </Route>
           <Route path='/articles' element={<Articles />} />
+          <Route path='/search/:search' element={<SearchResult />} />
+          <Route path='/recipe/:recipeId' element={<FullRecipe />} />
           <Route path='/vegan' element={<Vegan />} />
+          <Route path='/diet' element={<Diet />} />
+          <Route path='/diet/:type' element={<Diet />} />
           <Route path='/contacts' element={<Contacts />} />
           <Route path='/profile' element={<PrivateRoute />} >
           <Route path='/profile' element={<Profile />} />

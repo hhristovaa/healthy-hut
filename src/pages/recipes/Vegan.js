@@ -23,7 +23,7 @@ const Vegan = () => {
         } else {
             const apiKey = '2ed50f18cc1446178f98816f679672f1';
             
-            const api = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=30&diet=vegan&instructionsRequired=true&addRecipeInformation=true&addRecipeNutrition=true&limitLicense=true`);
+            const api = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_RECIPE_API_KEY}&number=30&diet=vegan&instructionsRequired=true&addRecipeInformation=true&addRecipeNutrition=true&limitLicense=true`);
             const data = await api.json();
             console.log(data);
             console.log(data.results);

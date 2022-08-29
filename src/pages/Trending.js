@@ -53,7 +53,6 @@ const Trending = () => {
 
 
                         {trending.map((recipe) => {
-                            console.log(recipe.id);
                             return (
                                 <SplideSlide key={recipe.id}>
                                     <RecipeItem key={recipe.id} recipe={recipe}>
