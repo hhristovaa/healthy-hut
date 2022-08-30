@@ -21,12 +21,12 @@ const Diet = () => {
     useEffect(() => {
 
         getDiet(params.type)
-        console.log(params.type)
+ 
     }, []);
 
     return (
         <main>
-            {diet.map((item) => {
+            {diet?.map((item) => {
                 return (
                     <RecipeItem key={item.id} recipe={item}>
                         

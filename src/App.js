@@ -20,6 +20,7 @@ import Vegan from './pages/recipes/Vegan';
 import Diet from './pages/recipes/Diet';
 import SearchResult from './pages/recipes/SearchResult';
 import FullRecipe from './pages/recipes/FullRecipe';
+import Favorites from './pages/favorites/Favorites';
 
 function App() {
   return (
@@ -48,6 +49,11 @@ function App() {
             </Route>
           <Route path='/sign-in' element={<SignIn />} />
           <Route path='/sign-up' element={<SignUp />} />
+          <Route path='/favorites' element={<PrivateRoute />} >
+          <Route path='/favorites' element={<Favorites />} />
+
+            </Route>
+
           <Route path='/create-article' element={<CreateArticle />} />
           <Route path='/edit-article/:articleId' element={<EditArticle />} />
           <Route path='/articles/:articleId' element={<FullArticle />} />

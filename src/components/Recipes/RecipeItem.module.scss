@@ -15,6 +15,7 @@
 .recipe__card-img {
     overflow: hidden;
     border-radius: 14px;
+    position: relative;
     &:hover {
         overflow: hidden;
         filter: contrast(1.1);
@@ -48,4 +49,12 @@
     ion-icon {
         font-size: 14px;
     }
+}
+
+
+.recipe-favorites {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    color: $color-primary;
 }

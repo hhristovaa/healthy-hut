@@ -6,4 +6,62 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+
+   
+}
+
+.recipe {
+    &__header {
+        display: flex;
+        gap: 2rem;
+
+    }
+
+    &__desc {
+        display: flex;
+        gap: 3rem;
+        margin: auto;
+        padding: 3rem 0;
+    }
+
+    &__ingredients {
+
+
+
+    }
+
+    &__instructions {
+        // flex: auto;
+
+
+    }
+
+    &__header-info {
+        flex: 1;
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        p {
+            text-align: justify;
+        }
+    }
+
+    &__header-img {
+        max-height: 534px;
+        max-width: 400px;
+
+    }
+
+    &__header-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+
+        ul {
+            list-style-type: none;
+        }
+    
+    }
 }

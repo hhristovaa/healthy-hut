@@ -41,7 +41,7 @@ const Vegan = () => {
             <h1>Vegan Recipes</h1>
       
       <section className={classes.recipes}>
-                {vegan.map((recipe) => {
+                {vegan?.map((recipe) => {
                     return (
                        
                             <RecipeItem key={recipe.id} recipe={recipe}>

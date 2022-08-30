@@ -39,22 +39,18 @@ const Recipes = () => {
         <main>
             <h1>Recipes</h1>
             <Category/>
-            <Splide options={{
-                perPage: 4,
-                gap: '5rem'
-            }}>
 
 
                 {trending.map((recipe) => {;
                     return (
-                        <SplideSlide key={recipe.id}>
+                     
                             <RecipeItem key={recipe.id} recipe={recipe}>
                             </RecipeItem>
-                        </SplideSlide>
+          
                     );
 
                 })}
-            </Splide>
+
 
         </main>)
 }

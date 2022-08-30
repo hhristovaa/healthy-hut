@@ -24,7 +24,7 @@ const SearchResult = () => {
         <main>
             <h1>Searched</h1>
 
-            {results.map((recipe) => {
+            {results?.map((recipe) => {
                 return (
                     <RecipeItem key={recipe.id} recipe={recipe}>
                     </RecipeItem>
