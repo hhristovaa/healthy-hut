@@ -7,7 +7,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
 
-   
+
 }
 
 .recipe {
@@ -17,21 +17,53 @@
 
     }
 
+
+    &__header-title {
+        font-size: 2rem;
+        color: $color-primary-dark;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+
     &__desc {
         display: flex;
         gap: 3rem;
         margin: auto;
         padding: 3rem 0;
+
+        li {
+            list-style-type: none;
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: -1.5rem;
+                top: 9px;
+                width: 10px;
+                display: block;
+                border-top: 2px solid $color-primary;
+            }
+        }
+    }
+
+    &__desc-title {
+        color: $color-primary;
+        text-align: center;
+        padding-bottom: 1rem;
+        font-size: 1.6rem;
     }
 
     &__ingredients {
+        width: 30%;
 
 
 
     }
 
     &__instructions {
-        // flex: auto;
+        width: 70%;
 
 
     }
@@ -57,11 +89,26 @@
     &__header-details {
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-between;
         gap: 2rem;
+        padding: 1.5rem;
+        background-color: #eee;
 
-        ul {
-            list-style-type: none;
+        margin-top: 1rem;
+
+        border-radius: 18px;
+
+        ion-icon {
+            color: $color-primary-dark;
         }
-    
+
+        a {
+            text-decoration: underline;
+            text-align: center;
+
+            ion-icon {
+                margin-right: 0.5rem;
+            }
+        }
     }
 }

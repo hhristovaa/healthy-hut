@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import RecipeSlider from '../../components/Recipes/RecipeSlider';
 import classes from './Recipes.module.scss';
 import { IonIcon } from '@ionic/react';
-import { restaurantOutline, barChartOutline, listOutline, starOutline, timerOutline, manOutline, flagOutline } from 'ionicons/icons';
+import { restaurantOutline, globeOutline, barChartOutline, listOutline, starOutline, timerOutline, manOutline, flagOutline } from 'ionicons/icons';
 import Spinner from '../../components/UI/Spinner';
 
 const FullRecipe = () => {
@@ -24,59 +24,52 @@ const FullRecipe = () => {
         getDetails();
     }, [params.recipeId]);
 
-    return (
-       
+    let cuisine = details.cuisines?.find(cuisine => cuisine !== undefined);
+    let diet = details.diets?.find(diet => diet !== undefined);
+    let dishType = details.dishTypes?.find(type => type !== undefined);
 
-       <main>
+
+    return (
+
+
+        <main>
             <section className={classes['recipe__header']}>
                 <aside className={classes['recipe__header-img']}> <img src={details.image} alt={details.title} />
-                <div className={classes['recipe__header-details']}>
-                <span>  <IonIcon icon={manOutline}/> {details.servings} Servings</span>
-                        <span><IonIcon icon={timerOutline}/> {details.readyInMinutes} Minutes</span>
-                    
-                     
-                        <ul>
-                            {details.dishTypes?.map((type) => (
-                               <li key={type.id}><IonIcon icon={restaurantOutline} /> {type} </li> 
-                            ))}
-                        </ul>
 
-                        <ul>
-                            {details.diets?.map((diet) => (
-                               <li key={diet.id}><IonIcon icon={listOutline} /> {diet} </li> 
-                            ))}
-                        </ul>
+                </aside>
+                <article className={classes['recipe__header-info']}>
+                    <h3 className={classes['recipe__header-title']}>{details.title}</h3>
+                    <p dangerouslySetInnerHTML={{ __html: details.summary }}></p>
 
-                        
-                        <ul>
-                            {details.cuisines?.map((cuisine) => (
-                               <li key={cuisine.id}><IonIcon icon={flagOutline} /> {cuisine} </li> 
-                            ))}
-                        </ul>
+                    <div className={classes['recipe__header-details']}>
+                        <span>  <IonIcon icon={manOutline} /> {details.servings} Servings</span>
+                        <span> <IonIcon icon={timerOutline} /> {details.readyInMinutes} Minutes</span>
+
+                        {diet && (<span> <IonIcon icon={listOutline} /> {diet}</span>)}
+                        {cuisine && (<span> <IonIcon icon={flagOutline} /> {cuisine}</span>)}
+                        {dishType && (<span> <IonIcon icon={restaurantOutline} /> {dishType}</span>)}
+
+                        <a href={details.sourceUrl} target="_blank"><IonIcon icon={globeOutline} />{details.sourceUrl}</a>
 
 
                     </div>
-                </aside>
-                <article className={classes['recipe__header-info']}>
-                    <h2>{details.title}</h2>
-                    <p dangerouslySetInnerHTML={{ __html: details.summary }}></p>
-
-   
                 </article>
             </section>
             <section className={classes['recipe__desc']}>
                 <div className={classes['recipe__ingredients']}>
-                    <h4>Ingredients</h4>
+                    <h4 className={classes['recipe__desc-title']}>Ingredients</h4>
                     <ul>
                         {details.extendedIngredients?.map((ingredient) => (
                             <li key={ingredient.id}>{ingredient.original}</li>
                         ))}
+
+
                     </ul>
 
                 </div>
                 {details.instructions ? (
                     <div className={classes['recipe__instructions']}>
-                        <h4>Instructions</h4>
+                        <h4 className={classes['recipe__desc-title']}>Instructions</h4>
                         <div dangerouslySetInnerHTML={{ __html: details.instructions }}></div>
                     </div>
                 ) : (
@@ -95,7 +88,7 @@ const FullRecipe = () => {
 
             {/* <RecipeSlider recipeId={params.recipeId}/> */}
         </main>
-        
+
     )
 
 }
