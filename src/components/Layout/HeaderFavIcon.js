@@ -2,8 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import classes from './HeaderFavIcon.module.scss';
 import { IonIcon } from '@ionic/react';
 import { heart } from 'ionicons/icons';
-// import CartIcon from '../Cart/CartIcon';
-// import CartContext from '../../store/cart-context';
 import FavoritesContext from '../../store/FavoritesContext';
 
 const HeaderFavIcon = props => {
@@ -11,9 +9,7 @@ const HeaderFavIcon = props => {
     const favoritesCtx = useContext(FavoritesContext);
     const { recipes } = favoritesCtx;
 
-    const favoritesCount = recipes.reduce((currCount, recipe) => {
-        return favoritesCount;
-    }, 0);
+    const favoritesCount = favoritesCtx.recipes.length;
 
     const btnClasses = `${classes.button} ${btnIsAnimated ? classes.bump : ''}`;
 
@@ -38,7 +34,6 @@ const HeaderFavIcon = props => {
             </span>
             <span className={classes.badge}>
                 {favoritesCount}
-                {/* 5 */}
             </span>
         </button>
     );

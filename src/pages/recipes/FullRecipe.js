@@ -4,11 +4,12 @@ import RecipeSlider from '../../components/Recipes/RecipeSlider';
 import classes from './Recipes.module.scss';
 import { IonIcon } from '@ionic/react';
 import { restaurantOutline, barChartOutline, listOutline, starOutline, timerOutline, manOutline, flagOutline } from 'ionicons/icons';
-
+import Spinner from '../../components/UI/Spinner';
 
 const FullRecipe = () => {
     let params = useParams();
     const [details, setDetails] = useState({});
+    const [loading, setLoading] = useState(true);
 
     const getDetails = async () => {
         const apiKey = '2ed50f18cc1446178f98816f679672f1';
@@ -16,6 +17,7 @@ const FullRecipe = () => {
         const data = await fetch(`https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${apiKey}`);
         const detailData = await data.json();
         setDetails(detailData);
+        // setLoading(false);
     }
 
     useEffect(() => {
@@ -23,7 +25,9 @@ const FullRecipe = () => {
     }, [params.recipeId]);
 
     return (
-        <main>
+       
+
+       <main>
             <section className={classes['recipe__header']}>
                 <aside className={classes['recipe__header-img']}> <img src={details.image} alt={details.title} />
                 <div className={classes['recipe__header-details']}>
@@ -91,6 +95,7 @@ const FullRecipe = () => {
 
             {/* <RecipeSlider recipeId={params.recipeId}/> */}
         </main>
+        
     )
 
 }

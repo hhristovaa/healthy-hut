@@ -13,42 +13,64 @@ const RecipeItem = (props) => {
 
     const favoritesHandler = (e) => {
         e.preventDefault();
-
         setFavorite(prevState => !prevState);
-
     }
-    
-    const addToFavoritesHandler = () => {
+
+    const toggleFavorites = (e) => {
+        e.preventDefault();
+
+        if (favorite) {
+            removeFromFavoritesHandler(e);
+        } else {
+            addToFavoritesHandler(e)
+        }
+        favoritesHandler(e);
+    }
+
+    const removeFromFavoritesHandler = (e) => {
+        favoritesCtx.removeRecipe(recipe.id);
+    }
+
+    const addToFavoritesHandler = (e) => {
         favoritesCtx.addRecipe({
             id: recipe.id,
+            recipe: recipe,
+            title: recipe.title,
+            image: recipe.image,
+            servings: recipe.servings,
+            readyInMinutes: recipe.readyInMinutes,
+            favorite: favorite
 
-        })
-
+        });
     }
 
 
     return (
-        <Link to={`/recipe/${recipe.id}`} className={classes['recipe-redirect']}>
-        <Card className={classes['recipe__card']} recipe={props.recipe}>
-            
-            <div className={classes['recipe__card-img']}>
-                <img src={recipe.image} alt="" />
-                <IonIcon class={classes['recipe-favorites']}icon={favorite ? heart : heartOutline} size='large' onClick={favoritesHandler} />
-            </div>
-            <p className={classes['recipe__card-title']}>{recipe.title}</p>
-            <div className={classes['recipe__card-info']}>
-                <span className={classes['recipe__card-details']}>
-                    <IonIcon icon={timerOutline}/> {recipe.readyInMinutes} Minutes
-                </span>
+        <>
+            <Link to={`/recipe/${recipe.id}`} className={classes['recipe-redirect']}>
+                <Card className={classes['recipe__card']} recipe={props.recipe}>
 
-                <span className={classes['recipe__card-details']}>
-                    <IonIcon icon={manOutline}/> {recipe.servings} Servings
-                </span>
+                    <div className={classes['recipe__card-img']}>
+                        <img src={recipe.image} alt={recipe.title} />
+                        <IonIcon class={classes['recipe-favorites']} icon={favorite ? heart : heartOutline} size='large' onClick={toggleFavorites} />
+                    </div>
+                    <p className={classes['recipe__card-title']}>{recipe.title}</p>
+                    <div className={classes['recipe__card-info']}>
+                        <span className={classes['recipe__card-details']}>
+                            <IonIcon icon={timerOutline} /> {recipe.readyInMinutes} Minutes
+                        </span>
 
-            </div>
-        </Card>
-        </Link>
-        
+                        <span className={classes['recipe__card-details']}>
+                            <IonIcon icon={manOutline} /> {recipe.servings} Servings
+                        </span>
+
+                    </div>
+
+
+                </Card>
+            </Link>
+
+        </>
     )
 }
 

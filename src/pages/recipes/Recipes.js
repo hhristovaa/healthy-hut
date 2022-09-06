@@ -41,7 +41,7 @@ const Recipes = () => {
             <Category/>
 
 
-                {trending.map((recipe) => {;
+                {trending.map((recipe) => {
                     return (
                      
                             <RecipeItem key={recipe.id} recipe={recipe}>

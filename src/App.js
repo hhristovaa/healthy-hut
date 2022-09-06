@@ -21,10 +21,12 @@ import Diet from './pages/recipes/Diet';
 import SearchResult from './pages/recipes/SearchResult';
 import FullRecipe from './pages/recipes/FullRecipe';
 import Favorites from './pages/favorites/Favorites';
+import FavoritesProvider from './store/FavoritesProvider';
 
 function App() {
   return (
     <>
+    <FavoritesProvider>
       <Router>
       <Navbar />
         <Routes>
@@ -44,15 +46,13 @@ function App() {
           <Route path='/diet/:type' element={<Diet />} />
           <Route path='/contacts' element={<Contacts />} />
           <Route path='/profile' element={<PrivateRoute />} >
-          <Route path='/profile' element={<Profile />} />
-
-            </Route>
+            <Route path='/profile' element={<Profile />} />
+          </Route>
           <Route path='/sign-in' element={<SignIn />} />
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/favorites' element={<PrivateRoute />} >
           <Route path='/favorites' element={<Favorites />} />
-
-            </Route>
+          </Route>
 
           <Route path='/create-article' element={<CreateArticle />} />
           <Route path='/edit-article/:articleId' element={<EditArticle />} />
@@ -63,7 +63,8 @@ function App() {
         
 
       </Router>
-   
+      </FavoritesProvider>
+
       <ToastContainer position="top-right"
         autoClose={3000}
         hideProgressBar={false}

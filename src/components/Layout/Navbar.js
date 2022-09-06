@@ -3,6 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import Button from '../UI/Button';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import HeaderFavIcon from './HeaderFavIcon';
+import FavoritesProvider from '../../store/FavoritesProvider';
 
 
 
@@ -63,6 +64,7 @@ const Navbar = () => {
 
             </nav>
             {loggedIn ? ( 
+
              <NavLink to={'/favorites'}>    <HeaderFavIcon></HeaderFavIcon></NavLink>
             ) : (
                 <div className={classes['header__action']}>

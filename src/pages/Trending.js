@@ -6,36 +6,47 @@ import classes from './Trending.module.scss';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { useEffect, useState } from 'react';
+import useAxios from '../hooks/useAxios';
+import axios from '../apis/spoonacularRecipes';
+import Spinner from '../components/UI/Spinner';
+import { toast } from 'react-toastify';
 
 const Trending = () => {
     const [trending, setTrending] = useState([]);
-    //runs fetch trending when the component is mounted
-    useEffect(() => {
-        fetchTrending();
-    }, []);
+    const [recipes, error, loading] = useAxios({
+        axiosInstance: axios,
+        method: 'GET',
+    })
 
-    const fetchTrending = async () => {
-        //cache - there is no need to fetch recipes every time
-        //store in local storage, check if there si something
-        //in local storage you can save strings; JSON.
-        //JSON.parse - parsing from string to array
-        //JSON stringify - opposite of it
 
-        const checkLocalStorage = localStorage.getItem('trending');
-        if (checkLocalStorage) {
-            let trendingRecipes = JSON.parse(checkLocalStorage);
-            setTrending(trendingRecipes)
-        } else {
-            const apiKey = '2ed50f18cc1446178f98816f679672f1';
-            const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=10`);
-            const data = await api.json();
-            const recipesString = JSON.stringify(data.recipes);
-            localStorage.setItem('trending', recipesString);
 
-            setTrending(data.recipes);
-        }
+    // //runs fetch trending when the component is mounted
+    // useEffect(() => {
+    //     fetchTrending();
+    // }, []);
 
-    };
+    // const fetchTrending = async () => {
+    //     //cache - there is no need to fetch recipes every time
+    //     //store in local storage, check if there si something
+    //     //in local storage you can save strings; JSON.
+    //     //JSON.parse - parsing from string to array
+    //     //JSON stringify - opposite of it
+
+    //     const checkLocalStorage = localStorage.getItem('trending');
+    //     if (checkLocalStorage) {
+    //         let trendingRecipes = JSON.parse(checkLocalStorage);
+    //         setTrending(trendingRecipes)
+    //     } else {
+    //         const apiKey = '2ed50f18cc1446178f98816f679672f1';
+    //         const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=10`);
+    //         const data = await api.json();
+    //         const recipesString = JSON.stringify(data.recipes);
+    //         localStorage.setItem('trending', recipesString);
+
+    //         setTrending(data.recipes);
+    //     }
+
+    // };
 
     return (
         <>
@@ -44,7 +55,14 @@ const Trending = () => {
             <main>
 
 
+
                 <h1>Trending</h1>
+                {loading && <Spinner/>}
+
+
+                {!loading && error && toast.error({error})}
+
+                {!loading && !error && recipes (
                 <section className={classes['trending-recipes']}>
                     <Splide options={{
                         perPage: 4,
@@ -52,7 +70,7 @@ const Trending = () => {
                     }}>
 
 
-                        {trending?.map((recipe) => {
+                        {recipes?.map((recipe) => {
                             return (
                                 <SplideSlide key={recipe.id}>
                                     <RecipeItem key={recipe.id} recipe={recipe}>
@@ -64,6 +82,7 @@ const Trending = () => {
                     </Splide>
 
                 </section>
+                )}
 
 
                 <Link to='/recipes'>

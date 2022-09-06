@@ -27,6 +27,7 @@ const Profile = () => {
 
     console.log(auth);
     console.log(auth.currentUser)
+    console.log(formData)
 
     const { firstName, email, isAdmin } = formData;
 
