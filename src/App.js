@@ -30,12 +30,10 @@ function App() {
       <Router>
       <Navbar />
         <Routes>
-          {/* <Route path='/' element={<></>} /> */}
           <Route path='/' element={<Trending/>} />
           <Route exact path='/recipes' element={<Recipes />}>
-            {/* <Route path='/recipes/:type' element={<Vegan/>}/> */}
             
-            <Route path='/recipes/:type' element={<Recipes/>}/>
+            <Route path='/recipes/:type' element={<Diet/>}/>
 
           </Route>
           <Route path='/articles' element={<Articles />} />
@@ -57,7 +55,6 @@ function App() {
           <Route path='/create-article' element={<CreateArticle />} />
           <Route path='/edit-article/:articleId' element={<EditArticle />} />
           <Route path='/articles/:articleId' element={<FullArticle />} />
-          <Route path='/recipe/:recipeId' element={<Recipes />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         

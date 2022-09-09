@@ -7,6 +7,17 @@
     flex-wrap: wrap;
     justify-content: space-around;
 
+    &__container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin: 1rem auto;
+    }
+
+    &__counter {
+        text-align: center;
+        margin: 1rem auto;
+    }
 
 }
 
@@ -90,11 +101,11 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        gap: 2rem;
+        gap: 1.5rem;
         padding: 1.5rem;
         background-color: #eee;
 
-        margin-top: 1rem;
+        margin: 1.5rem auto;
 
         border-radius: 18px;
 

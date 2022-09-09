@@ -20,7 +20,6 @@ const FullArticle = () => {
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 setArticle(docSnap.data());
-                console.log(docSnap.data());
                 setLoading(false);
             }
 

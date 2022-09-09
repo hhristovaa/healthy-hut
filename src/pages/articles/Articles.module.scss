@@ -52,5 +52,12 @@
         margin: 0px auto;
         padding-top: 2em;
         width: 60%;
+        position: relative;
+    }
+
+    &__img-label {
+        position: absolute;
+        bottom: 20%;
+        left: 25%;
     }
 }

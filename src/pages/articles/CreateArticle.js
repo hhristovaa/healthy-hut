@@ -18,6 +18,7 @@ import { IonIcon } from '@ionic/react';
 
 const CreateArticle = () => {
     const [loading, setLoading] = useState(false);
+    const [file, setFile] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         articleImageUrl: '',
@@ -144,22 +145,28 @@ const CreateArticle = () => {
         let eTarget = e.target;
         let uploadedFile = eTarget.files;
 
-        if (uploadedFile) {
-            setFormData((prevState) => ({
-                ...prevState,
-                articleImageUrl: uploadedFile
-            }));
-            
-            let fileName = uploadedFile[0]?.name;
-            console.log(fileName);
-            console.log(eTarget);
-        } else {
+        if (!uploadedFile) {
             setFormData((prevState) => ({
                 ...prevState,
                 [eTarget.id]: eTarget.value
             }));
         }
     }
+
+
+    const handleUpload = e => {
+        let eTarget = e.target;
+        let uploadedFile = eTarget.files;
+        
+        if (uploadedFile) {
+            setFormData((prevState) => ({
+                ...prevState,
+                articleImageUrl: uploadedFile
+            }));
+
+            setFile(uploadedFile[0]);          
+    }
+}
 
     if (loading) {
         return <Spinner />
@@ -173,7 +180,8 @@ const CreateArticle = () => {
                     <Input type='text' id='name' label='Name' onChange={onChange} value={name}/>
                     <Input type='text' id='source' label='Source' onChange={onChange} value={source}/>
                     <Input multiline type='text' id='content' label='Content' onChange={onChange} value={content}/>
-                    <Input type='file' id='articleImageUrl' label='Image' onChange={onChange} accept='.jpg, .png, .jpeg'/>
+                    <Input type='file' id='articleImageUrl' label='Image' onChange={handleUpload} accept='.jpg, .png, .jpeg'/>
+                    <span className={classes['articles__img-label']}>{file ? file?.name : 'No file chosen'}</span>
                     <Button type='submit' version='primary'>Create Article</Button>
                 </form>
             </main>

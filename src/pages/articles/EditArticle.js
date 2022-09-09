@@ -15,6 +15,7 @@ import classes from './Articles.module.scss';
 const EditArticle = () => {
     const [loading, setLoading] = useState(false);
     const [article, setArticle] = useState(false);
+    const [file, setFile] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         articleImageUrl: '',
@@ -183,19 +184,28 @@ const EditArticle = () => {
 
     const onChange = e => {
         let eTarget = e.target;
-
-        if (eTarget.files) {
-            setFormData((prevState) => ({
-                ...prevState,
-                articleImageUrl: eTarget.files
-            }));
-        } else {
+        let uploadedFile = eTarget.files;
+        if (!uploadedFile) {
             setFormData((prevState) => ({
                 ...prevState,
                 [eTarget.id]: eTarget.value
             }));
         }
     }
+
+    const handleUpload = e => {
+        let eTarget = e.target;
+        let uploadedFile = eTarget.files;
+        
+        if (uploadedFile) {
+            setFormData((prevState) => ({
+                ...prevState,
+                articleImageUrl: uploadedFile
+            }));
+
+            setFile(uploadedFile[0]);          
+    }
+}
 
     if (loading) {
         return <Spinner />
@@ -209,6 +219,7 @@ const EditArticle = () => {
                 <Input type='text' id='source' label='Source' onChange={onChange} value={source} />
                 <Input multiline type='text' id='content' label='Content' onChange={onChange} value={content} />
                 <Input type='file' id='articleImageUrl' label='Image' onChange={onChange} accept='.jpg, .png, .jpeg' />
+                <span className={classes['articles__img-label']}>{file ? file?.name : 'No file chosen'}</span>
                 <Button type="submit" version='change'>Edit Article</Button>
             </form>
         </main>

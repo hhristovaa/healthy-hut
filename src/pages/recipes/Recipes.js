@@ -3,9 +3,13 @@ import RecipeItem from '../../components/Recipes/RecipeItem';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import Category from '../../components/Category/Category';
+import classes from './Recipes.module.scss';
+import Spinner from '../../components/UI/Spinner';
 
 const Recipes = () => {
     const [trending, setTrending] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     //runs fetch trending when the component is mounted
     useEffect(() => {
         fetchTrending();
@@ -32,26 +36,30 @@ const Recipes = () => {
             setTrending(data.recipes);
         }
 
+        setLoading(false);
+
     };
 
-
+    if (loading) {
+        return <Spinner />;
+    }
     return (
         <main>
-            <h1>Recipes</h1>
+  <h1 className={classes['g-title']}>Recipes</h1>
             <Category/>
-
-
+            <section className={classes['recipes__container']}>
                 {trending.map((recipe) => {
                     return (
-                     
+                        
+              
                             <RecipeItem key={recipe.id} recipe={recipe}>
                             </RecipeItem>
-          
+                      
                     );
 
                 })}
 
-
+</section> 
         </main>)
 }
 

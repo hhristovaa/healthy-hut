@@ -17,7 +17,7 @@ const FullRecipe = () => {
         const data = await fetch(`https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${apiKey}`);
         const detailData = await data.json();
         setDetails(detailData);
-        // setLoading(false);
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -28,13 +28,16 @@ const FullRecipe = () => {
     let diet = details.diets?.find(diet => diet !== undefined);
     let dishType = details.dishTypes?.find(type => type !== undefined);
 
+    if (loading) {
+        return <Spinner />;
+    }
 
     return (
-
-
+        
         <main>
             <section className={classes['recipe__header']}>
-                <aside className={classes['recipe__header-img']}> <img src={details.image} alt={details.title} />
+                <aside className={classes['recipe__header-img']}> 
+                <img src={details.image} alt={details.title} />
 
                 </aside>
                 <article className={classes['recipe__header-info']}>
