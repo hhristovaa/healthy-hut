@@ -11,13 +11,26 @@ import axios from '../apis/spoonacularRecipes';
 import Spinner from '../components/UI/Spinner';
 import { toast } from 'react-toastify';
 
+import useApi from '../hooks/useApi';
+import randomApi from '../apis/random';
+
+const apiKey = '2ed50f18cc1446178f98816f679672f1';
+const BASE_URL = `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=10`;
+
+const getRandom = () => axios.get(BASE_URL);
+
 const Trending = () => {
     const [trending, setTrending] = useState([]);
-    const [recipes, error, loading] = useAxios({
-        axiosInstance: axios,
-        method: 'GET',
-    })
+    // const [recipes, error, loading] = useAxios({
+    //     axiosInstance: axios,
+    //     method: 'GET',
+    // })
 
+    const getRandomApi = useApi(getRandom);
+
+    useEffect(() => {
+        getRandomApi.request();
+    }, []);
 
 
     // //runs fetch trending when the component is mounted
@@ -54,15 +67,16 @@ const Trending = () => {
 
             <main>
 
-
+                {getRandomApi.loading && <Spinner />}
+                {getRandomApi.error && toast.error(getRandomApi.error)}
 
                 <h1>Trending</h1>
-                {loading && <Spinner/>}
+                {/* {loading && <Spinner/>}
 
 
-                {!loading && error && toast.error({error})}
+                {!loading && error && toast.error({error})} */}
 
-                {!loading && !error && recipes (
+
                 <section className={classes['trending-recipes']}>
                     <Splide options={{
                         perPage: 4,
@@ -70,7 +84,7 @@ const Trending = () => {
                     }}>
 
 
-                        {recipes?.map((recipe) => {
+                        {getRandomApi.data?.recipes.map((recipe) => {
                             return (
                                 <SplideSlide key={recipe.id}>
                                     <RecipeItem key={recipe.id} recipe={recipe}>
@@ -82,7 +96,7 @@ const Trending = () => {
                     </Splide>
 
                 </section>
-                )}
+
 
 
                 <Link to='/recipes'>
