@@ -5,54 +5,64 @@ import classes from './Recipes.module.scss';
 import { IonIcon } from '@ionic/react';
 import { restaurantOutline, globeOutline, barChartOutline, listOutline, starOutline, timerOutline, manOutline, flagOutline } from 'ionicons/icons';
 import Spinner from '../../components/UI/Spinner';
+import {toast} from 'react-toastify';
+import useApi from '../../hooks/useApi';
+import client from '../../apis/client';
 
 const FullRecipe = () => {
     let params = useParams();
-    const [details, setDetails] = useState({});
-    const [loading, setLoading] = useState(true);
+    const apiKey = '2ed50f18cc1446178f98816f679672f1';
 
-    const getDetails = async () => {
-        const apiKey = '2ed50f18cc1446178f98816f679672f1';
+    const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${apiKey}`;
+    const getDetails = (params) => client.get(BASE_URL)
+   
+   
+    // const [details, setDetails] = useState({});
+    // const [loading, setLoading] = useState(true);
 
-        const data = await fetch(`https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${apiKey}`);
-        const detailData = await data.json();
-        setDetails(detailData);
-        setLoading(false);
-    }
+    // const getDetails = async () => {
+    //     const apiKey = '2ed50f18cc1446178f98816f679672f1';
+
+    //     const data = await fetch(`https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${apiKey}`);
+    //     const detailData = await data.json();
+    //     setDetails(detailData);
+    //     setLoading(false);
+    // }
+
+    const getDetailsApi = useApi(getDetails);
 
     useEffect(() => {
-        getDetails();
+        getDetailsApi.request(params.recipeId)
     }, [params.recipeId]);
 
-    let cuisine = details.cuisines?.find(cuisine => cuisine !== undefined);
-    let diet = details.diets?.find(diet => diet !== undefined);
-    let dishType = details.dishTypes?.find(type => type !== undefined);
+    let cuisine = getDetailsApi.data?.cuisines?.find(cuisine => cuisine !== undefined);
+    let diet = getDetailsApi.data?.diets?.find(diet => diet !== undefined);
+    let dishType = getDetailsApi.data?.dishTypes?.find(type => type !== undefined);
 
-    if (loading) {
-        return <Spinner />;
-    }
+    {getDetailsApi.loading && <Spinner />}
+    {getDetailsApi.error && toast.error(getDetailsApi.error)}
 
     return (
-        
+
         <main>
             <section className={classes['recipe__header']}>
                 <aside className={classes['recipe__header-img']}> 
-                <img src={details.image} alt={details.title} />
+                <img src={getDetailsApi.data?.image} alt={getDetailsApi.data?.title} />
 
                 </aside>
                 <article className={classes['recipe__header-info']}>
-                    <h3 className={classes['recipe__header-title']}>{details.title}</h3>
-                    <p dangerouslySetInnerHTML={{ __html: details.summary }}></p>
+                    <h3 className={classes['recipe__header-title']}>{getDetailsApi.data?.title}</h3>
+                    <p dangerouslySetInnerHTML={{ __html: getDetailsApi.data?.summary }}></p>
 
                     <div className={classes['recipe__header-details']}>
-                        <span>  <IonIcon icon={manOutline} /> {details.servings} Servings</span>
-                        <span> <IonIcon icon={timerOutline} /> {details.readyInMinutes} Minutes</span>
+                        <span>  <IonIcon icon={manOutline} /> {getDetailsApi.data?.servings} Servings</span>
+                        <span> <IonIcon icon={timerOutline} /> {getDetailsApi.data?.readyInMinutes} Minutes</span>
 
                         {diet && (<span> <IonIcon icon={listOutline} /> {diet}</span>)}
                         {cuisine && (<span> <IonIcon icon={flagOutline} /> {cuisine}</span>)}
                         {dishType && (<span> <IonIcon icon={restaurantOutline} /> {dishType}</span>)}
 
-                        <a href={details.sourceUrl} target="_blank"><IonIcon icon={globeOutline} />{details.sourceUrl}</a>
+                        <a href={getDetailsApi.data?.sourceUrl} target="_blank"><IonIcon icon={globeOutline} />{getDetailsApi.data?.sourceUrl}</a>
 
 
                     </div>
@@ -62,7 +72,7 @@ const FullRecipe = () => {
                 <div className={classes['recipe__ingredients']}>
                     <h4 className={classes['recipe__desc-title']}>Ingredients</h4>
                     <ul>
-                        {details.extendedIngredients?.map((ingredient) => (
+                        {getDetailsApi.data?.extendedIngredients?.map((ingredient) => (
                             <li key={ingredient.id}>{ingredient.original}</li>
                         ))}
 
@@ -70,10 +80,10 @@ const FullRecipe = () => {
                     </ul>
 
                 </div>
-                {details.instructions ? (
+                {getDetailsApi.data?.instructions ? (
                     <div className={classes['recipe__instructions']}>
                         <h4 className={classes['recipe__desc-title']}>Instructions</h4>
-                        <div dangerouslySetInnerHTML={{ __html: details.instructions }}></div>
+                        <div dangerouslySetInnerHTML={{ __html: getDetailsApi.data?.instructions }}></div>
                     </div>
                 ) : (
                     <p>Currently the instructions are not available.</p>
