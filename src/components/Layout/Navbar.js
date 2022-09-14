@@ -24,13 +24,14 @@ const Navbar = () => {
                     <div className={classes.submenu}>
                         <div className={classes['submenu__section']}>
                             <p>Dish Type</p>
-                            <NavLink to={'/diet/vegan'}> Breakfast </NavLink>
-                            <NavLink to={'/diet/vegan'}> Salad </NavLink>
-                            <NavLink to={'/diet/vegetarian'}> Main Course </NavLink>
-                            <NavLink to={'/diet/ketogenic'}> Soup </NavLink>
-                            <NavLink to={'/diet/gluten-free'}> Appetizer </NavLink>
-                            <NavLink to={'/diet/dairy-free'}> Dessert </NavLink>
-                            <NavLink to={'/diet/dairy-free'}> Drinks </NavLink>
+                            <NavLink to={'/dish/breakfast'}> Breakfast </NavLink>
+                            <NavLink to={'/dish/lunch'}> Lunch </NavLink>
+                            <NavLink to={'/dish/salad'}> Salad </NavLink>
+                            <NavLink to={'/dish/soup'}> Soup </NavLink>
+                            <NavLink to={'/dish/appetizer'}> Appetizer </NavLink>
+                            <NavLink to={'/dish/dinner'}> Dinner </NavLink>
+                            <NavLink to={'/dish/dessert'}> Dessert </NavLink>
+                            <NavLink to={'/dish/drink'}> Drinks </NavLink>
                         </div>
                         <div className={classes['submenu__section']}>
                             <p>Diet Type</p>
@@ -40,13 +41,13 @@ const Navbar = () => {
                             <NavLink to={'/diet/gluten-free'}> Gluten Free </NavLink>
                             <NavLink to={'/diet/dairy-free'}> Dairy Free </NavLink>
                             <NavLink to={'/diet/fodmap-friendly'}> Low Fodmap</NavLink>
-                            <NavLink to={'/diet/primal'}> Primal</NavLink>
+                            <NavLink to={'/diet/paleo'}> Paleo</NavLink>
                         </div>
                         <div className={classes['submenu__section']}>
                             <p>Duration</p>
-                            <NavLink to={'/diet/vegan'}> Up to 30 Minutes </NavLink>
-                            <NavLink to={'/diet/vegetarian'}> Up to 60 Minutes </NavLink>
-                            <NavLink to={'/diet/ketogenic'}> 90- Minutes </NavLink>
+                            <NavLink to={'/duration/30'}> Up to 30 Minutes </NavLink>
+                            <NavLink to={'/duration/60'}> Up to 60 Minutes </NavLink>
+                            <NavLink to={'/duration/90'}> 90 Minutes </NavLink>
 
                         </div>
                         <div className={classes['submenu__section']}>

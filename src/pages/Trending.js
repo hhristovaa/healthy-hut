@@ -76,7 +76,6 @@ const Trending = () => {
                 <section className={classes['trending-recipes']}>
                     <Splide options={{
                         perPage: 4,
-                        gap: '10rem'
                     }}>
 
 

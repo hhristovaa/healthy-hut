@@ -64,7 +64,7 @@ const FavoritesProvider = props => {
     // useEffect(() => {
     //     localStorage.setItem('favorites', JSON.stringify(favoritesState))
     // }, [favoritesState]);
-    
+    console.log(favoritesState);
     const addRecipeHandler = recipe => {
         dispatchFavoritesAction({ type: 'ADD', recipe: recipe });
     };
@@ -77,7 +77,8 @@ const FavoritesProvider = props => {
         recipes: favoritesState.recipes,
         totalCount: favoritesState.totalCount,
         addRecipe: addRecipeHandler,
-        removeRecipe: removeRecipeHandler
+        removeRecipe: removeRecipeHandler,
+
     };
 
     return (

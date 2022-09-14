@@ -15,19 +15,6 @@ const FullRecipe = () => {
 
     const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${apiKey}`;
     const getDetails = (params) => client.get(BASE_URL)
-   
-   
-    // const [details, setDetails] = useState({});
-    // const [loading, setLoading] = useState(true);
-
-    // const getDetails = async () => {
-    //     const apiKey = '2ed50f18cc1446178f98816f679672f1';
-
-    //     const data = await fetch(`https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${apiKey}`);
-    //     const detailData = await data.json();
-    //     setDetails(detailData);
-    //     setLoading(false);
-    // }
 
     const getDetailsApi = useApi(getDetails);
 
@@ -36,13 +23,13 @@ const FullRecipe = () => {
     }, [params.recipeId]);
 
     let cuisine = getDetailsApi.data?.cuisines?.find(cuisine => cuisine !== undefined);
-    let diet = getDetailsApi.data?.diets?.find(diet => diet !== undefined);
     let dishType = getDetailsApi.data?.dishTypes?.find(type => type !== undefined);
 
     {getDetailsApi.loading && <Spinner />}
     {getDetailsApi.error && toast.error(getDetailsApi.error)}
 
     return (
+ 
 
         <main>
             <section className={classes['recipe__header']}>
@@ -58,11 +45,14 @@ const FullRecipe = () => {
                         <span>  <IonIcon icon={manOutline} /> {getDetailsApi.data?.servings} Servings</span>
                         <span> <IonIcon icon={timerOutline} /> {getDetailsApi.data?.readyInMinutes} Minutes</span>
 
-                        {diet && (<span> <IonIcon icon={listOutline} /> {diet}</span>)}
+                        {/* {diet && (<span> <IonIcon icon={listOutline} /> {diet}</span>)} */}
                         {cuisine && (<span> <IonIcon icon={flagOutline} /> {cuisine}</span>)}
                         {dishType && (<span> <IonIcon icon={restaurantOutline} /> {dishType}</span>)}
-
                         <a href={getDetailsApi.data?.sourceUrl} target="_blank"><IonIcon icon={globeOutline} />{getDetailsApi.data?.sourceUrl}</a>
+                        <ul className={classes['recipe__diet']}>{getDetailsApi.data?.diets.map((diet) => (
+                            <li>{diet}</li>
+                        ))}
+                        </ul>
 
 
                     </div>
@@ -75,8 +65,6 @@ const FullRecipe = () => {
                         {getDetailsApi.data?.extendedIngredients?.map((ingredient) => (
                             <li key={ingredient.id}>{ingredient.original}</li>
                         ))}
-
-
                     </ul>
 
                 </div>
@@ -99,7 +87,7 @@ const FullRecipe = () => {
 
 
 
-            {/* <RecipeSlider recipeId={params.recipeId}/> */}
+            <RecipeSlider recipeId={params.recipeId}/>
         </main>
 
     )

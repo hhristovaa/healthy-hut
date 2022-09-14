@@ -66,17 +66,26 @@
         font-size: 1.6rem;
     }
 
+    &__diet {
+        list-style-type: none;
+        display: flex;
+        gap: .5rem;
+
+        li {
+            background-color: $color-secondary;
+            border-radius: 1rem;
+            padding: .2rem .5rem;
+            width: 100px;
+            text-align: center;
+        }
+    }
+
     &__ingredients {
         width: 30%;
-
-
-
     }
 
     &__instructions {
         width: 70%;
-
-
     }
 
     &__header-info {

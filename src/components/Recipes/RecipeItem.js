@@ -39,11 +39,12 @@ const RecipeItem = (props) => {
             image: recipe.image,
             servings: recipe.servings,
             readyInMinutes: recipe.readyInMinutes,
-            favorite: favorite
+            favorite: true
 
         });
     }
 
+    const BASE_IMG_URL = ` https://spoonacular.com/recipeImages/${recipe.id}-240x150.${recipe.imageType}`;
 
     return (
         <>
@@ -51,7 +52,7 @@ const RecipeItem = (props) => {
                 <Card className={classes['recipe__card']} recipe={props.recipe}>
 
                     <div className={classes['recipe__card-img']}>
-                        <img src={recipe.image} alt={recipe.title} />
+                        <img src={recipe.image ? recipe.image : BASE_IMG_URL} alt={recipe.title} />
                         <IonIcon class={classes['recipe-favorites']} icon={favorite ? heart : heartOutline} size='large' onClick={toggleFavorites} />
                     </div>
                     <p className={classes['recipe__card-title']}>{recipe.title}</p>

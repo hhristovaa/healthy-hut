@@ -8,13 +8,13 @@ import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
 import classes from './Recipes.module.scss';
 
-const Diet = () => {
+const Duration = () => {
 
     const [diet, setDiet] = useState([]);
     let params = useParams();
 
-    const getDiet = (name) => client.get(`&diet=${name}`);
-    const getDietApi = useApi(getDiet);
+    const getDuration = (minutes) => client.get(`&maxReadyTime=${minutes}`);
+    const getDurationApi = useApi(getDuration);
 
     // const getDiet = async (name) => {
     //     const apiKey = '2ed50f18cc1446178f98816f679672f1';
@@ -29,17 +29,19 @@ const Diet = () => {
 
     useEffect(() => {
 
-        getDietApi.request(params.type)
+        getDurationApi.request(params.minutes)
 
-    }, [params.type]);
+    }, [params.minutes]);
 
     return (
         <main>
-            {getDietApi.loading && <Spinner />}
-            {getDietApi.error && toast.error(getDietApi.error)}
-            <h1 className={classes['g-title']}>{params.type}</h1>
+            {/* additional check if it is between  */}
+            {console.log(getDurationApi.data?.results)}
+            {getDurationApi.loading && <Spinner />}
+            {getDurationApi.error && toast.error(getDurationApi.error)}
+            <h1 className={classes['g-title']}>Up to {params.minutes} Minutes</h1>
             <section className={classes['recipes__container']}>
-            {getDietApi.data?.results.map((item) => {
+            {getDurationApi.data?.results.map((item) => {
                 return (
                     <RecipeItem key={item.id} recipe={item}>
 
@@ -53,4 +55,4 @@ const Diet = () => {
 
 }
 
-export default Diet;
+export default Duration;

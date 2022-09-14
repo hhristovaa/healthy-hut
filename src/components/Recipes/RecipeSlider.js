@@ -23,17 +23,17 @@ const RecipeSlider = (props) => {
             const data = await api.json();
 
 
-            setRecipes(data.recipes);
-            console.log(data.recipes);
+            setRecipes(data);
+            console.log(recipes);
         }
 
     
 
     return(
         <section>
+                <h2>Similar Recipes</h2>
         <Splide options={{
-            perPage: 4,
-            gap: '10rem'
+            perPage: 4
         }}>
 
 
