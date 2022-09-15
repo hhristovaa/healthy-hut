@@ -5,6 +5,7 @@ import '@splidejs/react-splide/css';
 import Category from '../../components/Category/Category';
 import classes from './Recipes.module.scss';
 import Spinner from '../../components/UI/Spinner';
+import FilterContainer from '../../components/Filters/FilterContainer';
 
 const Recipes = () => {
     const [trending, setTrending] = useState([]);
@@ -40,13 +41,17 @@ const Recipes = () => {
 
     };
 
+    const handleFilters = (filters, category) => {
+
+    }
+
     if (loading) {
         return <Spinner />;
     }
     return (
         <main>
   <h1 className={classes['g-title']}>Recipes</h1>
-            <Category/>
+            <FilterContainer handleFilters={filters => handleFilters(filters, 'diets')} />
             <section className={classes['recipes__container']}>
                 {trending.map((recipe) => {
                     return (
