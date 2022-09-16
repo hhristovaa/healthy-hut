@@ -9,7 +9,7 @@ import { useContext, useState } from 'react';
 const RecipeItem = (props) => {
     let recipe = props.recipe;
     const favoritesCtx = useContext(FavoritesContext);
-    const [favorite, setFavorite] = useState(false);
+    const [favorite, setFavorite] = useState(props.isFavorite);
 
     const favoritesHandler = (e) => {
         e.preventDefault();
@@ -24,6 +24,7 @@ const RecipeItem = (props) => {
         } else {
             addToFavoritesHandler(e)
         }
+
         favoritesHandler(e);
     }
 
@@ -44,16 +45,21 @@ const RecipeItem = (props) => {
         });
     }
 
+//fetch favs from firebase 
+//ids with heart 
+//use effect 
+
+
     const BASE_IMG_URL = ` https://spoonacular.com/recipeImages/${recipe.id}-240x150.${recipe.imageType}`;
 
     return (
         <>
             <Link to={`/recipe/${recipe.id}`} className={classes['recipe-redirect']}>
-                <Card className={classes['recipe__card']} recipe={props.recipe}>
+                <Card className={classes['recipe__card']} recipe={props.recipe} isFavorite={props.isFavorite}>
 
                     <div className={classes['recipe__card-img']}>
                         <img src={recipe.image ? recipe.image : BASE_IMG_URL} alt={recipe.title} />
-                        <IonIcon class={classes['recipe-favorites']} icon={favorite ? heart : heartOutline} size='large' onClick={toggleFavorites} />
+                        <IonIcon class={classes['recipe-favorites']} icon={favorite ? heart : heartOutline}  size='large' onClick={toggleFavorites} />
                     </div>
                     <p className={classes['recipe__card-title']}>{recipe.title}</p>
                     <div className={classes['recipe__card-info']}>

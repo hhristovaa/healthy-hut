@@ -1,34 +1,33 @@
-import { motion } from 'framer-motion';
-import { Link, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import RecipeItem from '../../components/Recipes/RecipeItem';
+import classes from './Recipes.module.scss';
 import { toast } from 'react-toastify';
 import Spinner from '../../components/UI/Spinner';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
-import classes from './Recipes.module.scss';
 import { capitalizeFirstLetter } from '../../utils/utils';
-const Dish = () => {
+import { Link, useParams } from 'react-router-dom';
 
+const Cuisine = () => {
     let params = useParams();
 
-    const getDish = (type) => client.get(`&type=${type}`);
-    const getDishApi = useApi(getDish);
+    const getCuisine = (type) => client.get(`&cuisine=${type}`);
+    const getCuisineApi = useApi(getCuisine);
 
     useEffect(() => {
 
-        getDishApi.request(params.type)
+        getCuisineApi.request(params.type)
 
     }, [params.type]);
 
     let title = capitalizeFirstLetter(params.type);
     return (
         <main>
-            {getDishApi.loading && <Spinner />}
-            {getDishApi.error && toast.error(getDishApi.error)}
+            {getCuisineApi.loading && <Spinner />}
+            {getCuisineApi.error && toast.error(getCuisineApi.error)}
             <h1 className={classes['g-title']}>{title}</h1>
             <section className={classes['recipes__container']}>
-            {getDishApi.data?.results.map((item) => {
+            {getCuisineApi.data?.results.map((item) => {
                 return (
                     <RecipeItem key={item.id} recipe={item}>
 
@@ -42,4 +41,5 @@ const Dish = () => {
 
 }
 
-export default Dish;
+
+export default Cuisine;

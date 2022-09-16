@@ -3,7 +3,6 @@ import FavoritesContext from '../../store/FavoritesContext';
 import RecipeItem from '../../components/Recipes/RecipeItem';
 import { useContext } from 'react';
 
-
 const Favorites = props => {
     const favoritesCtx = useContext(FavoritesContext);
     const hasFavorites = favoritesCtx.recipes.length > 0;
@@ -21,14 +20,19 @@ const Favorites = props => {
     const favoritesItems = (
         <section className={classes['recipes__container']}>
             {favoritesCtx.recipes.map(recipe => {
-                console.log(recipe);
                 return (
-                    <RecipeItem key={recipe.id} recipe={recipe} onAdd={addToFavorites.bind(null, recipe)} onRemove={removeFromFavorites.bind(null, recipe.id)} isFavorite={recipe.favorite} />
+                    <RecipeItem
+                        key={recipe.id}
+                        recipe={recipe}
+                        onAdd={addToFavorites.bind(null, recipe)}
+                        onRemove={removeFromFavorites.bind(null, recipe.id)}
+                        isFavorite={recipe.favorite}
+                    />
                 );
             })}
         </section>
     );
-    
+
     return (
         <main>
             <h1 className={classes['g-title']}>Favorites </h1>

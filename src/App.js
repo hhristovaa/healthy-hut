@@ -16,7 +16,7 @@ import Footer from './components/Layout/Footer';
 import './styles/Global.scss';
 import EditArticle from './pages/articles/EditArticle';
 import NotFound from './pages/404/NotFound';
-import Vegan from './pages/recipes/Vegan';
+import Vegan from './pages/recipes/Cuisine';
 import Diet from './pages/recipes/Diet';
 import SearchResult from './pages/recipes/SearchResult';
 import FullRecipe from './pages/recipes/FullRecipe';
@@ -24,6 +24,7 @@ import Favorites from './pages/favorites/Favorites';
 import FavoritesProvider from './store/FavoritesProvider';
 import Duration from './pages/recipes/Duration';
 import Dish from './pages/recipes/Dish';
+import Cuisine from './pages/recipes/Cuisine';
 
 function App() {
   return (
@@ -42,9 +43,11 @@ function App() {
           <Route path='/search/:search' element={<SearchResult />} />
           <Route path='/recipe/:recipeId' element={<FullRecipe />} />
           <Route path='/vegan' element={<Vegan />} />
+
           <Route path='/diet/:type' element={<Diet />} />
           <Route path='/duration/:minutes' element={<Duration />} />
           <Route path='/dish/:type' element={<Dish />} />
+          <Route path='/cuisine/:type' element={<Cuisine />} />
           <Route path='/contacts' element={<Contacts />} />
           <Route path='/profile' element={<PrivateRoute />} >
             <Route path='/profile' element={<Profile />} />

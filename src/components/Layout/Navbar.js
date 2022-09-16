@@ -44,6 +44,17 @@ const Navbar = () => {
                             <NavLink to={'/diet/paleo'}> Paleo</NavLink>
                         </div>
                         <div className={classes['submenu__section']}>
+                            <p>Cuisine</p>
+                            <NavLink to={'/cuisine/american'}> American </NavLink>
+                            <NavLink to={'/cuisine/british'}> British </NavLink>
+                            <NavLink to={'/cuisine/chinese'}> Chinese </NavLink>
+                            <NavLink to={'/cuisine/european'}> European </NavLink>
+                            <NavLink to={'/cuisine/mediterranean'}> Mediterranean </NavLink>
+                            <NavLink to={'/cuisine/greek'}> Greek</NavLink>
+                            <NavLink to={'/cuisine/italian'}> Italian</NavLink>
+                            <NavLink to={'/cuisine/thai'}> Thai</NavLink>
+                        </div>
+                        <div className={classes['submenu__section']}>
                             <p>Duration</p>
                             <NavLink to={'/duration/30'}> Up to 30 Minutes </NavLink>
                             <NavLink to={'/duration/60'}> Up to 60 Minutes </NavLink>
