@@ -24,8 +24,13 @@ import FavoritesProvider from './store/FavoritesProvider';
 import Duration from './pages/recipes/Duration';
 import Dish from './pages/recipes/Dish';
 import Cuisine from './pages/recipes/Cuisine';
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+
 
 function App() {
+  const dispatch = useDispatch();
+  
   return (
     <>
     <FavoritesProvider>
