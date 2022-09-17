@@ -6,7 +6,7 @@ import Navbar from './components/Layout/Navbar';
 import Trending from './pages/Trending';
 import Recipes from './pages/recipes/Recipes';
 import Articles from './pages/articles/Articles';
-import Contacts from './pages/contacts/Contacts';
+import About from './pages/about/About';
 import Profile from './pages/profile/Profile';
 import SignIn from './pages/signin/SignIn';
 import SignUp from './pages/signup/SignUp';
@@ -16,7 +16,6 @@ import Footer from './components/Layout/Footer';
 import './styles/Global.scss';
 import EditArticle from './pages/articles/EditArticle';
 import NotFound from './pages/404/NotFound';
-import Vegan from './pages/recipes/Cuisine';
 import Diet from './pages/recipes/Diet';
 import SearchResult from './pages/recipes/SearchResult';
 import FullRecipe from './pages/recipes/FullRecipe';
@@ -42,7 +41,7 @@ function App() {
           <Route path='/duration/:minutes' element={<Duration />} />
           <Route path='/dish/:type' element={<Dish />} />
           <Route path='/cuisine/:type' element={<Cuisine />} />
-          <Route path='/contacts' element={<Contacts />} />
+          <Route path='/About' element={<About />} />
           <Route path='/profile' element={<PrivateRoute />} >
             <Route path='/profile' element={<Profile />} />
           </Route>

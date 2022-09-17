@@ -7,9 +7,12 @@ import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
 import { capitalizeFirstLetter } from '../../utils/utils';
 import { Link, useParams } from 'react-router-dom';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const Cuisine = () => {
     let params = useParams();
+    console.log(params);
+    const [cuisine, setCuisine] = useLocalStorage('cuisine', params.type)
 
     const getCuisine = (type) => client.get(`&cuisine=${type}`);
     const getCuisineApi = useApi(getCuisine);

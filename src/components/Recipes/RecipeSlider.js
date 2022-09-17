@@ -37,6 +37,17 @@ const RecipeSlider = (props) => {
             perPage: 4,
             gap: '5rem',
             perMove: 1,
+            breakpoints: {
+                986: {
+                    perPage: 3
+                },
+                640: {
+                    perPage: 2
+                },
+                425: {
+                    perPage: 1
+                }
+            }
         }}>
 
 

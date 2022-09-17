@@ -1,8 +1,6 @@
 import classes from './HeroBanner.module.scss';
 import ingredientsImage from '../../assets/ingredients.jpg';
-import Input from './Input';
 import { useState } from 'react';
-
 import { searchOutline } from 'ionicons/icons';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,14 +18,20 @@ const HeroBanner = () => {
         <>
             <section className={classes['hero-container']}>
                 <img src={ingredientsImage} className={classes['hero-container__img']} alt="Ingredients as a hero banner background" />
-                <h1 className={classes['hero-container__title']}>Search for a new recipe...</h1>
-                <form onSubmit={submitHandler}>
-                     <Input
+                <form onSubmit={submitHandler} className={classes.search}>
+                <label className={classes['hero-container__title']} htmlFor='recipe-search'>Search for a new recipe...</label>
+
+                     <input
                     type='search'
                     id='recipe-search'
+                    className={classes['search__input']}
                     placeholder='Search for a recipe'
                     value={searchInput} onChange={(e) => setSearchInput(e.target.value)}
+         
                 />
+             
+
+                
                
 
 

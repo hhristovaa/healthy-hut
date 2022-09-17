@@ -11,8 +11,15 @@ const favoritesReducer = (state, action) => {
 
         const existingFavRecipeIndex = state.recipes.findIndex(recipe => recipe.id === action.recipe.id);
         const existingFavRecipe = state.recipes[existingFavRecipeIndex];
-
         let favRecipes = state.recipes.filter(recipe => recipe.id !== action.recipe.id);
+
+        console.log(state.recipes);
+        console.log(action.recipe.id);
+        console.log(existingFavRecipe);
+        console.log(existingFavRecipeIndex);
+
+
+
         
         if (!existingFavRecipe) {
             

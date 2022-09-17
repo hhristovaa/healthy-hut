@@ -10,23 +10,10 @@ import classes from './Recipes.module.scss';
 import { capitalizeFirstLetter } from '../../utils/utils';
 
 const Diet = () => {
-
-    const [diet, setDiet] = useState([]);
     let params = useParams();
-
+    
     const getDiet = (name) => client.get(`&diet=${name}`);
     const getDietApi = useApi(getDiet);
-
-    // const getDiet = async (name) => {
-    //     const apiKey = '2ed50f18cc1446178f98816f679672f1';
-
-    //     const data = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=30&diet=${name}&instructionsRequired=true&addRecipeInformation=true&addRecipeNutrition=true&limitLicense=true`);
-    //     const duration = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=30&maxReadyTime=30&instructionsRequired=true&addRecipeInformation=true&addRecipeNutrition=true&limitLicense=true`);
-    //     const recipes = await data.json();
-
-    //     setDiet(recipes.results);
-
-    // };
 
     useEffect(() => {
 

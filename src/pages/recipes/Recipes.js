@@ -7,18 +7,18 @@ import Spinner from '../../components/UI/Spinner';
 import FiltersSection from '../../components/Filters/FiltersSection';
 
 const Recipes = () => {
-    const [trending, setTrending] = useState([]);
+    const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
 
 
     //runs fetch trending when the component is mounted
     useEffect(() => {
-        fetchTrending();
+        fetchRecipes();
     }, []);
 
-    const fetchTrending = async () => {
+    const fetchRecipes = async () => {
         //cache - there is no need to fetch recipes every time
-        //store in local storage, check if there si something
+        //store in local storage, check if there is  something
         //in local storage you can save strings; JSON.
         //JSON.parse - parsing from string to array
         //JSON stringify - opposite of it
@@ -26,42 +26,38 @@ const Recipes = () => {
         const checkLocalStorage = localStorage.getItem('trending');
         if (checkLocalStorage) {
             let trendingRecipes = JSON.parse(checkLocalStorage);
-            setTrending(trendingRecipes)
+            setRecipes(trendingRecipes)
         } else {
             const apiKey = 'cc1ef7f275ed420782a8c869acc377dd';
             const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=10`);
             const data = await api.json();
             const recipesString = JSON.stringify(data.recipes);
-            localStorage.setItem('trending', recipesString);
-
-            setTrending(data.recipes);
+            localStorage.setItem('recipes', recipesString);
+            console.log(data.recipes)
+            setRecipes(data.recipes);
         }
 
         setLoading(false);
 
     };
-    
-
 
     if (loading) {
         return <Spinner />;
     }
+
     return (
         <main>
             <h1 className={classes['g-title']}>Recipes</h1>
-<FiltersSection/>
-
+            <FiltersSection />
             <section className={classes['recipes__container']}>
-                {trending.map((recipe) => {
+                {recipes?.map((recipe) => {
                     return (
                         <RecipeItem key={recipe.id} recipe={recipe} isFavorite={recipe.favorite} />
-
                     );
-
                 })}
-
             </section>
-        </main>)
+        </main>
+        )
 }
 
 export default Recipes;

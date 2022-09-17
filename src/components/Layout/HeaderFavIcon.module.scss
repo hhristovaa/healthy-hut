@@ -4,14 +4,14 @@
 
 
 .button {
+  @include flex-setup($justContent: space-around);
     cursor: pointer;
     font: inherit;
     border: none;
     background-color: $color-secondary;
     color: $color-primary;
-    padding: 0.5rem 2.5rem;
-    display: flex;
-    justify-content: space-around;
+    padding: 0.5rem 1rem;
+    gap: 1rem;
     border-radius: 25px;
     font-weight: bold;
   }

@@ -13,6 +13,9 @@ const Dish = () => {
     let params = useParams();
 
     const getDish = (type) => client.get(`&type=${type}`);
+
+    //low fat high protein
+    //&maxFat=30&minProtein=10
     const getDishApi = useApi(getDish);
 
     useEffect(() => {

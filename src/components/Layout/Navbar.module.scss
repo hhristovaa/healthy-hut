@@ -6,12 +6,22 @@
     @include flex-setup($alItems: center, $justContent: space-evenly);
     width: 100%;
     background-color: $color-primary;
+    &__icon {
+        color: $color-white;
+        display: none;
+    }
+
+    &__buttons {
+        margin-left: 2rem;
+    }
+
 }
 
 .navbar {
     display: flex;
     align-items: center;
     position: relative;
+
 
     &__item {
         color: $color-white;
@@ -43,18 +53,19 @@
 .submenu {
     display: none;
     padding: 1rem 2rem;
-    background: rgb(255,254,244);
-background: linear-gradient(0deg, rgba(255,254,244,1) -90%, rgba(210,56,108,1) 100%);
+    background: rgb(255, 254, 244);
+    background: linear-gradient(0deg, rgba(255, 254, 244, 1) -90%, rgba(210, 56, 108, 1) 100%);
     position: absolute;
-    top: 2.7rem;
+    top: 3rem;
+    left: 0;
     z-index: 2;
 
     &__section {
-    color: $color-white;
-    display: flex;
-    flex-direction: column;
-    padding: 0 1.2rem;
-    text-align: center;
+        color: $color-white;
+        display: flex;
+        flex-direction: column;
+        padding: 0 1.2rem;
+        text-align: center;
 
         p {
             font-weight: 600;
@@ -77,8 +88,81 @@ background: linear-gradient(0deg, rgba(255,254,244,1) -90%, rgba(210,56,108,1) 1
 .is-active {
     color: $color-secondary;
 }
-@media screen and (max-width: 768px) {
-    .navigation-menu.expanded ul {
-      display: block;
+
+
+@media screen and (max-width: 900px) {
+    .header {
+        position: relative;
+
+        &__icon {
+            display: block;
+            cursor: pointer;
+        }
+
+        &__buttons {
+            display: none;
+        }
+
+        &.is-mobile {
+            .navbar {
+                display: none;
+
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            height: calc(100vh - 77px);
+            z-index: 2;
+            left: 0%;
+            width: 100%;
+            background-color: $color-primary;
+    
+            span {
+                padding: 1rem;
+            }
+        }
+
+        .header__buttons {
+            display: none;
+        }
     }
-  }
+
+    &.is-open {
+        .navbar {
+            display: flex;
+        }
+
+        .header__buttons {
+            display: flex;
+        }
+
+    }
+
+    }
+
+    .navbar {
+        display: none;
+
+    }
+
+
+    .dropdown-menu {
+        position: relative;
+        .submenu {
+            // position: absolute;
+            top: 100%;
+            height: calc(100vh - 77px);
+            z-index: 5;
+            left: 0%;
+            width: 100%;
+            background: $color-primary;
+            display: block;
+        }
+        &:hover {
+        .submenu {
+            display: none;
+        }
+    }
+    }
+    
+
+}

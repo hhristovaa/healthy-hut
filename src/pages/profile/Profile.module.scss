@@ -38,3 +38,22 @@
 
 
 }
+
+
+@media only screen and (max-width: 425px) {
+    .personal-details__header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .personal-details__form {
+        width: 100%;
+        div {
+            display: flex;
+        }
+
+        button {
+            margin-left: .5rem;
+        }
+    }
+  }

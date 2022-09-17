@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, updateDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
-import { v4 as uuid4 } from 'uuid';
 import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../../components/UI/Spinner';
 import { toast } from 'react-toastify';

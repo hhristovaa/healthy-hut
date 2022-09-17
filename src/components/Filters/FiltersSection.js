@@ -15,7 +15,7 @@ const FiltersSection = () => {
     });
 
     const showFilteredResults = (filters) => {
-        getFiltered(filters);
+      //  getFiltered(filters);
 
     }
 
@@ -24,9 +24,9 @@ const FiltersSection = () => {
 
     }
 
-    const getFiltered = (filters) => client.get(`&type=${filters.dishes}&diet=${filters.diets}&intolerance=${filters.intolerances}&cuisine=${filters.cuisines}`)
+ //   const getFiltered = (filters) => client.get(`&type=${filters.dishes}&diet=${filters.diets}&intolerance=${filters.intolerances}&cuisine=${filters.cuisines}`)
 
-    const getFilteredApi = useApi(getFiltered);
+  //  const getFilteredApi = useApi(getFiltered);
 
 
     const handleFilters = (filters, category) => {
@@ -36,9 +36,9 @@ const FiltersSection = () => {
 
         newFilters[category] = filters;
 
-        getFiltered(newFilters);
+     //   getFiltered(newFilters);
         setFilters(newFilters);
-        getFilteredApi.request(newFilters);
+      //  getFilteredApi.request(newFilters);
 
 
     }

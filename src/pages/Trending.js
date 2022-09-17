@@ -10,11 +10,11 @@ import Spinner from '../components/UI/Spinner';
 import { toast } from 'react-toastify';
 import useApi from '../hooks/useApi';
 import client from '../apis/client';
-
+import { RANDOM_RECIPES_URL } from '../utils/endpoints';
 const apiKey = '2ed50f18cc1446178f98816f679672f1';
 const BASE_URL = `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=10`;
 
-const getRandom = () => client.get(BASE_URL);
+const getRandom = () => client.get(RANDOM_RECIPES_URL);
 
 const Trending = () => {
 

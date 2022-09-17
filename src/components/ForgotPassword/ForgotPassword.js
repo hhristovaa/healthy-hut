@@ -35,8 +35,6 @@ const ForgotPassword = (props) => {
             <IonIcon className={classes['reset-password__close']} icon={closeCircleOutline} onClick={props.onClose} size='large'/>
  
             <h1 className={classes['g-heading']}>Forgot Password?</h1>
-
-
             <form className={classes['reset-password__form']} onSubmit={onSubmit}>
                 <Input 
                 type="email" 
