@@ -1,13 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, updateDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { v4 as uuid4 } from 'uuid';
 import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../../components/UI/Spinner';
 import { toast } from 'react-toastify';
-import { uuidv4 } from '@firebase/util';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
 import classes from './Articles.module.scss';
@@ -15,42 +13,40 @@ import classes from './Articles.module.scss';
 const EditArticle = () => {
     const [loading, setLoading] = useState(false);
     const [article, setArticle] = useState(false);
-    const [file, setFile] = useState('');
     const [formData, setFormData] = useState({
-        name: '',
-        articleImageUrl: '',
+        name: '',     
         content: '',
         source: '',
     });
 
-    const { name, articleImageUrl, content, source } = formData;
+    const { name, content, source } = formData;
 
     const auth = getAuth();
     const navigate = useNavigate();
     const params = useParams();
     const isMounted = useRef(true);
 
-    // useEffect(() => {
-    //     setLoading(true);
-    //     const getArticle = async () => {
-    //         const docRef = doc(db, 'articles', params.articleId);
-    //         const docSnap = await getDoc(docRef);
+    useEffect(() => {
+        setLoading(true);
+        const getArticle = async () => {
+            const docRef = doc(db, 'articles', params.articleId);
+            const docSnap = await getDoc(docRef);
 
-    //         if(docSnap.exists()){
-    //             setArticle(docSnap.data());
-    //             setFormData({...docSnap.data()});
-    //             setLoading(false);
-    //         } else {
-    //             navigate('/');
-    //             toast.error('Article does not exist!');
-    //         }
+            if(docSnap.exists()){
+                setArticle(docSnap.data());
+                setFormData({...docSnap.data()});
+                setLoading(false);
+            } else {
+                navigate('/');
+                toast.error('Article does not exist!');
+            }
 
-    //     }
+        }
 
-    //     getArticle();
+        getArticle();
 
-    // }, [params.articleId, navigate]);
-    //redirect if article is not user's
+    }, [params.articleId, navigate]);
+   // redirect if article is not user's
 
     useEffect(() => {
         if (article && article.userRef !== auth.currentUser.uid) {
@@ -103,80 +99,17 @@ const EditArticle = () => {
         e.preventDefault();
         setLoading(true);
 
-        //edit validation
-        if (articleImageUrl.length === 0) {
-            setLoading(false);
-            toast.error('Image is required');
-            return;
-        }
+    
 
-        //store image in firebase
-        const storeImage = async (image) => {
-            return new Promise((resolve, reject) => {
-                const storage = getStorage();
-                const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
-
-                const storageRef = ref(storage, `images/${fileName}`);
-
-                const uploadTask = uploadBytesResumable(storageRef, image);
-
-                // Register three observers:
-                // 1. 'state_changed' observer, called any time the state changes
-                // 2. Error observer, called on failure
-                // 3. Completion observer, called on successful completion
-                uploadTask.on('state_changed',
-                    (snapshot) => {
-                        // Observe state change events such as progress, pause, and resume
-                        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        console.log('Upload is ' + progress + '% done');
-                        switch (snapshot.state) {
-                            case 'paused':
-                                console.log('Upload is paused');
-                                break;
-                            case 'running':
-                                console.log('Upload is running');
-                                break;
-                        }
-                    },
-                    (error) => {
-                        // Handle unsuccessful uploads
-                        console.log(error);
-                        reject(error);
-
-                    },
-                    () => {
-                        // Handle successful uploads on complete
-                        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-                        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                            console.log('File available at', downloadURL);
-                            resolve(downloadURL);
-                        });
-                    }
-                );
-            });
-        }
-
-
-
-        const imageUrl = await Promise.all(
-            [...articleImageUrl].map((img) => storeImage(img))).catch(() => {
-                setLoading(false);
-                toast.error('An error occured while uploading the image.');
-                return;
-            });
 
         const formDataCopy = {
             ...formData,
-            imageUrl,
             timestamp: serverTimestamp()
         };
 
-        delete formDataCopy.articleImageUrl;
-
+       
         const docRef = doc(db, 'articles', params.articleId);
         await updateDoc(docRef, formDataCopy);
-
         setLoading(false);
         toast.success('The article was successfully updated!');
         navigate(`/articles/${docRef.id}`)
@@ -184,28 +117,14 @@ const EditArticle = () => {
 
     const onChange = e => {
         let eTarget = e.target;
-        let uploadedFile = eTarget.files;
-        if (!uploadedFile) {
+
             setFormData((prevState) => ({
                 ...prevState,
                 [eTarget.id]: eTarget.value
             }));
-        }
-    }
-
-    const handleUpload = e => {
-        let eTarget = e.target;
-        let uploadedFile = eTarget.files;
         
-        if (uploadedFile) {
-            setFormData((prevState) => ({
-                ...prevState,
-                articleImageUrl: uploadedFile
-            }));
-
-            setFile(uploadedFile[0]);          
     }
-}
+
 
     if (loading) {
         return <Spinner />
@@ -218,8 +137,6 @@ const EditArticle = () => {
                 <Input type='text' id='name' label='Name' onChange={onChange} value={name} />
                 <Input type='text' id='source' label='Source' onChange={onChange} value={source} />
                 <Input multiline type='text' id='content' label='Content' onChange={onChange} value={content} />
-                <Input type='file' id='articleImageUrl' label='Image' onChange={onChange} accept='.jpg, .png, .jpeg' />
-                <span className={classes['articles__img-label']}>{file ? file?.name : 'No file chosen'}</span>
                 <Button type="submit" version='change'>Edit Article</Button>
             </form>
         </main>

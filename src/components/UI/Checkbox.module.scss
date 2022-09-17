@@ -3,8 +3,7 @@
 @use '../../styles/_typography.scss' as *;
 
 .filter {
-    display: flex;
-    align-items: center;
+    @include flex-setup($alItems: center);
     width: 100%;
     margin: 8px 0px;
     outline: none;
@@ -13,13 +12,11 @@
     &__input {
         width: 26px;
         height: 26px;
-        background: #fff;
+        background: #f1f1f4;
         appearance: none;
         border: none;
         outline: none;
         cursor: pointer; 
-        border-style: solid;
-        border-width: 2px;
         position: relative;
         transition: all .4s ease-in;
         overflow: hidden;
@@ -34,12 +31,10 @@
         
             &::after {
                 content: "\2714";
-                font-size: 26px;
-                color: #fff;
-                height: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                font-size: 20px;
+                color: $color-white;
+                @include flex-setup($alItems: center, $justContent: center);
+          
             }
         }
 
@@ -47,11 +42,6 @@
     
     &__label {
         margin-left: 10px;
-
-        &::first-letter {
-            font-size: 1.5rem;
-        }
-
     }
 
 }

@@ -5,14 +5,10 @@ import RecipeItem from '../components/Recipes/RecipeItem';
 import classes from './Trending.module.scss';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import { useEffect, useState } from 'react';
-import useAxios from '../hooks/useAxios';
-import axios from '../apis/spoonacularRecipes';
+import { useEffect } from 'react';
 import Spinner from '../components/UI/Spinner';
 import { toast } from 'react-toastify';
-
 import useApi from '../hooks/useApi';
-import randomApi from '../apis/random';
 import client from '../apis/client';
 
 const apiKey = '2ed50f18cc1446178f98816f679672f1';
@@ -67,15 +63,10 @@ const Trending = () => {
                 {getRandomApi.error && toast.error(getRandomApi.error)}
 
                 <h1>Trending</h1>
-                {/* {loading && <Spinner/>}
-
-
-                {!loading && error && toast.error({error})} */}
-
-
                 <section className={classes['trending-recipes']}>
                     <Splide options={{
                         perPage: 4,
+                        gap: '5rem'
                     }}>
 
 

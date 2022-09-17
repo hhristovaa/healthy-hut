@@ -12,7 +12,6 @@ import client from '../../apis/client';
 const FullRecipe = () => {
     let params = useParams();
     const apiKey = '2ed50f18cc1446178f98816f679672f1';
-
     const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${apiKey}`;
     const getDetails = (params) => client.get(BASE_URL)
 
@@ -44,11 +43,9 @@ const FullRecipe = () => {
                     <div className={classes['recipe__header-details']}>
                         <span>  <IonIcon icon={manOutline} /> {getDetailsApi.data?.servings} Servings</span>
                         <span> <IonIcon icon={timerOutline} /> {getDetailsApi.data?.readyInMinutes} Minutes</span>
-
-                        {/* {diet && (<span> <IonIcon icon={listOutline} /> {diet}</span>)} */}
                         {cuisine && (<span> <IonIcon icon={flagOutline} /> {cuisine}</span>)}
                         {dishType && (<span> <IonIcon icon={restaurantOutline} /> {dishType}</span>)}
-                        <a href={getDetailsApi.data?.sourceUrl} target="_blank"><IonIcon icon={globeOutline} />{getDetailsApi.data?.sourceUrl}</a>
+                        <a href={getDetailsApi.data?.sourceUrl}  target='_blank' rel='noreferrer'><IonIcon icon={globeOutline} />{getDetailsApi.data?.sourceUrl}</a>
                         <ul className={classes['recipe__diet']}>{getDetailsApi.data?.diets.map((diet) => (
                             <li>{diet}</li>
                         ))}

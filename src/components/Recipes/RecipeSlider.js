@@ -2,10 +2,11 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { useEffect, useState } from 'react';
 import RecipeItem from './RecipeItem';
+import useApi from '../../hooks/useApi';
+import client from '../../apis/client';
 
 const RecipeSlider = (props) => {
     const [recipes, setRecipes] = useState([]);
-    console.log(props.recipeId);
 
     useEffect(() => {
         fetchRecipes(props.recipeId);
@@ -33,7 +34,9 @@ const RecipeSlider = (props) => {
         <section>
                 <h2>Similar Recipes</h2>
         <Splide options={{
-            perPage: 4
+            perPage: 4,
+            gap: '5rem',
+            perMove: 1,
         }}>
 
 

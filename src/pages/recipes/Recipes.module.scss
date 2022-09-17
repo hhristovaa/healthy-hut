@@ -3,14 +3,10 @@
 @use '../../styles/_variables.scss' as *;
 
 .recipes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    @include flex-setup($wrap: wrap, $justContent: space-around);
 
     &__container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
+        @include flex-setup($wrap: wrap, $justContent: space-around);
         margin: 1rem auto;
     }
 
@@ -18,13 +14,6 @@
         text-align: center;
         margin: 1rem auto;
     }
-
-    &__filter {
-        margin: 2rem auto;
-        display: flex;
-        justify-content: space-around;
-    }
-
 }
 
 .recipe {
@@ -113,15 +102,11 @@
     }
 
     &__header-details {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
+        @include flex-setup($wrap: wrap, $justContent: space-between);
         gap: 1.5rem;
         padding: 1.5rem;
         background-color: #eee;
-
         margin: 1.5rem auto;
-
         border-radius: 18px;
 
         ion-icon {

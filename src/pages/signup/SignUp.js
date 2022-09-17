@@ -19,10 +19,11 @@ const SignUp = () => {
         lastName: '',
         email: '',
         password: '',
+        favorites: [],
         hasAdminRights: false
     });
 
-    const { firstName, lastName, email, password, hasAdminRights } = formData;
+    const { firstName, lastName, email, password, favorites, hasAdminRights } = formData;
 
     const navigate = useNavigate();
 

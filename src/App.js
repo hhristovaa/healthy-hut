@@ -34,16 +34,10 @@ function App() {
       <Navbar />
         <Routes>
           <Route path='/' element={<Trending/>} />
-          <Route exact path='/recipes' element={<Recipes />}>
-            
-            <Route path='/recipes/:type' element={<Diet/>}/>
-
-          </Route>
+          <Route exact path='/recipes' element={<Recipes />}/>        
           <Route path='/articles' element={<Articles />} />
           <Route path='/search/:search' element={<SearchResult />} />
           <Route path='/recipe/:recipeId' element={<FullRecipe />} />
-          <Route path='/vegan' element={<Vegan />} />
-
           <Route path='/diet/:type' element={<Diet />} />
           <Route path='/duration/:minutes' element={<Duration />} />
           <Route path='/dish/:type' element={<Dish />} />
