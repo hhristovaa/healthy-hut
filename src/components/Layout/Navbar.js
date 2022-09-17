@@ -3,17 +3,23 @@ import { NavLink, Link } from 'react-router-dom';
 import Button from '../UI/Button';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import HeaderFavIcon from './HeaderFavIcon';
-import FavoritesProvider from '../../store/FavoritesProvider';
-
-
+import { IonIcon } from '@ionic/react';
+import { menuOutline, closeOutline } from 'ionicons/icons';
+import { useState, useRef } from 'react';
 
 const Navbar = () => {
     const { loggedIn, loadingStatus } = useAuthStatus();
+    const [isMobile, setIsMobile] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
+    const toggle = () => setIsOpen(!isOpen);
     const isLinkActive = (({ isActive }) => (isActive ? `${classes['navbar__item']} ${classes['is-active']}` : classes['navbar__item']));
+    const isMenuMobile = isMobile ? `${classes.header} ${classes['is-mobile']} ${classes['is-open']}` : classes.header;
+
+    const isMenuOpen = isOpen ? `${classes.header} ${classes['is-mobile']} ${classes['is-open']}` : `${classes.header} ${classes['is-mobile']}`;
 
     return (
-        <header className={classes.header}>
+        <header className={isMenuMobile}>
             <Link to='/' className={classes.logo}>HealthyHut</Link>
 
             <nav className={classes.navbar}>
@@ -54,39 +60,47 @@ const Navbar = () => {
                             <NavLink to={'/cuisine/italian'}> Italian</NavLink>
                             <NavLink to={'/cuisine/thai'}> Thai</NavLink>
                         </div>
-                        <div className={classes['submenu__section']}>
+                        {/* <div className={classes['submenu__section']}>
                             <p>Duration</p>
                             <NavLink to={'/duration/30'}> Up to 30 Minutes </NavLink>
                             <NavLink to={'/duration/60'}> Up to 60 Minutes </NavLink>
                             <NavLink to={'/duration/90'}> 90 Minutes </NavLink>
-
-                        </div>
+                        </div> */}
                         <div className={classes['submenu__section']}>
                             <p>Special Recipes</p>
                             <NavLink to={'/diet/vegan'}> Budget Recipies </NavLink>
                             <NavLink to={'/diet/vegetarian'}> Super Healthy Recipes </NavLink>
                             <NavLink to={'/diet/ketogenic'}> Sustainable Recipes </NavLink>
-
+                            <NavLink to={'/duration/30'}> Up to 30 Minutes </NavLink>
                         </div>
 
 
                     </div>
                 </span>
-                <NavLink className={isLinkActive} to={'/articles'}>Articles</NavLink>
-                <NavLink className={isLinkActive} to={'/contacts'}>Contacts</NavLink>
+                <NavLink className={isLinkActive} to={'/articles'} onClick={toggle}>Articles</NavLink>
+                <NavLink className={isLinkActive} to={'/about'}>About</NavLink>
                 <NavLink className={isLinkActive} to={'/profile'}>Profile</NavLink>
+                <div className={classes['header__buttons']}>
 
+{loggedIn ? (
+
+    <NavLink to={'/favorites'}>    <HeaderFavIcon></HeaderFavIcon></NavLink>
+) : (
+    <div className={classes['header__action']}>
+        <Button type='button' version='secondary' outline><NavLink to={'/sign-up'}>Sign Up</NavLink>  </Button>
+        <Button type='button' version='logged' outline><NavLink to={'/sign-in'}>Log In</NavLink>  </Button>
+    </div>
+)
+}
+</div>
             </nav>
-            {loggedIn ? (
 
-                <NavLink to={'/favorites'}>    <HeaderFavIcon></HeaderFavIcon></NavLink>
-            ) : (
-                <div className={classes['header__action']}>
-                    <Button type='button' version='secondary' outline><NavLink to={'/sign-up'}>Sign Up</NavLink>  </Button>
-                    <Button type='button' version='logged' outline><NavLink to={'/sign-in'}>Log In</NavLink>  </Button>
-                </div>
-            )
-            }
+            <IonIcon 
+            className={classes['header__icon']} 
+            icon={menuOutline}
+             size='large' 
+             onClick={() => setIsMobile(!isMobile)}
+             />
 
         </header>
     )
