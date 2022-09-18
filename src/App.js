@@ -24,6 +24,7 @@ import FavoritesProvider from './store/FavoritesProvider';
 import Duration from './pages/recipes/Duration';
 import Dish from './pages/recipes/Dish';
 import Cuisine from './pages/recipes/Cuisine';
+import Specials from './pages/recipes/Specials';
 
 function App() {
   return (
@@ -41,6 +42,9 @@ function App() {
             <Route path='/duration/:minutes' element={<Duration />} />
             <Route path='/dish/:type' element={<Dish />} />
             <Route path='/cuisine/:type' element={<Cuisine />} />
+            <Route path='/specials/:type' element={<Specials />} />
+            
+
             <Route path='/about' element={<About />} />
             <Route path='/profile' element={<PrivateRoute />} >
               <Route path='/profile' element={<Profile />} />

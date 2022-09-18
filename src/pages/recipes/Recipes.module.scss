@@ -21,6 +21,7 @@
 }
 
 .recipe {
+
     &__header {
         @include flex-setup($gap: 2rem);
     }
@@ -32,6 +33,7 @@
         
         ion-icon {
             margin-right: 0.5rem;
+            vertical-align: middle;
         }
     }
 

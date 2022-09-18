@@ -1,0 +1,27 @@
+@use '../../styles/_variables.scss' as *;
+
+.filters {
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__form-section {
+        border: none;
+      margin: 2rem auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 2rem;
+    
+    }
+
+    &__actions {
+        button {
+            margin: auto 2rem;
+        }
+        
+    }
+
+}
