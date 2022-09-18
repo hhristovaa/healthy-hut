@@ -1,161 +1,161 @@
 export const diets = [
     {
-        '_id': 1,
-        'type': 'vegan'
+        'value': 'vegan',
+        'label': 'vegan'
 
     },
     {
-        '_id': 2,
-        'type': 'vegetarian'
+        'value': 'vegetarian',
+        'label': 'vegetarian'
 
     },
     {
-        '_id': 3,
-        'type': 'ketogenic'
+        'value': 'ketogenic',
+        'label': 'ketogenic'
 
     },
     {
-        '_id': 4,
-        'type': 'gluten-free'
+        'value': 'gluten-free',
+        'label': 'gluten-free'
 
     },
     {
-        '_id': 5,
-        'type': 'dairy-free'
+        'value': 'dairy-free',
+        'label': 'dairy-free'
 
     },
     {
-        '_id': 6,
-        'type': 'paleo'
+        'value': 'paleo',
+        'label': 'paleo'
 
     }
 ];
 
 export const dishes = [
     {
-        '_id': 1,
-        'type': 'breakfast'
+        'value': 'breakfast',
+        'label': 'breakfast'
 
     },
     {
-        '_id': 2,
-        'type': 'lunch'
+        'value': 'lunch',
+        'label': 'lunch'
 
     },
     {
-        '_id': 3,
-        'type': 'salad'
+        'value': 'salad',
+        'label': 'salad'
 
     },
     {
-        '_id': 4,
-        'type': 'soup'
+        'value': 'soup',
+        'label': 'soup'
 
     },
     {
-        '_id': 5,
-        'type': 'appetizer'
+        'value': 'appetizer',
+        'label': 'appetizer'
 
     },
     {
-        '_id': 6,
-        'type': 'dinner'
+        'value': 'dinner',
+        'label': 'dinner'
 
     },
     {
-        '_id': 7,
-        'type': 'dessert'
+        'value': 'dessert',
+        'label': 'dessert'
 
     },
     {
-        '_id': 8,
-        'type': 'drink'
+        'value': 'drink',
+        'label': 'drink'
 
     }
 ];
 
 export const intolerances = [
     {
-        '_id': 1,
-        'type': 'dairy'
+        'value': 'dairy',
+        'label': 'dairy'
 
     },
     {
-        '_id': 2,
-        'type': 'egg'
+        'value': 'egg',
+        'label': 'egg'
 
     },
     {
-        '_id': 3,
-        'type': 'grain'
+        'value': 'grain',
+        'label': 'grain'
 
     },
     {
-        '_id': 4,
-        'type': 'seafood'
+        'value': 'seafood',
+        'label': 'seafood'
 
     },
     {
-        '_id': 5,
-        'type': 'soy'
+        'value': 'soy',
+        'label': 'soy'
 
     },
     {
-        '_id': 6,
-        'type': 'shellfish'
+        'value': 'shellfish',
+        'label': 'shellfish'
 
     },
     {
-        '_id': 7,
-        'type': 'sulfite'
+        'value': 'sulfite',
+        'label': 'sulfite'
 
     },
     {
-        '_id': 8,
-        'type': 'peanut'
+        'value': 'peanut',
+        'label': 'peanut'
 
     }
 ];
 
 export const cuisines = [
     {
-        '_id': 1,
-        'type': 'american'
+        'value': 'american',
+        'label': 'american'
 
     },
     {
-        '_id': 2,
-        'type': 'british'
+        'value': 'british',
+        'label': 'british'
 
     },
     {
-        '_id': 3,
-        'type': 'chinese'
+        'value': 'chinese',
+        'label': 'chinese'
 
     },
     {
-        '_id': 4,
-        'type': 'european'
+        'value': 'european',
+        'label': 'european'
 
     },
     {
-        '_id': 5,
-        'type': 'mediterranean'
+        'value': 'mediterranean',
+        'label': 'mediterranean'
 
     },
     {
-        '_id': 6,
-        'type': 'greek'
+        'value': 'greek',
+        'label': 'greek'
 
     },
     {
-        '_id': 7,
-        'type': 'italian'
+        'value': 'italian',
+        'label': 'italian'
 
     },
     {
-        '_id': 8,
-        'type': 'thai'
+        'value': 'thai',
+        'label': 'thai'
 
     }
 ];

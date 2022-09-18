@@ -11,33 +11,44 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const Cuisine = () => {
     let params = useParams();
-    console.log(params);
-    const [cuisine, setCuisine] = useLocalStorage('cuisine', params.type)
+    const [cuisine, setCuisine] = useState([]);
 
     const getCuisine = (type) => client.get(`&cuisine=${type}`);
     const getCuisineApi = useApi(getCuisine);
 
     useEffect(() => {
-
         getCuisineApi.request(params.type)
+    
 
-    }, [params.type]);
+     }, [params.type]);
 
     let title = capitalizeFirstLetter(params.type);
+
+    // let isCuisineInStorage = localStorage.getItem(params.type);
+
+    // if (isCuisineInStorage) {
+    //     let JSONcuisine = JSON.parse(isCuisineInStorage);
+    //     setCuisine(JSONcuisine);
+    // } else {
+    //     getCuisineApi.request(params.type)
+    //     setCuisine(getCuisineApi.data?.results);
+    // }
+    
+
     return (
         <main>
             {getCuisineApi.loading && <Spinner />}
             {getCuisineApi.error && toast.error(getCuisineApi.error)}
             <h1 className={classes['g-title']}>{title}</h1>
             <section className={classes['recipes__container']}>
-            {getCuisineApi.data?.results.map((item) => {
-                return (
-                    <RecipeItem key={item.id} recipe={item}>
+                {getCuisineApi.data?.result.map((item) => {
+                    return (
+                        <RecipeItem key={item.id} recipe={item}>
 
 
-                    </RecipeItem>
-                )
-            })}
+                        </RecipeItem>
+                    )
+                })}
             </section>
         </main>
     )

@@ -25,7 +25,7 @@ const Trending = () => {
         getRandomApi.request();
     }, []);
 
-
+    
     // //runs fetch trending when the component is mounted
     // useEffect(() => {
     //     fetchTrending();

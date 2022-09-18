@@ -33,7 +33,6 @@ const Recipes = () => {
             const data = await api.json();
             const recipesString = JSON.stringify(data.recipes);
             localStorage.setItem('recipes', recipesString);
-            console.log(data.recipes)
             setRecipes(data.recipes);
         }
 

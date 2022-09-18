@@ -4,8 +4,7 @@
     display: flex;
     height: 19rem;
     flex-direction: column;
-    justify-content: space-around;
-
+    justify-content: space-between;
 }
 
 .recipe-redirect {
@@ -19,42 +18,28 @@
     &:hover {
         overflow: hidden;
         filter: contrast(1.1);
-        img {
-            
-            transform: scale(1.2);
-    
+        img {            
+            transform: scale(1.2); 
         }
     }
-
 }
 
 .recipe__card-title {
     font-weight: 600;
     margin: .5rem 0;
-
 }
 
 .recipe__card-info {
     font-size: 12px;
     display: flex;
     justify-content: space-between;
-
 }
 
 .recipe__card-details {
     display: flex;
     gap: 5px;
     align-items: center;
-
     ion-icon {
         font-size: 14px;
     }
-}
-
-
-.recipe-favorites {
-    position: absolute;
-    top: 2%;
-    right: 2%;
-    color: $color-primary;
 }
