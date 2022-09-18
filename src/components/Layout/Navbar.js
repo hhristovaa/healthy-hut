@@ -97,7 +97,7 @@ const Navbar = () => {
 
             <IonIcon 
             className={classes['header__icon']} 
-            icon={menuOutline}
+            icon={isMobile ? closeOutline : menuOutline}
              size='large' 
              onClick={() => setIsMobile(!isMobile)}
              />

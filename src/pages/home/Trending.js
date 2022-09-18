@@ -1,18 +1,19 @@
 import { Link } from 'react-router-dom';
 
-import HeroBanner from '../components/UI/HeroBanner';
-import RecipeItem from '../components/Recipes/RecipeItem';
+import HeroBanner from '../../components/UI/HeroBanner';
+import RecipeItem from '../../components/Recipes/RecipeItem';
 import classes from './Trending.module.scss';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { useEffect } from 'react';
-import Spinner from '../components/UI/Spinner';
+import Spinner from '../../components/UI/Spinner';
 import { toast } from 'react-toastify';
-import useApi from '../hooks/useApi';
-import client from '../apis/client';
-import { RANDOM_RECIPES_URL } from '../utils/endpoints';
+import useApi from '../../hooks/useApi';
+import client from '../../apis/client';
+import { RANDOM_RECIPES_URL } from '../../utils/endpoints';
+
 const apiKey = '2ed50f18cc1446178f98816f679672f1';
-const BASE_URL = `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=10`;
+const BASE_URL = `https://api.spoonacular.com/recipes/random?apiKey=${process.env.RANDOM_RECIPES_URL}&number=10`;
 
 const getRandom = () => client.get(RANDOM_RECIPES_URL);
 
@@ -56,9 +57,7 @@ const Trending = () => {
     return (
         <>
             <HeroBanner />
-
             <main>
-
                 {getRandomApi.loading && <Spinner />}
                 {getRandomApi.error && toast.error(getRandomApi.error)}
 
@@ -66,9 +65,19 @@ const Trending = () => {
                 <section className={classes['trending-recipes']}>
                     <Splide options={{
                         perPage: 4,
-                        gap: '5rem'
+                        gap: '5rem',
+                        breakpoints: {
+                            986: {
+                                perPage: 3
+                            },
+                            640: {
+                                perPage: 2
+                            },
+                            425: {
+                                perPage: 1
+                            }
+                        }
                     }}>
-
 
                         {getRandomApi.data?.recipes.map((recipe) => {
                             return (
@@ -80,19 +89,7 @@ const Trending = () => {
 
                         })}
                     </Splide>
-
                 </section>
-
-
-
-                <Link to='/recipes'>
-                    All Recipes
-                </Link>
-
-                <Link to='/articles'>
-                    All articles
-                </Link>
-
             </main>
         </>
     )

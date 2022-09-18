@@ -92,7 +92,7 @@ const FullRecipe = () => {
 
 
 
-            {/* <RecipeSlider recipeId={params.recipeId}/> */}
+            <RecipeSlider recipeId={params.recipeId}/>
         </main>
 
     )

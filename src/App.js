@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './components/Layout/PrivateRoute';
 import Navbar from './components/Layout/Navbar';
-import Trending from './pages/Trending';
+import Trending from './pages/home/Trending';
 import Recipes from './pages/recipes/Recipes';
 import Articles from './pages/articles/Articles';
 import About from './pages/about/About';
@@ -41,7 +41,7 @@ function App() {
           <Route path='/duration/:minutes' element={<Duration />} />
           <Route path='/dish/:type' element={<Dish />} />
           <Route path='/cuisine/:type' element={<Cuisine />} />
-          <Route path='/About' element={<About />} />
+          <Route path='/about' element={<About />} />
           <Route path='/profile' element={<PrivateRoute />} >
             <Route path='/profile' element={<Profile />} />
           </Route>
