@@ -41,7 +41,14 @@ const FiltersSection = () => {
     let cuisines = e.target.cuisines.value;
     let disheshInput = e.target.dishes;
 
+    const isDietEmpty = diets.length === 0;
+    const isIntoleranceEmpty = intolerances.length === 0;
+    const isCuisineEmpty = cuisines.length === 0;
+    const isDishEmpty = disheshInput.value.length === 0;
+
     const isIterable = disheshInput.length > 1;
+
+    if (isDietEmpty && isIntoleranceEmpty && isCuisineEmpty && isDishEmpty) return; 
 
     if (isIterable) {
     let dishVals = [...disheshInput];
@@ -56,11 +63,9 @@ const FiltersSection = () => {
   }
 
     setDiets(diets);
-
     setIntolerances(intolerances);
     setCuisines(cuisines);
     getFilteredApi.request(diet, dish, intolerance, cuisine);
-
 
   }
 

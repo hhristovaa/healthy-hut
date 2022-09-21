@@ -4,7 +4,7 @@ import Button from '../UI/Button';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import HeaderFavIcon from './HeaderFavIcon';
 import { IonIcon } from '@ionic/react';
-import { menuOutline, closeOutline } from 'ionicons/icons';
+import { menuOutline, closeOutline, chevronDownOutline } from 'ionicons/icons';
 import { useState, useRef, useEffect } from 'react';
 
 const Navbar = () => {
@@ -13,13 +13,20 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
 
+    const [click, setClick] = useState(false);
+    const [isDropdown, setIsDropdown] = useState(false);
+
+    const handleClick = () => setIsMobile(!isMobile);
+    const closeMobileMenu = () => {
+        setIsMobile(false);
+        setIsDropdown(false);
+    }
+
     const toggle = () => setIsOpen(!isOpen);
     const isLinkActive = (({ isActive }) => (isActive ? `${classes['navbar__item']} ${classes['is-active']}` : classes['navbar__item']));
     const isMenuMobile = isMobile ? `${classes.header} ${classes['is-mobile']} ${classes['is-open']}` : classes.header;
 
     const isMenuOpen = isOpen ? `${classes.header} ${classes['is-mobile']} ${classes['is-open']}` : `${classes.header} ${classes['is-mobile']}`;
-
-    console.log(location);
 
     if (isMenuMobile) {
 
@@ -27,26 +34,32 @@ const Navbar = () => {
 
     return (
         <header className={isMenuMobile}>
-            <Link to='/' className={classes.logo}>HealthyHut</Link>
+            <Link to='/' className={classes.logo} onClick={closeMobileMenu}>HealthyHut</Link>
 
             <nav className={classes.navbar}>
-                <NavLink className={isLinkActive} to={'/'}>Home</NavLink>
-                <span className={classes['dropdown-menu']}><NavLink className={isLinkActive} to={'/recipes'}>Recipes
-                </NavLink>
-
-                    <div className={classes.submenu}>
-                        <div className={classes['submenu__section']}>
-                            <p>Dish Type</p>
-                            <NavLink to={'/dish/breakfast'}> Breakfast </NavLink>
-                            <NavLink to={'/dish/lunch'}> Lunch </NavLink>
-                            <NavLink to={'/dish/salad'}> Salad </NavLink>
-                            <NavLink to={'/dish/soup'}> Soup </NavLink>
-                            <NavLink to={'/dish/appetizer'}> Appetizer </NavLink>
-                            <NavLink to={'/dish/dinner'}> Dinner </NavLink>
-                            <NavLink to={'/dish/dessert'}> Dessert </NavLink>
-                            <NavLink to={'/dish/drink'}> Drinks </NavLink>
-                        </div>
-                        <div className={classes['submenu__section']}>
+                <NavLink className={isLinkActive} to={'/'} onClick={closeMobileMenu}>Home</NavLink>
+                <NavLink className={isLinkActive} to={'/recipes'} onClick={closeMobileMenu}>All Recipes</NavLink>
+                <span className={classes['dropdown-menu']}>
+                    {!isMobile && <NavLink className={isLinkActive} to={'/recipes'}>Categories
+                        <IonIcon icon={chevronDownOutline} />  </NavLink>
+                    }
+                    {isMobile && <span className={classes['navbar__item']} onClick={() => setIsDropdown(!isDropdown)}>Categories
+                        <IonIcon icon={chevronDownOutline} />  </span>
+                    }
+                    {isDropdown &&
+                        <div className={classes.submenu}>
+                            <div className={classes['submenu__section']}>
+                                <p>Dish Type</p>
+                                <NavLink to={'/dish/breakfast'} onClick={closeMobileMenu}> Breakfast </NavLink>
+                                <NavLink to={'/dish/lunch'} onClick={closeMobileMenu}> Lunch </NavLink>
+                                <NavLink to={'/dish/salad'} onClick={closeMobileMenu}> Salad </NavLink>
+                                <NavLink to={'/dish/soup'} onClick={closeMobileMenu}> Soup </NavLink>
+                                <NavLink to={'/dish/appetizer'} onClick={closeMobileMenu}> Appetizer </NavLink>
+                                <NavLink to={'/dish/dinner'} onClick={closeMobileMenu}> Dinner </NavLink>
+                                <NavLink to={'/dish/dessert'} onClick={closeMobileMenu}> Dessert </NavLink>
+                                <NavLink to={'/dish/drink'} onClick={closeMobileMenu}> Drinks </NavLink>
+                            </div>
+                            {/* <div className={classes['submenu__section']}>
                             <p>Diet Type</p>
                             <NavLink to={'/diet/vegan'}> Vegan </NavLink>
                             <NavLink to={'/diet/vegetarian'}> Vegetarian </NavLink>
@@ -54,40 +67,50 @@ const Navbar = () => {
                             <NavLink to={'/diet/gluten-free'}> Gluten Free </NavLink>
                             <NavLink to={'/diet/dairy-free'}> Dairy Free </NavLink>
                             <NavLink to={'/diet/paleo'}> Paleo</NavLink>
+                        </div> */}
+                            <div className={classes['submenu__section']}>
+                                <p>Diet Type</p>
+                                <NavLink to={'/diet/vegan'} onClick={closeMobileMenu}> Vegan </NavLink>
+                                <NavLink to={'/diet/vegetarian'} onClick={closeMobileMenu}> Vegetarian </NavLink>
+                                <NavLink to={'/diet/ketogenic'} onClick={closeMobileMenu}> Keto </NavLink>
+                                <NavLink to={'/diet/glutenFree'} onClick={closeMobileMenu}> Gluten Free </NavLink>
+                                <NavLink to={'/diet/dairyFree'} onClick={closeMobileMenu}> Dairy Free </NavLink>
+                                <NavLink to={'/diet/lowFodmap'} onClick={closeMobileMenu}> Fodmap Friendly</NavLink>
+                            </div>
+                            <div className={classes['submenu__section']}>
+                                <p>Cuisine</p>
+                                <NavLink to={'/cuisine/american'} onClick={closeMobileMenu}> American </NavLink>
+                                <NavLink to={'/cuisine/british'} onClick={closeMobileMenu}> British </NavLink>
+                                <NavLink to={'/cuisine/chinese'} onClick={closeMobileMenu}> Chinese </NavLink>
+                                <NavLink to={'/cuisine/european'} onClick={closeMobileMenu}> European </NavLink>
+                                <NavLink to={'/cuisine/mediterranean'} onClick={closeMobileMenu}> Mediterranean </NavLink>
+                                <NavLink to={'/cuisine/greek'} onClick={closeMobileMenu}> Greek</NavLink>
+                                <NavLink to={'/cuisine/italian'} onClick={closeMobileMenu}> Italian</NavLink>
+                                <NavLink to={'/cuisine/thai'} onClick={closeMobileMenu}> Thai</NavLink>
+                            </div>
+                            <div className={classes['submenu__section']}>
+                                <p>Special Recipes</p>
+                                <NavLink to={'/specials/cheap'} onClick={closeMobileMenu}> Budget Recipies </NavLink>
+                                <NavLink to={'/specials/veryHealthy'} onClick={closeMobileMenu}> Super Healthy Recipes </NavLink>
+                                <NavLink to={'/specials/sustainable'} onClick={closeMobileMenu}>Sustainable Recipes </NavLink>
+                                <NavLink to={'/specials/lowFodmap'} onClick={closeMobileMenu}> Fodmap Friendly </NavLink>
+                            </div>
                         </div>
-                        <div className={classes['submenu__section']}>
-                            <p>Cuisine</p>
-                            <NavLink to={'/cuisine/american'}> American </NavLink>
-                            <NavLink to={'/cuisine/british'}> British </NavLink>
-                            <NavLink to={'/cuisine/chinese'}> Chinese </NavLink>
-                            <NavLink to={'/cuisine/european'}> European </NavLink>
-                            <NavLink to={'/cuisine/mediterranean'}> Mediterranean </NavLink>
-                            <NavLink to={'/cuisine/greek'}> Greek</NavLink>
-                            <NavLink to={'/cuisine/italian'}> Italian</NavLink>
-                            <NavLink to={'/cuisine/thai'}> Thai</NavLink>
-                        </div>
-                        <div className={classes['submenu__section']}>
-                            <p>Special Recipes</p>
-                            <NavLink to={'/specials/cheap'}> Budget Recipies </NavLink>
-                            <NavLink to={'/specials/veryHealthy'}> Super Healthy Recipes </NavLink>
-                            <NavLink to={'/specials/sustainable'}> Sustainable Recipes </NavLink>
-                            <NavLink to={'/specials/lowFodmap'}> Fodmap Friendly </NavLink>
-                        </div>
-                    </div>
+                    }
                 </span>
 
-                <NavLink className={isLinkActive} to={'/articles'} onClick={toggle}>Articles</NavLink>
-                <NavLink className={isLinkActive} to={'/about'}>About</NavLink>
-                <NavLink className={isLinkActive} to={'/profile'}>Profile</NavLink>
+                <NavLink className={isLinkActive} to={'/articles'} onClick={closeMobileMenu}>Articles</NavLink>
+                <NavLink className={isLinkActive} to={'/about'} onClick={closeMobileMenu}>About</NavLink>
+                <NavLink className={isLinkActive} to={'/profile'} onClick={closeMobileMenu}>Profile</NavLink>
                 <div className={classes['header__buttons']}>
 
                     {loggedIn ? (
 
-                        <NavLink to={'/favorites'}>    <HeaderFavIcon></HeaderFavIcon></NavLink>
+                        <NavLink to={'/favorites'} onClick={closeMobileMenu}>    <HeaderFavIcon></HeaderFavIcon></NavLink>
                     ) : (
                         <div className={classes['header__action']}>
-                            <Button type='button' version='secondary' outline><NavLink to={'/sign-up'}>Sign Up</NavLink>  </Button>
-                            <Button type='button' version='logged' outline><NavLink to={'/sign-in'}>Log In</NavLink>  </Button>
+                            <Button type='button' version='secondary' outline onClick={closeMobileMenu}><NavLink to={'/sign-up'}>Sign Up</NavLink>  </Button>
+                            <Button type='button' version='logged' outline onClick={closeMobileMenu}><NavLink to={'/sign-in'}>Log In</NavLink>  </Button>
                         </div>
                     )
                     }

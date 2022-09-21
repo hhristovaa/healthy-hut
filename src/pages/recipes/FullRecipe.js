@@ -9,6 +9,7 @@ import {toast} from 'react-toastify';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
 import FavoritesContext from '../../store/FavoritesContext';
+import ToggleFavorites from '../../components/favorites/ToggleFavorites';
 
 const FullRecipe = (props) => {
     let params = useParams();
@@ -72,6 +73,7 @@ const FullRecipe = (props) => {
 
         });
     }
+    
     console.log(getNutritionApi);
 
     return (
@@ -79,7 +81,10 @@ const FullRecipe = (props) => {
             <section className={classes['recipe__header']}>
                 <aside className={classes['recipe__header-container']}> 
                 <img src={getDetailsApi.data?.image} alt={getDetailsApi.data?.title} />
-   <span class={classes['recipe__favorites']} onClick={toggleFavorites}><IonIcon icon={favorite ? heart : heartOutline}  size='large' />{favorite ? 'Remove From Favorites' : 'Add To Favorites'}</span> 
+  
+  <ToggleFavorites recipe={getDetailsApi.data}/>
+  
+   {/* <span class={classes['recipe__favorites']} onClick={toggleFavorites}><IonIcon icon={favorite ? heart : heartOutline}  size='large' />{favorite ? 'Remove From Favorites' : 'Add To Favorites'}</span>  */}
                 </aside>
                 <article className={classes['recipe__header-info']}>
                     <h3 className={classes['recipe__header-title']}>{getDetailsApi.data?.title}</h3>
