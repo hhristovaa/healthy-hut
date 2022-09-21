@@ -73,7 +73,7 @@ const FullRecipe = (props) => {
 
         });
     }
-    
+
     console.log(getNutritionApi);
 
     return (
@@ -133,7 +133,7 @@ const FullRecipe = (props) => {
 
 
 
-            <RecipeSlider recipeId={params.recipeId}/>
+            {/* <RecipeSlider recipeId={params.recipeId}/> */}
         </main>
 
     )

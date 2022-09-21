@@ -4,7 +4,7 @@ import Button from '../UI/Button';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import HeaderFavIcon from './HeaderFavIcon';
 import { IonIcon } from '@ionic/react';
-import { menuOutline, closeOutline, chevronDownOutline } from 'ionicons/icons';
+import { menuOutline, closeOutline, chevronDownOutline, chevronUpOutline } from 'ionicons/icons';
 import { useState, useRef, useEffect } from 'react';
 
 const Navbar = () => {
@@ -13,10 +13,10 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
 
-    const [click, setClick] = useState(false);
     const [isDropdown, setIsDropdown] = useState(false);
 
     const handleClick = () => setIsMobile(!isMobile);
+
     const closeMobileMenu = () => {
         setIsMobile(false);
         setIsDropdown(false);
@@ -28,6 +28,7 @@ const Navbar = () => {
 
     const isMenuOpen = isOpen ? `${classes.header} ${classes['is-mobile']} ${classes['is-open']}` : `${classes.header} ${classes['is-mobile']}`;
 
+    const isNotExpanded = isDropdown ? `${classes.submenu} ${classes['is-hidden']}` : classes.submenu;
     if (isMenuMobile) {
 
     }
@@ -44,10 +45,10 @@ const Navbar = () => {
                         <IonIcon icon={chevronDownOutline} />  </NavLink>
                     }
                     {isMobile && <span className={classes['navbar__item']} onClick={() => setIsDropdown(!isDropdown)}>Categories
-                        <IonIcon icon={chevronDownOutline} />  </span>
+                        <IonIcon icon={isDropdown ? chevronDownOutline : chevronUpOutline} />  </span>
                     }
-                    {isDropdown &&
-                        <div className={classes.submenu}>
+
+                        <div className={isNotExpanded}>
                             <div className={classes['submenu__section']}>
                                 <p>Dish Type</p>
                                 <NavLink to={'/dish/breakfast'} onClick={closeMobileMenu}> Breakfast </NavLink>
@@ -96,7 +97,7 @@ const Navbar = () => {
                                 <NavLink to={'/specials/lowFodmap'} onClick={closeMobileMenu}> Fodmap Friendly </NavLink>
                             </div>
                         </div>
-                    }
+                    
                 </span>
 
                 <NavLink className={isLinkActive} to={'/articles'} onClick={closeMobileMenu}>Articles</NavLink>

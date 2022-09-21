@@ -19,8 +19,7 @@
 }
 
 .navbar {
-    display: flex;
-    align-items: center;
+    @include flex-setup($alItems: center);
     position: relative;
     text-transform: uppercase;
 
@@ -29,7 +28,6 @@
         text-decoration: none;
         padding: 1rem;
         cursor: pointer;
-
         font-size: 16px;
         line-height: 20px;
 
@@ -38,9 +36,7 @@
             transition: ease-in-out all 0.4s;
 
             ion-icon {
-
                 transform: rotate(180deg);
-
             }
         }
 
@@ -52,7 +48,6 @@
         ion-icon {
             margin-left: .5rem;
             vertical-align: text-top;
-
         }
     }
 }
@@ -87,10 +82,8 @@
         }
 
         a:hover {
-     
-                color: $color-secondary-light;
-                transition: ease-in-out all 0.4s;
-    
+            color: $color-secondary-light;
+            transition: ease-in-out all 0.4s;
         }
 
     }
@@ -98,7 +91,6 @@
 
 .logo {
     font-family: 'Pacifico', cursive;
-    // font-size: 1.5em;
     font-size: 24px;
     line-height: 63px;
     color: $color-secondary;
@@ -127,7 +119,6 @@
         &.is-mobile {
             .navbar {
                 display: none;
-
                 flex-direction: column;
                 position: absolute;
                 top: 100%;
@@ -136,9 +127,7 @@
                 left: 0%;
                 width: 100%;
                 background-color: $color-primary;
-
             }
-
             .header__buttons {
                 display: none;
             }
@@ -152,34 +141,29 @@
             .header__buttons {
                 display: flex;
             }
-
         }
-
     }
 
     .navbar {
         display: none;
-
     }
 
 
     .dropdown-menu {
+        @include flex-setup($direction: column, $alItems: center);
         position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
 
         .submenu {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-position: relative;
-top: unset;
+            @include flex-setup($alItems: center, $justContent: center, $wrap: wrap);
+            position: relative;
+            top: unset;
             z-index: 5;
-
             width: 100%;
             background: $color-primary;
+            
+            &.is-hidden {
+                display: none;
+            }
         }
     }
 
