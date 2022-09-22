@@ -28,7 +28,8 @@ const Recipes = () => {
             let trendingRecipes = JSON.parse(checkLocalStorage);
             setRecipes(trendingRecipes)
         } else {
-            const apiKey = 'cc1ef7f275ed420782a8c869acc377dd';
+         //   const apiKey = 'cc1ef7f275ed420782a8c869acc377dd';
+         const apiKey = 'b44514ae9c644024a55ec4e856cf0fd2';
             const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=10`);
             const data = await api.json();
             const recipesString = JSON.stringify(data.recipes);

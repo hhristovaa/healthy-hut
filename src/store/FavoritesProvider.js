@@ -13,23 +13,15 @@ const favoritesReducer = (state, action) => {
         const existingFavRecipe = state.recipes[existingFavRecipeIndex];
         let favRecipes = state.recipes.filter(recipe => recipe.id !== action.recipe.id);
 
-        console.log(state.recipes);
-        console.log(action.recipe.id);
-        console.log(existingFavRecipe);
-        console.log(existingFavRecipeIndex);
-
-
-
-        
         if (!existingFavRecipe) {
             
         let updatedRecipes = state.recipes.concat(action.recipe);
-        let updatedTotalCount = state.recipes?.length + 1;
+        // let updatedTotalCount = state.recipes?.length + 1;
+        let updatedTotalCount = (state.totalCount + 1);
             return {
                 recipes: updatedRecipes,
                 totalCount: updatedTotalCount
             };
-          
         }
 
         //firebase add to users logic 
@@ -44,7 +36,7 @@ const favoritesReducer = (state, action) => {
         let existingRecipe = state.recipes[existingFavRecipeIndex];
 
        // const updatedTotalCount = state.totalCount - existingRecipe.totalCount;
-        const updatedTotalCount = state.totalCount--;
+        const updatedTotalCount = state.totalCount > 0 ? --state.totalCount : 0;
 
         let updatedRecipes;
 
@@ -61,6 +53,7 @@ const favoritesReducer = (state, action) => {
             totalCount: updatedTotalCount
         }
     }
+    console.log(defaultFavoritesState.totalCount);
     return defaultFavoritesState;
 };
 
@@ -71,7 +64,6 @@ const FavoritesProvider = props => {
     //     localStorage.setItem('favorites', JSON.stringify(favoritesState))
     // }, [favoritesState]);
 
-    console.log(favoritesState);
 
     const addRecipeHandler = recipe => {
         dispatchFavoritesAction({ type: 'ADD', recipe: recipe });

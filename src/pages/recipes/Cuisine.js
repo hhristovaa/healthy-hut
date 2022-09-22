@@ -33,7 +33,7 @@ const Cuisine = () => {
     //     getCuisineApi.request(params.type)
     //     setCuisine(getCuisineApi.data?.results);
     // }
-    
+
 
     return (
         <main>
@@ -41,7 +41,7 @@ const Cuisine = () => {
             {getCuisineApi.error && toast.error(getCuisineApi.error)}
             <h1 className={classes['g-title']}>{title}</h1>
             <section className={classes['recipes__container']}>
-                {getCuisineApi.data?.result.map((item) => {
+                {getCuisineApi.data?.results.map((item) => {
                     return (
                         <RecipeItem key={item.id} recipe={item}>
 

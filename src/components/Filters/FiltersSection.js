@@ -6,31 +6,21 @@ import useApi from '../../hooks/useApi';
 import Button from '../UI/Button';
 import Select from 'react-select';
 
-import { useEffect, useRef } from 'react';
-
 const FiltersSection = () => {
   const [diet, setDiets] = useState('');
   const [dish, setDishes] = useState([]);
   const [intolerance, setIntolerances] = useState('');
   const [cuisine, setCuisines] = useState('');
-  const [value, setValue] = useState('')
 
-  const selectInputRef = useRef();
-
-  const getFiltered = (diet = '', dish = '', intolerance = '', cuisine = '') => client.get(`&type=${dish}&diet=${diet}&intolerance=${intolerance}&cuisine=${cuisine}`)
+  const getFiltered = (diet, dish, intolerance, cuisine) => client.get(`&type=${dish}&diet=${diet}&intolerance=${intolerance}&cuisine=${cuisine}`)
 
   const getFilteredApi = useApi(getFiltered);
-
-  const handleSelectValue = (selected) => {
-    setValue(selected);
-  }
 
   const resetFilters = () => {
     setDiets('');
     setDishes('');
     setIntolerances('');
     setCuisines('');
-    setValue('')
     getFilteredApi.request();
   }
 
@@ -48,19 +38,19 @@ const FiltersSection = () => {
 
     const isIterable = disheshInput.length > 1;
 
-    if (isDietEmpty && isIntoleranceEmpty && isCuisineEmpty && isDishEmpty) return; 
+    if (isDietEmpty && isIntoleranceEmpty && isCuisineEmpty && isDishEmpty) return;
 
     if (isIterable) {
-    let dishVals = [...disheshInput];
-    let arrDishes = [];
+      let dishVals = [...disheshInput];
+      let arrDishes = [];
 
-    for (const inputField of dishVals.values()) {
-      arrDishes.push(inputField.value);
+      for (const inputField of dishVals.values()) {
+        arrDishes.push(inputField.value);
+      }
+      setDishes(arrDishes);
+    } else {
+      setDishes(disheshInput.value);
     }
-    setDishes(arrDishes);
-  } else {
-    setDishes(disheshInput.value);
-  }
 
     setDiets(diets);
     setIntolerances(intolerances);
@@ -79,15 +69,15 @@ const FiltersSection = () => {
 
     <section className={classes['filters']}>
       <form className={classes['filters__form']} onSubmit={submitFilters}>
-       <fieldset className={classes['filters__form-section']} >
-        <Select ref={selectInputRef} name='diets' options={diets} isClearable={true} placeholder='Select a diet' />
-        <Select  ref={selectInputRef} name='dishes' options={dishes} isMulti isClearable={true} placeholder='Select a dish' />
-        <Select  ref={selectInputRef} name='intolerances' options={intolerances} isClearable={true} placeholder='Select an intolerance' />
-        <Select  ref={selectInputRef}  name='cuisines' options={cuisines} isClearable={true} placeholder='Select a cuisine' />
+        <fieldset className={classes['filters__form-section']} >
+          <Select name='diets' options={diets} isClearable={true} placeholder='Select a diet' />
+          <Select name='dishes' options={dishes} isMulti isClearable={true} placeholder='Select a dish' />
+          <Select name='intolerances' options={intolerances} isClearable={true} placeholder='Select an intolerance' />
+          <Select name='cuisines' options={cuisines} isClearable={true} placeholder='Select a cuisine' />
         </fieldset>
         <div className={classes['filters__actions']}>
-        <Button type='submit' version='secondary'>Filter</Button>
-        <Button type='button' version='danger' outline onClick={resetFilters}>Reset Filters</Button>
+          <Button type='submit' version='secondary'>Filter</Button>
+          <Button type='button' version='danger' outline onClick={resetFilters}>Reset Filters</Button>
         </div>
       </form>
     </section>

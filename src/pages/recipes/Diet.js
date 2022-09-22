@@ -31,10 +31,7 @@ const Diet = () => {
             <section className={classes['recipes__container']}>
             {getDietApi.data?.results.map((item) => {
                 return (
-                    <RecipeItem key={item.id} recipe={item}>
-
-
-                    </RecipeItem>
+                    <RecipeItem key={item.id} recipe={item}/>
                 )
             })}
             </section>

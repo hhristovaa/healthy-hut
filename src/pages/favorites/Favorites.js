@@ -48,45 +48,45 @@ const Favorites = props => {
     const params = useParams();
     const auth = getAuth();
 
-    useEffect(() => {
-        const fetchFavorites = async () => {
-            try {
-                //get reference
-                const favoritesRef = collection(db, 'favorites');
-                const q = query(favoritesRef, where('userRef', '==', auth.currentUser.uid), orderBy('timestamp', 'desc'));
+    // useEffect(() => {
+    //     const fetchFavorites = async () => {
+    //         try {
+    //             //get reference
+    //             const favoritesRef = collection(db, 'favorites');
+    //             const q = query(favoritesRef, where('userRef', '==', auth.currentUser.uid), orderBy('timestamp', 'desc'));
             
-                const favoritesData = await getDocs(q);
-                const favorites = [];
+    //             const favoritesData = await getDocs(q);
+    //             const favorites = [];
 
-                favoritesData.docs.forEach(favorite => {
-                    return favorites.push({
-                        id: favorite.id,
-                        data: favorite.data()
-                    });
+    //             favoritesData.docs.forEach(favorite => {
+    //                 return favorites.push({
+    //                     id: favorite.id,
+    //                     data: favorite.data()
+    //                 });
 
-                });
+    //             });
 
-                setFavorite(favorites);
-                setLoading(false);
-            } catch (err) {
-                toast.error('An error occured while loading the favorites.');
-            }
+    //             setFavorite(favorites);
+    //             setLoading(false);
+    //         } catch (err) {
+    //             toast.error('An error occured while loading the favorites.');
+    //         }
 
 
-        }
+    //     }
 
-        fetchFavorites();
-    }, [auth.currentUser.uid]);
+    //     fetchFavorites();
+    // }, [auth.currentUser.uid]);
 
-    if (loading) {
-        return <Spinner />;
-    }
+    // if (loading) {
+    //     return <Spinner />;
+    // }
 
     return (
         <main>
             <h1 className={classes['g-title']}>Favorites </h1>
             <h3 className={classes['recipes__counter']}>You have marked {totalCount} recipes as favorites.</h3>
-            <section className={classes['recipes__container']}>
+            {/* <section className={classes['recipes__container']}>
             {!loading  && favorite?.length > 0 && favorite.map(recipe => {
                 return (
                     <RecipeItem
@@ -98,7 +98,8 @@ const Favorites = props => {
                     />
                 );
             })}
-        </section>
+        </section> */}
+        {favoritesItems}
         </main>
     );
 }

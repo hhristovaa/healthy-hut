@@ -19,6 +19,7 @@
     color: $color-primary;
     font-size: 36px;
     line-height: 59px;
+    text-align: center;
   }
 }
 
@@ -38,5 +39,21 @@
     margin-top: 0.3rem;
     font-size: 1rem;
     border: 1px solid $color-primary-dark;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .search {
+    width: 80%;
+
+    .hero-container {
+      height: 100%;
+      
+      &__title {
+        font-size: 26px;
+        line-height: 40px;
+      }
+    }
   }
 }

@@ -60,7 +60,7 @@ const Navbar = () => {
                                 <NavLink to={'/dish/dessert'} onClick={closeMobileMenu}> Dessert </NavLink>
                                 <NavLink to={'/dish/drink'} onClick={closeMobileMenu}> Drinks </NavLink>
                             </div>
-                            {/* <div className={classes['submenu__section']}>
+                            <div className={classes['submenu__section']}>
                             <p>Diet Type</p>
                             <NavLink to={'/diet/vegan'}> Vegan </NavLink>
                             <NavLink to={'/diet/vegetarian'}> Vegetarian </NavLink>
@@ -68,8 +68,8 @@ const Navbar = () => {
                             <NavLink to={'/diet/gluten-free'}> Gluten Free </NavLink>
                             <NavLink to={'/diet/dairy-free'}> Dairy Free </NavLink>
                             <NavLink to={'/diet/paleo'}> Paleo</NavLink>
-                        </div> */}
-                            <div className={classes['submenu__section']}>
+                        </div>
+                            {/* <div className={classes['submenu__section']}>
                                 <p>Diet Type</p>
                                 <NavLink to={'/diet/vegan'} onClick={closeMobileMenu}> Vegan </NavLink>
                                 <NavLink to={'/diet/vegetarian'} onClick={closeMobileMenu}> Vegetarian </NavLink>
@@ -77,7 +77,7 @@ const Navbar = () => {
                                 <NavLink to={'/diet/glutenFree'} onClick={closeMobileMenu}> Gluten Free </NavLink>
                                 <NavLink to={'/diet/dairyFree'} onClick={closeMobileMenu}> Dairy Free </NavLink>
                                 <NavLink to={'/diet/lowFodmap'} onClick={closeMobileMenu}> Fodmap Friendly</NavLink>
-                            </div>
+                            </div> */}
                             <div className={classes['submenu__section']}>
                                 <p>Cuisine</p>
                                 <NavLink to={'/cuisine/american'} onClick={closeMobileMenu}> American </NavLink>

@@ -13,7 +13,7 @@ import Input from '../../components/UI/Input';
 import classes from './ToggleFavorites.module.scss';
 import { isFieldEmpty } from '../../utils/utils';
 import { IonIcon } from '@ionic/react';
-import {heart, heartOutline} from 'ionicons/icons';
+import { heart, heartOutline } from 'ionicons/icons';
 import FavoritesContext from '../../store/FavoritesContext';
 
 const ToggleFavorites = (props) => {
@@ -40,14 +40,14 @@ const ToggleFavorites = (props) => {
 
     const toggleFavorites = (e) => {
         e.preventDefault();
-
+        
         if (favorite) {
             removeFromFavoritesHandler(e);
         } else {
             addToFavoritesHandler(e)
-            onSubmit(e);
+            //onSubmit(e);
         }
-
+        
         favoritesHandler(e);
     }
 
@@ -57,14 +57,13 @@ const ToggleFavorites = (props) => {
 
     const addToFavoritesHandler = (e) => {
         favoritesCtx.addRecipe({
-            id: props.recipe.recipeId,
+            id: props.recipe.id,
             recipe: props.recipe,
             title: props.recipe?.title,
             image: props.recipe?.image,
             servings: props.recipe?.servings,
             readyInMinutes: props.recipe?.readyInMinutes,
             favorite: true
-
         });
     }
 
@@ -72,7 +71,16 @@ const ToggleFavorites = (props) => {
         if (isMounted) {
             onAuthStateChanged(auth, (user) => {
                 if (user) {
-                    setFavRecipeData({ ...favRecipeData, userRef: user.uid });
+                    setFavRecipeData({
+                        id: props.recipe?.id,
+                        recipe: props.recipe,
+                        title: props.recipe?.title,
+                        image: props.recipe?.image,
+                        servings: props.recipe?.servings,
+                        readyInMinutes: props.recipe?.readyInMinutes,
+                        favorite: true,
+                        userRef: user.uid
+                    });
                 } else {
                     navigate('/sign-in');
                 }
@@ -90,18 +98,24 @@ const ToggleFavorites = (props) => {
         e.preventDefault();
         setLoading(true);
 
-        const formDataCopy = {
-            ...favRecipeData,
+        const recipeDataCopy = {
+            id: props.recipe.id,
+            recipe: props.recipe,
+            title: props.recipe?.title,
+            image: props.recipe?.image,
+            servings: props.recipe?.servings,
+            readyInMinutes: props.recipe?.readyInMinutes,
+            favorite: true,
+
             timestamp: serverTimestamp()
         };
 
+        console.log(recipeDataCopy);
 
-
-        const docRef = await addDoc(collection(db, 'favorites'), favRecipeData);
+        const docRef = await addDoc(collection(db, 'favorites'), recipeDataCopy);
 
         setLoading(false);
         toast.success('The recipe was successfully marked as favorite!');
-       // navigate(`/favorites/${docRef.id}`)
     }
 
 
@@ -110,10 +124,12 @@ const ToggleFavorites = (props) => {
     }
 
     return (
-  
-        <span class={classes['recipe__favorites']} onClick={toggleFavorites}><IonIcon icon={favorite ? heart : heartOutline}  size='large' />{favorite ? 'Remove From Favorites' : 'Add To Favorites'}</span> 
-
-     
+        <span
+            className={classes['recipe__favorites']}
+            onClick={toggleFavorites}>
+            <IonIcon icon={favorite ? heart : heartOutline} size='large' />
+            {favorite ? 'Remove From Favorites' : 'Add To Favorites'}
+        </span>
     )
 }
 

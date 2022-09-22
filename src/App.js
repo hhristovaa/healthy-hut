@@ -38,13 +38,11 @@ function App() {
             <Route path='/articles' element={<Articles />} />
             <Route path='/search/:search' element={<SearchResult />} />
             <Route path='/recipe/:recipeId' element={<FullRecipe />} />
-            <Route path='/diet/:type' element={<Specials />} />
+            <Route path='/diet/:type' element={<Diet />} />
             <Route path='/duration/:minutes' element={<Duration />} />
             <Route path='/dish/:type' element={<Dish />} />
             <Route path='/cuisine/:type' element={<Cuisine />} />
             <Route path='/specials/:type' element={<Specials />} />
-            
-
             <Route path='/about' element={<About />} />
             <Route path='/profile' element={<PrivateRoute />} >
               <Route path='/profile' element={<Profile />} />
@@ -54,7 +52,6 @@ function App() {
             <Route path='/favorites' element={<PrivateRoute />} >
               <Route path='/favorites' element={<Favorites />} />
             </Route>
-
             <Route path='/create-article' element={<PrivateRoute />} >
               <Route path='/create-article' element={<CreateArticle />} />
             </Route>
@@ -72,7 +69,7 @@ function App() {
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
-        rtl={false}        
+        rtl={false}
         draggable
         pauseOnHover />
 

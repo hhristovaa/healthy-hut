@@ -74,13 +74,12 @@ const FullRecipe = (props) => {
         });
     }
 
-    console.log(getNutritionApi);
-
     return (
         <main>
             <section className={classes['recipe__header']}>
                 <aside className={classes['recipe__header-container']}> 
                 <img src={getDetailsApi.data?.image} alt={getDetailsApi.data?.title} />
+  
   
   <ToggleFavorites recipe={getDetailsApi.data}/>
   
@@ -122,16 +121,7 @@ const FullRecipe = (props) => {
                 ) : (
                     <p>Currently the instructions are not available.</p>
                 )}
-
-
             </section>
-
-
-
-
-
-
-
 
             {/* <RecipeSlider recipeId={params.recipeId}/> */}
         </main>

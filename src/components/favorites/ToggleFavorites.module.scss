@@ -1,0 +1,15 @@
+@use '../../styles/_variables.scss' as *;
+
+.recipe {
+    &__favorites {
+        color: $color-primary;
+        cursor: pointer;
+        margin-top: 1rem;
+        
+        ion-icon {
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+    }
+
+}
