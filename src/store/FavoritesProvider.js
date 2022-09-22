@@ -1,10 +1,11 @@
+import { createContext } from 'react';
 import { useReducer, useEffect } from 'react';
 import FavoritesContext from './FavoritesContext';
 
 const defaultFavoritesState = {
-    recipes: [],
-    totalCount: 0,
+    recipes: []
 };
+
 
 const favoritesReducer = (state, action) => {
     if (action.type === 'ADD') {
@@ -14,13 +15,11 @@ const favoritesReducer = (state, action) => {
         let favRecipes = state.recipes.filter(recipe => recipe.id !== action.recipe.id);
 
         if (!existingFavRecipe) {
-            
-        let updatedRecipes = state.recipes.concat(action.recipe);
-        // let updatedTotalCount = state.recipes?.length + 1;
-        let updatedTotalCount = (state.totalCount + 1);
+            let updatedRecipes = state.recipes.concat(action.recipe);
+            // let updatedTotalCount = state.recipes?.length + 1;
             return {
                 recipes: updatedRecipes,
-                totalCount: updatedTotalCount
+               
             };
         }
 
@@ -35,25 +34,23 @@ const favoritesReducer = (state, action) => {
 
         let existingRecipe = state.recipes[existingFavRecipeIndex];
 
-       // const updatedTotalCount = state.totalCount - existingRecipe.totalCount;
+        // const updatedTotalCount = state.totalCount - existingRecipe.totalCount;
         const updatedTotalCount = state.totalCount > 0 ? --state.totalCount : 0;
 
         let updatedRecipes;
 
         if (existingRecipe) {
             updatedRecipes = state.recipes.filter(recipe => recipe.id !== action.id);
-        } else {     
+        } else {
             updatedRecipes = [...state.recipes];
             updatedRecipes[existingFavRecipeIndex] = existingRecipe;
-        } 
-
+        }
 
         return {
-            recipes: updatedRecipes,
-            totalCount: updatedTotalCount
+            recipes: updatedRecipes          
         }
     }
-    console.log(defaultFavoritesState.totalCount);
+
     return defaultFavoritesState;
 };
 
@@ -63,7 +60,6 @@ const FavoritesProvider = props => {
     // useEffect(() => {
     //     localStorage.setItem('favorites', JSON.stringify(favoritesState))
     // }, [favoritesState]);
-
 
     const addRecipeHandler = recipe => {
         dispatchFavoritesAction({ type: 'ADD', recipe: recipe });
@@ -75,10 +71,8 @@ const FavoritesProvider = props => {
 
     const favoritesContext = {
         recipes: favoritesState.recipes,
-        totalCount: favoritesState.totalCount,
         addRecipe: addRecipeHandler,
         removeRecipe: removeRecipeHandler,
-
     };
 
     return (

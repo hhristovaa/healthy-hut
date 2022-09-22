@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import RecipeItem from '../../components/Recipes/RecipeItem';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import classes from './Recipes.module.scss';
 import Spinner from '../../components/UI/Spinner';
 import FiltersSection from '../../components/Filters/FiltersSection';
+
+const ctxNqkafSi = createContext([]);
 
 const Recipes = () => {
     const [recipes, setRecipes] = useState([]);
@@ -28,8 +30,8 @@ const Recipes = () => {
             let trendingRecipes = JSON.parse(checkLocalStorage);
             setRecipes(trendingRecipes)
         } else {
-         //   const apiKey = 'cc1ef7f275ed420782a8c869acc377dd';
-         const apiKey = 'b44514ae9c644024a55ec4e856cf0fd2';
+            //   const apiKey = 'cc1ef7f275ed420782a8c869acc377dd';
+            const apiKey = 'b44514ae9c644024a55ec4e856cf0fd2';
             const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=10`);
             const data = await api.json();
             const recipesString = JSON.stringify(data.recipes);
@@ -46,18 +48,20 @@ const Recipes = () => {
     }
 
     return (
-        <main>
-            <h1 className={classes['g-title']}>Recipes</h1>
-            <FiltersSection />
-            <section className={classes['recipes__container']}>
-                {recipes?.map((recipe) => {
-                    return (
-                        <RecipeItem key={recipe.id} recipe={recipe} isFavorite={recipe.favorite} />
-                    );
-                })}
-            </section>
-        </main>
-        )
+        <ctxNqkafSi.Provider value={recipes ? recipes : []}>
+            <main>
+                <h1 className={classes['g-title']}>Recipes</h1>
+                <FiltersSection ctxNqkafSiPodaden={ctxNqkafSi} />
+                <section className={classes['recipes__container']}>
+                    {recipes?.map((recipe) => {
+                        return (
+                            <RecipeItem key={recipe.id} recipe={recipe} isFavorite={recipe.favorite} />
+                        );
+                    })}
+                </section>
+            </main>
+        </ ctxNqkafSi.Provider>
+    )
 }
 
 export default Recipes;

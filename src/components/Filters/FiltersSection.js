@@ -63,8 +63,6 @@ const FiltersSection = () => {
   //   getFilteredApi.request(diet, dish, intolerance, cuisine);
   // }, [diet, dish, intolerance, cuisine])
 
-  console.log(getFilteredApi.data);
-
   return (
 
     <section className={classes['filters']}>

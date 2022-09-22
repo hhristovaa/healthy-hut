@@ -1,135 +1,63 @@
-import { useState, useEffect, useRef, useContext } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../firebase.config';
-import { v4 as uuid4 } from 'uuid';
-import { useNavigate } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
 import Spinner from '../../components/UI/Spinner';
-import { toast } from 'react-toastify';
-import { uuidv4 } from '@firebase/util';
 import Button from '../../components/UI/Button';
-import Input from '../../components/UI/Input';
 import classes from './ToggleFavorites.module.scss';
-import { isFieldEmpty } from '../../utils/utils';
 import { IonIcon } from '@ionic/react';
 import { heart, heartOutline } from 'ionicons/icons';
 import FavoritesContext from '../../store/FavoritesContext';
+// import FavoritesProvider from '../../store/FavoritesProvider';
 
 const ToggleFavorites = (props) => {
-    const auth = getAuth();
-    const navigate = useNavigate();
-    const isMounted = useRef(true);
-
-    const favoritesCtx = useContext(FavoritesContext);
-
     const [loading, setLoading] = useState(false);
     const [favorite, setFavorite] = useState(false);
-    const [favRecipeData, setFavRecipeData] = useState({
-        id: '',
-        title: '',
-        image: '',
-        servings: '',
-        readyInMinutes: '',
-    });
+    // const [neshtoSiId, setNeshtoSiId] = useState(props?.recipe?.id);
+    const [favoriteCount, setFavoriteCount] = useState(0);
+    const favoritesCtx = useContext(FavoritesContext);
+    const { recipes } = favoritesCtx;
 
-    const favoritesHandler = (e) => {
-        e.preventDefault();
-        setFavorite(prevState => !prevState);
+    const addToFavorites = recipe => {
+        favoritesCtx.addRecipe({ ...recipe});
+    };
+
+    const removeFromFavorites = id => {
+        favoritesCtx.removeRecipe(id);
+    };
+
+    const toggleFavorite = () => {
+        favorite ? removeFromFavorites(props.recipe.id) : addToFavorites(props.recipe);
+        setFavorite(!favorite);
     }
 
-    const toggleFavorites = (e) => {
-        e.preventDefault();
-        
-        if (favorite) {
-            removeFromFavoritesHandler(e);
-        } else {
-            addToFavoritesHandler(e)
-            //onSubmit(e);
-        }
-        
-        favoritesHandler(e);
-    }
+    // useEffect(() => {
+    //     // const isFavorite = recipes?.some(recipe => recipe.id === props.recipe.id) ?? false;
 
-    const removeFromFavoritesHandler = (e) => {
-        favoritesCtx.removeRecipe(props.recipe.recipeId);
-    }
+    //     // setFavorite(isFavorite);
 
-    const addToFavoritesHandler = (e) => {
-        favoritesCtx.addRecipe({
-            id: props.recipe.id,
-            recipe: props.recipe,
-            title: props.recipe?.title,
-            image: props.recipe?.image,
-            servings: props.recipe?.servings,
-            readyInMinutes: props.recipe?.readyInMinutes,
-            favorite: true
-        });
-    }
+    //     const result = recipes?.some(recipe => recipe.id === props.recipe.id) ?? false;
+    //     console.log(result);
+
+    //     return false;
+    // }, [recipes, props?.recipe?.id]);
 
     useEffect(() => {
-        if (isMounted) {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    setFavRecipeData({
-                        id: props.recipe?.id,
-                        recipe: props.recipe,
-                        title: props.recipe?.title,
-                        image: props.recipe?.image,
-                        servings: props.recipe?.servings,
-                        readyInMinutes: props.recipe?.readyInMinutes,
-                        favorite: true,
-                        userRef: user.uid
-                    });
-                } else {
-                    navigate('/sign-in');
-                }
-            });
+        const newNewFavoriteNeshtoSi = recipes.some(recipe => recipe.id === props?.recipe?.id);
 
-        }
-
-        return () => {
-            isMounted.current = false;
-        }
-
-    }, [isMounted]);
-
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-
-        const recipeDataCopy = {
-            id: props.recipe.id,
-            recipe: props.recipe,
-            title: props.recipe?.title,
-            image: props.recipe?.image,
-            servings: props.recipe?.servings,
-            readyInMinutes: props.recipe?.readyInMinutes,
-            favorite: true,
-
-            timestamp: serverTimestamp()
-        };
-
-        console.log(recipeDataCopy);
-
-        const docRef = await addDoc(collection(db, 'favorites'), recipeDataCopy);
-
-        setLoading(false);
-        toast.success('The recipe was successfully marked as favorite!');
-    }
-
+        setFavorite(newNewFavoriteNeshtoSi);
+    }, [favorite, recipes, props]);
 
     if (loading) {
         return <Spinner />
     }
 
     return (
-        <span
-            className={classes['recipe__favorites']}
-            onClick={toggleFavorites}>
-            <IonIcon icon={favorite ? heart : heartOutline} size='large' />
-            {favorite ? 'Remove From Favorites' : 'Add To Favorites'}
-        </span>
+        <>
+            <span
+                className={classes['recipe__favorites']}
+                onClick={toggleFavorite}>
+                <IonIcon icon={favorite ? heart : heartOutline} size='large' />
+                {favorite ? 'Remove From Favorites' : 'Add To Favorites'}
+            </span>     
+        </>
     )
 }
 

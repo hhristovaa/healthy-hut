@@ -14,10 +14,9 @@ const Favorites = props => {
     const favoritesCtx = useContext(FavoritesContext);
     const hasFavorites = favoritesCtx.recipes.length > 0;
 
-    const totalCount = favoritesCtx.totalCount;
 
     const addToFavorites = recipe => {
-        favoritesCtx.addRecipe({ ...recipe, totalCount: 1 });
+        favoritesCtx.addRecipe({ ...recipe});
     };
 
     const removeFromFavorites = id => {
@@ -85,7 +84,7 @@ const Favorites = props => {
     return (
         <main>
             <h1 className={classes['g-title']}>Favorites </h1>
-            <h3 className={classes['recipes__counter']}>You have marked {totalCount} recipes as favorites.</h3>
+            <h3 className={classes['recipes__counter']}>You have marked {favoritesCtx.recipes.length} recipes as favorites.</h3>
             {/* <section className={classes['recipes__container']}>
             {!loading  && favorite?.length > 0 && favorite.map(recipe => {
                 return (

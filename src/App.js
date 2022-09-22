@@ -27,42 +27,49 @@ import Cuisine from './pages/recipes/Cuisine';
 import Specials from './pages/recipes/Specials';
 
 function App() {
+  
+
+
   return (
     <>
-      <FavoritesProvider>
-        <Router>
+      <Router>
+        <FavoritesProvider>
+
           <Navbar />
-          <Routes>
-            <Route path='/' element={<Trending />} />
-            <Route exact path='/recipes' element={<Recipes />} />
-            <Route path='/articles' element={<Articles />} />
-            <Route path='/search/:search' element={<SearchResult />} />
-            <Route path='/recipe/:recipeId' element={<FullRecipe />} />
-            <Route path='/diet/:type' element={<Diet />} />
-            <Route path='/duration/:minutes' element={<Duration />} />
-            <Route path='/dish/:type' element={<Dish />} />
-            <Route path='/cuisine/:type' element={<Cuisine />} />
-            <Route path='/specials/:type' element={<Specials />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/profile' element={<PrivateRoute />} >
-              <Route path='/profile' element={<Profile />} />
-            </Route>
-            <Route path='/sign-in' element={<SignIn />} />
-            <Route path='/sign-up' element={<SignUp />} />
-            <Route path='/favorites' element={<PrivateRoute />} >
-              <Route path='/favorites' element={<Favorites />} />
-            </Route>
-            <Route path='/create-article' element={<PrivateRoute />} >
-              <Route path='/create-article' element={<CreateArticle />} />
-            </Route>
-            <Route path='/edit-article/:articleId' element={<PrivateRoute />} >
-              <Route path='/edit-article/:articleId' element={<EditArticle />} />
-            </Route>
-            <Route path='/articles/:articleId' element={<FullArticle />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-        </Router>
-      </FavoritesProvider>
+
+
+        <Routes>
+          <Route path='/' element={<Trending />} />
+          <Route exact path='/recipes' element={<Recipes />} />
+          <Route path='/articles' element={<Articles />} />
+          <Route path='/search/:search' element={<SearchResult />} />
+          <Route path='/recipe/:recipeId' element={<FullRecipe />} />
+          <Route path='/diet/:type' element={<Diet />} />
+          <Route path='/duration/:minutes' element={<Duration />} />
+          <Route path='/dish/:type' element={<Dish />} />
+          <Route path='/cuisine/:type' element={<Cuisine />} />
+          <Route path='/specials/:type' element={<Specials />} />
+
+          <Route path='/about' element={<About />} />
+          <Route path='/profile' element={<PrivateRoute />} >
+            <Route path='/profile' element={<Profile />} />
+          </Route>
+          <Route path='/sign-in' element={<SignIn />} />
+          <Route path='/sign-up' element={<SignUp />} />
+          <Route path='/favorites' element={<PrivateRoute />} >
+            <Route path='/favorites' element={<Favorites />} />
+          </Route>
+          <Route path='/create-article' element={<PrivateRoute />} >
+            <Route path='/create-article' element={<CreateArticle />} />
+          </Route>
+          <Route path='/edit-article/:articleId' element={<PrivateRoute />} >
+            <Route path='/edit-article/:articleId' element={<EditArticle />} />
+          </Route>
+          <Route path='/articles/:articleId' element={<FullArticle />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+        </FavoritesProvider>
+      </Router>
 
       <ToastContainer position="top-right"
         autoClose={3000}
