@@ -5,7 +5,7 @@ const Input = (props) => (
     <fieldset className='form-group'>
         {props.label && <label className='form-group__label' htmlFor={props.id}>{props.label}</label>}
         {props.multiline ? (<textarea
-        id={props.id}
+            id={props.id}
             value={props.value}
             className='form-group__textarea'
             placeholder={props.placeholder}
@@ -21,7 +21,7 @@ const Input = (props) => (
                 required={props.required}
             />)
         }
-        {props.icon && <IonIcon icon={props.icon}/>}
+        {props.icon && <IonIcon icon={props.icon} />}
     </fieldset>
 );
 

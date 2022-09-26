@@ -1,42 +1,32 @@
-import { createContext } from 'react';
-import { useReducer, useEffect } from 'react';
+import { useReducer } from 'react';
 import FavoritesContext from './FavoritesContext';
+import { ACTIONS } from '../utils/constants';
 
 const defaultFavoritesState = {
     recipes: []
 };
 
-
 const favoritesReducer = (state, action) => {
-    if (action.type === 'ADD') {
-
+    if (action.type === ACTIONS.ADD) {
         const existingFavRecipeIndex = state.recipes.findIndex(recipe => recipe.id === action.recipe.id);
         const existingFavRecipe = state.recipes[existingFavRecipeIndex];
-        let favRecipes = state.recipes.filter(recipe => recipe.id !== action.recipe.id);
 
         if (!existingFavRecipe) {
             let updatedRecipes = state.recipes.concat(action.recipe);
-            // let updatedTotalCount = state.recipes?.length + 1;
             return {
                 recipes: updatedRecipes,
-               
+
             };
         }
 
-        //firebase add to users logic 
-
     }
 
-    if (action.type === 'REMOVE') {
+    if (action.type === ACTIONS.REMOVE) {
         const existingFavRecipeIndex = state.recipes.findIndex(
             (recipe) => recipe.id === action.id
         );
 
         let existingRecipe = state.recipes[existingFavRecipeIndex];
-
-        // const updatedTotalCount = state.totalCount - existingRecipe.totalCount;
-        const updatedTotalCount = state.totalCount > 0 ? --state.totalCount : 0;
-
         let updatedRecipes;
 
         if (existingRecipe) {
@@ -47,7 +37,7 @@ const favoritesReducer = (state, action) => {
         }
 
         return {
-            recipes: updatedRecipes          
+            recipes: updatedRecipes
         }
     }
 
@@ -57,16 +47,12 @@ const favoritesReducer = (state, action) => {
 const FavoritesProvider = props => {
     const [favoritesState, dispatchFavoritesAction] = useReducer(favoritesReducer, defaultFavoritesState);
 
-    // useEffect(() => {
-    //     localStorage.setItem('favorites', JSON.stringify(favoritesState))
-    // }, [favoritesState]);
-
     const addRecipeHandler = recipe => {
-        dispatchFavoritesAction({ type: 'ADD', recipe: recipe });
+        dispatchFavoritesAction({ type: ACTIONS.ADD, recipe: recipe });
     };
 
     const removeRecipeHandler = id => {
-        dispatchFavoritesAction({ type: 'REMOVE', id: id });
+        dispatchFavoritesAction({ type: ACTIONS.REMOVE, id: id });
     };
 
     const favoritesContext = {

@@ -1,32 +1,32 @@
 export const diets = [
     {
         'value': 'vegan',
-        'label': 'vegan'
+        'label': 'Vegan'
 
     },
     {
         'value': 'vegetarian',
-        'label': 'vegetarian'
+        'label': 'Vegetarian'
 
     },
     {
         'value': 'ketogenic',
-        'label': 'ketogenic'
+        'label': 'Ketogenic'
 
     },
     {
         'value': 'gluten-free',
-        'label': 'gluten-free'
+        'label': 'Gluten free'
 
     },
     {
         'value': 'dairy-free',
-        'label': 'dairy-free'
+        'label': 'Dairy Free'
 
     },
     {
         'value': 'paleo',
-        'label': 'paleo'
+        'label': 'Paleo'
 
     }
 ];
@@ -34,42 +34,42 @@ export const diets = [
 export const dishes = [
     {
         'value': 'breakfast',
-        'label': 'breakfast'
+        'label': 'Breakfast'
 
     },
     {
         'value': 'lunch',
-        'label': 'lunch'
+        'label': 'Lunch'
 
     },
     {
         'value': 'salad',
-        'label': 'salad'
+        'label': 'Salad'
 
     },
     {
         'value': 'soup',
-        'label': 'soup'
+        'label': 'Soup'
 
     },
     {
         'value': 'appetizer',
-        'label': 'appetizer'
+        'label': 'Appetizer'
 
     },
     {
         'value': 'dinner',
-        'label': 'dinner'
+        'label': 'Dinner'
 
     },
     {
         'value': 'dessert',
-        'label': 'dessert'
+        'label': 'Dessert'
 
     },
     {
         'value': 'drink',
-        'label': 'drink'
+        'label': 'Drink'
 
     }
 ];
@@ -77,42 +77,42 @@ export const dishes = [
 export const intolerances = [
     {
         'value': 'dairy',
-        'label': 'dairy'
+        'label': 'Dairy'
 
     },
     {
         'value': 'egg',
-        'label': 'egg'
+        'label': 'Egg'
 
     },
     {
         'value': 'grain',
-        'label': 'grain'
+        'label': 'Grain'
 
     },
     {
         'value': 'seafood',
-        'label': 'seafood'
+        'label': 'Seafood'
 
     },
     {
         'value': 'soy',
-        'label': 'soy'
+        'label': 'Soy'
 
     },
     {
         'value': 'shellfish',
-        'label': 'shellfish'
+        'label': 'Shellfish'
 
     },
     {
         'value': 'sulfite',
-        'label': 'sulfite'
+        'label': 'Sulfite'
 
     },
     {
         'value': 'peanut',
-        'label': 'peanut'
+        'label': 'Peanut'
 
     }
 ];
@@ -120,42 +120,47 @@ export const intolerances = [
 export const cuisines = [
     {
         'value': 'american',
-        'label': 'american'
+        'label': 'American'
 
     },
     {
         'value': 'british',
-        'label': 'british'
+        'label': 'British'
 
     },
     {
         'value': 'chinese',
-        'label': 'chinese'
+        'label': 'Chinese'
 
     },
     {
         'value': 'european',
-        'label': 'european'
+        'label': 'European'
 
     },
     {
         'value': 'mediterranean',
-        'label': 'mediterranean'
+        'label': 'Mediterranean'
 
     },
     {
         'value': 'greek',
-        'label': 'greek'
+        'label': 'Greek'
 
     },
     {
         'value': 'italian',
-        'label': 'italian'
+        'label': 'Italian'
 
     },
     {
         'value': 'thai',
-        'label': 'thai'
+        'label': 'Thai'
 
     }
 ];
+
+export const ACTIONS = {
+    ADD: 'add',
+    REMOVE: 'remove'
+}

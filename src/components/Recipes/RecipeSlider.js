@@ -4,66 +4,57 @@ import { useEffect, useState } from 'react';
 import RecipeItem from './RecipeItem';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
+import { useParams } from 'react-router-dom';
+import Spinner from '../UI/Spinner';
+import { toast } from 'react-toastify';
 
-const RecipeSlider = (props) => {
-    const [recipes, setRecipes] = useState([]);
+const RecipeSlider = () => {
+
+    let params = useParams();
+    const apiKey = '2ed50f18cc1446178f98816f679672f1';
+
+    const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/similar/?apiKey=${apiKey}`
+    const getSimilar = (params) => client.get(BASE_URL)
+    const getSimilarApi = useApi(getSimilar);
 
     useEffect(() => {
-        fetchRecipes(props.recipeId);
-    }, [props.recipeId]);
-
-    const fetchRecipes = async (recipeId) => {
-        //cache - there is no need to fetch recipes every time
-        //store in local storage, check if there si something
-        //in local storage you can save strings; JSON.
-        //JSON.parse - parsing from string to array
-        //JSON stringify - opposite of it
-
-            const apiKey = '2ed50f18cc1446178f98816f679672f1';
-            const api = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/similar/?apiKey=${apiKey}`);
-            const data = await api.json();
+        getSimilarApi.request(params.recipeId);
+    }, [params.recipeId]);
 
 
-            setRecipes(data);
-            console.log(recipes);
-        }
-
-    
-
-    return(
+    return (
         <section>
-                <h2>Similar Recipes</h2>
-        <Splide options={{
-            perPage: 4,
-            gap: '5rem',
-            perMove: 1,
-            breakpoints: {
-                986: {
-                    perPage: 3
-                },
-                640: {
-                    perPage: 2
-                },
-                425: {
-                    perPage: 1
+            {getSimilarApi.loading && <Spinner />}
+            {getSimilarApi.error && toast.error(getSimilarApi.error)}
+
+            <h2>Similar Recipes</h2>
+            <Splide options={{
+                perPage: 4,
+                gap: '5rem',
+                perMove: 1,
+                breakpoints: {
+                    986: {
+                        perPage: 3
+                    },
+                    640: {
+                        perPage: 2
+                    },
+                    425: {
+                        perPage: 1
+                    }
                 }
-            }
-        }}>
+            }}>
 
-
-            {recipes?.map((recipe) => {
-                return (
-                    <SplideSlide key={recipe.id}>
-                        <RecipeItem key={recipe.id} recipe={recipe}>
-                        </RecipeItem>
-                    </SplideSlide>
-                );
-
-            })}
-        </Splide>
-
-    </section>
-
+                {getSimilarApi?.data.results.map((recipe) => {
+                    return (
+                        <SplideSlide key={recipe.id}>
+                            <RecipeItem key={recipe.id} recipe={recipe}>
+                            </RecipeItem>
+                        </SplideSlide>
+                    );
+                })}
+            </Splide>
+        </section>
     )
 
 }

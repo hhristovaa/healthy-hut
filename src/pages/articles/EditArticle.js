@@ -13,7 +13,7 @@ const EditArticle = () => {
     const [loading, setLoading] = useState(false);
     const [article, setArticle] = useState(false);
     const [formData, setFormData] = useState({
-        name: '',     
+        name: '',
         content: '',
         source: '',
     });
@@ -31,21 +31,20 @@ const EditArticle = () => {
             const docRef = doc(db, 'articles', params.articleId);
             const docSnap = await getDoc(docRef);
 
-            if(docSnap.exists()){
+            if (docSnap.exists()) {
                 setArticle(docSnap.data());
-                setFormData({...docSnap.data()});
+                setFormData({ ...docSnap.data() });
                 setLoading(false);
             } else {
                 navigate('/');
                 toast.error('Article does not exist!');
             }
-
         }
 
         getArticle();
 
     }, [params.articleId, navigate]);
-   // redirect if article is not user's
+    // redirect if article is not user's
 
     useEffect(() => {
         if (article && article.userRef !== auth.currentUser.uid) {
@@ -59,17 +58,13 @@ const EditArticle = () => {
 
         const fetchArticle = async () => {
             const docRef = doc(db, 'articles', params.articleId);
-            console.log(docRef);
-
             const docSnap = await getDoc(docRef);
-            console.log(docSnap);
+
             if (docSnap.exists()) {
                 setArticle(docSnap.data());
                 setFormData({ ...docSnap.data() });
-                console.log(docSnap.data());
                 setLoading(false);
             }
-
         }
 
         fetchArticle();
@@ -85,7 +80,6 @@ const EditArticle = () => {
                     navigate('/sign-in');
                 }
             });
-
         }
 
         return () => {
@@ -98,15 +92,11 @@ const EditArticle = () => {
         e.preventDefault();
         setLoading(true);
 
-    
-
-
         const formDataCopy = {
             ...formData,
             timestamp: serverTimestamp()
         };
 
-       
         const docRef = doc(db, 'articles', params.articleId);
         await updateDoc(docRef, formDataCopy);
         setLoading(false);
@@ -116,14 +106,11 @@ const EditArticle = () => {
 
     const onChange = e => {
         let eTarget = e.target;
-
-            setFormData((prevState) => ({
-                ...prevState,
-                [eTarget.id]: eTarget.value
-            }));
-        
+        setFormData((prevState) => ({
+            ...prevState,
+            [eTarget.id]: eTarget.value
+        }));
     }
-
 
     if (loading) {
         return <Spinner />

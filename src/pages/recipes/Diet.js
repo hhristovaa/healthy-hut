@@ -1,6 +1,5 @@
-import { motion } from 'framer-motion';
-import { Link, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import RecipeItem from '../../components/Recipes/RecipeItem';
 import { toast } from 'react-toastify';
 import Spinner from '../../components/UI/Spinner';
@@ -11,14 +10,12 @@ import { capitalizeFirstLetter } from '../../utils/utils';
 
 const Diet = () => {
     let params = useParams();
-    
+
     const getDiet = (name) => client.get(`&diet=${name}`);
     const getDietApi = useApi(getDiet);
 
     useEffect(() => {
-
         getDietApi.request(params.type)
-
     }, [params.type]);
 
     let title = capitalizeFirstLetter(params.type);
@@ -29,15 +26,14 @@ const Diet = () => {
             {getDietApi.error && toast.error(getDietApi.error)}
             <h1 className={classes['g-title']}>{title}</h1>
             <section className={classes['recipes__container']}>
-            {getDietApi.data?.results.map((item) => {
-                return (
-                    <RecipeItem key={item.id} recipe={item}/>
-                )
-            })}
+                {getDietApi.data?.results.map((item) => {
+                    return (
+                        <RecipeItem key={item.id} recipe={item} />
+                    )
+                })}
             </section>
         </main>
     )
-
 }
 
 export default Diet;

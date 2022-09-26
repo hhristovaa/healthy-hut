@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import RecipeItem from '../../components/Recipes/RecipeItem';
-import useAxios from '../../hooks/useAxios';
 import classes from './Recipes.module.scss';
 import client from '../../apis/client';
 import useApi from '../../hooks/useApi';
@@ -33,7 +32,7 @@ const SearchResult = () => {
                         </RecipeItem>
                     )
                 })}
-                
+
             </section>
         </main>
     )

@@ -9,7 +9,6 @@ import classes from './Profile.module.scss';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
 import { IonIcon } from '@ionic/react';
-
 import { personCircleOutline, mailOutline, personOutline } from 'ionicons/icons';
 
 
@@ -22,15 +21,9 @@ const Profile = () => {
     const [formData, setFormData] = useState({
         firstName: auth.currentUser.displayName,
         email: auth.currentUser.email,
-        isAdmin: auth.currentUser.hasAdminRights
     });
 
-    console.log(auth);
-    console.log(auth.currentUser)
-    console.log(formData)
-
-    const { firstName, email, isAdmin } = formData;
-
+    const { firstName, email } = formData;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -99,42 +92,36 @@ const Profile = () => {
             setArticles(updatedArticles);
             toast.success('Successfully deleted');
         }
-
-
-
     }
 
     const onEdit = (articleId) => navigate(`/edit-article/${articleId}`);
 
-
     return (
         <main>
             <h1 className={classes['g-title']}>Profile</h1>
-            <p>{isAdmin}</p>
-
             <section className={classes['personal-details']}>
                 <h3 className={classes['g-description']}>Personal Details</h3>
                 <div className={classes['personal-details__header']}>
                     <div className={classes['personal-details__info']}>
-                        <IonIcon icon={personCircleOutline} className={classes['personal-details__icon']}/>
+                        <IonIcon icon={personCircleOutline} className={classes['personal-details__icon']} />
                         <p>Hello {firstName}</p>
                         <small>Admin</small>
                         <Button version='create' type='button'><Link to='/create-article'>New article</Link></Button>
 
                     </div>
                     <form className={classes['personal-details__form']}>
-                        <Input 
-                        type="text" 
-                        id="firstName" 
-                        value={firstName} 
-                        disabled={!updateDetails} onChange={onChange} 
-                        icon={personOutline}
+                        <Input
+                            type="text"
+                            id="firstName"
+                            value={firstName}
+                            disabled={!updateDetails} onChange={onChange}
+                            icon={personOutline}
                         />
-                        <Input 
-                        type="text" 
-                        id="email" 
-                        value={email} 
-                        disabled icon={mailOutline}
+                        <Input
+                            type="text"
+                            id="email"
+                            value={email}
+                            disabled icon={mailOutline}
                         />
                         <div className={classes['personal-details__action']}>
                             <Button type='button' version='secondary' onClick={() => {
@@ -157,14 +144,10 @@ const Profile = () => {
                                 <ArticleItem key={article.id} article={article.data} id={article.id} onDelete={() => onDelete(article.id)} onEdit={() => onEdit(article.id)} />
                             ))}
                         </div>
-
-
                     </section>
                 )}
 
-
             </section>
-
         </main>
     )
 }

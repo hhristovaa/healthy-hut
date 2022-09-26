@@ -1,17 +1,22 @@
 import classes from './FiltersSection.module.scss';
-import { useState } from 'react';
+import { useState, createContext, useContext } from 'react';
 import { diets, dishes, intolerances, cuisines } from '../../utils/constants';
 import client from '../../apis/client';
 import useApi from '../../hooks/useApi';
 import Button from '../UI/Button';
 import Select from 'react-select';
+import FiltersContext from '../../context/FiltersContext';
 
-const FiltersSection = () => {
+const FiltersSection = (props) => {
   const [diet, setDiets] = useState('');
   const [dish, setDishes] = useState([]);
   const [intolerance, setIntolerances] = useState('');
   const [cuisine, setCuisines] = useState('');
 
+const filtersCtx = useContext(FiltersContext);
+const filterRecipes = filters => {
+  filtersCtx.filterHandler({...filters})
+}
   const getFiltered = (diet, dish, intolerance, cuisine) => client.get(`&type=${dish}&diet=${diet}&intolerance=${intolerance}&cuisine=${cuisine}`)
 
   const getFilteredApi = useApi(getFiltered);
@@ -56,15 +61,17 @@ const FiltersSection = () => {
     setIntolerances(intolerances);
     setCuisines(cuisines);
     getFilteredApi.request(diet, dish, intolerance, cuisine);
-
+filterRecipes(diet, dish, intolerance, cuisine)
   }
 
   // useEffect(()=> {
   //   getFilteredApi.request(diet, dish, intolerance, cuisine);
   // }, [diet, dish, intolerance, cuisine])
+  console.log(getFilteredApi.data?.results)
+  console.log()
 
   return (
-
+    <FiltersContext.Provider value={props.recipes}>
     <section className={classes['filters']}>
       <form className={classes['filters__form']} onSubmit={submitFilters}>
         <fieldset className={classes['filters__form-section']} >
@@ -79,6 +86,7 @@ const FiltersSection = () => {
         </div>
       </form>
     </section>
+    </FiltersContext.Provider>
   )
 };
 

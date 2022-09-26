@@ -22,7 +22,6 @@ const FullArticle = () => {
                 setArticle(docSnap.data());
                 setLoading(false);
             }
-
         }
 
         fetchArticle();
@@ -32,7 +31,6 @@ const FullArticle = () => {
         return <Spinner />;
     }
 
-
     return (
         <main>
 
@@ -41,7 +39,7 @@ const FullArticle = () => {
                 <div className={classes['article__img']}><img src={article.imageUrl} alt={article.name} /></div>
                 <p className={classes['article__content']}>{article.content}</p>
                 <div className={classes['article__source']}>
-                <span>Source: </span><a className={classes['article__source-url']} href={article.source} target='_blank' rel='noreferrer'>{article.source}</a> <br></br>
+                    <span>Source: </span><a className={classes['article__source-url']} href={article.source} target='_blank' rel='noreferrer'>{article.source}</a> <br></br>
                 </div>
                 {/* <p>{article.timestamp.toString()}</p> */}
 

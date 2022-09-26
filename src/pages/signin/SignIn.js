@@ -58,7 +58,6 @@ const SignIn = () => {
         setForgottenPassword(false);
     }
 
-
     return (
         <main>
 
@@ -90,7 +89,7 @@ const SignIn = () => {
                         Forgot Password?
                     </a>
                     <Link to='/sign-up' className={classes['signup-url']}>Sign Up Instead</Link>
-                    {isPasswordForgotten && <ForgotPassword onClose={closeModal}/>}
+                    {isPasswordForgotten && <ForgotPassword onClose={closeModal} />}
                 </div>
             </form>
             <div className={classes['btn-container__social']}>

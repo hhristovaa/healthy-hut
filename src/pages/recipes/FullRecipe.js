@@ -1,14 +1,13 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import RecipeSlider from '../../components/Recipes/RecipeSlider';
 import classes from './Recipes.module.scss';
 import { IonIcon } from '@ionic/react';
-import { heart, heartOutline, restaurantOutline, globeOutline, barChartOutline, listOutline, starOutline, timerOutline, manOutline, flagOutline } from 'ionicons/icons';
+import { restaurantOutline, globeOutline, starOutline, timerOutline, manOutline, flagOutline } from 'ionicons/icons';
 import Spinner from '../../components/UI/Spinner';
 import { toast } from 'react-toastify';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
-import FavoritesContext from '../../store/FavoritesContext';
 import ToggleFavorites from '../../components/favorites/ToggleFavorites';
 
 const FullRecipe = (props) => {
@@ -20,9 +19,6 @@ const FullRecipe = (props) => {
     const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${apiKey}`;
 
     const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/&apiKey=${apiKey}/nutritionLabel.png`
-
-    const favoritesCtx = useContext(FavoritesContext);
-    const [favorite, setFavorite] = useState(false);
 
 
     const getDetails = (params) => client.get(BASE_URL)
@@ -42,50 +38,12 @@ const FullRecipe = (props) => {
     { getDetailsApi.loading && <Spinner /> }
     { getDetailsApi.error && toast.error(getDetailsApi.error) }
 
-    const favoritesHandler = (e) => {
-        e.preventDefault();
-        setFavorite(prevState => !prevState);
-    }
-
-    const toggleFavorites = (e) => {
-        e.preventDefault();
-
-        if (favorite) {
-            removeFromFavoritesHandler(e);
-        } else {
-            addToFavoritesHandler(e)
-        }
-
-        favoritesHandler(e);
-    }
-
-    const removeFromFavoritesHandler = (e) => {
-        favoritesCtx.removeRecipe(params.recipeId);
-    }
-
-    const addToFavoritesHandler = (e) => {
-        favoritesCtx.addRecipe({
-            id: params.recipeId,
-            recipe: getDetailsApi.data,
-            title: getDetailsApi.data?.title,
-            image: getDetailsApi.data?.image,
-            servings: getDetailsApi.data?.servings,
-            readyInMinutes: getDetailsApi.data?.readyInMinutes,
-            favorite: true
-
-        });
-    }
-
     return (
         <main>
             <section className={classes['recipe__header']}>
                 <aside className={classes['recipe__header-container']}>
                     <img src={getDetailsApi.data?.image} alt={getDetailsApi.data?.title} />
-
-
                     <ToggleFavorites recipe={getDetailsApi.data} />
-
-                    {/* <span class={classes['recipe__favorites']} onClick={toggleFavorites}><IonIcon icon={favorite ? heart : heartOutline}  size='large' />{favorite ? 'Remove From Favorites' : 'Add To Favorites'}</span>  */}
                 </aside>
                 <article className={classes['recipe__header-info']}>
                     <h3 className={classes['recipe__header-title']}>{getDetailsApi.data?.title}</h3>

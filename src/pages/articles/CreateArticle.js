@@ -24,7 +24,6 @@ const CreateArticle = () => {
     });
 
     const { name, articleImageUrl, content, source } = formData;
-
     const auth = getAuth();
     const navigate = useNavigate();
     const isMounted = useRef(true);
@@ -51,10 +50,9 @@ const CreateArticle = () => {
         e.preventDefault();
         setLoading(true);
 
-        if (name.length === 0|| content.length === 0 || source.length === 0) {
+        if (name.length === 0 || content.length === 0 || source.length === 0) {
             setLoading(false);
             let isField = isFieldEmpty(name);
-            console.log(isField);
             toast.error('Empty fields are not accepted.');
             return;
         }
@@ -113,7 +111,6 @@ const CreateArticle = () => {
         }
 
 
-
         const imageUrl = await Promise.all(
             [...articleImageUrl].map((img) => storeImage(img))).catch(() => {
                 setLoading(false);
@@ -128,11 +125,7 @@ const CreateArticle = () => {
         };
 
         delete formDataCopy.articleImageUrl;
-
         const docRef = await addDoc(collection(db, 'articles'), formDataCopy);
-
-        console.log(articleImageUrl);
-
         setLoading(false);
         toast.success('The article was successfully created!');
         navigate(`/articles/${docRef.id}`)
@@ -154,35 +147,34 @@ const CreateArticle = () => {
     const handleUpload = e => {
         let eTarget = e.target;
         let uploadedFile = eTarget.files;
-        
+
         if (uploadedFile) {
             setFormData((prevState) => ({
                 ...prevState,
                 articleImageUrl: uploadedFile
             }));
 
-            setFile(uploadedFile[0]);          
+            setFile(uploadedFile[0]);
+        }
     }
-}
 
     if (loading) {
         return <Spinner />
     }
 
     return (
-  
-            <main>
-                 <h1 className={classes['g-title']}>Create Article</h1>
-                <form className={classes['articles__form']} onSubmit={onSubmit}>
-                    <Input type='text' id='name' label='Name' onChange={onChange} value={name}/>
-                    <Input type='text' id='source' label='Source' onChange={onChange} value={source}/>
-                    <Input multiline type='text' id='content' label='Content' onChange={onChange} value={content}/>
-                    <Input type='file' id='articleImageUrl' label='Image' onChange={handleUpload} accept='.jpg, .png, .jpeg'/>
-                    <span className={classes['articles__img-label']}>{file ? file?.name : 'No file chosen'}</span>
-                    <Button type='submit' version='primary'>Create Article</Button>
-                </form>
-            </main>
-     
+        <main>
+            <h1 className={classes['g-title']}>Create Article</h1>
+            <form className={classes['articles__form']} onSubmit={onSubmit}>
+                <Input type='text' id='name' label='Name' onChange={onChange} value={name} />
+                <Input type='text' id='source' label='Source' onChange={onChange} value={source} />
+                <Input multiline type='text' id='content' label='Content' onChange={onChange} value={content} />
+                <Input type='file' id='articleImageUrl' label='Image' onChange={handleUpload} accept='.jpg, .png, .jpeg' />
+                <span className={classes['articles__img-label']}>{file ? file?.name : 'No file chosen'}</span>
+                <Button type='submit' version='primary'>Create Article</Button>
+            </form>
+        </main>
+
     )
 }
 

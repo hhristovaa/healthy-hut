@@ -20,7 +20,7 @@ import Diet from './pages/recipes/Diet';
 import SearchResult from './pages/recipes/SearchResult';
 import FullRecipe from './pages/recipes/FullRecipe';
 import Favorites from './pages/favorites/Favorites';
-import FavoritesProvider from './store/FavoritesProvider';
+import FavoritesProvider from './context/FavoritesProvider';
 import Duration from './pages/recipes/Duration';
 import Dish from './pages/recipes/Dish';
 import Cuisine from './pages/recipes/Cuisine';

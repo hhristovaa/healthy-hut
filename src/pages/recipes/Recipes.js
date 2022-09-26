@@ -1,20 +1,18 @@
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import RecipeItem from '../../components/Recipes/RecipeItem';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
 import classes from './Recipes.module.scss';
 import Spinner from '../../components/UI/Spinner';
 import FiltersSection from '../../components/Filters/FiltersSection';
-
-const ctxNqkafSi = createContext([]);
+import FiltersContext from '../../context/FiltersContext';
 
 const Recipes = () => {
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const filtersCtx = useContext(FiltersContext);
 
     //runs fetch trending when the component is mounted
     useEffect(() => {
+
         fetchRecipes();
     }, []);
 
@@ -48,19 +46,19 @@ const Recipes = () => {
     }
 
     return (
-        <ctxNqkafSi.Provider value={recipes ? recipes : []}>
-            <main>
-                <h1 className={classes['g-title']}>Recipes</h1>
-                <FiltersSection ctxNqkafSiPodaden={ctxNqkafSi} />
-                <section className={classes['recipes__container']}>
-                    {recipes?.map((recipe) => {
-                        return (
-                            <RecipeItem key={recipe.id} recipe={recipe} isFavorite={recipe.favorite} />
-                        );
-                    })}
-                </section>
-            </main>
-        </ ctxNqkafSi.Provider>
+
+        <main>
+            <h1 className={classes['g-title']}>Recipes</h1>
+            <FiltersSection recipes={recipes} />
+            <section className={classes['recipes__container']}>
+                {recipes?.map((recipe) => {
+                    return (
+                        <RecipeItem key={recipe.id} recipe={recipe} />
+                    );
+                })}
+            </section>
+        </main>
+
     )
 }
 

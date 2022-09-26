@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 import Button from '../UI/Button';
 import GoogleIcon from '../UI/GoogleIcon';
 
-
 const OAuth = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -18,8 +17,6 @@ const OAuth = () => {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
 
-            //check for user
-
             const docRef = doc(db, 'users', user.uid);
             const docSnap = await getDoc(docRef);
             const doesUserExist = docSnap.exists();
@@ -30,23 +27,18 @@ const OAuth = () => {
                     lastName: user.lastName,
                     email: user.email,
                     timestamp: serverTimestamp()
-
                 });
             }
-
             navigate('/');
         } catch {
             toast.error('Could not authorize with Google');
-
         }
-
     }
 
     return (
         <Button version='google' onClick={onGoogleIconClick}>
             <GoogleIcon/>{location.pathname === '/sign-up' ? 'Sign Up' : 'Log In'}       
         </Button>
-
     )
 }
 

@@ -6,7 +6,7 @@ import Spinner from '../../components/UI/Spinner';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
 import { capitalizeFirstLetter } from '../../utils/utils';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const Cuisine = () => {
@@ -18,9 +18,7 @@ const Cuisine = () => {
 
     useEffect(() => {
         getCuisineApi.request(params.type)
-    
-
-     }, [params.type]);
+    }, [params.type]);
 
     let title = capitalizeFirstLetter(params.type);
 
@@ -43,10 +41,7 @@ const Cuisine = () => {
             <section className={classes['recipes__container']}>
                 {getCuisineApi.data?.results.map((item) => {
                     return (
-                        <RecipeItem key={item.id} recipe={item}>
-
-
-                        </RecipeItem>
+                        <RecipeItem key={item.id} recipe={item} />
                     )
                 })}
             </section>

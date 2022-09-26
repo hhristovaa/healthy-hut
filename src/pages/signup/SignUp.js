@@ -5,11 +5,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
+import { eyeOutline, eyeOffOutline, mailOutline, personOutline } from 'ionicons/icons';
+import { IonIcon } from '@ionic/react';
 import OAuth from '../../components/Layout/OAuth';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
-import { eyeOutline, eyeOffOutline, mailOutline, personOutline } from 'ionicons/icons';
-import { IonIcon } from '@ionic/react';
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -19,11 +19,9 @@ const SignUp = () => {
         lastName: '',
         email: '',
         password: '',
-        favorites: [],
-        hasAdminRights: false
     });
 
-    const { firstName, lastName, email, password, favorites, hasAdminRights } = formData;
+    const { firstName, lastName, email, password } = formData;
 
     const navigate = useNavigate();
 
@@ -41,7 +39,7 @@ const SignUp = () => {
 
         try {
             const auth = getAuth();
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password, hasAdminRights);
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
             updateProfile(auth.currentUser, {

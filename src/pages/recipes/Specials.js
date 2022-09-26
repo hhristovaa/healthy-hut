@@ -27,8 +27,8 @@ const Specials = () => {
         return () => {
             isMounted.current = false;
         }
-       
-       
+
+
     }, [isMounted]);
 
     let type = params.type;
