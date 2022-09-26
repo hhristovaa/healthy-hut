@@ -48,8 +48,6 @@
 .btn-container__social {
   @include flex-setup($justContent: space-around, $alItems: center);
   width: 50%;
-
-
 }
 
 .password-wrapper {

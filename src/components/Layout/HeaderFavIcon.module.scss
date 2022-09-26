@@ -2,66 +2,64 @@
 @use '../../styles/_mixins.scss' as *;
 @use '../../styles/_typography.scss' as *;
 
-
 .button {
   @include flex-setup($justContent: space-around);
-    cursor: pointer;
-    font: inherit;
-    border: none;
-    background-color: $color-secondary;
-    color: $color-primary;
-    padding: 0.5rem 1rem;
-    gap: 1rem;
-    border-radius: 25px;
-    font-weight: bold;
-  }
-  
-  .button:hover,
-  .button:active {
-    background-color: darken($color-secondary, 10%);
-  }
-  
-  .icon {
-    width: 1.35rem;
-    height: 1.35rem;
-    margin-right: 0.5rem;
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background-color: $color-secondary;
+  color: $color-primary;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
+  border-radius: 25px;
+  font-weight: bold;
+}
 
-    ion-icon {
-        color: $color-primary;
-    }
+.button:hover,
+.button:active {
+  background-color: darken($color-secondary, 10%);
+}
+
+.icon {
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-right: 0.5rem;
+
+  ion-icon {
+    color: $color-primary;
   }
-  
-  .badge {
-    background-color: $color-white;
-    padding: 0.25rem 1rem;
-    border-radius: 25px;
-    margin-left: 1rem;
-    font-weight: bold;
+}
+
+.badge {
+  background-color: $color-white;
+  padding: 0.25rem 1rem;
+  border-radius: 25px;
+  margin-left: 1rem;
+  font-weight: bold;
+}
+
+.bump {
+  animation: bump 300ms ease-out;
+}
+
+@keyframes bump {
+  0% {
+    transform: scale(1);
   }
-  
-  .button:hover .badge,
-  .button:active .badge {
-    // background-color: $color-primary-dark;
+
+  10% {
+    transform: scale(0.9);
   }
-  
-  .bump {
-    animation: bump 300ms ease-out;
+
+  30% {
+    transform: scale(1.1);
   }
-  
-  @keyframes bump {
-    0% {
-      transform: scale(1);
-    }
-    10% {
-      transform: scale(0.9);
-    }
-    30% {
-      transform: scale(1.1);
-    }
-    50% {
-      transform: scale(1.15);
-    }
-    100% {
-      transform: scale(1);
-    }
+
+  50% {
+    transform: scale(1.15);
   }
+
+  100% {
+    transform: scale(1);
+  }
+}

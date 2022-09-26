@@ -1,7 +1,6 @@
 import HeroBanner from '../../components/UI/HeroBanner';
 import RecipeItem from '../../components/Recipes/RecipeItem';
 import Spinner from '../../components/UI/Spinner';
-import classes from './Trending.module.scss';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { useEffect } from 'react';
@@ -31,7 +30,7 @@ const Trending = () => {
                 {getRandomApi.error && toast.error(getRandomApi.error)}
 
                 <h1>Trending</h1>
-                <section className={classes['trending-recipes']}>
+                <section>
                     <Splide options={{
                         perPage: 4,
                         gap: '5rem',

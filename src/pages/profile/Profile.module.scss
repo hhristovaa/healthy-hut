@@ -1,14 +1,12 @@
 @use '../../styles/_mixins.scss' as *;
 @use '../../styles/_typography.scss' as *;
 @use '../../styles/_variables.scss' as *;
- 
+
 .personal-details {
     margin-top: 5%;
 
     &__header {
-        display: flex;
-        justify-content: space-around;
-        align-items: flex-end;
+        @include flex-setup($justContent: space-around, $alItems: flex-end);
         background-color: lighten($color-gray-light, 20%);
         padding: 1rem;
         margin: 1.5em 0 2em 0;
@@ -16,26 +14,18 @@
     }
 
     &__info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-
+        @include flex-setup($direction: column, $alItems: center);
     }
-    
+
     &__icon {
-          font-size: 120px;
-            color: $color-gray-dark;     
+        font-size: 120px;
+        color: $color-gray-dark;
     }
 
     &__form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
+        @include flex-setup($direction: column, $alItems: center, $gap: 1rem);
         width: 50%;
     }
-
 
 }
 
@@ -48,6 +38,7 @@
 
     .personal-details__form {
         width: 100%;
+
         div {
             display: flex;
         }
@@ -56,4 +47,4 @@
             margin-left: .5rem;
         }
     }
-  }
+}

@@ -1,10 +1,9 @@
 @use '../../styles/_variables.scss' as *;
+@use '../../styles/_mixins.scss' as *;
 
 .recipe__card {   
-    display: flex;
+    @include flex-setup($direction: column, $justContent: space-between);
     height: 19rem;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .recipe-redirect {
@@ -30,15 +29,12 @@
 }
 
 .recipe__card-info {
+    @include flex-setup($justContent: space-between);
     font-size: 12px;
-    display: flex;
-    justify-content: space-between;
 }
 
 .recipe__card-details {
-    display: flex;
-    gap: 5px;
-    align-items: center;
+    @include flex-setup($alItems: center, $gap: 5px);
     ion-icon {
         font-size: 14px;
     }

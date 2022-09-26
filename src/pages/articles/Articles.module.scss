@@ -2,7 +2,6 @@
 @use '../../styles/_typography.scss' as *;
 @use '../../styles/_variables.scss' as *;
 
-
 .article {
 
     &__img {
@@ -11,10 +10,8 @@
             height: 44vh;
             width: 100%;
             object-fit: cover;
-            margin: 0px auto;
-     
+            margin: 0px auto;    
         }
-
     }
 
     &__content {
@@ -22,8 +19,6 @@
         font-size: 18px;
         line-height: 29px;
         text-align: justify;
-       
-
     }
 
     &__source {
@@ -33,11 +28,9 @@
             font-weight: 600;
         }
 
-
         &-url {
         font-size: 16px;
         color: $color-primary-dark;
-
         &:hover {
             color: $color-primary-dark;
         }
@@ -56,9 +49,7 @@
     }
 
     &__img-label {
-        position: absolute;
-        bottom: 20%;
-        left: 25%;
+        @include position-setup(absolute, $bottom: 20%, $left: 25%);
         margin-left: 1.2rem;
     }
 }

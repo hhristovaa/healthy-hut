@@ -26,11 +26,11 @@
         @include flex-setup($gap: 2rem);
     }
 
-   &__favorites {
+    &__favorites {
         color: $color-primary;
         cursor: pointer;
         margin-top: 1rem;
-        
+
         ion-icon {
             margin-right: 0.5rem;
             vertical-align: middle;
@@ -56,7 +56,7 @@
 
             &::before {
                 content: "";
-                @include position-setup(absolute, $left: -1.5rem, $top: 9px);             
+                @include position-setup(absolute, $left: -1.5rem, $top: 9px);
                 width: 10px;
                 display: block;
                 border-top: 2px solid $color-primary;
@@ -106,6 +106,8 @@
     }
 
     &__header-container {
+        @include flex-setup($direction: column, $alItems: center);
+
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -137,6 +139,7 @@
 
 @media screen and (max-width: 768px) {
     .recipe {
+
         &__header,
         &__desc {
             flex-wrap: wrap;

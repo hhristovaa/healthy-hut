@@ -59,20 +59,16 @@
 }
 
 .submenu {
+    @include position-setup(absolute, $top: 3.5rem, $left: 0, $zIndex: 2);
     display: none;
     padding: 1rem 2rem;
     background: rgb(255, 254, 244);
     background: linear-gradient(0deg, rgba(255, 254, 244, 1) -90%, rgba(210, 56, 108, 1) 100%);
-    position: absolute;
-    top: 3.5rem;
-    left: 0;
-    z-index: 2;
 
     &__section {
+        @include flex-setup($direction: column);
         color: $color-white;
-        display: flex;
-        flex-direction: column;
-        padding: 0 1.2rem;
+        padding: 0rem 1.2rem;
         text-align: center;
         line-height: 32px;
 
@@ -118,16 +114,14 @@
 
         &.is-mobile {
             .navbar {
+                @include position-setup(absolute, $left: 0%, $top: 100%, $zIndex: 2);
                 display: none;
                 flex-direction: column;
-                position: absolute;
-                top: 100%;
                 padding-bottom: 3rem;
-                z-index: 2;
-                left: 0%;
                 width: 100%;
                 background-color: $color-primary;
             }
+
             .header__buttons {
                 display: none;
             }
@@ -160,7 +154,7 @@
             z-index: 5;
             width: 100%;
             background: $color-primary;
-            
+
             &.is-hidden {
                 display: none;
             }
