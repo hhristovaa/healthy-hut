@@ -12,10 +12,10 @@ import ToggleFavorites from '../../components/favorites/ToggleFavorites';
 
 const FullRecipe = (props) => {
     let params = useParams();
-    //const apiKey = '2ed50f18cc1446178f98816f679672f1';
+    const apiKey = '2ed50f18cc1446178f98816f679672f1';
     //const apiKey = 'cc1ef7f275ed420782a8c869acc377dd';
     //const apiKey = 'a3577636ccd3420a92a088027e661830';
-    const apiKey = 'b44514ae9c644024a55ec4e856cf0fd2';
+    //const apiKey = 'b44514ae9c644024a55ec4e856cf0fd2';
     const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${apiKey}`;
 
     const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/&apiKey=${apiKey}/nutritionLabel.png`
