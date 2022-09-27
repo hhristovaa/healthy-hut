@@ -8,7 +8,7 @@ import Spinner from '../../components/UI/Spinner';
 import { toast } from 'react-toastify';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
-import ToggleFavorites from '../../components/favorites/ToggleFavorites';
+import ToggleFavorites from '../../components/Favorites/ToggleFavorites';
 
 const FullRecipe = (props) => {
     let params = useParams();

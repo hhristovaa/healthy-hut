@@ -86,7 +86,7 @@ const Profile = () => {
 
 
     const onDelete = async (articleId) => {
-        if (window.confirm('Sure bro?')) {
+        if (window.confirm('Do you want to delete this article?')) {
             await deleteDoc(doc(db, 'articles', articleId));
             const updatedArticles = articles.filter((article) => article.id !== articleId);
             setArticles(updatedArticles);

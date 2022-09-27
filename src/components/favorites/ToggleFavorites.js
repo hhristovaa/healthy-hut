@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect, useRef } from 'react';
-import Spinner from '../../components/UI/Spinner';
+import Spinner from '../UI/Spinner';
 import classes from './ToggleFavorites.module.scss';
 import { IonIcon } from '@ionic/react';
 import { heart, heartOutline } from 'ionicons/icons';

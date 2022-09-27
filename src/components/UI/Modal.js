@@ -1,12 +1,13 @@
 import classes from './Modal.module.scss';
 import ReactDOM from 'react-dom';
 
+const portalEl = document.getElementById('overlays');
+
 const Backdrop = props => {
     return (
         <section className={classes.backdrop} onClick={props.onClose}>
         </section>
     )
-
 };
 
 const ModalOverlay = props => {
@@ -15,9 +16,8 @@ const ModalOverlay = props => {
             <div className={classes.content}>{props.children}</div>
         </div>
     );
-}
+};
 
-const portalEl = document.getElementById('overlays');
 
 const Modal = props => {
     return (
@@ -26,6 +26,6 @@ const Modal = props => {
             {ReactDOM.createPortal(<ModalOverlay>{props.children}</ModalOverlay>, portalEl)}
         </>
     )
-}
+};
 
 export default Modal;
