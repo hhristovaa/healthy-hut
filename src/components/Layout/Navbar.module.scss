@@ -52,10 +52,17 @@
     }
 }
 
-.dropdown-menu:hover {
-    .submenu {
-        display: flex;
+.dropdown-menu{ 
+    padding: 1rem;
+    .navbar__item {
+        padding: 0;
     }
+
+    &:hover {
+        .submenu {
+            display: flex;
+        }
+}
 }
 
 .submenu {

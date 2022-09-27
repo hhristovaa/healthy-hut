@@ -46,15 +46,12 @@ const Favorites = props => {
                 setLoading(false);
             } catch (err) {
                 setLoading(false);
-                toast.error('An error occured while loading the favorites.');
+                toast.error('An error occrured while loading the favorites.');
             }
-
-
         }
 
         fetchUserFavorites();
     }, [auth.currentUser.uid]);
-    console.log(favorites)
 
     if (loading) {
         return <Spinner />;
