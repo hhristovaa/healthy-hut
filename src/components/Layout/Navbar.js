@@ -29,7 +29,7 @@ const Navbar = () => {
                 <NavLink className={isLinkActive} to={'/'} onClick={closeMobileMenu}>Home</NavLink>
                 <NavLink className={isLinkActive} to={'/recipes'} onClick={closeMobileMenu}>All Recipes</NavLink>
                 <span className={classes['dropdown-menu']}>
-                    {!isMobile && <NavLink className={isLinkActive} to={'/recipes'}>Categories
+                    {!isMobile && <NavLink className={isLinkActive} to={'/categories'}>Categories
                         <IonIcon icon={chevronDownOutline} />  </NavLink>
                     }
                     {isMobile && <span className={classes['navbar__item']} onClick={() => setIsDropdown(!isDropdown)}>Categories

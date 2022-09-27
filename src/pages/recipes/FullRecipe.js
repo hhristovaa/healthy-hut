@@ -3,14 +3,14 @@ import { useParams } from 'react-router-dom';
 import RecipeSlider from '../../components/Recipes/RecipeSlider';
 import classes from './Recipes.module.scss';
 import { IonIcon } from '@ionic/react';
-import { restaurantOutline, globeOutline, starOutline, timerOutline, manOutline, flagOutline, nutrition } from 'ionicons/icons';
+import { restaurantOutline, globeOutline, starOutline, timerOutline, manOutline, flagOutline, cashOutline, nutrition, leafOutline } from 'ionicons/icons';
 import Spinner from '../../components/UI/Spinner';
 import { toast } from 'react-toastify';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
 import ToggleFavorites from '../../components/Favorites/ToggleFavorites';
 
-const FullRecipe = (props) => {
+const FullRecipe = () => {
     let params = useParams();
     const apiKey = '2ed50f18cc1446178f98816f679672f1';
     //const apiKey = 'cc1ef7f275ed420782a8c869acc377dd';
@@ -57,6 +57,9 @@ const FullRecipe = (props) => {
                         <span>  <IonIcon icon={manOutline} /> {getDetailsApi.data?.servings} Servings</span>
                         <span> <IonIcon icon={timerOutline} /> {getDetailsApi.data?.readyInMinutes} Minutes</span>
                         {getDetailsApi.data?.lowFodmap && <span> <IonIcon icon={starOutline} /> FODMAP Friendly</span>}
+                        {getDetailsApi.data?.cheap && <span> <IonIcon icon={cashOutline} /> Budget Friendly</span>}
+                        {getDetailsApi.data?.veryHealthy && <span> <IonIcon icon={nutrition} /> Super Healthy</span>}
+                        {getDetailsApi.data?.sustainable && <span> <IonIcon icon={leafOutline} /> Sustainable</span>}
                         {cuisine && (<span> <IonIcon icon={flagOutline} /> {cuisine}</span>)}
                         {dishType && (<span> <IonIcon icon={restaurantOutline} /> {dishType}</span>)}
                         <a href={getDetailsApi.data?.sourceUrl} target='_blank' rel='noreferrer'><IonIcon icon={globeOutline} />{getDetailsApi.data?.sourceUrl}</a>

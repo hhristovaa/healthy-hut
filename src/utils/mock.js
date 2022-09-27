@@ -1,5 +1,4 @@
-{
-    "results": [
+export const mock = [
         {
             "vegetarian": false,
             "vegan": false,
@@ -13907,8 +13906,4 @@
             ],
             "spoonacularSourceUrl": "https://spoonacular.com/peach-ham-and-feta-salad-with-fruity-olive-oil-dressing-655174"
         }
-    ],
-    "offset": 0,
-    "number": 5,
-    "totalResults": 54
-}
+    ];

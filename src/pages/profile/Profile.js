@@ -34,6 +34,7 @@ const Profile = () => {
             const querySnap = await getDocs(q);
 
             let articles = [];
+
             querySnap.forEach((doc) => {
                 return articles.push({
                     id: doc.id,
@@ -57,16 +58,14 @@ const Profile = () => {
     const onSubmit = async () => {
         try {
             if (auth.currentUser.displayName !== firstName) {
-                //update display name in fb
                 await updateProfile(auth.currentUser, {
                     displayName: firstName
-                })
+                });
 
-                //update in firestore
                 const userRef = doc(db, 'users', auth.currentUser.uid)
                 await updateDoc(userRef, {
                     firstName
-                })
+                });
 
                 toast.success('Success! Personal details were updated!');
             }
@@ -107,7 +106,6 @@ const Profile = () => {
                         <p>Hello {firstName}</p>
                         <small>Admin</small>
                         <Button version='create' type='button'><Link to='/create-article'>New article</Link></Button>
-
                     </div>
                     <form className={classes['personal-details__form']}>
                         <Input
@@ -124,16 +122,24 @@ const Profile = () => {
                             disabled icon={mailOutline}
                         />
                         <div className={classes['personal-details__action']}>
-                            <Button type='button' version='secondary' onClick={() => {
-                                updateDetails && onSubmit()
-                                setUpdateDetails((prevState) => !prevState)
-                            }}>{updateDetails ? 'Done' : 'Change'}</Button>
-                            <Button type='button' version='danger' outline onClick={onLogout}>
+                            <Button type='button'
+                                version='secondary'
+                                onClick={() => {
+                                    updateDetails && onSubmit()
+                                    setUpdateDetails((prevState) => !prevState)
+                                }}>
+                                {updateDetails ? 'Done' : 'Change'}
+                            </Button>
+                            <Button
+                                type='button'
+                                version='danger'
+                                outline
+                                onClick={onLogout}
+                            >
                                 Logout
                             </Button>
                         </div>
                     </form>
-
                 </div>
 
                 {!loading && articles?.length > 0 && (
@@ -141,12 +147,17 @@ const Profile = () => {
                         <h3 className={classes['g-description']}>Your articles</h3>
                         <div className={classes.articles}>
                             {articles.map((article) => (
-                                <ArticleItem key={article.id} article={article.data} id={article.id} onDelete={() => onDelete(article.id)} onEdit={() => onEdit(article.id)} />
+                                <ArticleItem
+                                    key={article.id}
+                                    article={article.data}
+                                    id={article.id}
+                                    onDelete={() => onDelete(article.id)}
+                                    onEdit={() => onEdit(article.id)}
+                                />
                             ))}
                         </div>
                     </section>
                 )}
-
             </section>
         </main>
     )

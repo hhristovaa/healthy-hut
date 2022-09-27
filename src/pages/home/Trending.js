@@ -29,7 +29,7 @@ const Trending = () => {
                 {getRandomApi.loading && <Spinner />}
                 {getRandomApi.error && toast.error(getRandomApi.error)}
 
-                <h1>Trending</h1>
+                <h1>Trending Recipes</h1>
                 <section>
                     <Splide options={{
                         perPage: 4,
@@ -50,8 +50,7 @@ const Trending = () => {
                         {getRandomApi.data?.recipes.map((recipe) => {
                             return (
                                 <SplideSlide key={recipe.id}>
-                                    <RecipeItem key={recipe.id} recipe={recipe}>
-                                    </RecipeItem>
+                                    <RecipeItem key={recipe.id} recipe={recipe}/>
                                 </SplideSlide>
                             );
                         })}
