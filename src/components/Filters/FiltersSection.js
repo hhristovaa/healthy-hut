@@ -7,6 +7,7 @@ import Button from '../UI/Button';
 import Select from 'react-select';
 import FiltersContext from '../../context/FiltersContext';
 import RecipeItem from '../Recipes/RecipeItem';
+import { toast } from 'react-toastify';
 
 const FiltersSection = (props) => {
   const [diet, setDiets] = useState('');
@@ -47,7 +48,10 @@ const FiltersSection = (props) => {
 
     const isIterable = disheshInput.length > 1;
 
-    if (isDietEmpty && isIntoleranceEmpty && isCuisineEmpty && isDishEmpty) return;
+    if (isDietEmpty && isIntoleranceEmpty && isCuisineEmpty && isDishEmpty) {
+      toast.warning('Filter criteria cannot be empty.');
+      return;
+    }
 
     if (isIterable) {
       let dishVals = [...disheshInput];
@@ -96,7 +100,7 @@ const FiltersSection = (props) => {
           <RecipeItem key={filtered.id} recipe={filtered} />
         )
       })}
-      
+
     </FiltersContext.Provider>
   )
 };

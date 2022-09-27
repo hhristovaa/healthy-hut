@@ -85,7 +85,7 @@ const SignIn = () => {
                     <IonIcon icon={showPassword ? eyeOutline : eyeOffOutline} onClick={() => setShowPassword(prevState => !prevState)} />
                 </div>
                 <div className={classes['btn-container']}>
-                    <a href="" className={classes['forgot-password']} onClick={openModal}>
+                    <a href="#" className={classes['forgot-password']} onClick={openModal}>
                         Forgot Password?
                     </a>
                     <Link to='/sign-up' className={classes['signup-url']}>Sign Up Instead</Link>
