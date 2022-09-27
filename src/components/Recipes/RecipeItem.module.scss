@@ -17,7 +17,8 @@
     &:hover {
         overflow: hidden;
         filter: contrast(1.1);
-        img {            
+        img {     
+            transition: all .3s ease-in;       
             transform: scale(1.2); 
         }
     }
