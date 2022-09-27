@@ -32,11 +32,28 @@ const Specials = () => {
     }, [isMounted]);
 
     let type = params.type;
-    console.log(type);
+    console.log(type)
 
-    console.log(getSpecialsApi.data)
-    let filtered = getSpecialsApi.data?.results.filter(recipe => Object.keys(recipe).some(type => recipe[type]));
-    console.log(filtered);
+    const filtered = getSpecialsApi.data?.results.filter(obj => {
+        console.log(obj.veryHealthy)
+        return obj.type === true;
+    });
+
+    // for (let rec of arrRecipes) {
+    //     const hasObjType = Object.hasOwn(rec, type)
+
+    //     console.log(rec);
+    //     console.log(hasObjType)
+    //     if (hasObjType) {
+    //         console.log(rec[type])
+    //         if (rec.type) {
+    //             console.log(rec.type)
+    //             console.log('eho');
+    //         }
+
+
+    //     }
+    // }
 
     { getSpecialsApi.loading && <Spinner /> }
     { getSpecialsApi.error && toast.error(getSpecialsApi.error) }
@@ -44,26 +61,13 @@ const Specials = () => {
     return (
         <main>
             <h1 className={classes['g-title']}>Special Recipes</h1>
-            <FiltersSection />
             <section className={classes['recipes__container']}>
-                {/* {getSpecialsApi.data?.results.map((recipe) => {
-                    {console.log(recipe.type ? recipe : 'no res')} 
-                    {console.log(recipe.type)} 
-                    //add two returns and use it for diets as well
-                    return recipe.type && <RecipeItem key={recipe.id} recipe={recipe} isFavorite={recipe.favorite} /> 
+                {filtered?.length === 0 && <div className={classes['no-results']}><p>No results found</p></div>}
 
 
-                   
-
-                })} */}
-
-                {getSpecialsApi.data?.results.filter(recipe => recipe.type).map(filteredRecipe => (
-
-                    <RecipeItem key={filteredRecipe.id} recipe={filteredRecipe} isFavorite={filteredRecipe.favorite} />
-                ))}
-
-
-
+                {filtered?.length !== 0 && filtered?.map((recipe) => {
+                    return <RecipeItem key={recipe.id} recipe={recipe} />
+                })}
             </section>
         </main>
     )

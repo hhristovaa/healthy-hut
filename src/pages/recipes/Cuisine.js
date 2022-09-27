@@ -11,8 +11,6 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const Cuisine = () => {
     let params = useParams();
-    const [cuisine, setCuisine] = useState([]);
-
     const getCuisine = (type) => client.get(`&cuisine=${type}`);
     const getCuisineApi = useApi(getCuisine);
 

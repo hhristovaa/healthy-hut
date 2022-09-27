@@ -137,6 +137,12 @@
     }
 }
 
+.no-results {
+    padding: 10%;
+    font-size: 36px;
+    color: $color-primary-dark;
+}
+
 @media screen and (max-width: 768px) {
     .recipe {
 

@@ -66,29 +66,29 @@ const ToggleFavorites = (props) => {
     // }, [auth.currentUser.uid])
 
 
-    useEffect(() => {
-        setLoading(true);
-        const fetchUserFavorites = async () => {
-                   //  setLoading(true);
-        const auth = getAuth();
+    // useEffect(() => {
+    //     setLoading(true);
+    //     const fetchUserFavorites = async () => {
+    //                //  setLoading(true);
+    //     const auth = getAuth();
 
-        const docRef = doc(db, 'users', auth.currentUser.uid)
-        const docSnap = await getDoc(docRef);
-        let userFavs = []
+    //     const docRef = doc(db, 'users', auth.currentUser.uid)
+    //     const docSnap = await getDoc(docRef);
+    //     let userFavs = []
 
-            if (docSnap.exists()) {
-                docSnap.data().favorites.forEach((fav) => {
-                    return userFavs.push(fav);
+    //         if (docSnap.exists()) {
+    //             docSnap.data().favorites.forEach((fav) => {
+    //                 return userFavs.push(fav);
                         
-                })
-                setUserFavs(userFavs)
-                setLoading(false);
-            }
-        }
+    //             })
+    //             setUserFavs(userFavs)
+    //             setLoading(false);
+    //         }
+    //     }
 
-        fetchUserFavorites();
+    //     fetchUserFavorites();
 
-    }, [auth.currentUser.uid]);
+    // }, [auth.currentUser.uid]);
 
     useEffect(() => {
         const newFavoriteRecipe = recipes.some(recipe => recipe.id === props?.recipe?.id);

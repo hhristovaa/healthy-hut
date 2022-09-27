@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import RecipeSlider from '../../components/Recipes/RecipeSlider';
 import classes from './Recipes.module.scss';
 import { IonIcon } from '@ionic/react';
-import { restaurantOutline, globeOutline, starOutline, timerOutline, manOutline, flagOutline } from 'ionicons/icons';
+import { restaurantOutline, globeOutline, starOutline, timerOutline, manOutline, flagOutline, nutrition } from 'ionicons/icons';
 import Spinner from '../../components/UI/Spinner';
 import { toast } from 'react-toastify';
 import useApi from '../../hooks/useApi';
@@ -24,19 +24,23 @@ const FullRecipe = (props) => {
     const getDetails = (params) => client.get(BASE_URL)
     const getDetailsApi = useApi(getDetails);
 
-    // const getNutrition = (params) => client.get(NUTRITION_URL)
-    // const getNutritionApi = useApi(getNutrition);
+    const getNutrition = (params) => client.get(NUTRITION_URL)
+    //const getNutrition = (params) => client.get(`https://api.spoonacular.com/apiKey=2ed50f18cc1446178f98816f679672f1/recipes/648339/nutritionWidget.png`)
+    const getNutritionApi = useApi(getNutrition);
 
     useEffect(() => {
         getDetailsApi.request(params.recipeId)
-        // getNutritionApi.request(params.recipeId)
+        getNutritionApi.request(params.recipeId)
     }, [params.recipeId]);
 
     let cuisine = getDetailsApi.data?.cuisines?.find(cuisine => cuisine !== undefined);
     let dishType = getDetailsApi.data?.dishTypes?.find(type => type !== undefined);
 
+    console.log(getNutritionApi);
     { getDetailsApi.loading && <Spinner /> }
     { getDetailsApi.error && toast.error(getDetailsApi.error) }
+
+
 
     return (
         <main>
@@ -57,7 +61,7 @@ const FullRecipe = (props) => {
                         {dishType && (<span> <IonIcon icon={restaurantOutline} /> {dishType}</span>)}
                         <a href={getDetailsApi.data?.sourceUrl} target='_blank' rel='noreferrer'><IonIcon icon={globeOutline} />{getDetailsApi.data?.sourceUrl}</a>
                         <ul className={classes['recipe__diet']}>{getDetailsApi.data?.diets.map((diet) => (
-                            <li>{diet}</li>
+                            <li key={diet.id}>{diet}</li>
                         ))}
                         </ul>
                     </div>
