@@ -28,16 +28,13 @@ const SearchResult = () => {
             <section className={classes['recipes__container']}>
                 {getSearchedApi.data?.results.map((recipe) => {
                     return (
-                        <RecipeItem key={recipe.id} recipe={recipe}>
-                        </RecipeItem>
+                        <RecipeItem key={recipe.id} recipe={recipe}/>
                     )
-                })}
+                })};
 
             </section>
         </main>
     )
-
-
 }
 
 export default SearchResult;
