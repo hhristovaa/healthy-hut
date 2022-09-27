@@ -40,8 +40,6 @@ const FullRecipe = () => {
     { getDetailsApi.loading && <Spinner /> }
     { getDetailsApi.error && toast.error(getDetailsApi.error) }
 
-
-
     return (
         <main>
             <section className={classes['recipe__header']}>

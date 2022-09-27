@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import './styles/Global.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './components/Layout/PrivateRoute';
 import Navbar from './components/Layout/Navbar';
@@ -13,7 +14,6 @@ import SignUp from './pages/signup/SignUp';
 import CreateArticle from './pages/articles/CreateArticle';
 import FullArticle from './pages/articles/FullArticle';
 import Footer from './components/Layout/Footer';
-import './styles/Global.scss';
 import EditArticle from './pages/articles/EditArticle';
 import NotFound from './pages/404/NotFound';
 import Diet from './pages/recipes/Diet';
@@ -27,17 +27,11 @@ import Cuisine from './pages/recipes/Cuisine';
 import Specials from './pages/recipes/Specials';
 
 function App() {
-  
-
-
   return (
     <>
       <Router>
         <FavoritesProvider>
-
           <Navbar />
-
-
         <Routes>
           <Route path='/' element={<Trending />} />
           <Route exact path='/recipes' element={<Recipes />} />
@@ -49,7 +43,6 @@ function App() {
           <Route path='/dish/:type' element={<Dish />} />
           <Route path='/cuisine/:type' element={<Cuisine />} />
           <Route path='/specials/:type' element={<Specials />} />
-
           <Route path='/about' element={<About />} />
           <Route path='/profile' element={<PrivateRoute />} >
             <Route path='/profile' element={<Profile />} />

@@ -19,3 +19,12 @@
         }
     }
 }
+
+@media screen and (max-width: 390px) {
+
+    .filters__actions {
+        button {
+            margin: 2rem;
+        }
+    }
+}

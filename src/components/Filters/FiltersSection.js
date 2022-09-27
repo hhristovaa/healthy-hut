@@ -85,8 +85,8 @@ const FiltersSection = (props) => {
           <fieldset className={classes['filters__form-section']} >
             <Select ref={selectInputRef} name='diets' options={diets} isClearable={true} placeholder='Select a diet' />
             <Select ref={selectInputRef} name='dishes' options={dishes} isMulti isClearable={true} placeholder='Select a dish' />
-            <Select ref={selectInputRef} name='intolerances' options={intolerances} isClearable={true} placeholder='Select an intolerance' />
             <Select ref={selectInputRef} name='cuisines' options={cuisines} isClearable={true} placeholder='Select a cuisine' />
+            <Select ref={selectInputRef} name='intolerances' options={intolerances} isClearable={true} placeholder='Select an intolerance' />
           </fieldset>
           <div className={classes['filters__actions']}>
             <Button type='submit' version='secondary'>Filter</Button>

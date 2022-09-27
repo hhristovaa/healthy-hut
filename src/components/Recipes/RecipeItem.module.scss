@@ -1,7 +1,7 @@
 @use '../../styles/_variables.scss' as *;
 @use '../../styles/_mixins.scss' as *;
 
-.recipe__card {   
+.recipe__card {
     @include flex-setup($direction: column, $justContent: space-between);
     height: 19rem;
 }
@@ -14,12 +14,14 @@
     overflow: hidden;
     border-radius: 14px;
     position: relative;
+
     &:hover {
         overflow: hidden;
         filter: contrast(1.1);
-        img {     
-            transition: all .3s ease-in;       
-            transform: scale(1.2); 
+
+        img {
+            transition: all .3s ease-in;
+            transform: scale(1.2);
         }
     }
 }
@@ -36,7 +38,25 @@
 
 .recipe__card-details {
     @include flex-setup($alItems: center, $gap: 5px);
+
     ion-icon {
         font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .recipe-redirect {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .recipe-redirect {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 425px) {
+    .recipe-redirect {
+        width: 100%;
     }
 }
