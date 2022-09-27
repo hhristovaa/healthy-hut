@@ -12,8 +12,6 @@ const About = () => {
                 <img src={spoonacularLogo} alt="Spoonacular API" />
                 <p>The only food API you'll ever need.</p>
             </article>
-
-
         </section>
     </main>
     );
