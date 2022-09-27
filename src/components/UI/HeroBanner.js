@@ -9,7 +9,10 @@ const HeroBanner = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        navigate('/search/' + searchInput);
+        if (searchInput.length > 2) {
+            navigate('/search/' + searchInput);
+        }
+
     }
 
     return (
@@ -21,9 +24,8 @@ const HeroBanner = () => {
                     type='search'
                     id='recipe-search'
                     className={classes['search__input']}
-                    placeholder='Search for a recipe'
+                    placeholder='Type text to search (min 3 chars)'
                     value={searchInput} onChange={(e) => setSearchInput(e.target.value)}
-
                 />
             </form>
         </section>

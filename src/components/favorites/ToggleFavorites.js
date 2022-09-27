@@ -43,9 +43,8 @@ const ToggleFavorites = (props) => {
             onDelete(props.recipe.id);
             removeFromFavorites(props.recipe.id)
         } else {
-            addToFavorites(props.recipe);
             onSubmit(e);
-
+            addToFavorites(props.recipe);
         }
         setFavorite(!favorite);
     }

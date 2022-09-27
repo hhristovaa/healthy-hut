@@ -15,10 +15,8 @@ const favoritesReducer = (state, action) => {
             let updatedRecipes = state.recipes.concat(action.recipe);
             return {
                 recipes: updatedRecipes,
-
             };
         }
-
     }
 
     if (action.type === ACTIONS.REMOVE) {
@@ -31,11 +29,7 @@ const favoritesReducer = (state, action) => {
 
         if (existingRecipe) {
             updatedRecipes = state.recipes.filter(recipe => recipe.id !== action.id);
-        } else {
-            updatedRecipes = [...state.recipes];
-            updatedRecipes[existingFavRecipeIndex] = existingRecipe;
-        }
-
+        } 
         return {
             recipes: updatedRecipes
         }
