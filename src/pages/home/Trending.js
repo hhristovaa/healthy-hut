@@ -7,8 +7,11 @@ import { useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
-
-
+import Button from '../../components/UI/Button';
+import FavoritesContext from '../../context/FavoritesContext';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase.config';
+import { getAuth } from 'firebase/auth';
 
 //const apiKey = '2ed50f18cc1446178f98816f679672f1';
 const apiKey = 'a3577636ccd3420a92a088027e661830';
@@ -18,13 +21,37 @@ const getRandom = () => client.get(BASE_URL);
 
 const Trending = () => {
 
+    const favoritesCtx = useContext(FavoritesContext);
+
+    const initFavorites = recipes => {
+        favoritesCtx.initRecipe(recipes)
+    }
+
+    const addToFavorites = recipe => {
+        favoritesCtx.addRecipe({ ...recipe });
+    };
+
 
     const getRandomApi = useApi(getRandom);
+const auth = getAuth();
 
     useEffect(() => {
     
+
         getRandomApi.request();
     }, []);
+    const fetchUserFavorites = async () => {
+        console.log('eho')
+        const userRef = doc(db, 'users', auth.currentUser.uid)
+        const docSnap = await getDoc(userRef);
+        console.dir(docSnap);
+
+        if (docSnap?.exists()) {
+            let userFavs = docSnap?.data()?.favorites;
+            addToFavorites(userFavs);
+
+        }
+    }
 
     return (
         <>
@@ -60,6 +87,8 @@ const Trending = () => {
                         })}
                     </Splide>
                 </section>
+
+                <Button version='primary' onClick={fetchUserFavorites}>Click here for magic</Button>
             </main>
         </>
     )

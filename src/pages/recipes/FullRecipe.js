@@ -43,18 +43,7 @@ const FullRecipe = () => {
             <section className={classes['recipe__header']}>
                 <aside className={classes['recipe__header-container']}>
                     <img src={getDetailsApi.data?.image} alt={getDetailsApi.data?.title} />
-
-
-
-
-
                     <ToggleFavorites recipe={getDetailsApi.data} />
-
-
-
-
-
-
                 </aside>
                 <article className={classes['recipe__header-info']}>
                     <h3 className={classes['recipe__header-title']}>{getDetailsApi.data?.title}</h3>

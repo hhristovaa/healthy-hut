@@ -35,16 +35,6 @@ const SignIn = () => {
         }))
     };
 
-    const favoritesCtx = useContext(FavoritesContext);
-
-    const initFavorites = recipes => {
-        favoritesCtx.initRecipe(recipes)
-    }
-
-    const addToFavorites = recipe => {
-        favoritesCtx.addRecipe({ ...recipe });
-    };
-
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -57,23 +47,6 @@ const SignIn = () => {
                 navigate('/');
                 toast.success('You have logged in successfully!');
 
-                const fetchUserFavorites = async () => {
-                    console.log('eho')
-                    const userRef = doc(db, 'users', auth.currentUser.uid)
-                    const docSnap = await getDoc(userRef);
-
-
-                    console.dir(docSnap);
-
-                    if (docSnap?.exists()) {
-                        let userFavs = docSnap?.data()?.favorites;
-                        addToFavorites(userFavs);
-
-
-                    }
-                }
-
-                fetchUserFavorites();
 
             }
         } catch (err) {

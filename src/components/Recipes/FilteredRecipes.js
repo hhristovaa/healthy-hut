@@ -1,24 +1,23 @@
-import classes from './FiltersSection.module.scss';
-import { useState, useContext, useRef, useEffect } from 'react';
+import classes from './FilteredRecipes.module.scss';
+import { useState, useRef, useEffect } from 'react';
 import { diets, dishes, intolerances, cuisines } from '../../utils/constants';
 import client from '../../apis/client';
 import useApi from '../../hooks/useApi';
 import Button from '../UI/Button';
 import Select from 'react-select';
-import FiltersContext from '../../context/FiltersContext';
-import RecipeItem from '../Recipes/RecipeItem';
+import RecipeItem from './RecipeItem';
 import { toast } from 'react-toastify';
 
-const FiltersSection = (props) => {
+const FilteredRecipes = (props) => {
   const [diet, setDiets] = useState('');
   const [dish, setDishes] = useState([]);
   const [intolerance, setIntolerances] = useState('');
   const [cuisine, setCuisines] = useState('');
-  const selectInputRef = useRef();
-  const filtersCtx = useContext(FiltersContext);
-  const filterRecipes = filters => {
-    filtersCtx.filterHandler({ ...filters })
-  }
+  const dietSelectInputRef = useRef();
+  const dishSelectInputRef = useRef();
+  const intoleranceSelectInputRef = useRef();
+  const cuisineSelectInputRef = useRef();
+
   const getFiltered = (diet, dish, intolerance, cuisine) => client.get(`&type=${dish}&diet=${diet}&intolerance=${intolerance}&cuisine=${cuisine}`)
 
   const getFilteredApi = useApi(getFiltered);
@@ -28,10 +27,11 @@ const FiltersSection = (props) => {
     setDishes('');
     setIntolerances('');
     setCuisines('');
-    console.log('inputRef: ');
-    console.log(selectInputRef);
-    selectInputRef.current.clearValue();
-//4refs
+    dietSelectInputRef.current.clearValue();
+    dishSelectInputRef.current.clearValue();
+    intoleranceSelectInputRef.current.clearValue();
+    cuisineSelectInputRef.current.clearValue();
+
     getFilteredApi.request();
   }
 
@@ -70,7 +70,6 @@ const FiltersSection = (props) => {
     setIntolerances(intolerances);
     setCuisines(cuisines);
     getFilteredApi.request(diet, dish, intolerance, cuisine);
-    filterRecipes(diet, dish, intolerance, cuisine)
   }
 
   useEffect(() => {
@@ -84,14 +83,14 @@ const FiltersSection = (props) => {
 
 
   return (
-    <FiltersContext.Provider value={props.recipes}>
+<>
       <section className={classes['filters']}>
         <form className={classes['filters__form']} onSubmit={submitFilters}>
           <fieldset className={classes['filters__form-section']} >
-            <Select ref={selectInputRef} name='diets' options={diets} isClearable={true} placeholder='Select a diet' />
-            <Select ref={selectInputRef} name='dishes' options={dishes} isMulti isClearable={true} placeholder='Select a dish' />
-            <Select ref={selectInputRef} name='cuisines' options={cuisines} isClearable={true} placeholder='Select a cuisine' />
-            <Select ref={selectInputRef} name='intolerances' options={intolerances} isClearable={true} placeholder='Select an intolerance' />
+            <Select ref={dietSelectInputRef} name='diets' options={diets} isClearable={true} placeholder='Select a diet' />
+            <Select ref={dishSelectInputRef} name='dishes' options={dishes} isMulti isClearable={true} placeholder='Select a dish' />
+            <Select ref={cuisineSelectInputRef} name='cuisines' options={cuisines} isClearable={true} placeholder='Select a cuisine' />
+            <Select ref={intoleranceSelectInputRef} name='intolerances' options={intolerances} isClearable={true} placeholder='Select an intolerance' />
           </fieldset>
           <div className={classes['filters__actions']}>
             <Button type='submit' version='secondary'>Filter</Button>
@@ -107,8 +106,8 @@ const FiltersSection = (props) => {
         )
       })}
       </section>
-    </FiltersContext.Provider>
+      </>
   )
 };
 
-export default FiltersSection;
+export default FilteredRecipes;
