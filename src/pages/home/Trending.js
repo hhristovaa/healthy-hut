@@ -8,8 +8,8 @@ import { toast } from 'react-toastify';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
 
-//const apiKey = '2ed50f18cc1446178f98816f679672f1';
-const apiKey = 'a3577636ccd3420a92a088027e661830';
+const apiKey = '2ed50f18cc1446178f98816f679672f1';
+//const apiKey = 'a3577636ccd3420a92a088027e661830';
 const BASE_URL = `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=10`;
 
 const getRandom = () => client.get(BASE_URL);
