@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import RecipeItem from '../../components/Recipes/RecipeItem';
 import classes from './Recipes.module.scss';
 import { toast } from 'react-toastify';
@@ -7,7 +7,6 @@ import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
 import { capitalizeFirstLetter } from '../../utils/utils';
 import { useParams } from 'react-router-dom';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const Cuisine = () => {
     let params = useParams();
