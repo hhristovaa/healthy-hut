@@ -25,10 +25,8 @@ const Specials = () => {
     }, [isMounted]);
 
     let type = params.type;
-    console.log(type)
 
     const filtered = getSpecialsApi.data?.results.filter(obj => {
-        console.log(obj.veryHealthy)
         return obj.type === true;
     });
 

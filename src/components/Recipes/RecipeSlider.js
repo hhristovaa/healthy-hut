@@ -16,11 +16,14 @@ const RecipeSlider = () => {
     const getSimilarApi = useApi(getSimilar);
 
     useEffect(() => {
+        const controller = new AbortController();
+
         getSimilarApi.request(params.recipeId);
+        return () => controller.abort();
     }, [params.recipeId]);
 
-    console.log(getSimilarApi);
     return (
+
         <section>
             {getSimilarApi.loading && <Spinner />}
             {getSimilarApi.error && toast.error(getSimilarApi.error)}

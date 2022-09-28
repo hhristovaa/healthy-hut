@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import classes from './SignIn.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,9 +9,6 @@ import Input from '../../components/UI/Input';
 import { eyeOutline, eyeOffOutline, personOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
-import FavoritesContext from '../../context/FavoritesContext';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../firebase.config';
 
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -46,11 +43,8 @@ const SignIn = () => {
             if (userCredential.user) {
                 navigate('/');
                 toast.success('You have logged in successfully!');
-
-
             }
         } catch (err) {
-            console.error(err);
             toast.error('Wrong user credentials! Please try again.');
         }
 

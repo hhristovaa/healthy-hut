@@ -66,12 +66,10 @@ const Profile = () => {
                 await updateDoc(userRef, {
                     firstName
                 });
-
                 toast.success('Success! Personal details were updated!');
             }
 
         } catch (err) {
-            console.error(err);
             toast.error('Error! Information was not updated!')
         }
     }

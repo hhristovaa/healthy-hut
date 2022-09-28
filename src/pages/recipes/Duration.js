@@ -20,7 +20,6 @@ const Duration = () => {
 
     return (
         <main>
-            {console.log(getDurationApi.data?.results)}
             {getDurationApi.loading && <Spinner />}
             {getDurationApi.error && toast.error(getDurationApi.error)}
             <h1 className={classes['g-title']}>Up to {params.minutes} Minutes</h1>

@@ -7,6 +7,7 @@ import Button from '../UI/Button';
 import Select from 'react-select';
 import RecipeItem from './RecipeItem';
 import { toast } from 'react-toastify';
+import Spinner from '../UI/Spinner';
 
 const FilteredRecipes = (props) => {
   const [diet, setDiets] = useState('');
@@ -78,12 +79,10 @@ const FilteredRecipes = (props) => {
 
   }, [diet, dish, intolerance, cuisine])
 
-
-  console.log(getFilteredApi.data?.results)
-
+  const doResultsExist = getFilteredApi.data?.results.length;
 
   return (
-<>
+    <>
       <section className={classes['filters']}>
         <form className={classes['filters__form']} onSubmit={submitFilters}>
           <fieldset className={classes['filters__form-section']} >
@@ -98,15 +97,18 @@ const FilteredRecipes = (props) => {
           </div>
         </form>
       </section>
-
+      {getFilteredApi.loading && <Spinner />}
+      {getFilteredApi.error && toast.error(getFilteredApi.error)}
       <section className={classes['recipes__container']}>
-      {getFilteredApi.data?.results.map((filtered) => {
-        return (
-          <RecipeItem key={filtered.id} recipe={filtered} />
-        )
-      })}
+        {!doResultsExist && <div className={classes['no-results']}><p>No results found</p></div>}
+        {doResultsExist && getFilteredApi.data?.results.map((filtered) => {
+
+          return (
+            <RecipeItem key={filtered.id} recipe={filtered} />
+          )
+        })}
       </section>
-      </>
+    </>
   )
 };
 
