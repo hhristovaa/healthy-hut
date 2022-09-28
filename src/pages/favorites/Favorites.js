@@ -27,7 +27,7 @@ const Favorites = () => {
 
 
     useEffect(() => {
-        const controller = new AbortController()
+        const controller = new AbortController();
 
         const fetchUserFavorites = async () => {
             try {

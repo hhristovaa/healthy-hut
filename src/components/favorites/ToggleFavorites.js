@@ -9,6 +9,7 @@ import { updateDoc, doc, getDoc, arrayUnion, arrayRemove } from 'firebase/firest
 import { db } from '../../firebase.config';
 import { toast } from 'react-toastify';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
+import { useNavigate } from 'react-router-dom';
 
 const ToggleFavorites = (props) => {
     const { loggedIn } = useAuthStatus();
@@ -22,6 +23,7 @@ const ToggleFavorites = (props) => {
     const { recipes } = favoritesCtx;
 
     const auth = getAuth();
+    const navigate = useNavigate();
 
     const addToFavorites = recipe => {
         favoritesCtx.addRecipe({ ...recipe });
@@ -35,9 +37,9 @@ const ToggleFavorites = (props) => {
         e.preventDefault();
 
         if (!loggedIn) {
-            toast.error('This feature is only for logged in users.');
+            navigate('/sign-in');
             return;
-        };
+        }
 
         if (favorite) {
             onDelete(props.recipe.id);
