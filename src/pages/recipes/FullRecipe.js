@@ -36,8 +36,6 @@ const FullRecipe = () => {
     let cuisine = getDetailsApi.data?.cuisines?.find(cuisine => cuisine !== undefined);
     let dishType = getDetailsApi.data?.dishTypes?.find(type => type !== undefined);
 
-    console.log(getNutritionApi);
-
     return (
         <main>
             {getDetailsApi.loading && <Spinner />}
@@ -45,7 +43,18 @@ const FullRecipe = () => {
             <section className={classes['recipe__header']}>
                 <aside className={classes['recipe__header-container']}>
                     <img src={getDetailsApi.data?.image} alt={getDetailsApi.data?.title} />
+
+
+
+
+
                     <ToggleFavorites recipe={getDetailsApi.data} />
+
+
+
+
+
+
                 </aside>
                 <article className={classes['recipe__header-info']}>
                     <h3 className={classes['recipe__header-title']}>{getDetailsApi.data?.title}</h3>
