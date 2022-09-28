@@ -1,5 +1,5 @@
 import classes from './FiltersSection.module.scss';
-import { useState, createContext, useContext, useRef } from 'react';
+import { useState, useContext, useRef } from 'react';
 import { diets, dishes, intolerances, cuisines } from '../../utils/constants';
 import client from '../../apis/client';
 import useApi from '../../hooks/useApi';

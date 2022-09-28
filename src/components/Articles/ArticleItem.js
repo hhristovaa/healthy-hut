@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import Card from '../UI/Card';
+import Button from '../UI/Button';
 import classes from './ArticleItem.module.scss';
 import { IonIcon } from '@ionic/react';
 import { trashOutline, openOutline } from 'ionicons/icons';
-import Button from '../UI/Button';
+
 
 const ArticleItem = ({ article, id, onDelete, onEdit }) => {
     return (
@@ -15,9 +16,7 @@ const ArticleItem = ({ article, id, onDelete, onEdit }) => {
                 <div className={classes['article__content']}>
                     <h3 className={classes['article__header']} key={article.id}>{article.name}</h3>
                     <p className={classes['article__desc']}> {article.content}</p>
-
                     <Button type='button' version='primary' outline>Read More</Button>
-
                 </div>
             </Link>
             <div className={classes.action}>

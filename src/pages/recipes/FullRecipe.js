@@ -37,11 +37,11 @@ const FullRecipe = () => {
     let dishType = getDetailsApi.data?.dishTypes?.find(type => type !== undefined);
 
     console.log(getNutritionApi);
-    { getDetailsApi.loading && <Spinner /> }
-    { getDetailsApi.error && toast.error(getDetailsApi.error) }
 
     return (
         <main>
+            {getDetailsApi.loading && <Spinner />}
+            {getDetailsApi.error && toast.error(getDetailsApi.error)}
             <section className={classes['recipe__header']}>
                 <aside className={classes['recipe__header-container']}>
                     <img src={getDetailsApi.data?.image} alt={getDetailsApi.data?.title} />

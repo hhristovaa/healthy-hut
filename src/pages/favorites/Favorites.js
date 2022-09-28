@@ -27,6 +27,8 @@ const Favorites = () => {
 
 
     useEffect(() => {
+        const controller = new AbortController()
+
         const fetchUserFavorites = async () => {
             try {
                 const userRef = doc(db, 'users', auth.currentUser.uid)
@@ -40,21 +42,24 @@ const Favorites = () => {
                 setLoading(false);
             } catch (err) {
                 setLoading(false);
-                toast.error('An error occrured while loading the favorites.');
+                toast.error('An error occurred while loading the favorites.');
             }
         }
 
         fetchUserFavorites();
+        return () => controller.abort();
     }, [auth.currentUser.uid]);
 
-
+if (loading) {
+    return <Spinner/>
+}
     return (
         <main>
             <h1 className={classes['g-title']}>Favorites </h1>
             <h3 className={classes['recipes__counter']}>You have marked {favorites?.length} recipes as favorites.</h3>
             <section className={classes['recipes__container']}>
-                {loading && <Spinner/>}
-                
+
+
                 {!loading && favorites?.length > 0 && favorites.map(recipe => {
                     return (
                         <RecipeItem

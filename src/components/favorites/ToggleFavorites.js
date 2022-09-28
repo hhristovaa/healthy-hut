@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 
 const ToggleFavorites = (props) => {
-    const { loggedIn, loadingStatus } = useAuthStatus();
+    const { loggedIn } = useAuthStatus();
     const [loading, setLoading] = useState(false);
     const [favorite, setFavorite] = useState(false);
     const [favRecipeData, setFavRecipeData] = useState({

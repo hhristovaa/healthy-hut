@@ -32,13 +32,11 @@ const Specials = () => {
         return obj.type === true;
     });
 
-
-    { getSpecialsApi.loading && <Spinner /> }
-    { getSpecialsApi.error && toast.error(getSpecialsApi.error) }
-
     return (
         <main>
             <h1 className={classes['g-title']}>Special Recipes</h1>
+            {getSpecialsApi.loading && <Spinner />}
+            {getSpecialsApi.error && toast.error(getSpecialsApi.error)}
             <section className={classes['recipes__container']}>
                 {filtered?.length === 0 && <div className={classes['no-results']}><p>No results found</p></div>}
                 {filtered?.length !== 0 && filtered?.map((recipe) => {

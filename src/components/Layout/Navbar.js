@@ -8,7 +8,7 @@ import { menuOutline, closeOutline, chevronDownOutline, chevronUpOutline } from 
 import { useState, } from 'react';
 
 const Navbar = () => {
-    const { loggedIn, loadingStatus } = useAuthStatus();
+    const { loggedIn } = useAuthStatus();
     const [isMobile, setIsMobile] = useState(false);
     const [isDropdown, setIsDropdown] = useState(false);
 
