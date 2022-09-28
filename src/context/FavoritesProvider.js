@@ -1,6 +1,10 @@
 import { useReducer } from 'react';
 import FavoritesContext from './FavoritesContext';
 import { ACTIONS } from '../utils/constants';
+import { doc, getDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { db } from '../firebase.config';
+import { useAuthStatus } from '../hooks/useAuthStatus';
 
 const defaultFavoritesState = {
     recipes: []
@@ -29,10 +33,44 @@ const favoritesReducer = (state, action) => {
 
         if (existingRecipe) {
             updatedRecipes = state.recipes.filter(recipe => recipe.id !== action.id);
-        } 
+        }
         return {
             recipes: updatedRecipes
         }
+    }
+
+    if (action.type === ACTIONS.INIT) {
+
+        console.log('Ура!');
+
+        const auth = getAuth();
+        console.log(auth);
+        let resultToReturn;
+
+        if (!!auth) {
+            const fetchUserFavorites = async () => {
+                console.log('eho')
+                const userRef = doc(db, 'users', auth.currentUser.uid)
+                const docSnap = await getDoc(userRef);
+
+                console.log(`neshta:`);
+
+                console.dir(docSnap);
+
+                if (docSnap?.exists()) {
+                    let userFavs = docSnap?.data()?.favorites;
+
+                    resultToReturn = !!userFavs ? userFavs : [];
+                }
+            }
+
+            fetchUserFavorites();
+
+            return {
+                recipes: resultToReturn
+            }
+        }
+
     }
 
     return defaultFavoritesState;
@@ -49,10 +87,15 @@ const FavoritesProvider = props => {
         dispatchFavoritesAction({ type: ACTIONS.REMOVE, id: id });
     };
 
+    const initRecipeHandler = recipes => {
+        dispatchFavoritesAction({ type: ACTIONS.INIT, recipes: recipes });
+    };
+
     const favoritesContext = {
         recipes: favoritesState.recipes,
         addRecipe: addRecipeHandler,
         removeRecipe: removeRecipeHandler,
+        initRecipe: initRecipeHandler
     };
 
     return (

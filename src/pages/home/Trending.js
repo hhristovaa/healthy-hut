@@ -3,10 +3,12 @@ import RecipeItem from '../../components/Recipes/RecipeItem';
 import Spinner from '../../components/UI/Spinner';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
+
+
 
 //const apiKey = '2ed50f18cc1446178f98816f679672f1';
 const apiKey = 'a3577636ccd3420a92a088027e661830';
@@ -16,9 +18,11 @@ const getRandom = () => client.get(BASE_URL);
 
 const Trending = () => {
 
+
     const getRandomApi = useApi(getRandom);
 
     useEffect(() => {
+    
         getRandomApi.request();
     }, []);
 
@@ -50,7 +54,7 @@ const Trending = () => {
                         {getRandomApi.data?.recipes.map((recipe) => {
                             return (
                                 <SplideSlide key={recipe.id}>
-                                    <RecipeItem key={recipe.id} recipe={recipe}/>
+                                    <RecipeItem key={recipe.id} recipe={recipe} />
                                 </SplideSlide>
                             );
                         })}

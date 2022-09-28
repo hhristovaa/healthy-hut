@@ -8,11 +8,11 @@ const HeaderFavIcon = props => {
     const [btnIsAnimated, setBtnIsAnimated] = useState(false);
     const favoritesCtx = useContext(FavoritesContext);
     const { recipes } = favoritesCtx;
-    const favoritesCount = favoritesCtx.recipes.length;
+    const favoritesCount = favoritesCtx.recipes?.length;
     const btnClasses = `${classes.button} ${btnIsAnimated ? classes.bump : ''}`;
 
     useEffect(() => {
-        if (recipes.length === 0) return;
+        // if (recipes.length === 0) return;
 
         setBtnIsAnimated(true);
         const timer = setTimeout(() => {

@@ -4,8 +4,9 @@ import { doc, getDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../../firebase.config';
 import Spinner from '../../components/UI/Spinner';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
+import FavoritesContext from '../../context/FavoritesContext';
 
 const Favorites = () => {
     const auth = getAuth();
@@ -26,8 +27,11 @@ const Favorites = () => {
     // );
 
 
+
+
     useEffect(() => {
         const controller = new AbortController();
+      
 
         const fetchUserFavorites = async () => {
             try {

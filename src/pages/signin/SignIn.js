@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
 import classes from './SignIn.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,6 +9,9 @@ import Input from '../../components/UI/Input';
 import { eyeOutline, eyeOffOutline, personOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
+import FavoritesContext from '../../context/FavoritesContext';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase.config';
 
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -32,6 +35,17 @@ const SignIn = () => {
         }))
     };
 
+    const favoritesCtx = useContext(FavoritesContext);
+
+    const initFavorites = recipes => {
+        favoritesCtx.initRecipe(recipes)
+    }
+
+    const addToFavorites = recipe => {
+        favoritesCtx.addRecipe({ ...recipe });
+    };
+
+
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -42,6 +56,24 @@ const SignIn = () => {
             if (userCredential.user) {
                 navigate('/');
                 toast.success('You have logged in successfully!');
+
+                const fetchUserFavorites = async () => {
+                    console.log('eho')
+                    const userRef = doc(db, 'users', auth.currentUser.uid)
+                    const docSnap = await getDoc(userRef);
+
+
+                    console.dir(docSnap);
+
+                    if (docSnap?.exists()) {
+                        let userFavs = docSnap?.data()?.favorites;
+                        addToFavorites(userFavs);
+
+
+                    }
+                }
+
+                fetchUserFavorites();
 
             }
         } catch (err) {

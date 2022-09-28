@@ -1,5 +1,5 @@
 import classes from './FiltersSection.module.scss';
-import { useState, useContext, useRef } from 'react';
+import { useState, useContext, useRef, useEffect } from 'react';
 import { diets, dishes, intolerances, cuisines } from '../../utils/constants';
 import client from '../../apis/client';
 import useApi from '../../hooks/useApi';
@@ -28,9 +28,10 @@ const FiltersSection = (props) => {
     setDishes('');
     setIntolerances('');
     setCuisines('');
+    console.log('inputRef: ');
     console.log(selectInputRef);
     selectInputRef.current.clearValue();
-
+//4refs
     getFilteredApi.request();
   }
 
@@ -72,10 +73,14 @@ const FiltersSection = (props) => {
     filterRecipes(diet, dish, intolerance, cuisine)
   }
 
+  useEffect(() => {
+
+    getFilteredApi.request(diet, dish, intolerance, cuisine);
+
+  }, [diet, dish, intolerance, cuisine])
 
 
-
-  // console.log(getFilteredApi.data?.results)
+  console.log(getFilteredApi.data?.results)
 
 
   return (
@@ -95,12 +100,13 @@ const FiltersSection = (props) => {
         </form>
       </section>
 
+      <section className={classes['recipes__container']}>
       {getFilteredApi.data?.results.map((filtered) => {
         return (
           <RecipeItem key={filtered.id} recipe={filtered} />
         )
       })}
-
+      </section>
     </FiltersContext.Provider>
   )
 };
