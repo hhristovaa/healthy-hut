@@ -3,7 +3,7 @@ import RecipeItem from '../../components/Recipes/RecipeItem';
 import Spinner from '../../components/UI/Spinner';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
@@ -12,6 +12,7 @@ import FavoritesContext from '../../context/FavoritesContext';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { getAuth } from 'firebase/auth';
+import { add } from 'ionicons/icons';
 
 //const apiKey = '2ed50f18cc1446178f98816f679672f1';
 const apiKey = 'a3577636ccd3420a92a088027e661830';
@@ -20,6 +21,7 @@ const BASE_URL = `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&nu
 const getRandom = () => client.get(BASE_URL);
 
 const Trending = () => {
+    const [favorites, setFavorites] = useState([]);
 
     const favoritesCtx = useContext(FavoritesContext);
 
@@ -33,25 +35,38 @@ const Trending = () => {
 
 
     const getRandomApi = useApi(getRandom);
-const auth = getAuth();
+    const auth = getAuth();
 
     useEffect(() => {
-    
+
 
         getRandomApi.request();
     }, []);
+
+
+
     const fetchUserFavorites = async () => {
         console.log('eho')
         const userRef = doc(db, 'users', auth.currentUser.uid)
         const docSnap = await getDoc(userRef);
-        console.dir(docSnap);
-
+        let favs = [];
         if (docSnap?.exists()) {
             let userFavs = docSnap?.data()?.favorites;
-            addToFavorites(userFavs);
+            addToFavorites(userFavs)
+            // setFavorites(userFavs)
+            // favorites.map(recipe => {
+            //     console.log(recipe);
+            //     favs.push(recipe);
+            // });
 
+           
+            // initFavorites(favorites);
+           
+            console.log(favs);
         }
     }
+
+    console.log(favorites)
 
     return (
         <>
