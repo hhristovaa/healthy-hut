@@ -10,7 +10,7 @@ import { useState, } from 'react';
 const Navbar = () => {
     const { loggedIn } = useAuthStatus();
     const [isMobile, setIsMobile] = useState(false);
-    const [isDropdown, setIsDropdown] = useState(false);
+    const [isDropdown, setIsDropdown] = useState(true);
 
     const closeMobileMenu = () => {
         setIsMobile(false);
@@ -18,7 +18,6 @@ const Navbar = () => {
     }
     const isLinkActive = (({ isActive }) => (isActive ? `${classes['navbar__item']} ${classes['is-active']}` : classes['navbar__item']));
     const isMenuMobile = isMobile ? `${classes.header} ${classes['is-mobile']} ${classes['is-open']}` : classes.header;
-
     const isNotExpanded = isDropdown ? `${classes.submenu} ${classes['is-hidden']}` : classes.submenu;
 
     return (

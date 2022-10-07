@@ -12,6 +12,7 @@ import { useAuthStatus } from '../../hooks/useAuthStatus';
 import { useNavigate } from 'react-router-dom';
 
 const ToggleFavorites = (props) => {
+
     const { loggedIn } = useAuthStatus();
     const [loading, setLoading] = useState(false);
     const [favorite, setFavorite] = useState(false);
@@ -54,7 +55,8 @@ const ToggleFavorites = (props) => {
 
     useEffect(() => {
         const newFavoriteRecipe = recipes.some(recipe => recipe.id === props?.recipe?.id);
-
+        console.log(recipes);
+        console.log(`nev fav ${newFavoriteRecipe}`);
         setFavorite(newFavoriteRecipe);
         setFavRecipeData({
             ...props.recipe
@@ -62,6 +64,10 @@ const ToggleFavorites = (props) => {
         });
 
     }, [favorite, recipes, props]);
+
+
+
+
 
     const onSubmit = async (e) => {
         e.preventDefault();

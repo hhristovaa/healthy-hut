@@ -1,0 +1,7 @@
+@use '../../styles/variables' as *; 
+
+.no-results {
+    padding: 10%;
+    font-size: 36px;
+    color: $color-primary-dark;
+}

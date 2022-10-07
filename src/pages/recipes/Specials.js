@@ -6,6 +6,7 @@ import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
+import NoResults from '../../components/UI/NoResults';
 
 const Specials = () => {
     const isMounted = useRef(true);
@@ -38,7 +39,7 @@ const Specials = () => {
             {getSpecialsApi.loading && <Spinner />}
             {getSpecialsApi.error && toast.error(getSpecialsApi.error)}
             <section className={classes['recipes__container']}>
-                {filtered?.length === 0 && <div className={classes['no-results']}><p>No results found</p></div>}
+                {filtered?.length === 0 && <NoResults/> }
                 {filtered?.length !== 0 && filtered?.map((recipe) => {
                     return <RecipeItem key={recipe.id} recipe={recipe} />
                 })}

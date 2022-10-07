@@ -20,14 +20,7 @@
     }
 }
 
-@media screen and (max-width: 390px) {
 
-    .filters__actions {
-        button {
-            margin: 2rem;
-        }
-    }
-}
 
 .recipes__container {
     @include flex-setup($wrap: wrap, $justContent: space-around);
@@ -35,5 +28,20 @@
 
     div {
         width: unset;
+    }
+}
+
+@media screen and (max-width: 390px) {
+
+    .filters__actions {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .filters__form-section {
+        > div {
+            width: 100%;
+        }
     }
 }

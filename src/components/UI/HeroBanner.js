@@ -17,7 +17,7 @@ const HeroBanner = () => {
 
     return (
         <section className={classes['hero-container']}>
-            <img src={ingredientsImage} className={classes['hero-container__img']} alt="Ingredients as a hero banner background" />
+            <img src={ingredientsImage} className={classes['hero-container__img']} alt="Ingredients as a hero banner background" loading='lazy' />
             <form onSubmit={submitHandler} className={classes.search}>
                 <label className={classes['hero-container__title']} htmlFor='recipe-search'>Search for a new recipe...</label>
                 <input

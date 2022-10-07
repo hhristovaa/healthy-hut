@@ -7,6 +7,7 @@ import Button from '../UI/Button';
 import Select from 'react-select';
 import RecipeItem from './RecipeItem';
 import { toast } from 'react-toastify';
+import NoResults from '../UI/NoResults';
 
 const FilteredRecipes = (props) => {
   const [diet, setDiets] = useState('');
@@ -83,7 +84,7 @@ const FilteredRecipes = (props) => {
 
 
   return (
-<>
+    <>
       <section className={classes['filters']}>
         <form className={classes['filters__form']} onSubmit={submitFilters}>
           <fieldset className={classes['filters__form-section']} >
@@ -100,13 +101,14 @@ const FilteredRecipes = (props) => {
       </section>
 
       <section className={classes['recipes__container']}>
-      {getFilteredApi.data?.results.map((filtered) => {
-        return (
-          <RecipeItem key={filtered.id} recipe={filtered} />
-        )
-      })}
+        {getFilteredApi.data?.results?.length === 0 && <NoResults/>}
+        {getFilteredApi.data?.results?.length !== 0 && getFilteredApi.data?.results.map((filtered) => {
+          return (
+            <RecipeItem key={filtered.id} recipe={filtered} />
+          )
+        })}
       </section>
-      </>
+    </>
   )
 };
 

@@ -48,3 +48,10 @@ img {
 .splide__track {
   margin-bottom: 5%;
 }
+
+
+@media screen and (max-width: 680px) { 
+  .splide__arrows {
+      display: none;
+  }
+}
