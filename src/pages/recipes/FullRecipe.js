@@ -18,13 +18,15 @@ const FullRecipe = () => {
     //const apiKey = 'b44514ae9c644024a55ec4e856cf0fd2';
     const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${apiKey}`;
 
-    const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/&apiKey=${apiKey}/nutritionLabel.png`
+   // const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionLabel.png?showOptionalNutrients=false&showZeroValues=false&showIngredients=false&apiKey=${apiKey}`
+  // const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionLabel?defaultCss=true&showOptionalNutrients=false&showZeroValues=false&showIngredients=false&apiKey=${apiKey}`
+    const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionWidget?defaultCss=true&apiKey=${apiKey}`
 
 
-    const getDetails = (params) => client.get(BASE_URL)
+    const getDetails = (params) => client.get(BASE_URL);
     const getDetailsApi = useApi(getDetails);
 
-    const getNutrition = (params) => client.get(NUTRITION_URL)
+    const getNutrition = (params) => client.get(NUTRITION_URL);
     //const getNutrition = (params) => client.get(`https://api.spoonacular.com/apiKey=2ed50f18cc1446178f98816f679672f1/recipes/648339/nutritionWidget.png`)
     const getNutritionApi = useApi(getNutrition);
 
@@ -36,6 +38,7 @@ const FullRecipe = () => {
     let cuisine = getDetailsApi.data?.cuisines?.find(cuisine => cuisine !== undefined);
     let dishType = getDetailsApi.data?.dishTypes?.find(type => type !== undefined);
 
+
     return (
         <main>
             {getDetailsApi.loading && <Spinner />}
@@ -44,6 +47,17 @@ const FullRecipe = () => {
                 <aside className={classes['recipe__header-container']}>
                     <img src={getDetailsApi.data?.image} alt={getDetailsApi.data?.title} />
                     <ToggleFavorites recipe={getDetailsApi.data} />
+    
+                    <div className={classes['recipe__ingredients']}>
+                    <h4 className={classes['recipe__desc-title']}>Ingredients</h4>
+                    <ul>
+                        {getDetailsApi.data?.extendedIngredients?.map((ingredient) => (
+                            <li key={ingredient.id}>{ingredient.original}</li>
+                        ))}
+                    </ul>
+
+                </div>
+       
                 </aside>
                 <article className={classes['recipe__header-info']}>
                     <h3 className={classes['recipe__header-title']}>{getDetailsApi.data?.title}</h3>
@@ -67,15 +81,7 @@ const FullRecipe = () => {
                 </article>
             </section>
             <section className={classes['recipe__desc']}>
-                <div className={classes['recipe__ingredients']}>
-                    <h4 className={classes['recipe__desc-title']}>Ingredients</h4>
-                    <ul>
-                        {getDetailsApi.data?.extendedIngredients?.map((ingredient) => (
-                            <li key={ingredient.id}>{ingredient.original}</li>
-                        ))}
-                    </ul>
 
-                </div>
                 {getDetailsApi.data?.instructions ? (
                     <div className={classes['recipe__instructions']}>
                         <h4 className={classes['recipe__desc-title']}>Instructions</h4>
@@ -84,6 +90,11 @@ const FullRecipe = () => {
                 ) : (
                     <p>Currently the instructions are not available.</p>
                 )}
+            </section>
+            <section className={classes['recipe__facts']}>
+            <h4 className={classes['recipe__desc-title']}>Nutrition Facts per Serving</h4>
+            <div className={classes['recipe__nutrition']} dangerouslySetInnerHTML={{ __html: getNutritionApi.data }}></div>
+
             </section>
 
             {/* <RecipeSlider recipeId={params.recipeId}/> */}

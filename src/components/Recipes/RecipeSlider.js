@@ -19,7 +19,7 @@ const RecipeSlider = () => {
         getSimilarApi.request(params.recipeId);
     }, [params.recipeId]);
 
-    console.log(getSimilarApi);
+    console.log(getSimilarApi.data.length);
     return (
         <section>
             {getSimilarApi.loading && <Spinner />}
@@ -42,7 +42,7 @@ const RecipeSlider = () => {
                     }
                 }
             }}>         
-                 {getSimilarApi?.data.map((recipe) => {
+                 {getSimilarApi?.data?.map((recipe) => {
                     return (
                         <SplideSlide key={recipe.id}>
                             <RecipeItem key={recipe.id} recipe={recipe}/>

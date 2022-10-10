@@ -46,7 +46,7 @@
 
 
     &__desc {
-        @include flex-setup($gap: 3rem);
+        @include flex-setup($alItems: baseline, $gap: 2.5rem);
         margin: auto;
         padding: 3rem 0rem;
 
@@ -65,7 +65,7 @@
     }
 
     &__desc-title {
-        color: $color-primary;
+        color: $color-primary-dark;
         text-align: center;
         padding-bottom: 1rem;
         font-size: 1.6rem;
@@ -86,15 +86,36 @@
     }
 
     &__ingredients {
-        width: 30%;
+       
+        margin: auto;
+        padding: 1rem 0rem;
+        
+        li {
+            list-style-type: none;
+            position: relative;
+
+            &::before {
+                content: "";
+                @include position-setup(absolute, $left: -1.5rem, $top: 9px);
+                width: 10px;
+                display: block;
+                border-top: 2px solid $color-primary;
+            }
+        }
     }
 
     &__instructions {
-        width: 70%;
+        width: 100%;
+    }
+
+    &__facts {
+     margin-bottom: 2rem;
+
     }
 
     &__header-info {
         flex: 1;
+        width: 100%;
 
         h2 {
             margin-bottom: 1rem;
@@ -111,7 +132,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        max-height: 534px;
+
         max-width: 400px;
     }
 
@@ -129,6 +150,7 @@
         a {
             text-decoration: underline;
             text-align: center;
+            word-break: break-word;
 
             ion-icon {
                 margin-right: 0.5rem;
@@ -137,24 +159,35 @@
     }
 }
 
-.no-results {
-    padding: 10%;
-    font-size: 36px;
-    color: $color-primary-dark;
-}
 
 @media screen and (max-width: 768px) {
     .recipe {
 
-        &__header,
-        &__desc {
+        &__header {
             flex-wrap: wrap;
             justify-content: center;
         }
 
+        &__header-title,
+        &__desc-title {
+            font-size: 1.2rem;
+        }
+
+        &__desc {
+            flex-flow: wrap-reverse;
+            justify-content: center;
+            padding: unset;
+        }
+
+
         &__ingredients,
         &__instructions {
             width: 100%;
+        }
+
+        &__facts {
+            padding: 2rem 0rem;
+            text-align: center;
         }
     }
 }
