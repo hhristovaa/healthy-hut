@@ -31,15 +31,6 @@
         font-size: 16px;
         line-height: 20px;
 
-        &:hover {
-            color: $color-secondary-light;
-            transition: ease-in-out all 0.4s;
-
-            ion-icon {
-                transform: rotate(180deg);
-            }
-        }
-
         &:visited,
         &:active {
             text-decoration: none;
@@ -52,44 +43,33 @@
     }
 }
 
-.dropdown-menu{ 
+.dropdown-menu {
     padding: 1rem;
+
     .navbar__item {
         padding: 0;
     }
 
-    &:hover {
-        .submenu {
-            display: flex;
-            transition: ease-in-out all 0.4s;
+    .submenu {
+        @include position-setup(absolute, $top: 3.5rem, $left: 0, $zIndex: 2);
+        display: none;
+        padding: 1rem 2rem;
+        background: rgb(255, 254, 244);
+        background: linear-gradient(0deg, rgba(255, 254, 244, 1) -90%, rgba(210, 56, 108, 1) 100%);
+
+        &__section {
+            @include flex-setup($direction: column);
+            color: $color-white;
+            padding: 0rem 1.2rem;
+            text-align: center;
+            line-height: 32px;
+
+            p {
+                font-weight: 600;
+                margin-bottom: .5rem;
+                border-bottom: 2px solid $color-secondary;
+            }
         }
-}
-}
-
-.submenu {
-    @include position-setup(absolute, $top: 3.5rem, $left: 0, $zIndex: 2);
-    display: none;
-    padding: 1rem 2rem;
-    background: rgb(255, 254, 244);
-    background: linear-gradient(0deg, rgba(255, 254, 244, 1) -90%, rgba(210, 56, 108, 1) 100%);
-
-    &__section {
-        @include flex-setup($direction: column);
-        color: $color-white;
-        padding: 0rem 1.2rem;
-        text-align: center;
-        line-height: 32px;
-
-        p {
-            font-weight: 600;
-            margin-bottom: .5rem;
-        }
-
-        a:hover {
-            color: $color-secondary-light;
-            transition: ease-in-out all 0.4s;
-        }
-
     }
 }
 
@@ -101,11 +81,9 @@
     text-decoration: none;
 }
 
-
 .is-active {
     color: $color-secondary;
 }
-
 
 @media screen and (max-width: 1024px) {
     .header {
@@ -156,7 +134,7 @@
         position: relative;
 
         .submenu {
-            @include flex-setup($alItems: center, $justContent: center, $wrap: wrap);
+            @include flex-setup($alItems: flex-start, $justContent: center, $wrap: wrap);
             position: relative;
             top: unset;
             z-index: 5;
@@ -169,5 +147,33 @@
         }
     }
 
+}
 
+@include hover {
+    .navbar__item {
+        &:hover {
+            color: $color-secondary-light;
+            transition: ease-in-out all 0.4s;
+
+            ion-icon {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .submenu__section {
+        a:hover {
+            color: $color-secondary-light;
+            transition: ease-in-out all 0.4s;
+        }
+    }
+
+    .dropdown-menu {
+        &:hover {
+            .submenu {
+                display: flex;
+                transition: ease-in-out all 0.4s;
+            }
+        }
+    }
 }

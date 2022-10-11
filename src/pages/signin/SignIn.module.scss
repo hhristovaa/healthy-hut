@@ -8,10 +8,6 @@
   font-weight: 600;
   text-align: right;
   margin-right: 10rem;
-
-  &:hover {
-    color: darken($color-green, 10%);
-  }
 }
 
 .form {
@@ -37,11 +33,6 @@
   font-weight: 600;
   cursor: pointer;
   color: $color-primary;
-
-  &:hover {
-    color: darken($color-primary, 10%);
-  }
-
 }
 
 
@@ -64,4 +55,21 @@
   .btn-container__social {
     width: 100%;
   }
+}
+
+@include hover {
+  .forgot-password {
+
+    &:hover {
+      color: darken($color-green, 10%);
+    }
+  }
+
+  .signup-url {
+    &:hover {
+      color: darken($color-primary, 10%);
+
+    }
+  }
+
 }

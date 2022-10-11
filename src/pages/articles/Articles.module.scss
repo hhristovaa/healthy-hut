@@ -6,11 +6,12 @@
 
     &__img {
         margin: 1.5rem 0px;
+
         img {
             height: 44vh;
             width: 100%;
             object-fit: cover;
-            margin: 0px auto;    
+            margin: 0px auto;
         }
     }
 
@@ -25,29 +26,27 @@
         margin: 1.5rem 0rem;
 
         &-url {
-        font-size: 16px;
-        color: $color-primary-dark;
-        
-        &:hover {
+            font-size: 16px;
             color: $color-primary-dark;
-        }
+            word-break: break-all;
 
+            ion-icon {
+                margin-right: 1rem;
+            }
+
+        }
+    }
+
+    &__date {
         ion-icon {
             margin-right: 1rem;
         }
-
     }
-}
-
-&__date {
-    ion-icon {
-        margin-right: 1rem;
-    }
-}
 }
 
 .articles {
     @include flex-setup($wrap: wrap);
+
     &__form {
         margin: 0px auto;
         padding-top: 2em;
@@ -58,5 +57,21 @@
     &__img-label {
         @include position-setup(absolute, $bottom: 20%, $left: 25%);
         margin-left: 1.2rem;
+    }
+}
+
+@include hover {
+    .article__source {
+        &:hover {
+            color: $color-primary-dark;
+        }
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .articles{
+        &__form {
+            width: 100%;
+        }
     }
 }

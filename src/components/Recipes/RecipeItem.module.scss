@@ -14,16 +14,6 @@
     overflow: hidden;
     border-radius: 14px;
     position: relative;
-
-    &:hover {
-        overflow: hidden;
-        filter: contrast(1.1);
-
-        img {
-            transition: all .3s ease-in;
-            transform: scale(1.2);
-        }
-    }
 }
 
 .recipe__card-title {
@@ -58,5 +48,19 @@
 @media screen and (max-width: 425px) {
     .recipe-redirect {
         width: 100%;
+    }
+}
+
+@include hover {
+    .recipe__card-img {
+        &:hover {
+            overflow: hidden;
+            filter: contrast(1.1);
+    
+            img {
+                transition: all .3s ease-in;
+                transform: scale(1.2);
+            }
+        }
     }
 }

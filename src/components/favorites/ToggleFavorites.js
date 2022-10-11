@@ -65,10 +65,6 @@ const ToggleFavorites = (props) => {
 
     }, [favorite, recipes, props]);
 
-
-
-
-
     const onSubmit = async (e) => {
         e.preventDefault();
         const docRef = doc(db, 'users', auth.currentUser.uid)

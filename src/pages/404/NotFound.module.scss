@@ -13,8 +13,13 @@
 
     ion-icon {
         color: $color-primary;
+    }   
+}
+
+@include hover {
+    ion-icon {
         &:hover {
             color: darken($color-primary, 10%);
         }
-    }   
+    }
 }

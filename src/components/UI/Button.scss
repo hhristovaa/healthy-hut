@@ -1,4 +1,5 @@
 @use '../../styles/_variables.scss' as *;
+@use '../../styles/_mixins.scss' as *;
 
 .btn {
     cursor: pointer;
@@ -13,19 +14,11 @@
 
     &--primary {
         background-color: $color-primary;
-
-        &:hover {
-            background-color: darken($color-primary, 10%);
-        }
     }
 
     &--secondary {
         background-color: $color-secondary;
         color: $color-black;
-
-        &:hover {
-            background-color: darken($color-secondary, 10%);
-        }
     }
 
     &--login {
@@ -37,28 +30,16 @@
     &--login,
     &--create {
         background-color: $color-green;
-
-        &:hover {
-            background-color: darken($color-green, 10%);
-        }
     }
 
     &--change {
         background-color: $color-orange;
         margin-left: 2em;
-
-        &:hover {
-            background-color: darken($color-orange, 10%);
-        }
     }
 
     &--logout {
         background-color: $color-red;
         margin-left: 2em;
-
-        &:hover {
-            background-color: darken($color-red, 10%);
-        }
     }
 
     &--more {
@@ -74,10 +55,6 @@
         align-items: center;
         padding: 0.42rem 0.8rem;
 
-        &:hover {
-            background-color: darken(#4285F4, 10%);
-        }
-
         svg {
             margin-right: 1rem;
         }
@@ -89,10 +66,6 @@
 
         ion-icon {
             font-size: 48px;
-        }
-
-        &:hover {
-            color: darken($color-primary, 10%);
         }
     }
 
@@ -107,49 +80,109 @@
     &--primary {
         border-color: $color-primary;
         color: $color-primary;
-
-        &:hover {
-            color: $color-white;
-            background-color: $color-primary;
-        }
     }
 
     &--secondary {
         border-color: $color-secondary;
         color: $color-secondary;
         margin: unset;
-
-        &:hover {
-            color: $color-black;
-            background-color: $color-secondary;
-        }
     }
 
     &--danger {
         border-color: $color-red;
         color: $color-red;
         margin-left: 2em;
-
-        &:hover {
-            color: $color-white;
-            background-color: $color-red;
-        }
     }
 
     &--logged {
         border-color: $color-white;
         color: $color-white;
         margin: 0 1rem;
-
-        &:hover {
-            color: $color-black;
-            background-color: $color-white;
-        }
     }
 }
 
-@media screen and (max-width: 680px) { 
+@media screen and (max-width: 680px) {
     .btn {
         font-size: 12px;
     }
+}
+
+@include hover {
+    .btn {
+        &--primary {
+            &:hover {
+                background-color: darken($color-primary, 10%);
+            }
+        }
+
+        &--secondary {
+
+            &:hover {
+                background-color: darken($color-secondary, 10%);
+            }
+        }
+
+        &--login,
+        &--create {
+            &:hover {
+                background-color: darken($color-green, 10%);
+            }
+        }
+
+        &--change {
+            &:hover {
+                background-color: darken($color-orange, 10%);
+            }
+        }
+
+        &--logout {
+            &:hover {
+                background-color: darken($color-red, 10%);
+            }
+        }
+
+        &--google {
+            &:hover {
+                background-color: darken(#4285F4, 10%);
+            }
+
+        }
+
+        &--loginIcon {
+            &:hover {
+                color: darken($color-primary, 10%);
+            }
+        }
+    }
+
+    .btn-outline {
+        &--primary {
+            &:hover {
+                color: $color-white;
+                background-color: $color-primary;
+            }
+        }
+
+        &--secondary {
+            &:hover {
+                color: $color-black;
+                background-color: $color-secondary;
+            }
+        }
+
+        &--danger {
+            &:hover {
+                color: $color-white;
+                background-color: $color-red;
+            }
+        }
+
+        &--logged {
+            &:hover {
+                color: $color-black;
+                background-color: $color-white;
+            }
+        }
+    }
+
 }
