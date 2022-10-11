@@ -1,17 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { v4 as uuid4 } from 'uuid';
-import { useNavigate } from 'react-router-dom';
-import Spinner from '../../components/UI/Spinner';
-import { toast } from 'react-toastify';
 import { uuidv4 } from '@firebase/util';
+
+import Spinner from '../../components/UI/Spinner';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
-import classes from './Articles.module.scss';
 import { isFieldEmpty } from '../../utils/utils';
+import classes from './Articles.module.scss';
 
 const CreateArticle = () => {
     const [loading, setLoading] = useState(false);

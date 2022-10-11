@@ -1,12 +1,13 @@
-import classes from '../recipes/Recipes.module.scss';
-import RecipeItem from '../../components/Recipes/RecipeItem';
+import { useState, useEffect, useContext } from 'react';
+import { toast } from 'react-toastify';
 import { doc, getDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../../firebase.config';
-import Spinner from '../../components/UI/Spinner';
-import { useState, useEffect, useContext } from 'react';
-import { toast } from 'react-toastify';
+
 import FavoritesContext from '../../context/FavoritesContext';
+import Spinner from '../../components/UI/Spinner';
+import RecipeItem from '../../components/Recipes/RecipeItem';
+import classes from '../recipes/Recipes.module.scss';
 
 const Favorites = () => {
     const auth = getAuth();

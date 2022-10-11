@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+import { IonIcon } from '@ionic/react';
+import { trashOutline, openOutline } from 'ionicons/icons';
+
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 import classes from './ArticleItem.module.scss';
-import { IonIcon } from '@ionic/react';
-import { trashOutline, openOutline } from 'ionicons/icons';
 
 
 const ArticleItem = ({ article, id, onDelete, onEdit }) => {

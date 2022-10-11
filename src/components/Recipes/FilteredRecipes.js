@@ -1,15 +1,17 @@
-import classes from './FilteredRecipes.module.scss';
+
 import { useState, useRef, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import Select from 'react-select';
+
 import { diets, dishes, intolerances, cuisines } from '../../utils/constants';
 import client from '../../apis/client';
 import useApi from '../../hooks/useApi';
-import Button from '../UI/Button';
-import Select from 'react-select';
 import RecipeItem from './RecipeItem';
-import { toast } from 'react-toastify';
 import NoResults from '../UI/NoResults';
+import Button from '../UI/Button';
+import classes from './FilteredRecipes.module.scss';
 
-const FilteredRecipes = (props) => {
+const FilteredRecipes = () => {
   const [diet, setDiets] = useState('');
   const [dish, setDishes] = useState([]);
   const [intolerance, setIntolerances] = useState('');
@@ -24,6 +26,13 @@ const FilteredRecipes = (props) => {
   const getFilteredApi = useApi(getFiltered);
 
   const resetFilters = () => {
+    const isDietEmpty = diet.length === 0;
+    const isIntoleranceEmpty = intolerance.length === 0;
+    const isCuisineEmpty = cuisine.length === 0;
+    const isDishEmpty = dish.length === 0;
+
+    if (isDietEmpty && isIntoleranceEmpty && isCuisineEmpty && isDishEmpty) return;
+
     setDiets('');
     setDishes('');
     setIntolerances('');
@@ -82,7 +91,6 @@ const FilteredRecipes = (props) => {
 
   console.log(getFilteredApi.data?.results)
 
-
   return (
     <>
       <section className={classes['filters']}>
@@ -105,7 +113,7 @@ const FilteredRecipes = (props) => {
         {getFilteredApi.data?.results?.length !== 0 && getFilteredApi.data?.results.map((filtered) => {
           return (
             <RecipeItem key={filtered.id} recipe={filtered} />
-          )
+          );
         })}
       </section>
     </>

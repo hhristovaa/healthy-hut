@@ -1,5 +1,5 @@
-import classes from './Modal.module.scss';
 import ReactDOM from 'react-dom';
+import classes from './Modal.module.scss';
 
 const portalEl = document.getElementById('overlays');
 

@@ -1,18 +1,19 @@
-import HeroBanner from '../../components/UI/HeroBanner';
-import RecipeItem from '../../components/Recipes/RecipeItem';
-import Spinner from '../../components/UI/Spinner';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
 import { useEffect, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
-import useApi from '../../hooks/useApi';
-import client from '../../apis/client';
-import Button from '../../components/UI/Button';
-import FavoritesContext from '../../context/FavoritesContext';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { getAuth } from 'firebase/auth';
-import { add } from 'ionicons/icons';
+
+import { useAuthStatus } from '../../hooks/useAuthStatus';
+import useApi from '../../hooks/useApi';
+import client from '../../apis/client';
+import Button from '../../components/UI/Button';
+import HeroBanner from '../../components/UI/HeroBanner';
+import RecipeItem from '../../components/Recipes/RecipeItem';
+import Spinner from '../../components/UI/Spinner';
+import FavoritesContext from '../../context/FavoritesContext';
 
 //const apiKey = '2ed50f18cc1446178f98816f679672f1';
 const apiKey = 'a3577636ccd3420a92a088027e661830';
@@ -34,39 +35,54 @@ const Trending = () => {
     };
 
 
+    const {loggedIn, loadingStatus} = useAuthStatus();
+
     const getRandomApi = useApi(getRandom);
     const auth = getAuth();
 
     useEffect(() => {
-
-
-        getRandomApi.request();
+        // getRandomApi.request();
+        console.log(auth);
+        const fetchUserFavorites = async () => {
+            console.log('eho')
+            const userRef = doc(db, 'users', auth.currentUser.uid)
+            const docSnap = await getDoc(userRef);
+            let favs = [];
+            if (docSnap?.exists()) {
+                let userFavs = docSnap?.data()?.favorites;
+                setFavorites(userFavs);
+    
+                // addToFavorites(userFavs);
+             
+               
+                //  initFavorites(favorites);
+               
+                console.log(favs);
+            }
+        }
+    
+        fetchUserFavorites();
     }, []);
 
+    console.log(favorites)
 
+    const initFavs = () => {
+    console.log(favorites.length);
+    
+            //  initFavorites(favorites);
+    for (let rec of favorites) {
+        console.log(rec);
+        addToFavorites(rec);
+  
+    }
+    // initFavorites()
+      console.log(favoritesCtx);
 
-    const fetchUserFavorites = async () => {
-        console.log('eho')
-        const userRef = doc(db, 'users', auth.currentUser.uid)
-        const docSnap = await getDoc(userRef);
-        let favs = [];
-        if (docSnap?.exists()) {
-            let userFavs = docSnap?.data()?.favorites;
-            addToFavorites(userFavs)
-            // setFavorites(userFavs)
-            // favorites.map(recipe => {
-            //     console.log(recipe);
-            //     favs.push(recipe);
-            // });
-
-           
-            // initFavorites(favorites);
-           
-            console.log(favs);
-        }
     }
 
-    console.log(favorites)
+   if (loadingStatus) {
+        return <Spinner/>
+    }
 
     return (
         <>
@@ -93,17 +109,17 @@ const Trending = () => {
                         }
                     }}>
 
-                        {getRandomApi.data?.recipes.map((recipe) => {
+                        {/* {getRandomApi.data?.recipes.map((recipe) => {
                             return (
                                 <SplideSlide key={recipe.id}>
                                     <RecipeItem key={recipe.id} recipe={recipe} />
                                 </SplideSlide>
                             );
-                        })}
+                        })} */}
                     </Splide>
                 </section>
 
-                <Button version='primary' onClick={fetchUserFavorites}>Click here for magic</Button>
+                <Button version='primary' onClick={initFavs}>Click here for magic</Button>
             </main>
         </>
     )

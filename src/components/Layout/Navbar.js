@@ -1,11 +1,12 @@
-import classes from './Navbar.module.scss';
+import { useState, } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { IonIcon } from '@ionic/react';
+import { menuOutline, closeOutline, chevronDownOutline, chevronUpOutline } from 'ionicons/icons';
+
 import Button from '../UI/Button';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import HeaderFavIcon from './HeaderFavIcon';
-import { IonIcon } from '@ionic/react';
-import { menuOutline, closeOutline, chevronDownOutline, chevronUpOutline } from 'ionicons/icons';
-import { useState, } from 'react';
+import classes from './Navbar.module.scss';
 
 const Navbar = () => {
     const { loggedIn } = useAuthStatus();

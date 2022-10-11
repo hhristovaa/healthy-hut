@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './styles/Global.scss';
 import 'react-toastify/dist/ReactToastify.css';
+
 import PrivateRoute from './components/Layout/PrivateRoute';
 import Navbar from './components/Layout/Navbar';
 import Trending from './pages/home/Trending';

@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
-import classes from './HeaderFavIcon.module.scss';
 import { IonIcon } from '@ionic/react';
 import { heart } from 'ionicons/icons';
+
 import FavoritesContext from '../../context/FavoritesContext';
+import classes from './HeaderFavIcon.module.scss';
 
 const HeaderFavIcon = props => {
     const [btnIsAnimated, setBtnIsAnimated] = useState(false);

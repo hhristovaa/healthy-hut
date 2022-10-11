@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import {Link} from 'react-router-dom';
-import classes from './ForgotPassword.module.scss';
-import Button from '../UI/Button';
-import Input from '../UI/Input';
 import { homeOutline, personOutline } from 'ionicons/icons';
-import Modal from '../UI/Modal';
 import { IonIcon } from '@ionic/react';
 import { closeCircleOutline } from 'ionicons/icons';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+
+import Modal from '../UI/Modal';
+import Button from '../UI/Button';
+import Input from '../UI/Input';
+import classes from './ForgotPassword.module.scss';
 
 const ForgotPassword = (props) => {
     const [email, setEmail] = useState('');

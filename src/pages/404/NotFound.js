@@ -1,9 +1,9 @@
-import classes from './NotFound.module.scss';
-import notFoundSvg from '../../assets/svg/404.svg';
 import { Link } from 'react-router-dom';
 import { homeOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 
+import notFoundSvg from '../../assets/svg/404.svg';
+import classes from './NotFound.module.scss';
 
 const NotFound = () => {
     return (<main>

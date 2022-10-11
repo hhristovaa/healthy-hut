@@ -1,8 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
-import { toast } from 'react-toastify';
+
 import Button from '../UI/Button';
 import GoogleIcon from '../UI/GoogleIcon';
 

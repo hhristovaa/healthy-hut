@@ -1,12 +1,13 @@
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import { useEffect } from 'react';
+
 import RecipeItem from './RecipeItem';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
-import { useParams } from 'react-router-dom';
 import Spinner from '../UI/Spinner';
-import { toast } from 'react-toastify';
 
 const RecipeSlider = () => {
     let params = useParams();

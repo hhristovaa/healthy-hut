@@ -1,7 +1,8 @@
-import classes from './HeroBanner.module.scss';
-import ingredientsImage from '../../assets/ingredients.jpg';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import classes from './HeroBanner.module.scss';
+import ingredientsImage from '../../assets/ingredients.jpg';
 
 const HeroBanner = () => {
     const [searchInput, setSearchInput] = useState('');

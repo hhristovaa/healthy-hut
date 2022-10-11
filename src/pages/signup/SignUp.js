@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import classes from '../signin/SignIn.module.scss';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
-import { eyeOutline, eyeOffOutline, mailOutline, personOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
+import { eyeOutline, eyeOffOutline, mailOutline, personOutline } from 'ionicons/icons';
+
 import OAuth from '../../components/Layout/OAuth';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
+import classes from '../signin/SignIn.module.scss';
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);

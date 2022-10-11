@@ -1,15 +1,16 @@
 import { useState, useContext, useEffect } from 'react';
-import Spinner from '../UI/Spinner';
-import classes from './ToggleFavorites.module.scss';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import { IonIcon } from '@ionic/react';
 import { heart, heartOutline } from 'ionicons/icons';
-import FavoritesContext from '../../context/FavoritesContext';
 import { getAuth } from 'firebase/auth';
 import { updateDoc, doc, getDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { db } from '../../firebase.config';
-import { toast } from 'react-toastify';
+
 import { useAuthStatus } from '../../hooks/useAuthStatus';
-import { useNavigate } from 'react-router-dom';
+import FavoritesContext from '../../context/FavoritesContext';
+import Spinner from '../UI/Spinner';
+import classes from './ToggleFavorites.module.scss';
 
 const ToggleFavorites = (props) => {
 
@@ -44,10 +45,10 @@ const ToggleFavorites = (props) => {
 
         if (favorite) {
             onDelete(props.recipe.id);
-            removeFromFavorites.bind(null, props.recipe.id)
+            removeFromFavorites(props.recipe.id);
         } else {
             onSubmit(e);
-            addToFavorites.bind(null, props.recipe);
+            addToFavorites(props.recipe);
         }
         setFavorite(!favorite);
     }

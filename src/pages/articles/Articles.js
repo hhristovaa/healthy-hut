@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { collection, getDocs, query, where, orderBy, limit, startAfter, setDoc } from 'firebase/firestore';
-import { db } from '../../firebase.config';
 import { toast } from 'react-toastify';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase.config';
+
 import Spinner from '../../components/UI/Spinner';
 import ArticleItem from '../../components/Articles/ArticleItem';
 import classes from './Articles.module.scss';

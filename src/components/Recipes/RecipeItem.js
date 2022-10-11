@@ -1,8 +1,9 @@
-import classes from './RecipeItem.module.scss';
-import Card from '../UI/Card';
+import { Link } from 'react-router-dom';
 import { IonIcon } from '@ionic/react';
 import { timerOutline, manOutline } from 'ionicons/icons';
-import { Link } from 'react-router-dom';
+
+import Card from '../UI/Card';
+import classes from './RecipeItem.module.scss';
 
 const RecipeItem = (props) => {
     let recipe = props.recipe;

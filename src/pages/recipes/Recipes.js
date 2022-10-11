@@ -1,5 +1,6 @@
-import classes from './Recipes.module.scss';
 import FilteredRecipes from '../../components/Recipes/FilteredRecipes';
+
+import classes from './Recipes.module.scss';
 
 const Recipes = () => {
     return (

@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import RecipeItem from '../../components/Recipes/RecipeItem';
-import classes from './Recipes.module.scss';
+import Spinner from '../../components/UI/Spinner';
 import client from '../../apis/client';
 import useApi from '../../hooks/useApi';
-import Spinner from '../../components/UI/Spinner';
-import { toast } from 'react-toastify';
+import classes from './Recipes.module.scss';
 
 const SearchResult = () => {
     let params = useParams();

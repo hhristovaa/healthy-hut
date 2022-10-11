@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import RecipeItem from '../../components/Recipes/RecipeItem';
-import classes from './Recipes.module.scss';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import RecipeItem from '../../components/Recipes/RecipeItem';
 import Spinner from '../../components/UI/Spinner';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
 import { capitalizeFirstLetter } from '../../utils/utils';
-import { useParams } from 'react-router-dom';
+import classes from './Recipes.module.scss';
 
 const Cuisine = () => {
     let params = useParams();

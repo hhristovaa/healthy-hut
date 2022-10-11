@@ -1,5 +1,6 @@
-import classes from './Input.scss';
 import { IonIcon } from '@ionic/react';
+
+import classes from './Input.scss';
 
 const Input = (props) => (
     <fieldset className='form-group'>

@@ -1,12 +1,13 @@
 import { useEffect, useRef } from 'react';
+import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
+
 import RecipeItem from '../../components/Recipes/RecipeItem';
-import classes from './Recipes.module.scss';
+import NoResults from '../../components/UI/NoResults';
 import Spinner from '../../components/UI/Spinner';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
-import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
-import NoResults from '../../components/UI/NoResults';
+import classes from './Recipes.module.scss';
 
 const Specials = () => {
     const isMounted = useRef(true);

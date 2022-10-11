@@ -162,5 +162,6 @@ export const cuisines = [
 
 export const ACTIONS = {
     ADD: 'add',
-    REMOVE: 'remove'
-}
+    REMOVE: 'remove',
+    INIT: 'init'
+};

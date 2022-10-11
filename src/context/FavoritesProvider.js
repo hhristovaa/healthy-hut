@@ -1,9 +1,10 @@
 import { useReducer } from 'react';
-import FavoritesContext from './FavoritesContext';
-import { ACTIONS } from '../utils/constants';
+
 import { doc, getDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../firebase.config';
+import FavoritesContext from './FavoritesContext';
+import { ACTIONS } from '../utils/constants';
 import { useAuthStatus } from '../hooks/useAuthStatus';
 
 const defaultFavoritesState = {
@@ -53,10 +54,6 @@ const favoritesReducer = (state, action) => {
                 const userRef = doc(db, 'users', auth.currentUser.uid)
                 const docSnap = await getDoc(userRef);
 
-                console.log(`neshta:`);
-
-                console.dir(docSnap);
-
                 if (docSnap?.exists()) {
                     let userFavs = docSnap?.data()?.favorites;
 
@@ -70,6 +67,7 @@ const favoritesReducer = (state, action) => {
                 recipes: resultToReturn
             }
         }
+        console.log(resultToReturn)
 
     }
 
@@ -97,6 +95,8 @@ const FavoritesProvider = props => {
         removeRecipe: removeRecipeHandler,
         initRecipe: initRecipeHandler
     };
+
+
 
     return (
         <FavoritesContext.Provider value={favoritesContext}>

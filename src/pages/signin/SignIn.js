@@ -1,17 +1,18 @@
 import { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
-import classes from './SignIn.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase.config';
+import { eyeOutline, eyeOffOutline, personOutline } from 'ionicons/icons';
+import { IonIcon } from '@ionic/react';
+
 import OAuth from '../../components/Layout/OAuth';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
-import { eyeOutline, eyeOffOutline, personOutline } from 'ionicons/icons';
-import { IonIcon } from '@ionic/react';
 import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
 import FavoritesContext from '../../context/FavoritesContext';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../firebase.config';
+import classes from './SignIn.module.scss';
 
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);

@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase.config';
-import Spinner from '../../components/UI/Spinner';
-import classes from './Articles.module.scss';
 import { IonIcon } from '@ionic/react';
 import { calendarOutline, globeOutline } from 'ionicons/icons';
+
+import Spinner from '../../components/UI/Spinner';
+import classes from './Articles.module.scss';
 
 const FullArticle = () => {
     const [article, setArticle] = useState(null);

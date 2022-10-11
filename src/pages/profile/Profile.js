@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
-import { getAuth, updateProfile } from 'firebase/auth';
-import { updateDoc, doc, collection, getDocs, query, where, orderBy, deleteDoc } from 'firebase/firestore';
-import ArticleItem from '../../components/Articles/ArticleItem';
-import { db } from '../../firebase.config';
 import { toast } from 'react-toastify';
 import { useNavigate, Link } from 'react-router-dom';
-import classes from './Profile.module.scss';
-import Button from '../../components/UI/Button';
-import Input from '../../components/UI/Input';
 import { IonIcon } from '@ionic/react';
 import { personCircleOutline, mailOutline, personOutline } from 'ionicons/icons';
+import { getAuth, updateProfile } from 'firebase/auth';
+import { updateDoc, doc, collection, getDocs, query, where, orderBy, deleteDoc } from 'firebase/firestore';
+import { db } from '../../firebase.config';
 
+import ArticleItem from '../../components/Articles/ArticleItem';
+import Button from '../../components/UI/Button';
+import Input from '../../components/UI/Input';
+import classes from './Profile.module.scss';
 
 const Profile = () => {
     const auth = getAuth();

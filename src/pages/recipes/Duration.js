@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import RecipeItem from '../../components/Recipes/RecipeItem';
 import { toast } from 'react-toastify';
+
+import RecipeItem from '../../components/Recipes/RecipeItem';
 import Spinner from '../../components/UI/Spinner';
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';

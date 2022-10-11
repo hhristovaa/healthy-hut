@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import RecipeSlider from '../../components/Recipes/RecipeSlider';
-import classes from './Recipes.module.scss';
+import { toast } from 'react-toastify';
 import { IonIcon } from '@ionic/react';
 import { restaurantOutline, globeOutline, starOutline, timerOutline, manOutline, flagOutline, cashOutline, nutrition, leafOutline } from 'ionicons/icons';
-import Spinner from '../../components/UI/Spinner';
-import { toast } from 'react-toastify';
+
 import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
+import Spinner from '../../components/UI/Spinner';
 import ToggleFavorites from '../../components/Favorites/ToggleFavorites';
+import RecipeSlider from '../../components/Recipes/RecipeSlider';
+import classes from './Recipes.module.scss';
 
 const FullRecipe = () => {
     let params = useParams();
@@ -18,8 +19,8 @@ const FullRecipe = () => {
     //const apiKey = 'b44514ae9c644024a55ec4e856cf0fd2';
     const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${apiKey}`;
 
-   // const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionLabel.png?showOptionalNutrients=false&showZeroValues=false&showIngredients=false&apiKey=${apiKey}`
-  // const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionLabel?defaultCss=true&showOptionalNutrients=false&showZeroValues=false&showIngredients=false&apiKey=${apiKey}`
+    // const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionLabel.png?showOptionalNutrients=false&showZeroValues=false&showIngredients=false&apiKey=${apiKey}`
+    // const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionLabel?defaultCss=true&showOptionalNutrients=false&showZeroValues=false&showIngredients=false&apiKey=${apiKey}`
     const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionWidget?defaultCss=true&apiKey=${apiKey}`
 
 
@@ -47,22 +48,21 @@ const FullRecipe = () => {
                 <aside className={classes['recipe__header-container']}>
                     <img src={getDetailsApi.data?.image} alt={getDetailsApi.data?.title} />
                     <ToggleFavorites recipe={getDetailsApi.data} />
-    
-                    <div className={classes['recipe__ingredients']}>
-                    <h4 className={classes['recipe__desc-title']}>Ingredients</h4>
-                    <ul>
-                        {getDetailsApi.data?.extendedIngredients?.map((ingredient) => (
-                            <li key={ingredient.id}>{ingredient.original}</li>
-                        ))}
-                    </ul>
 
-                </div>
-       
+                    <div className={classes['recipe__ingredients']}>
+                        <h4 className={classes['recipe__desc-title']}>Ingredients</h4>
+                        <ul>
+                            {getDetailsApi.data?.extendedIngredients?.map((ingredient) => (
+                                <li key={ingredient.id}>{ingredient.original}</li>
+                            ))}
+                        </ul>
+
+                    </div>
+
                 </aside>
                 <article className={classes['recipe__header-info']}>
                     <h3 className={classes['recipe__header-title']}>{getDetailsApi.data?.title}</h3>
                     <p dangerouslySetInnerHTML={{ __html: getDetailsApi.data?.summary }}></p>
-
                     <div className={classes['recipe__header-details']}>
                         <span>  <IonIcon icon={manOutline} /> {getDetailsApi.data?.servings} Servings</span>
                         <span> <IonIcon icon={timerOutline} /> {getDetailsApi.data?.readyInMinutes} Minutes</span>
@@ -92,9 +92,12 @@ const FullRecipe = () => {
                 )}
             </section>
             <section className={classes['recipe__facts']}>
-            <h4 className={classes['recipe__desc-title']}>Nutrition Facts per Serving</h4>
-            <div className={classes['recipe__nutrition']} dangerouslySetInnerHTML={{ __html: getNutritionApi.data }}></div>
-
+                <h4 className={classes['recipe__desc-title']}>
+                    Nutrition Facts per Serving
+                </h4>
+                {/* <div className={classes['recipe__nutrition']}
+                    dangerouslySetInnerHTML={{ __html: getNutritionApi?.data }}>
+                </div> */}
             </section>
 
             {/* <RecipeSlider recipeId={params.recipeId}/> */}
