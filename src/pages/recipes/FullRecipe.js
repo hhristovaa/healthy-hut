@@ -95,9 +95,12 @@ const FullRecipe = () => {
                 <h4 className={classes['recipe__desc-title']}>
                     Nutrition Facts per Serving
                 </h4>
-                {/* <div className={classes['recipe__nutrition']}
+                {/* {getNutritionApi?.data ? (<div className={classes['recipe__nutrition']}
                     dangerouslySetInnerHTML={{ __html: getNutritionApi?.data }}>
-                </div> */}
+                </div>) : (
+                    <p>Currently the nutrition facts are not available.</p>
+                )} */}
+
             </section>
 
             {/* <RecipeSlider recipeId={params.recipeId}/> */}

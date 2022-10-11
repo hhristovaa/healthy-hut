@@ -35,14 +35,13 @@ const Trending = () => {
     };
 
 
-    const {loggedIn, loadingStatus} = useAuthStatus();
+    const { loggedIn, loadingStatus } = useAuthStatus();
 
     const getRandomApi = useApi(getRandom);
     const auth = getAuth();
 
     useEffect(() => {
         // getRandomApi.request();
-        console.log(auth);
         const fetchUserFavorites = async () => {
             console.log('eho')
             const userRef = doc(db, 'users', auth.currentUser.uid)
@@ -51,37 +50,35 @@ const Trending = () => {
             if (docSnap?.exists()) {
                 let userFavs = docSnap?.data()?.favorites;
                 setFavorites(userFavs);
-    
+
                 // addToFavorites(userFavs);
-             
-               
+
+
                 //  initFavorites(favorites);
-               
                 console.log(favs);
             }
         }
-    
+
         fetchUserFavorites();
     }, []);
 
     console.log(favorites)
 
     const initFavs = () => {
-    console.log(favorites.length);
-    
-            //  initFavorites(favorites);
-    for (let rec of favorites) {
-        console.log(rec);
-        addToFavorites(rec);
-  
-    }
-    // initFavorites()
-      console.log(favoritesCtx);
+
+        //  initFavorites(favorites);
+        for (let rec of favorites) {
+            console.log(rec);
+            addToFavorites(rec);
+
+        }
+        //initFavorites(favorites)
+        console.log(favoritesCtx);
 
     }
 
-   if (loadingStatus) {
-        return <Spinner/>
+    if (loadingStatus) {
+        return <Spinner />
     }
 
     return (

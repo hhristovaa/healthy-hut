@@ -67,7 +67,6 @@ const favoritesReducer = (state, action) => {
                 recipes: resultToReturn
             }
         }
-        console.log(resultToReturn)
 
     }
 

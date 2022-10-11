@@ -61,7 +61,6 @@ const ToggleFavorites = (props) => {
         setFavorite(newFavoriteRecipe);
         setFavRecipeData({
             ...props.recipe
-
         });
 
     }, [favorite, recipes, props]);
