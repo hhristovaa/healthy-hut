@@ -2,42 +2,37 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import { useQuery } from 'react-query';
+
 import RecipeItem from '../../components/Recipes/RecipeItem';
 import Spinner from '../../components/UI/Spinner';
-import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
 import { capitalizeFirstLetter } from '../../utils/utils';
 import classes from './Recipes.module.scss';
 
 const Cuisine = () => {
     let params = useParams();
-    const getCuisine = (type) => client.get(`&cuisine=${type}`);
-    const getCuisineApi = useApi(getCuisine);
+    const getCuisine = async (params) => await client.get(`&cuisine=${params.type}`);
 
-    useEffect(() => {
-        getCuisineApi.request(params.type)
-    }, [params.type]);
+    const { isLoading, isError, error, data } = useQuery(['cuisine', params.type], () => getCuisine(params));
 
     let title = capitalizeFirstLetter(params.type);
 
-    // let isCuisineInStorage = localStorage.getItem(params.type);
+    let content;
 
-    // if (isCuisineInStorage) {
-    //     let JSONcuisine = JSON.parse(isCuisineInStorage);
-    //     setCuisine(JSONcuisine);
-    // } else {
-    //     getCuisineApi.request(params.type)
-    //     setCuisine(getCuisineApi.data?.results);
-    // }
-
+    if (isLoading) {
+        return <Spinner />
+    } else if (isError) {
+        return toast.error(error.message)
+    } else {
+        content = data;
+    }
 
     return (
         <main>
-            {getCuisineApi.loading && <Spinner />}
-            {getCuisineApi.error && toast.error(getCuisineApi.error)}
             <h1 className={classes['g-title']}>{title}</h1>
             <section className={classes['recipes__container']}>
-                {getCuisineApi.data?.results.map((item) => {
+                {content?.data?.results.map((item) => {
                     return (
                         <RecipeItem key={item.id} recipe={item} />
                     )

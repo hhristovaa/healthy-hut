@@ -1,31 +1,34 @@
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import {useQuery} from 'react-query';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 
 import RecipeItem from './RecipeItem';
-import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
 import Spinner from '../UI/Spinner';
 
 const RecipeSlider = () => {
     let params = useParams();
     const apiKey = '2ed50f18cc1446178f98816f679672f1';
-    const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/similar/?apiKey=${apiKey}`
-    const getSimilar = (params) => client.get(BASE_URL)
-    const getSimilarApi = useApi(getSimilar);
+    const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/similar/?apiKey=${apiKey}&number=6`
+    const getSimilar = () => client.get(BASE_URL)
 
-    useEffect(() => {
-        getSimilarApi.request(params.recipeId);
-    }, [params.recipeId]);
+    const { isLoading, isError, error, data } = useQuery(['similar', params.recipeId], getSimilar);
 
-    console.log(getSimilarApi.data.length);
+    let content;
+
+
+    if (isLoading) {
+        return <Spinner />
+    } else if (isError) {
+        return toast.error(error.message)
+    } else {
+        content = data;
+    }
+
     return (
         <section>
-            {getSimilarApi.loading && <Spinner />}
-            {getSimilarApi.error && toast.error(getSimilarApi.error)}
-
             <h2>Similar Recipes</h2>
             <Splide options={{
                 perPage: 4,
@@ -43,7 +46,7 @@ const RecipeSlider = () => {
                     }
                 }
             }}>         
-                 {getSimilarApi?.data?.map((recipe) => {
+                 {content?.data?.map((recipe) => {
                     return (
                         <SplideSlide key={recipe.id}>
                             <RecipeItem key={recipe.id} recipe={recipe}/>

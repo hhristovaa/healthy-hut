@@ -1,33 +1,36 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useQuery } from 'react-query';
+
 
 import RecipeItem from '../../components/Recipes/RecipeItem';
 import Spinner from '../../components/UI/Spinner';
 import client from '../../apis/client';
-import useApi from '../../hooks/useApi';
 import classes from './Recipes.module.scss';
 
 const SearchResult = () => {
     let params = useParams();
 
-    const getSearched = (query) => client.get(`&query=${query}`);
+    const getSearched = (params) => client.get(`&query=${params.search}`);
 
-    const getSearchedApi = useApi(getSearched);
+    const { isLoading, isError, error, data } = useQuery(['searched', params.search], () => getSearched(params));
 
-    useEffect(() => {
-        getSearchedApi.request(params.search);
-    }, [params.search])
+    let content;
+
+    if (isLoading) {
+        return <Spinner />
+    } else if (isError) {
+        return toast.error(error.message)
+    } else {
+        content = data;
+    }
 
     return (
         <main>
-            <h1 className={classes['g-title']}>Search Results</h1>
-
-            {getSearchedApi.loading && <Spinner />}
-            {getSearchedApi.error && toast.error(getSearchedApi.error)}
-
+            <h1 className={classes['g-title']}>Search Results</h1>     
             <section className={classes['recipes__container']}>
-                {getSearchedApi.data?.results.map((recipe) => {
+                {content?.data?.results.map((recipe) => {
                     return (
                         <RecipeItem key={recipe.id} recipe={recipe}/>
                     )
