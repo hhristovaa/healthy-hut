@@ -112,8 +112,8 @@ const SignUp = () => {
                 </div>
             </form>
             <div className={classes['btn-container__social']}>
-                <OAuth />
-                <strong>OR</strong>
+                {/* <OAuth />
+                <strong>OR</strong> */}
                 <Link to='/sign-in' className={classes['signup-url']}>Log In Instead</Link>
             </div>
         </main>

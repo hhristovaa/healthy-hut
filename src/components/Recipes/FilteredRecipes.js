@@ -1,9 +1,8 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
 
-import { diets, dishes, intolerances, cuisines } from '../../utils/constants';
+import { DIETS, DISHES, INTOLERANCES, CUISINES } from '../../utils/constants';
 import client from '../../apis/client';
 import useApi from '../../hooks/useApi';
 import RecipeItem from './RecipeItem';
@@ -16,6 +15,7 @@ const FilteredRecipes = () => {
   const [dish, setDishes] = useState([]);
   const [intolerance, setIntolerances] = useState('');
   const [cuisine, setCuisines] = useState('');
+
   const dietSelectInputRef = useRef();
   const dishSelectInputRef = useRef();
   const intoleranceSelectInputRef = useRef();
@@ -83,23 +83,23 @@ const FilteredRecipes = () => {
   }
 
   useEffect(() => {
-
+    const controller = new AbortController();
     getFilteredApi.request(diet, dish, intolerance, cuisine);
 
+    return () => controller.abort();
   }, [diet, dish, intolerance, cuisine])
 
 
-  console.log(getFilteredApi.data?.results)
 
   return (
     <>
       <section className={classes['filters']}>
         <form className={classes['filters__form']} onSubmit={submitFilters}>
           <fieldset className={classes['filters__form-section']} >
-            <Select ref={dietSelectInputRef} name='diets' options={diets} isClearable={true} placeholder='Select a diet' />
-            <Select ref={dishSelectInputRef} name='dishes' options={dishes} isMulti isClearable={true} placeholder='Select a dish' />
-            <Select ref={cuisineSelectInputRef} name='cuisines' options={cuisines} isClearable={true} placeholder='Select a cuisine' />
-            <Select ref={intoleranceSelectInputRef} name='intolerances' options={intolerances} isClearable={true} placeholder='Select an intolerance' />
+            <Select ref={dietSelectInputRef} name='diets' options={DIETS} isClearable={true} placeholder='Select a diet' />
+            <Select ref={dishSelectInputRef} name='dishes' options={DISHES} isMulti isClearable={true} placeholder='Select a dish' />
+            <Select ref={cuisineSelectInputRef} name='cuisines' options={CUISINES} isClearable={true} placeholder='Select a cuisine' />
+            <Select ref={intoleranceSelectInputRef} name='intolerances' options={INTOLERANCES} isClearable={true} placeholder='Select an intolerance' />
           </fieldset>
           <div className={classes['filters__actions']}>
             <Button type='submit' version='secondary'>Filter</Button>

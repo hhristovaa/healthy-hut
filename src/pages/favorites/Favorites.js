@@ -14,26 +14,9 @@ const Favorites = () => {
     const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // const favoritesItems = (
-    //     <section className={classes['recipes__container']}>
-    //         {favoritesCtx.recipes.map(recipe => {
-    //             return (
-    //                 <RecipeItem
-    //                     key={recipe.id}
-    //                     recipe={recipe}
-    //                 />
-    //             );
-    //         })}
-    //     </section>
-    // );
-
-
-
-
     useEffect(() => {
         const controller = new AbortController();
       
-
         const fetchUserFavorites = async () => {
             try {
                 const userRef = doc(db, 'users', auth.currentUser.uid)

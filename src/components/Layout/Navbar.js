@@ -29,8 +29,8 @@ const Navbar = () => {
                 <NavLink className={isLinkActive} to={'/'} onClick={closeMobileMenu}>Home</NavLink>
                 <NavLink className={isLinkActive} to={'/recipes'} onClick={closeMobileMenu}>All Recipes</NavLink>
                 <span className={classes['dropdown-menu']}>
-                    {!isMobile && <NavLink className={isLinkActive} to={'/categories'}>Categories
-                        <IonIcon icon={chevronDownOutline} />  </NavLink>
+                    {!isMobile && <span className={classes['navbar__item']}>Categories
+                        <IonIcon icon={chevronDownOutline} />  </span>
                     }
                     {isMobile && <span className={classes['navbar__item']} onClick={() => setIsDropdown(!isDropdown)}>Categories
                         <IonIcon icon={isDropdown ? chevronDownOutline : chevronUpOutline} />  </span>
@@ -70,6 +70,7 @@ const Navbar = () => {
                         </div>
                         <div className={classes['submenu__section']}>
                             <p>Special Recipes</p>
+                            <NavLink to={'/duration/30'} onClick={closeMobileMenu}> Up to 30 Minutes </NavLink>
                             <NavLink to={'/specials/cheap'} onClick={closeMobileMenu}> Budget Recipies </NavLink>
                             <NavLink to={'/specials/veryHealthy'} onClick={closeMobileMenu}> Super Healthy Recipes </NavLink>
                             <NavLink to={'/specials/sustainable'} onClick={closeMobileMenu}>Sustainable Recipes </NavLink>

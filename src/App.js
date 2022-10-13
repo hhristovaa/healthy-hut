@@ -40,7 +40,7 @@ function App() {
           <Route path='/search/:search' element={<SearchResult />} />
           <Route path='/recipe/:recipeId' element={<FullRecipe />} />
           <Route path='/diet/:type' element={<Diet />} />
-          <Route path='/duration/:minutes' element={<Duration />} />
+          <Route path='/duration/30' element={<Duration />} />
           <Route path='/dish/:type' element={<Dish />} />
           <Route path='/cuisine/:type' element={<Cuisine />} />
           <Route path='/specials/:type' element={<Specials />} />

@@ -7,6 +7,7 @@ import '@splidejs/react-splide/css';
 import RecipeItem from './RecipeItem';
 import client from '../../apis/client';
 import Spinner from '../UI/Spinner';
+import { SLIDER_OPTIONS } from '../../utils/constants';
 
 const RecipeSlider = () => {
     let params = useParams();
@@ -30,22 +31,7 @@ const RecipeSlider = () => {
     return (
         <section>
             <h2>Similar Recipes</h2>
-            <Splide options={{
-                perPage: 4,
-                gap: '5rem',
-                perMove: 1,
-                breakpoints: {
-                    986: {
-                        perPage: 3
-                    },
-                    640: {
-                        perPage: 2
-                    },
-                    425: {
-                        perPage: 1
-                    }
-                }
-            }}>         
+            <Splide options={SLIDER_OPTIONS}>         
                  {content?.data?.map((recipe) => {
                     return (
                         <SplideSlide key={recipe.id}>

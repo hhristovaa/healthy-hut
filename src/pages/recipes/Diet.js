@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 
 import Spinner from '../../components/UI/Spinner';
 import RecipeItem from '../../components/Recipes/RecipeItem';
@@ -30,7 +30,7 @@ const Diet = () => {
     return (
         <main>
             <h1 className={classes['g-title']}>{title}</h1>
-            <section className={classes['recipes__container']}>            
+            <section className={classes['recipes__container']}>
                 {content?.data?.results.map((item) => {
                     return (
                         <RecipeItem key={item.id} recipe={item} />

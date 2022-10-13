@@ -100,8 +100,8 @@ const SignIn = () => {
             </form>
             <div className={classes['btn-container__social']}>
                 <Button version='primary' type='submit' onClick={onSubmit}>Log In</Button>
-                <strong>OR</strong>
-                <OAuth />
+                {/* <strong>OR</strong>
+                <OAuth /> */}
             </div>
         </main>
     );

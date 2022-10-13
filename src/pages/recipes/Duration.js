@@ -1,32 +1,32 @@
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { useQuery } from 'react-query';
 
 import RecipeItem from '../../components/Recipes/RecipeItem';
 import Spinner from '../../components/UI/Spinner';
-import useApi from '../../hooks/useApi';
 import client from '../../apis/client';
 import classes from './Recipes.module.scss';
 
 const Duration = () => {
-    let params = useParams();
 
-    const getDuration = (minutes) => client.get(`&maxReadyTime=${minutes}`);
-    const getDurationApi = useApi(getDuration);
+    const getDuration = () => client.get(`&maxReadyTime=${30}`);
 
-    useEffect(() => {
-        getDurationApi.request(params.minutes)
+    const { isLoading, isError, error, data } = useQuery('duration', getDuration);
 
-    }, [params.minutes]);
+    let content;
+
+    if (isLoading) {
+        return <Spinner />
+    } else if (isError) {
+        return toast.error(error.message)
+    } else {
+        content = data;
+    }
 
     return (
         <main>
-            {console.log(getDurationApi.data?.results)}
-            {getDurationApi.loading && <Spinner />}
-            {getDurationApi.error && toast.error(getDurationApi.error)}
-            <h1 className={classes['g-title']}>Up to {params.minutes} Minutes</h1>
+            <h1 className={classes['g-title']}>Up to 30 Minutes</h1>
             <section className={classes['recipes__container']}>
-                {getDurationApi.data?.results.map((item) => {
+                {content.data?.results.map((item) => {
                     return (
                         <RecipeItem key={item.id} recipe={item} />
                     )

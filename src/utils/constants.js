@@ -1,4 +1,4 @@
-export const diets = [
+export const DIETS = [
     {
         'value': 'vegan',
         'label': 'Vegan'
@@ -31,7 +31,7 @@ export const diets = [
     }
 ];
 
-export const dishes = [
+export const DISHES = [
     {
         'value': 'breakfast',
         'label': 'Breakfast'
@@ -74,7 +74,7 @@ export const dishes = [
     }
 ];
 
-export const intolerances = [
+export const INTOLERANCES = [
     {
         'value': 'dairy',
         'label': 'Dairy'
@@ -117,7 +117,7 @@ export const intolerances = [
     }
 ];
 
-export const cuisines = [
+export const CUISINES = [
     {
         'value': 'american',
         'label': 'American'
@@ -164,4 +164,23 @@ export const ACTIONS = {
     ADD: 'add',
     REMOVE: 'remove',
     INIT: 'init'
+};
+
+export const SLIDER_OPTIONS = {
+    perPage: 4,
+    gap: '5rem',
+    perMove: 1,
+    rewind: true,
+    rewindSpeed: 3000,
+    breakpoints: {
+        986: {
+            perPage: 3
+        },
+        640: {
+            perPage: 2
+        },
+        425: {
+            perPage: 1
+        }
+    }
 };

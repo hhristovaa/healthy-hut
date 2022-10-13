@@ -16,6 +16,13 @@
         margin-left: 2rem;
     }
 
+    .logo {
+        font-family: 'Pacifico', cursive;
+        font-size: 24px;
+        line-height: 63px;
+        color: $color-secondary;
+        text-decoration: none;
+    }
 }
 
 .navbar {
@@ -39,6 +46,11 @@
         ion-icon {
             margin-left: .5rem;
             vertical-align: text-top;
+        }
+
+
+        &.is-active {
+            color: $color-secondary;
         }
     }
 }
@@ -73,16 +85,36 @@
     }
 }
 
-.logo {
-    font-family: 'Pacifico', cursive;
-    font-size: 24px;
-    line-height: 63px;
-    color: $color-secondary;
-    text-decoration: none;
-}
 
-.is-active {
-    color: $color-secondary;
+@include hover {
+    .navbar__item {
+        &:hover {
+            color: $color-secondary-light;
+            transition: ease-in-out all 0.4s;
+
+
+        }
+    }
+
+    .submenu__section {
+        a:hover {
+            color: $color-secondary-light;
+            transition: ease-in-out all 0.4s;
+        }
+    }
+
+    .dropdown-menu {
+        &:hover {
+            .submenu {
+                display: flex;
+                transition: ease-in-out all 0.4s;
+            }
+
+            ion-icon {
+                transform: rotate(180deg);
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -128,7 +160,6 @@
         display: none;
     }
 
-
     .dropdown-menu {
         @include flex-setup($direction: column, $alItems: center);
         position: relative;
@@ -143,36 +174,6 @@
 
             &.is-hidden {
                 display: none;
-            }
-        }
-    }
-
-}
-
-@include hover {
-    .navbar__item {
-        &:hover {
-            color: $color-secondary-light;
-            transition: ease-in-out all 0.4s;
-
-            ion-icon {
-                transform: rotate(180deg);
-            }
-        }
-    }
-
-    .submenu__section {
-        a:hover {
-            color: $color-secondary-light;
-            transition: ease-in-out all 0.4s;
-        }
-    }
-
-    .dropdown-menu {
-        &:hover {
-            .submenu {
-                display: flex;
-                transition: ease-in-out all 0.4s;
             }
         }
     }
