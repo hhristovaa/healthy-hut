@@ -4,6 +4,7 @@ import { getDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { IonIcon } from '@ionic/react';
 import { calendarOutline, globeOutline } from 'ionicons/icons';
+import { motion } from 'framer-motion';
 
 import Spinner from '../../components/UI/Spinner';
 import classes from './Articles.module.scss';
@@ -17,7 +18,7 @@ const FullArticle = () => {
 
     useEffect(() => {
         const controller = new AbortController();
-        
+
         const fetchArticle = async () => {
             const docRef = doc(db, 'articles', params.articleId);
             const docSnap = await getDoc(docRef);
@@ -40,17 +41,22 @@ const FullArticle = () => {
     }
 
     return (
-        <main>
+        <motion.main
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 3 }}
+        >
             <h1 className={classes['g-heading']}>{article.name}</h1>
             <section className={classes.article}>
                 <div className={classes['article__img']}><img src={article.imageUrl} alt={article.name} /></div>
                 <p className={classes['article__content']}>{article.content}</p>
                 <div className={classes['article__source']}>
-                <a className={classes['article__source-url']} href={article.source} target='_blank' rel='noreferrer'><IonIcon icon={globeOutline} />{article.source}</a>
+                    <a className={classes['article__source-url']} href={article.source} target='_blank' rel='noreferrer'><IonIcon icon={globeOutline} />{article.source}</a>
                 </div>
                 <span className={classes['article__date']} ><IonIcon icon={calendarOutline} />{articleDate.toLocaleDateString('en-GB')}</span>
             </section>
-        </main>
+        </motion.main>
     )
 
 }

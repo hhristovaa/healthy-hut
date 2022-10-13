@@ -4,10 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
+import {motion} from 'framer-motion';
 import { IonIcon } from '@ionic/react';
 import { eyeOutline, eyeOffOutline, mailOutline, personOutline } from 'ionicons/icons';
 
-import OAuth from '../../components/Layout/OAuth';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
 import classes from '../signin/SignIn.module.scss';
@@ -65,7 +65,12 @@ const SignUp = () => {
     }
 
     return (
-        <main>
+        <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 3 }}
+    >
             <h1 className={classes['g-title']}>Welcome!</h1>
             <form className={classes.form} onSubmit={onSubmit}>
                 <Input
@@ -112,11 +117,9 @@ const SignUp = () => {
                 </div>
             </form>
             <div className={classes['btn-container__social']}>
-                {/* <OAuth />
-                <strong>OR</strong> */}
                 <Link to='/sign-in' className={classes['signup-url']}>Log In Instead</Link>
             </div>
-        </main>
+        </motion.main>
     );
 }
 

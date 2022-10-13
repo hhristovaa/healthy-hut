@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useQuery } from 'react-query';
+import { motion } from 'framer-motion';
 import { IonIcon } from '@ionic/react';
 import { restaurantOutline, globeOutline, starOutline, timerOutline, manOutline, flagOutline, cashOutline, nutrition, leafOutline } from 'ionicons/icons';
 
@@ -67,7 +68,12 @@ const FullRecipe = () => {
 
 
     return (
-        <main>
+        <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 3 }}
+    >
             <section className={classes['recipe__header']}>
                 <aside className={classes['recipe__header-container']}>
                     <img src={content.data?.image} alt={content.data?.title} />
@@ -129,7 +135,7 @@ const FullRecipe = () => {
             </section>
 
          <RecipeSlider recipeId={params.recipeId}/>
-        </main>
+        </motion.main>
 
     )
 

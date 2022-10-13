@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
 import { useQuery } from 'react-query';
+import { motion } from 'framer-motion';
 
 import RecipeItem from '../../components/Recipes/RecipeItem';
 import Spinner from '../../components/UI/Spinner';
@@ -23,7 +24,12 @@ const Duration = () => {
     }
 
     return (
-        <main>
+        <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 3 }}
+    >
             <h1 className={classes['g-title']}>Up to 30 Minutes</h1>
             <section className={classes['recipes__container']}>
                 {content.data?.results.map((item) => {
@@ -32,7 +38,7 @@ const Duration = () => {
                     )
                 })}
             </section>
-        </main>
+        </motion.main>
     )
 }
 

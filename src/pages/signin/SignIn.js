@@ -6,6 +6,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { eyeOutline, eyeOffOutline, personOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
+import { motion } from 'framer-motion';
 
 import OAuth from '../../components/Layout/OAuth';
 import Button from '../../components/UI/Button';
@@ -65,10 +66,13 @@ const SignIn = () => {
     }
 
     return (
-        <main>
-
+        <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 3 }}
+    >
             <h1 className={classes['g-title']}>Welcome Back!</h1>
-
             <form className={classes.form} >
                 <Input type='email'
                     placeholder='Email'
@@ -100,10 +104,8 @@ const SignIn = () => {
             </form>
             <div className={classes['btn-container__social']}>
                 <Button version='primary' type='submit' onClick={onSubmit}>Log In</Button>
-                {/* <strong>OR</strong>
-                <OAuth /> */}
             </div>
-        </main>
+        </motion.main>
     );
 }
 

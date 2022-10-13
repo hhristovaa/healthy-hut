@@ -7,6 +7,7 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { v4 as uuid4 } from 'uuid';
 import { uuidv4 } from '@firebase/util';
+import { motion } from 'framer-motion';
 
 import Spinner from '../../components/UI/Spinner';
 import Button from '../../components/UI/Button';
@@ -164,7 +165,12 @@ const CreateArticle = () => {
     }
 
     return (
-        <main>
+        <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 3 }}
+    >
             <h1 className={classes['g-title']}>Create Article</h1>
             <form className={classes['articles__form']} onSubmit={onSubmit}>
                 <Input type='text' id='name' label='Name' onChange={onChange} value={name} />
@@ -174,7 +180,7 @@ const CreateArticle = () => {
                 <span className={classes['articles__img-label']}>{file ? file?.name : 'No file chosen'}</span>
                 <Button type='submit' version='primary'>Create Article</Button>
             </form>
-        </main>
+        </motion.main>
 
     )
 }

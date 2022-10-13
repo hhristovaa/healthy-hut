@@ -6,6 +6,7 @@ import { personCircleOutline, mailOutline, personOutline } from 'ionicons/icons'
 import { getAuth, updateProfile } from 'firebase/auth';
 import { updateDoc, doc, collection, getDocs, query, where, orderBy, deleteDoc } from 'firebase/firestore';
 import { db } from '../../firebase.config';
+import { motion } from "framer-motion";
 
 import ArticleItem from '../../components/Articles/ArticleItem';
 import Button from '../../components/UI/Button';
@@ -96,7 +97,14 @@ const Profile = () => {
     const onEdit = (articleId) => navigate(`/edit-article/${articleId}`);
 
     return (
-        <main>
+        <motion.main
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{
+                duration: 2
+            }}
+        >
             <h1 className={classes['g-title']}>Profile</h1>
             <section className={classes['personal-details']}>
                 <h3 className={classes['g-description']}>Personal Details</h3>
@@ -159,7 +167,7 @@ const Profile = () => {
                     </section>
                 )}
             </section>
-        </main>
+        </motion.main>
     )
 }
 

@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase.config';
+import { motion } from 'framer-motion';
 
 import Spinner from '../../components/UI/Spinner';
 import ArticleItem from '../../components/Articles/ArticleItem';
 import classes from './Articles.module.scss';
+import NoResults from '../../components/UI/NoResults';
 
 const Articles = () => {
     const [articles, setArticles] = useState(null);
@@ -40,7 +42,12 @@ const Articles = () => {
     }, []);
 
     return (
-        <main>
+        <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 3 }}
+    >
             <h1 className={classes['g-title']}>All Articles</h1>
             {loading ? (<Spinner />) : articles && articles.length > 0 ? (
                 <section className={classes.articles}>{articles.map((article) => (
@@ -50,8 +57,8 @@ const Articles = () => {
                 </section>
 
 
-            ) : (<h3>No articles</h3>)}
-        </main>
+            ) : <NoResults/>}
+        </motion.main>
     )
 }
 

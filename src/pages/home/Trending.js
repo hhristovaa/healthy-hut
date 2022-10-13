@@ -6,6 +6,7 @@ import '@splidejs/react-splide/css';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { motion } from 'framer-motion';
 
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 
@@ -109,24 +110,31 @@ const Trending = () => {
 
     return (
         <>
-            <HeroBanner />
-            <main>
-                <h1>Trending Recipes</h1>
-                <section>
-                    <Splide options={SLIDER_OPTIONS}>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 3 }}
+            >
+                <HeroBanner />
+                <main>
+                    <h1>Trending Recipes</h1>
+                    <section>
+                        <Splide options={SLIDER_OPTIONS}>
 
-                        {/* {content?.data?.recipes.map((recipe) => {
+                            {/* {content?.data?.recipes.map((recipe) => {
                             return (
                                 <SplideSlide key={recipe.id}>
                                     <RecipeItem key={recipe.id} recipe={recipe} />
                                 </SplideSlide>
                             );
                         })} */}
-                    </Splide>
-                </section>
+                        </Splide>
+                    </section>
 
-                <Button version='primary' onClick={initFavs}>Click here for magic</Button>
-            </main>
+                    <Button version='primary' onClick={initFavs}>Click here for magic</Button>
+                </main>
+            </motion.div>
         </>
     )
 }

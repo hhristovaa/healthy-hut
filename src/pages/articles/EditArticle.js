@@ -4,6 +4,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { doc, updateDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
+import { motion } from 'framer-motion';
 
 import Spinner from '../../components/UI/Spinner';
 import Button from '../../components/UI/Button';
@@ -118,7 +119,12 @@ const EditArticle = () => {
     }
 
     return (
-        <main>
+        <motion.main
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 3 }}
+        >
             <h1 className={classes['g-title']}>Edit Article</h1>
             <form onSubmit={onSubmit} className={classes['articles__form']}>
                 <Input type='text' id='name' label='Name' onChange={onChange} value={name} />
@@ -126,7 +132,7 @@ const EditArticle = () => {
                 <Input multiline type='text' id='content' label='Content' onChange={onChange} value={content} />
                 <Button type="submit" version='change'>Edit Article</Button>
             </form>
-        </main>
+        </motion.main>
     )
 }
 
