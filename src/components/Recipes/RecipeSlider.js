@@ -15,6 +15,7 @@ const RecipeSlider = () => {
     const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/similar/?apiKey=${apiKey}&number=6`
     const getSimilar = () => client.get(BASE_URL)
 
+
     const { isLoading, isError, error, data } = useQuery(['similar', params.recipeId], getSimilar);
 
     let content;
@@ -28,7 +29,9 @@ const RecipeSlider = () => {
         content = data;
     }
 
+
     return (
+
         <section>
             <h2>Similar Recipes</h2>
             <Splide options={SLIDER_OPTIONS}>         

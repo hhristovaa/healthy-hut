@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
@@ -24,6 +25,12 @@ root.render(
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
   // </React.StrictMode>
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <App />
+
 );
 
 // If you want to start measuring performance in your app, pass a function

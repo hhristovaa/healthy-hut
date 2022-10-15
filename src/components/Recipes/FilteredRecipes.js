@@ -10,6 +10,7 @@ import NoResults from '../UI/NoResults';
 import Button from '../UI/Button';
 import classes from './FilteredRecipes.module.scss';
 
+
 const FilteredRecipes = () => {
   const [diet, setDiets] = useState('');
   const [dish, setDishes] = useState([]);
@@ -90,7 +91,6 @@ const FilteredRecipes = () => {
   }, [diet, dish, intolerance, cuisine])
 
 
-
   return (
     <>
       <section className={classes['filters']}>
@@ -107,13 +107,15 @@ const FilteredRecipes = () => {
           </div>
         </form>
       </section>
-
+      {getFilteredApi.loading && <Spinner />}
+      {getFilteredApi.error && toast.error(getFilteredApi.error)}
       <section className={classes['recipes__container']}>
         {getFilteredApi.data?.results?.length === 0 && <NoResults/>}
         {getFilteredApi.data?.results?.length !== 0 && getFilteredApi.data?.results.map((filtered) => {
           return (
             <RecipeItem key={filtered.id} recipe={filtered} />
           );
+
         })}
       </section>
     </>

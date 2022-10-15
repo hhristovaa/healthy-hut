@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { useQuery } from 'react-query';
 import '@splidejs/react-splide/css';
+
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -91,14 +92,11 @@ const Trending = () => {
 
         }
         //initFavorites(favorites)
-        console.log(favoritesCtx);
 
     }
 
-
     const { isLoading, isError, error, data } = useQuery('trending', getRandom);
     let content;
-    console.log(data);
     if (loadingStatus) {
         return <Spinner />
     } else if (isError) {
@@ -106,7 +104,6 @@ const Trending = () => {
     } else {
         content = data;
     }
-
 
     return (
         <>
@@ -135,6 +132,9 @@ const Trending = () => {
                     <Button version='primary' onClick={initFavs}>Click here for magic</Button>
                 </main>
             </motion.div>
+
+            </main>
+
         </>
     )
 }

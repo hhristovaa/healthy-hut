@@ -17,7 +17,7 @@ const Favorites = () => {
 
     useEffect(() => {
         const controller = new AbortController();
-      
+
         const fetchUserFavorites = async () => {
             try {
                 const userRef = doc(db, 'users', auth.currentUser.uid)
