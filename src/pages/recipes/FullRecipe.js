@@ -33,13 +33,13 @@ const FullRecipe = () => {
         data: detailsData,
       } = useQuery(['details', params.recipeId], getDetails);
 
-    //   const {
-    //     isLoading: loadingNutrition,
-    //     error: errorNutrition,
-    //     data: nutritionData,
-    //   } = useQuery(['nutrition', 'details', params.recipeId], getNutrition,  {
-    //     enabled: detailsData && Object.keys(detailsData).length > 0,
-    //   });
+      const {
+        isLoading: loadingNutrition,
+        error: errorNutrition,
+        data: nutritionData,
+      } = useQuery(['nutrition', 'details', params.recipeId], getNutrition,  {
+        enabled: detailsData && Object.keys(detailsData).length > 0,
+      });
 
           
     // const onMouseOver = (e) => {
@@ -125,13 +125,13 @@ const FullRecipe = () => {
                 <h4 className={classes['recipe__desc-title']}>
                     Nutrition Facts per Serving
                 </h4>
-                {/* {loadingNutrition && <p>Currently the nutrition facts are not available.</p>}
+                {loadingNutrition && <p>Currently the nutrition facts are not available.</p>}
                 {errorNutrition && toast.error(errorNutrition.message)}
                 {nutritionData?.data ? (<div className={classes['recipe__nutrition']}
                     dangerouslySetInnerHTML={{ __html: nutritionData?.data }}>
                 </div>) : (
                     <p>Currently the nutrition facts are not available.</p>
-                )} */}
+                )}
             </section>
 
          <RecipeSlider recipeId={params.recipeId}/>
