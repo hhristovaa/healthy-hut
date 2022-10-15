@@ -7,6 +7,7 @@ import client from '../../apis/client';
 import useApi from '../../hooks/useApi';
 import RecipeItem from './RecipeItem';
 import NoResults from '../UI/NoResults';
+import Spinner from '../UI/Spinner';
 import Button from '../UI/Button';
 import classes from './FilteredRecipes.module.scss';
 

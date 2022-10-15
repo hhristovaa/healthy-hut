@@ -1,11 +1,6 @@
 import { useEffect, useState } from 'react';
-
-=======
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase.config';
-
 import { toast } from 'react-toastify';
-import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { motion } from 'framer-motion';
 
