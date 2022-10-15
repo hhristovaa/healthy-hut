@@ -31,10 +31,6 @@ const Duration = () => {
         transition={{ duration: 3 }}
     >
             <h1 className={classes['g-title']}>Up to 30 Minutes</h1>
-        <main>
-            {getDurationApi.loading && <Spinner />}
-            {getDurationApi.error && toast.error(getDurationApi.error)}
-            <h1 className={classes['g-title']}>Up to {params.minutes} Minutes</h1>
             <section className={classes['recipes__container']}>
                 {content.data?.results.map((item) => {
                     return (

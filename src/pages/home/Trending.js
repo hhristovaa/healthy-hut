@@ -120,12 +120,12 @@ const Trending = () => {
                         <Splide options={SLIDER_OPTIONS}>
 
                             {content?.data?.recipes.map((recipe) => {
-                            return (
-                                <SplideSlide key={recipe.id}>
-                                    <RecipeItem key={recipe.id} recipe={recipe} />
-                                </SplideSlide>
-                            );
-                        })}
+                                return (
+                                    <SplideSlide key={recipe.id}>
+                                        <RecipeItem key={recipe.id} recipe={recipe} />
+                                    </SplideSlide>
+                                );
+                            })}
                         </Splide>
                     </section>
 
@@ -133,7 +133,7 @@ const Trending = () => {
                 </main>
             </motion.div>
 
-            </main>
+
 
         </>
     )
