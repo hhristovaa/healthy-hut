@@ -14,15 +14,12 @@ import classes from './Recipes.module.scss';
 
 const FullRecipe = () => {
     let params = useParams();
-    const apiKey = '2ed50f18cc1446178f98816f679672f1';
-    //const apiKey = 'cc1ef7f275ed420782a8c869acc377dd';
-    //const apiKey = 'a3577636ccd3420a92a088027e661830';
-    //const apiKey = 'b44514ae9c644024a55ec4e856cf0fd2';
-    const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${apiKey}`;
+
+    const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${process.env.REACT_APP_RECIPE_API_KEY}`;
 
     // const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionLabel.png?showOptionalNutrients=false&showZeroValues=false&showIngredients=false&apiKey=${apiKey}`
     // const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionLabel?defaultCss=true&showOptionalNutrients=false&showZeroValues=false&showIngredients=false&apiKey=${apiKey}`
-    const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionWidget?defaultCss=true&apiKey=${apiKey}`
+    const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionWidget?defaultCss=true&apiKey=${process.env.REACT_APP_RECIPE_API_KEY}`
 
     const getDetails = async () => await client.get(BASE_URL);
     const getNutrition = async () => await client.get(NUTRITION_URL);
@@ -33,13 +30,13 @@ const FullRecipe = () => {
         data: detailsData,
       } = useQuery(['details', params.recipeId], getDetails);
 
-      const {
-        isLoading: loadingNutrition,
-        error: errorNutrition,
-        data: nutritionData,
-      } = useQuery(['nutrition', 'details', params.recipeId], getNutrition,  {
-        enabled: detailsData && Object.keys(detailsData).length > 0,
-      });
+    //   const {
+    //     isLoading: loadingNutrition,
+    //     error: errorNutrition,
+    //     data: nutritionData,
+    //   } = useQuery(['nutrition', 'details', params.recipeId], getNutrition,  {
+    //     enabled: detailsData && Object.keys(detailsData).length > 0,
+    //   });
 
           
     // const onMouseOver = (e) => {
@@ -121,7 +118,7 @@ const FullRecipe = () => {
                     <p>Currently the instructions are not available.</p>
                 )}
             </section> 
-            <section className={classes['recipe__facts']}>
+            {/* <section className={classes['recipe__facts']}>
                 <h4 className={classes['recipe__desc-title']}>
                     Nutrition Facts per Serving
                 </h4>
@@ -134,7 +131,7 @@ const FullRecipe = () => {
                 )}
             </section>
 
-         <RecipeSlider recipeId={params.recipeId}/>
+         <RecipeSlider recipeId={params.recipeId}/> */}
         </motion.main>
 
     )

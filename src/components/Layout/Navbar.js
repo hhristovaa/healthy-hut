@@ -82,7 +82,7 @@ const Navbar = () => {
 
                 <NavLink className={isLinkActive} to={'/articles'} onClick={closeMobileMenu}>Articles</NavLink>
                 <NavLink className={isLinkActive} to={'/about'} onClick={closeMobileMenu}>About</NavLink>
-                <NavLink className={isLinkActive} to={'/profile'} onClick={closeMobileMenu}>Profile</NavLink>
+                {loggedIn && <NavLink className={isLinkActive} to={'/profile'} onClick={closeMobileMenu}>Profile</NavLink>}
                 <div className={classes['header__buttons']}>
 
                     {loggedIn ? (
