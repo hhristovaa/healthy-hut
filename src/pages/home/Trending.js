@@ -34,73 +34,74 @@ const Trending = () => {
 
     const favoritesCtx = useContext(FavoritesContext);
 
-    const initFavorites = recipes => {
-        favoritesCtx.initRecipe(recipes)
-    }
+    // const initFavorites = recipes => {
+    //     favoritesCtx.initRecipe(recipes)
+    // }
 
-    const addToFavorites = recipe => {
-        favoritesCtx.addRecipe({ ...recipe });
-    };
-
-
-    const { loggedIn, loadingStatus } = useAuthStatus();
-
-    const auth = getAuth();
-    const isMounted = useRef(true);
-
-    const fetchUserFavorites = async () => {
-        console.log('eho')
-        const userRef = doc(db, 'users', auth.currentUser.uid)
-        const docSnap = await getDoc(userRef);
-        if (docSnap?.exists()) {
-            let userFavs = docSnap?.data()?.favorites;
-            setFavorites(userFavs);
-            console.log('eho2')
-
-            // addToFavorites(userFavs);
+    // const addToFavorites = recipe => {
+    //     favoritesCtx.addRecipe({ ...recipe });
+    // };
 
 
-            //  initFavorites(favorites);
+    // const { loggedIn, loadingStatus } = useAuthStatus();
 
-        }
+    // const auth = getAuth();
+    // const isMounted = useRef(true);
 
-    }
+    // const fetchUserFavorites = async () => {
+    //     console.log('eho')
+    //     const userRef = doc(db, 'users', auth.currentUser.uid)
+    //     const docSnap = await getDoc(userRef);
+    //     if (docSnap?.exists()) {
+    //         let userFavs = docSnap?.data()?.favorites;
+    //         setFavorites(userFavs);
+    //         console.count('tuk')
 
-    useEffect(() => {
-        if (isMounted) {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    fetchUserFavorites();
-                }
-            });
-        }
-        return () => {
-            isMounted.current = false;
-        }
-    }, [isMounted]);
 
-    console.log(favorites)
+    //         // addToFavorites(userFavs);
 
-    const initFavs = () => {
-        //  initFavorites(favorites);
-        for (let rec of favorites) {
-            addToFavorites(rec);
 
-        }
-        //initFavorites(favorites)
+    //         //  initFavorites(favorites);
 
-    }
+    //     }
 
-    const { isLoading, isError, error, data } = useQuery('trending', getRandom);
+    // }
+
+    // useEffect(() => {
+    //     if (isMounted) {
+    //         onAuthStateChanged(auth, (user) => {
+    //             if (user) {
+    //                 fetchUserFavorites();
+    //                 initFavorites(favorites);
+    //                 console.log(favorites)
+    //             }
+    //         });
+    //     }
+    //     return () => {
+    //         isMounted.current = false;
+    //     }
+    // }, [isMounted]);
+
+
+    // const initFavs = () => {
+    //     for (let rec of favorites) {
+    //         addToFavorites(rec);
+
+    //     }
+    //     // initFavorites(favorites)
+
+    // }
+
+    // const { isLoading, isError, error, data } = useQuery('trending', getRandom);
     
-    let content;
-    if (isLoading) {
-        return <Spinner />
-    } else if (isError) {
-        return toast.error(error.message)
-    } else {
-        content = data;
-    }
+    // let content;
+    // if (isLoading) {
+    //     return <Spinner />
+    // } else if (isError) {
+    //     return toast.error(error.message)
+    // } else {
+    //     content = data;
+    // }
 
     return (
         <>
@@ -114,7 +115,7 @@ const Trending = () => {
                 <main>
                     <h1>Trending Recipes</h1>
                     <section>
-                        <Splide options={SLIDER_OPTIONS}>
+                        {/* <Splide options={SLIDER_OPTIONS}>
                             {content?.data?.recipes.map((recipe) => {
                                 return (
                                     <SplideSlide key={recipe.id}>
@@ -122,9 +123,9 @@ const Trending = () => {
                                     </SplideSlide>
                                 );
                             })}
-                        </Splide>
+                        </Splide> */}
                     </section>
-                    <Button version='primary' onClick={initFavs}>Click here for magic</Button>
+                    {/* <Button version='primary' onClick={initFavs}>Click here for magic</Button> */}
                 </main>
             </motion.div>
 

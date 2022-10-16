@@ -86,7 +86,7 @@ const Navbar = () => {
                 <div className={classes['header__buttons']}>
 
                     {loggedIn ? (
-                        <NavLink to={'/favorites'} onClick={closeMobileMenu}>    <HeaderFavIcon></HeaderFavIcon></NavLink>
+                        <NavLink to={'/favorites'} onClick={closeMobileMenu}>    <HeaderFavIcon /></NavLink>
                     ) : (
                         <div className={classes['header__action']}>
                             <Button type='button' version='secondary' outline onClick={closeMobileMenu}><NavLink to={'/sign-up'}>Sign Up</NavLink>  </Button>

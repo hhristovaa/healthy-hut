@@ -50,7 +50,7 @@ if (loading) {
         transition={{ duration: 3 }}
     >
             <h1 className={classes['g-title']}>Favorites </h1>
-            <h3 className={classes['recipes__counter']}>You have marked {favorites?.length} recipes as favorites.</h3>
+            <h3 className={classes['recipes__counter']}>You have marked {favorites?.length || 0} recipes as favorites.</h3>
             <section className={classes['recipes__container']}>
                 {!loading && favorites?.length > 0 && favorites.map(recipe => {
                     return (

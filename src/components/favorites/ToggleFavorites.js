@@ -1,9 +1,9 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { IonIcon } from '@ionic/react';
 import { heart, heartOutline } from 'ionicons/icons';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { updateDoc, doc, getDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 
@@ -53,17 +53,46 @@ const ToggleFavorites = (props) => {
         setFavorite(!favorite);
     }
 
+    const isMounted = useRef(true);
+    const [isLogged, setIsLogged] = useState(false);
 
     useEffect(() => {
-        const newFavoriteRecipe = recipes.some(recipe => recipe.id === props?.recipe?.id);
-        console.log(recipes);
-        console.log(`nev fav ${newFavoriteRecipe}`);
-        setFavorite(newFavoriteRecipe);
-        setFavRecipeData({
-            ...props.recipe
-        });
+        if (isMounted) {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    setIsLogged(true);
+                }
+            });
+        }
+        return () => {
+            isMounted.current = false;
+        }
+    }, [isMounted]);
 
-    }, [favorite, recipes, props]);
+    useEffect(() => {
+        if (isLogged) {
+            let userFavRecipes;
+
+            const userRef = doc(db, 'users', auth.currentUser.uid);
+            getDoc(userRef).then((docSnap) => {
+                if (docSnap?.exists()) {
+                    let userFavs = docSnap?.data()?.favorites;
+                    userFavRecipes = !!userFavs ? userFavs : [];
+                    console.dir(userFavRecipes);
+                    const newFavoriteRecipe = userFavRecipes.some(recipe => recipe.id === props?.recipe?.id);
+                    console.log(`nev fav ${newFavoriteRecipe}`);
+                    setFavorite(newFavoriteRecipe);
+                    setFavRecipeData({
+                        ...props.recipe
+                    });
+                }
+            }).catch(err => {
+                console.error(err);
+            });
+
+
+        }
+    }, [favorite, recipes, isLogged, props.recipe]);
 
     const onSubmit = async (e) => {
         e.preventDefault();
