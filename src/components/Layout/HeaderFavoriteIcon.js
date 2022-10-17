@@ -20,7 +20,8 @@ const HeaderFavoriteIcon = props => {
     const btnClasses = `${classes.button} ${btnIsAnimated ? classes.bump : ''}`;
 
     const initFavorites = recipes => {
-        favoritesCtx.initRecipe([...recipes])
+        favoritesCtx.initRecipe(recipes)
+        
     }
 
     const addToFavorites = recipe => {
@@ -40,12 +41,8 @@ const HeaderFavoriteIcon = props => {
         if (docSnap?.exists()) {
             let userFavs = docSnap?.data()?.favorites;
             setFavorites(userFavs);
-            console.count('tuk')
-            
-
-
+            console.count('tuk')    
             // addToFavorites(userFavs);
-
 
             //  initFavorites(favorites);
 
@@ -75,10 +72,10 @@ const HeaderFavoriteIcon = props => {
         console.dir(recipes);
         console.log(`count: ${favoritesCount}`);
    
-        setBtnIsAnimated(true);
-        const timer = setTimeout(() => {
-            setBtnIsAnimated(false);
-        }, 300);
+        // setBtnIsAnimated(true);
+        // const timer = setTimeout(() => {
+        //     setBtnIsAnimated(false);
+        // }, 300);
 
         console.log(favorites);
         console.log(`favs: ${favorites.length}`);
@@ -87,12 +84,12 @@ const HeaderFavoriteIcon = props => {
         // console.log(`rec length ${recipes?.length}`);
 
 
-        return () => {
-            clearTimeout(timer);
-        };
+        // return () => {
+        //     clearTimeout(timer);
+        // };
 
 
-    }, [recipes, favorites]);
+    }, [recipes, favorites, favoritesCount]);
 
     return (
         <button className={btnClasses}>
