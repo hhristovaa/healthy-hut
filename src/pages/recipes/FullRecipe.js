@@ -63,7 +63,6 @@ const FullRecipe = () => {
     let cuisine = content.data?.cuisines?.find(cuisine => cuisine !== undefined);
     let dishType = content.data?.dishTypes?.find(type => type !== undefined);
 
-
     return (
         <motion.main
         initial={{ opacity: 0 }}
