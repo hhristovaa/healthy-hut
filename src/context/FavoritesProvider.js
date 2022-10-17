@@ -1,6 +1,5 @@
 import { useReducer } from 'react';
 
-
 import { doc, getDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../firebase.config';
@@ -88,7 +87,6 @@ const FavoritesProvider = props => {
         removeRecipe: removeRecipeHandler,
         initRecipe: initRecipeHandler
     };
-
 
 
     return (

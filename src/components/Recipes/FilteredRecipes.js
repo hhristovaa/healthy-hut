@@ -11,7 +11,6 @@ import Spinner from '../UI/Spinner';
 import Button from '../UI/Button';
 import classes from './FilteredRecipes.module.scss';
 
-
 const FilteredRecipes = () => {
   const [diet, setDiets] = useState('');
   const [dish, setDishes] = useState([]);

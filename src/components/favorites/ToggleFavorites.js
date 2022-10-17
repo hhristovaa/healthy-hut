@@ -72,15 +72,12 @@ const ToggleFavorites = (props) => {
     useEffect(() => {
         if (isLogged) {
             let userFavRecipes;
-
             const userRef = doc(db, 'users', auth.currentUser.uid);
             getDoc(userRef).then((docSnap) => {
                 if (docSnap?.exists()) {
                     let userFavs = docSnap?.data()?.favorites;
                     userFavRecipes = !!userFavs ? userFavs : [];
-                    console.dir(userFavRecipes);
                     const newFavoriteRecipe = userFavRecipes.some(recipe => recipe.id === props?.recipe?.id);
-                    console.log(`nev fav ${newFavoriteRecipe}`);
                     setFavorite(newFavoriteRecipe);
                     setFavRecipeData({
                         ...props.recipe
@@ -89,8 +86,6 @@ const ToggleFavorites = (props) => {
             }).catch(err => {
                 console.error(err);
             });
-
-
         }
     }, [favorite, recipes, isLogged, props.recipe]);
 

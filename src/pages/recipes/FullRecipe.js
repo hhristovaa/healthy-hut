@@ -101,7 +101,7 @@ const FullRecipe = () => {
                         {dishType && (<span> <IonIcon icon={restaurantOutline} /> {dishType}</span>)}
                         <a href={content.data?.sourceUrl} target='_blank' rel='noreferrer'><IonIcon icon={globeOutline} />{content.data?.sourceUrl}</a>
                         <ul className={classes['recipe__diet']}>{content.data?.diets.map((diet) => (
-                            <li key={diet.id}>{diet}</li>
+                            <li key={diet}>{diet}</li>
                         ))}
                         </ul>
                     </div>

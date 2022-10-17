@@ -25,7 +25,7 @@ const SearchResult = () => {
     } else {
         content = data;
     }
-    console.log(content?.data?.results.length);
+
     return (
         <motion.main
             initial={{ opacity: 0 }}

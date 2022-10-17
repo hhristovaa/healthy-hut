@@ -15,6 +15,7 @@ const useApi = (apiFunc) => {
       setData(result.data);
      
     } catch (err) {
+      console.log(err.request.status);
       setError(err.message || "Unexpected Error!");
     } finally {
       setLoading(false);
