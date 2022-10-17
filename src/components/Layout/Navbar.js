@@ -15,7 +15,11 @@ const Navbar = () => {
 
     const closeMobileMenu = () => {
         setIsMobile(false);
-        setIsDropdown(false);
+        setIsDropdown(!isDropdown);
+    }
+
+    const closeDropdownMenu = () => {
+        
     }
     const isLinkActive = (({ isActive }) => (isActive ? `${classes['navbar__item']} ${classes['is-active']}` : classes['navbar__item']));
     const isMenuMobile = isMobile ? `${classes.header} ${classes['is-mobile']} ${classes['is-open']}` : classes.header;

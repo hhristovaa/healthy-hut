@@ -41,6 +41,7 @@ const HeaderFavoriteIcon = props => {
             let userFavs = docSnap?.data()?.favorites;
             setFavorites(userFavs);
             console.count('tuk')
+            
 
 
             // addToFavorites(userFavs);
@@ -70,16 +71,17 @@ const HeaderFavoriteIcon = props => {
     useEffect(() => {
         // if (recipes.length === 0) return;
 
-        // fetchUserFavorites();
         console.log('rezoltat');
         console.dir(recipes);
-
+        console.log(`count: ${favoritesCount}`);
+   
         setBtnIsAnimated(true);
         const timer = setTimeout(() => {
             setBtnIsAnimated(false);
         }, 300);
 
         console.log(favorites);
+        console.log(`favs: ${favorites.length}`);
         // console.log(`recipes:`);
         // console.dir(recipes);
         // console.log(`rec length ${recipes?.length}`);
