@@ -5,7 +5,7 @@ import { menuOutline, closeOutline, chevronDownOutline, chevronUpOutline } from 
 
 import Button from '../UI/Button';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
-import HeaderFavIcon from './HeaderFavIcon';
+import HeaderFavoriteIcon from './HeaderFavoriteIcon';
 import classes from './Navbar.module.scss';
 
 const Navbar = () => {
@@ -15,7 +15,11 @@ const Navbar = () => {
 
     const closeMobileMenu = () => {
         setIsMobile(false);
-        setIsDropdown(false);
+        setIsDropdown(!isDropdown);
+    }
+
+    const closeDropdownMenu = () => {
+        
     }
     const isLinkActive = (({ isActive }) => (isActive ? `${classes['navbar__item']} ${classes['is-active']}` : classes['navbar__item']));
     const isMenuMobile = isMobile ? `${classes.header} ${classes['is-mobile']} ${classes['is-open']}` : classes.header;
@@ -82,11 +86,13 @@ const Navbar = () => {
 
                 <NavLink className={isLinkActive} to={'/articles'} onClick={closeMobileMenu}>Articles</NavLink>
                 <NavLink className={isLinkActive} to={'/about'} onClick={closeMobileMenu}>About</NavLink>
-                <NavLink className={isLinkActive} to={'/profile'} onClick={closeMobileMenu}>Profile</NavLink>
+                {loggedIn && <NavLink className={isLinkActive} to={'/profile'} onClick={closeMobileMenu}>Profile</NavLink>}
                 <div className={classes['header__buttons']}>
 
                     {loggedIn ? (
-                        <NavLink to={'/favorites'} onClick={closeMobileMenu}>    <HeaderFavIcon></HeaderFavIcon></NavLink>
+                        <NavLink to={'/favorites'} onClick={closeMobileMenu}>
+                            <HeaderFavoriteIcon />
+                        </NavLink>
                     ) : (
                         <div className={classes['header__action']}>
                             <Button type='button' version='secondary' outline onClick={closeMobileMenu}><NavLink to={'/sign-up'}>Sign Up</NavLink>  </Button>

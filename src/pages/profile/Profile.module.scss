@@ -8,8 +8,8 @@
     &__header {
         @include flex-setup($justContent: space-around, $alItems: flex-end);
         background-color: lighten($color-gray-light, 20%);
-        padding: 1rem;
-        margin: 1.5em 0 2em 0;
+        padding: 1em;
+        margin: 1.5em 0em 2em 0em;
         border-radius: 14px;
     }
 

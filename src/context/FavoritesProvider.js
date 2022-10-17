@@ -13,7 +13,7 @@ const defaultFavoritesState = {
     recipes: []
 };
 
-const favoritesReducer = (state, action) => {
+const favoritesReducer = async (state, action) => {
     if (action.type === ACTIONS.ADD) {
         const existingFavRecipeIndex = state.recipes.findIndex(recipe => recipe.id === action.recipe.id);
         const existingFavRecipe = state.recipes[existingFavRecipeIndex];
@@ -43,35 +43,26 @@ const favoritesReducer = (state, action) => {
     }
 
     if (action.type === ACTIONS.INIT) {
-
-        console.log('Ура!');
-
         const auth = getAuth();
-        console.log(auth);
-        let resultToReturn;
 
         if (!!auth) {
-            const fetchUserFavorites = async () => {
-                console.log('eho')
-                const userRef = doc(db, 'users', auth.currentUser.uid)
-                const docSnap = await getDoc(userRef);
+            let updatedRecipes;
 
-                if (docSnap?.exists()) {
-                    let userFavs = docSnap?.data()?.favorites;
+            const userRef = doc(db, 'users', auth.currentUser.uid);
+            const docSnap = await getDoc(userRef);
 
-                    resultToReturn = !!userFavs ? userFavs : [];
-                }
+            if (docSnap?.exists()) {
+                let userFavs = docSnap?.data()?.favorites;
+
+                updatedRecipes = !!userFavs ? userFavs : [];
             }
 
-            fetchUserFavorites();
-
             return {
-                recipes: resultToReturn
+                recipes: updatedRecipes
             }
         }
 
     }
-
 
     return defaultFavoritesState;
 };
@@ -87,10 +78,15 @@ const FavoritesProvider = props => {
         dispatchFavoritesAction({ type: ACTIONS.REMOVE, id: id });
     };
 
+    const initRecipeHandler = recipes => {
+        dispatchFavoritesAction({ type: ACTIONS.INIT, recipes: recipes });
+    };
+
     const favoritesContext = {
         recipes: favoritesState.recipes,
         addRecipe: addRecipeHandler,
         removeRecipe: removeRecipeHandler,
+        initRecipe: initRecipeHandler
     };
 
 

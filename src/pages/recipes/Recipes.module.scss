@@ -6,7 +6,7 @@
     @include flex-setup($wrap: wrap, $justContent: space-around);
 
     &__container {
-        @include flex-setup($wrap: wrap, $justContent: space-around);
+        @include flex-setup($wrap: wrap, $justContent: center);
         margin: 1rem auto;
 
         div {

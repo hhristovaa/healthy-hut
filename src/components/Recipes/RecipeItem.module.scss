@@ -45,9 +45,14 @@
         width: 80%;
     }
 }
+
 @media screen and (max-width: 425px) {
     .recipe-redirect {
         width: 100%;
+    }
+
+    .recipe__card {
+        width: unset;
     }
 }
 

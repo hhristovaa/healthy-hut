@@ -11,8 +11,8 @@ import { SLIDER_OPTIONS } from '../../utils/constants';
 
 const RecipeSlider = () => {
     let params = useParams();
-    const apiKey = '2ed50f18cc1446178f98816f679672f1';
-    const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/similar/?apiKey=${apiKey}&number=6`
+    
+    const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/similar/?apiKey=${process.env.REACT_APP_RECIPE_API_KEY}&number=6`
     const getSimilar = () => client.get(BASE_URL)
 
 

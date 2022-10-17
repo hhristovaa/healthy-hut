@@ -11,6 +11,7 @@
     margin: 1rem 0px;
     min-width: 100px;
     max-height: 44px;
+    transition: all .3s ease-in-out;
 
     &--primary {
         background-color: $color-primary;

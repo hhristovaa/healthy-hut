@@ -18,12 +18,11 @@ import RecipeItem from '../../components/Recipes/RecipeItem';
 import Spinner from '../../components/UI/Spinner';
 import FavoritesContext from '../../context/FavoritesContext';
 import { SLIDER_OPTIONS } from '../../utils/constants';
+import MediaElement from './MediaElement';
 
+const BASE_URL = `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_RECIPE_API_KEY}&number=10`;
 
 const Trending = () => {
-    const apiKey = '2ed50f18cc1446178f98816f679672f1';
-    // const apiKey = 'a3577636ccd3420a92a088027e661830';
-    const BASE_URL = `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=10`;
 
     const getRandom = async () => await client.get(BASE_URL).catch(function (error) {
         if (error.response && error.response.status === 402) {
@@ -31,79 +30,89 @@ const Trending = () => {
             return;
         }
     });
+
     const [favorites, setFavorites] = useState([]);
 
     const favoritesCtx = useContext(FavoritesContext);
 
-    const initFavorites = recipes => {
-        favoritesCtx.initRecipe(recipes)
-    }
+    // const initFavorites = recipes => {
+    //     favoritesCtx.initRecipe(recipes)
+    // }
 
-    const addToFavorites = recipe => {
-        favoritesCtx.addRecipe({ ...recipe });
-    };
-
-
-    const { loggedIn, loadingStatus } = useAuthStatus();
-
-    const auth = getAuth();
-    const isMounted = useRef(true);
-
-    const fetchUserFavorites = async () => {
-        console.log('eho')
-        const userRef = doc(db, 'users', auth.currentUser.uid)
-        const docSnap = await getDoc(userRef);
-        if (docSnap?.exists()) {
-            let userFavs = docSnap?.data()?.favorites;
-            setFavorites(userFavs);
-            console.log('eho2')
-
-            // addToFavorites(userFavs);
+    // const addToFavorites = recipe => {
+    //     favoritesCtx.addRecipe({ ...recipe });
+    // };
 
 
-            //  initFavorites(favorites);
+    // const { loggedIn, loadingStatus } = useAuthStatus();
 
-        }
+    // const auth = getAuth();
+    // const isMounted = useRef(true);
 
-    }
+    // const fetchUserFavorites = async () => {
+    //     console.log('eho')
+    //     const userRef = doc(db, 'users', auth.currentUser.uid)
+    //     const docSnap = await getDoc(userRef);
+    //     if (docSnap?.exists()) {
+    //         let userFavs = docSnap?.data()?.favorites;
+    //         setFavorites(userFavs);
+    //         console.count('tuk')
 
-    useEffect(() => {
-        // getRandomApi.request();
-        if (isMounted) {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    fetchUserFavorites();
 
-                }
-            });
-        }
-        return () => {
-            isMounted.current = false;
-        }
-    }, [isMounted]);
+    //         // addToFavorites(userFavs);
 
-    console.log(favorites)
 
-    const initFavs = () => {
-        //  initFavorites(favorites);
-        for (let rec of favorites) {
-            console.log(rec);
-            addToFavorites(rec);
+    //         //  initFavorites(favorites);
 
-        }
-        //initFavorites(favorites)
+    //     }
 
-    }
+    // }
 
-    const { isLoading, isError, error, data } = useQuery('trending', getRandom);
-    let content;
-    if (loadingStatus) {
-        return <Spinner />
-    } else if (isError) {
-        return toast.error(error.message)
-    } else {
-        content = data;
-    }
+    // useEffect(() => {
+    //     if (isMounted) {
+    //         onAuthStateChanged(auth, (user) => {
+    //             if (user) {
+    //                 fetchUserFavorites();
+    //                 initFavorites(favorites);
+    //                 console.log(favorites)
+    //             }
+    //         });
+    //     }
+    //     return () => {
+    //         isMounted.current = false;
+    //     }
+    // }, [isMounted]);
+
+
+    // const initFavs = () => {
+    //     for (let rec of favorites) {
+    //         addToFavorites(rec);
+
+    //     }
+    //     // initFavorites(favorites)
+
+    // }
+
+    // const { isLoading, isError, error, data } = useQuery('trending', getRandom);
+    
+    // let content;
+    // if (isLoading) {
+    //     return <Spinner />
+    // } else if (isError) {
+    //     return toast.error(error.message)
+    // } else {
+    //     content = data;
+    // }
+
+    const
+			sources = [
+				{src: 'https://www.youtube-nocookie.com/embed/v_hR4K4auoQ', type: 'video/youtube'},
+				// {src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4'},
+				// {src: 'rtmp://firehose.cul.columbia.edu:1935/vod/mp4:sample.mp4', type: 'video/rtmp'}
+			],
+			config = {},
+			tracks = {}
+		;
 
     return (
         <>
@@ -117,8 +126,20 @@ const Trending = () => {
                 <main>
                     <h1>Trending Recipes</h1>
                     <section>
-                        <Splide options={SLIDER_OPTIONS}>
-
+                 
+		<MediaElement
+		   id="player1"
+		   mediaType="video"
+		   preload="none"
+		   controls
+		   width="640"
+		   height="360"
+		   poster=""
+		   sources={JSON.stringify(sources)}
+		   options={JSON.stringify(config)}
+		   tracks={JSON.stringify(tracks)}
+		/>
+                        {/* <Splide options={SLIDER_OPTIONS}>
                             {content?.data?.recipes.map((recipe) => {
                                 return (
                                     <SplideSlide key={recipe.id}>
@@ -126,10 +147,9 @@ const Trending = () => {
                                     </SplideSlide>
                                 );
                             })}
-                        </Splide>
+                        </Splide> */}
                     </section>
-
-                    <Button version='primary' onClick={initFavs}>Click here for magic</Button>
+                    {/* <Button version='primary' onClick={initFavs}>Click here for magic</Button> */}
                 </main>
             </motion.div>
 
