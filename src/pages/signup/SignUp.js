@@ -14,6 +14,7 @@ import classes from '../signin/SignIn.module.scss';
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [isInvalidClass, setIsInvalidClass] = useState('');
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -27,19 +28,21 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const onChange = (e) => {
-       
-
+        let eTargetVal = e.target.value;
         setFormData((prevState) => ({
             ...prevState,
-            [e.target.id]: e.target.value
-
+            [e.target.id]: eTargetVal
         }));
+
+        if (eTargetVal.length === 0) {
+            setIsInvalidClass('invalid');
+            toast.error('All fields must be filled out');
+        }
+       
     };
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
-
         try {
             const auth = getAuth();
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -80,6 +83,7 @@ const SignUp = () => {
                     onChange={onChange}
                     required
                     icon={personOutline}
+                    className={isInvalidClass}
                 />
                 <Input
                     type='text'
