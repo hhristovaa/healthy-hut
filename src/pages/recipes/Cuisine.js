@@ -26,42 +26,51 @@ const Cuisine = () => {
     } else if (isError) {
         return toast.error(error.message)
     } else {
-       data?.data?.results.every(obj => {
-            allCuisines = obj.cuisines.map(el => {
-                console.log(el);
-                if ((el.toLowerCase()).includes(params.type) && obj.length !== 0) {
-                    console.log(obj.length)
-                    return obj;
-                } 
-            });
-        });
+        //    data?.data?.results.every(obj => {
+        //         allCuisines = obj.cuisines.map(el => {
+        //             console.log(el);
+        //             if ((el.toLowerCase()).includes(params.type) && obj.length !== 0) {
+        //                 console.log(obj.length)
+        //                 return obj;
+        //             } 
+        //         });
+        //     });
+        // }
     }
- 
-    console.dir(allCuisines);
-    return (
-        <motion.main
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{
-                duration: 2
-            }}
-        >
-            <h1 className={classes['g-title']}>{title}</h1>
-            <section className={classes['recipes__container']}>
 
-                {allCuisines.length !== 0 && allCuisines.map((item) => {
+        console.dir(allCuisines);
+        return (
+            <motion.main
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                    duration: 2
+                }}
+            >
+                <h1 className={classes['g-title']}>{title}</h1>
+                <section className={classes['recipes__container']}>
+
+                    {/* {allCuisines.length !== 0 && allCuisines.map((item) => {
                 if (item) {
                     return (
                         <RecipeItem key={item.id} recipe={item} />
                     )
                 }
-                })}
-            </section>
-        </motion.main>
-    )
+                })} */}
 
-}
+                    {data?.data?.results.map((item) => {
+
+                        return (
+                            <RecipeItem key={item.id} recipe={item} />
+                        )
+
+                    })}
+                </section>
+            </motion.main>
+        )
+
+    }
 
 
-export default Cuisine;
+    export default Cuisine;

@@ -63,12 +63,12 @@ const Navbar = () => {
                             <p>Cuisine</p>
                             <NavLink to={'/cuisine/american'} onClick={closeMobileMenu}> American </NavLink>
                             <NavLink to={'/cuisine/british'} onClick={closeMobileMenu}> British </NavLink>
-                            <NavLink to={'/cuisine/chinese'} onClick={closeMobileMenu}> Chinese </NavLink>
                             <NavLink to={'/cuisine/european'} onClick={closeMobileMenu}> European </NavLink>
                             <NavLink to={'/cuisine/mediterranean'} onClick={closeMobileMenu}> Mediterranean </NavLink>
-                            <NavLink to={'/cuisine/greek'} onClick={closeMobileMenu}> Greek</NavLink>
                             <NavLink to={'/cuisine/italian'} onClick={closeMobileMenu}> Italian</NavLink>
+                            <NavLink to={'/cuisine/chinese'} onClick={closeMobileMenu}> Chinese </NavLink>
                             <NavLink to={'/cuisine/thai'} onClick={closeMobileMenu}> Thai</NavLink>
+                            <NavLink to={'/cuisine/nordic'} onClick={closeMobileMenu}> Noridc</NavLink>
                         </div>
                         <div className={classes['submenu__section']}>
                             <p>Special Recipes</p>

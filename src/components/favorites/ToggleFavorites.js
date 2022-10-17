@@ -50,6 +50,8 @@ const ToggleFavorites = (props) => {
             onSubmit(e);
             addToFavorites(props.recipe);
         }
+        console.log('props recipe:');
+        console.dir(props.recipe);
         setFavorite(!favorite);
     }
 
