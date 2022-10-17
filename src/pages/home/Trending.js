@@ -18,7 +18,6 @@ import RecipeItem from '../../components/Recipes/RecipeItem';
 import Spinner from '../../components/UI/Spinner';
 import FavoritesContext from '../../context/FavoritesContext';
 import { SLIDER_OPTIONS } from '../../utils/constants';
-import MediaElement from './MediaElement';
 
 const BASE_URL = `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_RECIPE_API_KEY}&number=10`;
 
@@ -104,15 +103,7 @@ const Trending = () => {
     //     content = data;
     // }
 
-    const
-			sources = [
-				{src: 'https://www.youtube-nocookie.com/embed/v_hR4K4auoQ', type: 'video/youtube'},
-				// {src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4'},
-				// {src: 'rtmp://firehose.cul.columbia.edu:1935/vod/mp4:sample.mp4', type: 'video/rtmp'}
-			],
-			config = {},
-			tracks = {}
-		;
+
 
     return (
         <>
@@ -127,18 +118,7 @@ const Trending = () => {
                     <h1>Trending Recipes</h1>
                     <section>
                  
-		<MediaElement
-		   id="player1"
-		   mediaType="video"
-		   preload="none"
-		   controls
-		   width="640"
-		   height="360"
-		   poster=""
-		   sources={JSON.stringify(sources)}
-		   options={JSON.stringify(config)}
-		   tracks={JSON.stringify(tracks)}
-		/>
+
                         {/* <Splide options={SLIDER_OPTIONS}>
                             {content?.data?.recipes.map((recipe) => {
                                 return (
