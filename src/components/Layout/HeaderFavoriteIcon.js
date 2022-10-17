@@ -9,18 +9,18 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 
 import FavoritesContext from '../../context/FavoritesContext';
-import classes from './HeaderFavIcon.module.scss';
+import classes from './HeaderFavoriteIcon.module.scss';
 
-const HeaderFavIcon = props => {
+const HeaderFavoriteIcon = props => {
     const [btnIsAnimated, setBtnIsAnimated] = useState(false);
     const [favorites, setFavorites] = useState([]);
     const favoritesCtx = useContext(FavoritesContext);
-    const { recipes, initRecipe } = favoritesCtx;
+    const { recipes } = favoritesCtx;
     const favoritesCount = recipes?.length;
     const btnClasses = `${classes.button} ${btnIsAnimated ? classes.bump : ''}`;
 
     const initFavorites = recipes => {
-        favoritesCtx.initRecipe(recipes)
+        favoritesCtx.initRecipe([...recipes])
     }
 
     const addToFavorites = recipe => {
@@ -70,7 +70,7 @@ const HeaderFavIcon = props => {
     useEffect(() => {
         // if (recipes.length === 0) return;
 
-        initFavorites([recipes]);
+        // fetchUserFavorites();
         console.log('rezoltat');
         console.dir(recipes);
 
@@ -79,6 +79,7 @@ const HeaderFavIcon = props => {
             setBtnIsAnimated(false);
         }, 300);
 
+        console.log(favorites);
         // console.log(`recipes:`);
         // console.dir(recipes);
         // console.log(`rec length ${recipes?.length}`);
@@ -89,7 +90,7 @@ const HeaderFavIcon = props => {
         };
 
 
-    }, [recipes]);
+    }, [recipes, favorites]);
 
     return (
         <button className={btnClasses}>
@@ -97,10 +98,10 @@ const HeaderFavIcon = props => {
                 <IonIcon icon={heart} size='large' />
             </span>
             <span className={classes.badge}>
-                {favoritesCount}
+                {favorites.length}
             </span>
         </button>
     );
 }
 
-export default HeaderFavIcon;
+export default HeaderFavoriteIcon;

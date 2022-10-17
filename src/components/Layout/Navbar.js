@@ -5,7 +5,7 @@ import { menuOutline, closeOutline, chevronDownOutline, chevronUpOutline } from 
 
 import Button from '../UI/Button';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
-import HeaderFavIcon from './HeaderFavIcon';
+import HeaderFavoriteIcon from './HeaderFavoriteIcon';
 import classes from './Navbar.module.scss';
 
 const Navbar = () => {
@@ -86,7 +86,9 @@ const Navbar = () => {
                 <div className={classes['header__buttons']}>
 
                     {loggedIn ? (
-                        <NavLink to={'/favorites'} onClick={closeMobileMenu}>    <HeaderFavIcon /></NavLink>
+                        <NavLink to={'/favorites'} onClick={closeMobileMenu}>
+                            <HeaderFavoriteIcon />
+                        </NavLink>
                     ) : (
                         <div className={classes['header__action']}>
                             <Button type='button' version='secondary' outline onClick={closeMobileMenu}><NavLink to={'/sign-up'}>Sign Up</NavLink>  </Button>
