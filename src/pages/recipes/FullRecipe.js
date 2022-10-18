@@ -8,7 +8,7 @@ import { restaurantOutline, globeOutline, starOutline, timerOutline, manOutline,
 
 import client from '../../apis/client';
 import Spinner from '../../components/UI/Spinner';
-import ToggleFavorites from '../../components/Favorites/ToggleFavorites';
+import ToggleFavorites from '../../components/favorites/ToggleFavorites';
 import RecipeSlider from '../../components/Recipes/RecipeSlider';
 import classes from './Recipes.module.scss';
 

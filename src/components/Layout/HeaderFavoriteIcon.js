@@ -21,7 +21,7 @@ const HeaderFavoriteIcon = props => {
 
     const initFavorites = recipes => {
         favoritesCtx.initRecipe(recipes)
-        
+
     }
 
     const addToFavorites = recipe => {
@@ -35,28 +35,40 @@ const HeaderFavoriteIcon = props => {
     const isMounted = useRef(true);
 
     const fetchUserFavorites = async () => {
-        console.log('eho')
         const userRef = doc(db, 'users', auth.currentUser.uid)
         const docSnap = await getDoc(userRef);
         if (docSnap?.exists()) {
             let userFavs = docSnap?.data()?.favorites;
             setFavorites(userFavs);
-            console.count('tuk')    
-            // addToFavorites(userFavs);
-
-            //  initFavorites(favorites);
-
         }
 
     }
+
+    useEffect(() => {
+        const auth = getAuth();
+
+        if (!!auth) {
+            const userRef = doc(db, 'users', auth.currentUser.uid);
+            getDoc(userRef).then(docSnap => {
+                if (docSnap?.exists()) {
+                    let userFavs = docSnap?.data()?.favorites;
+    
+                    let updatedRecipes = !!userFavs ? userFavs : [];
+
+                    favoritesCtx.initRecipe(updatedRecipes);
+                }
+            }).catch(err => {
+                console.log('userFavs fetch failed: ');
+                console.error(err);
+            });
+        }
+    });
 
     useEffect(() => {
         if (isMounted) {
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     fetchUserFavorites();
-                    initFavorites(favorites);
-                    console.log(favorites)
                 }
             });
         }
@@ -68,17 +80,17 @@ const HeaderFavoriteIcon = props => {
     useEffect(() => {
         // if (recipes.length === 0) return;
 
-        console.log('rezoltat');
-        console.dir(recipes);
-        console.log(`count: ${favoritesCount}`);
-   
+        // console.log('rezoltat');
+        // console.dir(recipes);
+        // console.log(`count: ${favoritesCount}`);
+
         // setBtnIsAnimated(true);
         // const timer = setTimeout(() => {
         //     setBtnIsAnimated(false);
         // }, 300);
 
-        console.log(favorites);
-        console.log(`favs: ${favorites.length}`);
+        // console.log(favorites);
+        // console.log(`favs: ${favorites.length}`);
         // console.log(`recipes:`);
         // console.dir(recipes);
         // console.log(`rec length ${recipes?.length}`);
@@ -89,7 +101,7 @@ const HeaderFavoriteIcon = props => {
         // };
 
 
-    }, [recipes, favorites, favoritesCount]);
+    });
 
     return (
         <button className={btnClasses}>
@@ -97,7 +109,7 @@ const HeaderFavoriteIcon = props => {
                 <IonIcon icon={heart} size='large' />
             </span>
             <span className={classes.badge}>
-                {favorites.length}
+                {favoritesCtx?.recipes?.length ?? 0}
             </span>
         </button>
     );
