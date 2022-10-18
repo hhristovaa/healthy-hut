@@ -50,7 +50,6 @@ const HeaderFavoriteIcon = props => {
                     let updatedRecipes = !!userFavs ? userFavs : [];
                     initFavorites(updatedRecipes);
                 }
-
             }).catch(err => {
                 console.log('userFavs fetch failed: ');
                 console.error(err);
