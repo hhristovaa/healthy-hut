@@ -12,58 +12,73 @@ const defaultFavoritesState = {
     recipes: []
 };
 
-const favoritesReducer = async (state, action) => {
+const favoritesReducer = (state, action) => {
     if (action.type === ACTIONS.ADD) {
         const existingFavRecipeIndex = state.recipes.findIndex(recipe => recipe.id === action.recipe.id);
-        const existingFavRecipe = state.recipes[existingFavRecipeIndex];
+        // const existingFavRecipe = state.recipes[existingFavRecipeIndex];
 
-        if (!existingFavRecipe) {
+        if (existingFavRecipeIndex === -1) {
             let updatedRecipes = state.recipes.concat(action.recipe);
+
             return {
                 recipes: updatedRecipes,
             };
         }
-    }
 
-    if (action.type === ACTIONS.REMOVE) {
-        const existingFavRecipeIndex = state.recipes.findIndex(
-            (recipe) => recipe.id === action.id
-        );
+        return state;
+    } else if (action.type === ACTIONS.REMOVE) {
+        let updatedRecipes = state.recipes.filter(recipe => recipe.id !== action.id);
 
-        let existingRecipe = state.recipes[existingFavRecipeIndex];
-        let updatedRecipes;
-
-        if (existingRecipe) {
-            updatedRecipes = state.recipes.filter(recipe => recipe.id !== action.id);
-        }
+        // return {
+        //     recipes: updatedRecipes
+        // }
         return {
             recipes: updatedRecipes
+        };
+    } else if (action.type === ACTIONS.INIT) {
+        return {
+            recipes: action.recipes
         }
+    } else {
+        throw new Error('Reducera sguna banicata, bruH');
     }
 
-    if (action.type === ACTIONS.INIT) {
-        const auth = getAuth();
+    // TODO: delete
+    // if (action.type === ACTIONS.INIT) {
+    //     const auth = getAuth();
 
-        if (!!auth) {
-            let updatedRecipes;
+    //     if (!!auth) {
+    //         const testAsyncrhonousShenanigans = async () => {
+    //             const userRef = doc(db, 'users', auth.currentUser.uid);
+    //             const docSnap = await getDoc(userRef);
 
-            const userRef = doc(db, 'users', auth.currentUser.uid);
-            const docSnap = await getDoc(userRef);
+    //             if (docSnap?.exists()) {
+    //                 let userFavs = docSnap?.data()?.favorites;
 
-            if (docSnap?.exists()) {
-                let userFavs = docSnap?.data()?.favorites;
+    //                 updatedRecipes = !!userFavs ? userFavs : [];
+    //             }
 
-                updatedRecipes = !!userFavs ? userFavs : [];
-            }
+    //             return updatedRecipes;
+    //         };
 
-            return {
-                recipes: updatedRecipes
-            }
-        }
+    //         let updatedRecipes = testAsyncrhonousShenanigans();
 
-    }
+    //         console.log('updatedRecipes:');
+    //         console.dir(updatedRecipes);
 
-    return defaultFavoritesState;
+
+    //         return {
+    //             recipes: updatedRecipes
+    //         }
+    //     } else {
+    //         return {
+    //             recipes: state.recipes
+    //         }
+    //     }
+
+    // }
+
+    // return defaultFavoritesState;
 };
 
 const FavoritesProvider = props => {
@@ -85,9 +100,8 @@ const FavoritesProvider = props => {
         recipes: favoritesState.recipes,
         addRecipe: addRecipeHandler,
         removeRecipe: removeRecipeHandler,
-        initRecipe: initRecipeHandler
+        initRecipes: initRecipeHandler
     };
-
 
     return (
         <FavoritesContext.Provider value={favoritesContext}>

@@ -30,68 +30,6 @@ const Trending = () => {
         }
     });
 
-    const [favorites, setFavorites] = useState([]);
-
-    const favoritesCtx = useContext(FavoritesContext);
-
-    // const initFavorites = recipes => {
-    //     favoritesCtx.initRecipe(recipes)
-    // }
-
-    // const addToFavorites = recipe => {
-    //     favoritesCtx.addRecipe({ ...recipe });
-    // };
-
-
-    // const { loggedIn, loadingStatus } = useAuthStatus();
-
-    // const auth = getAuth();
-    // const isMounted = useRef(true);
-
-    // const fetchUserFavorites = async () => {
-    //     console.log('eho')
-    //     const userRef = doc(db, 'users', auth.currentUser.uid)
-    //     const docSnap = await getDoc(userRef);
-    //     if (docSnap?.exists()) {
-    //         let userFavs = docSnap?.data()?.favorites;
-    //         setFavorites(userFavs);
-    //         console.count('tuk')
-
-
-    //         // addToFavorites(userFavs);
-
-
-    //         //  initFavorites(favorites);
-
-    //     }
-
-    // }
-
-    // useEffect(() => {
-    //     if (isMounted) {
-    //         onAuthStateChanged(auth, (user) => {
-    //             if (user) {
-    //                 fetchUserFavorites();
-    //                 initFavorites(favorites);
-    //                 console.log(favorites)
-    //             }
-    //         });
-    //     }
-    //     return () => {
-    //         isMounted.current = false;
-    //     }
-    // }, [isMounted]);
-
-
-    // const initFavs = () => {
-    //     for (let rec of favorites) {
-    //         addToFavorites(rec);
-
-    //     }
-    //     // initFavorites(favorites)
-
-    // }
-
     // const { isLoading, isError, error, data } = useQuery('trending', getRandom);
     
     // let content;
@@ -129,12 +67,8 @@ const Trending = () => {
                             })}
                         </Splide> */}
                     </section>
-                    {/* <Button version='primary' onClick={initFavs}>Click here for magic</Button> */}
                 </main>
             </motion.div>
-
-
-
         </>
     )
 }

@@ -20,14 +20,9 @@ const HeaderFavoriteIcon = props => {
     const btnClasses = `${classes.button} ${btnIsAnimated ? classes.bump : ''}`;
 
     const initFavorites = recipes => {
-        favoritesCtx.initRecipe(recipes)
-        
+        favoritesCtx.initRecipes(recipes)
+
     }
-
-    const addToFavorites = recipe => {
-        favoritesCtx.addRecipe({ ...recipe });
-    };
-
 
     const { loggedIn, loadingStatus } = useAuthStatus();
 
@@ -35,28 +30,39 @@ const HeaderFavoriteIcon = props => {
     const isMounted = useRef(true);
 
     const fetchUserFavorites = async () => {
-        console.log('eho')
         const userRef = doc(db, 'users', auth.currentUser.uid)
         const docSnap = await getDoc(userRef);
         if (docSnap?.exists()) {
             let userFavs = docSnap?.data()?.favorites;
             setFavorites(userFavs);
-            console.count('tuk')    
-            // addToFavorites(userFavs);
-
-            //  initFavorites(favorites);
-
         }
 
     }
+
+    useEffect(() => {
+        const auth = getAuth();
+
+        if (!!auth) {
+            const userRef = doc(db, 'users', auth.currentUser.uid);
+            getDoc(userRef).then(docSnap => {
+                if (docSnap?.exists()) {
+                    let userFavs = docSnap?.data()?.favorites;
+                    let updatedRecipes = !!userFavs ? userFavs : [];
+                    initFavorites(updatedRecipes);
+                }
+
+            }).catch(err => {
+                console.log('userFavs fetch failed: ');
+                console.error(err);
+            });
+        }
+    }, [auth]);
 
     useEffect(() => {
         if (isMounted) {
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     fetchUserFavorites();
-                    initFavorites(favorites);
-                    console.log(favorites)
                 }
             });
         }
@@ -66,30 +72,17 @@ const HeaderFavoriteIcon = props => {
     }, [isMounted]);
 
     useEffect(() => {
-        // if (recipes.length === 0) return;
+        // if (favoritesCount=== 0) return;
+        setBtnIsAnimated(true);
+        const timer = setTimeout(() => {
+            setBtnIsAnimated(false);
+        }, 300);
 
-        console.log('rezoltat');
-        console.dir(recipes);
-        console.log(`count: ${favoritesCount}`);
-   
-        // setBtnIsAnimated(true);
-        // const timer = setTimeout(() => {
-        //     setBtnIsAnimated(false);
-        // }, 300);
+        return () => {
+            clearTimeout(timer);
+        };
 
-        console.log(favorites);
-        console.log(`favs: ${favorites.length}`);
-        // console.log(`recipes:`);
-        // console.dir(recipes);
-        // console.log(`rec length ${recipes?.length}`);
-
-
-        // return () => {
-        //     clearTimeout(timer);
-        // };
-
-
-    }, [recipes, favorites, favoritesCount]);
+    });
 
     return (
         <button className={btnClasses}>
@@ -97,7 +90,7 @@ const HeaderFavoriteIcon = props => {
                 <IonIcon icon={heart} size='large' />
             </span>
             <span className={classes.badge}>
-                {favorites.length}
+                {favoritesCount ?? 0}
             </span>
         </button>
     );

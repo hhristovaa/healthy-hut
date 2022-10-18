@@ -13,7 +13,6 @@ import Spinner from '../UI/Spinner';
 import classes from './ToggleFavorites.module.scss';
 
 const ToggleFavorites = (props) => {
-
     const { loggedIn } = useAuthStatus();
     const [loading, setLoading] = useState(false);
     const [favorite, setFavorite] = useState(false);
@@ -50,8 +49,7 @@ const ToggleFavorites = (props) => {
             onSubmit(e);
             addToFavorites(props.recipe);
         }
-        console.log('props recipe:');
-        console.dir(props.recipe);
+
         setFavorite(!favorite);
     }
 
@@ -79,6 +77,7 @@ const ToggleFavorites = (props) => {
                 if (docSnap?.exists()) {
                     let userFavs = docSnap?.data()?.favorites;
                     userFavRecipes = !!userFavs ? userFavs : [];
+                    // от него бъгва иконката
                     const newFavoriteRecipe = userFavRecipes.some(recipe => recipe.id === props?.recipe?.id);
                     setFavorite(newFavoriteRecipe);
                     setFavRecipeData({
@@ -89,14 +88,14 @@ const ToggleFavorites = (props) => {
                 console.error(err);
             });
         }
-    }, [favorite, recipes, isLogged, props.recipe]);
+    }, [isLogged]);
 
     const onSubmit = async (e) => {
         e.preventDefault();
         const docRef = doc(db, 'users', auth.currentUser.uid)
 
         setFavRecipeData({
-            favRecipeData
+            ...favRecipeData
         });
 
         updateDoc(docRef,
