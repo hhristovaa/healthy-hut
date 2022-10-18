@@ -144,8 +144,8 @@ export const CUISINES = [
 
     },
     {
-        'value': 'greek',
-        'label': 'Greek'
+        'value': 'nordic',
+        'label': 'nordic'
 
     },
     {
