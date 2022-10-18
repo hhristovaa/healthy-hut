@@ -145,7 +145,7 @@ export const CUISINES = [
     },
     {
         'value': 'nordic',
-        'label': 'nordic'
+        'label': 'Nordic'
 
     },
     {
