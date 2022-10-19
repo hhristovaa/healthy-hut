@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { IonIcon } from '@ionic/react';
 import { eyeOutline, eyeOffOutline, mailOutline, personOutline } from 'ionicons/icons';
 
+import { useAuthStatus } from '../../hooks/useAuthStatus';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
 import classes from '../signin/SignIn.module.scss';
@@ -15,6 +16,7 @@ import classes from '../signin/SignIn.module.scss';
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isInvalidClass, setIsInvalidClass] = useState('');
+    const { loggedIn } = useAuthStatus();
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -66,12 +68,19 @@ const SignUp = () => {
         }
     }
 
+    useEffect(() => {
+
+        if (loggedIn) {
+            navigate('/profile');
+        }
+    });
+
     return (
         <motion.main
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1}}
+            transition={{ duration: 1 }}
         >
             <h1 className={classes['g-title']}>Welcome!</h1>
             <form className={classes.form} onSubmit={onSubmit}>

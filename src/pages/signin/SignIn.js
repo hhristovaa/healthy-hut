@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
@@ -6,6 +6,7 @@ import { eyeOutline, eyeOffOutline, personOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import { motion } from 'framer-motion';
 
+import { useAuthStatus } from '../../hooks/useAuthStatus';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
 import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
@@ -14,6 +15,7 @@ import classes from './SignIn.module.scss';
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isPasswordForgotten, setForgottenPassword] = useState(false);
+    const { loggedIn } = useAuthStatus();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -56,6 +58,13 @@ const SignIn = () => {
     const closeModal = () => {
         setForgottenPassword(false);
     }
+
+    useEffect(() => {
+
+        if (loggedIn) {
+            navigate('/profile');
+        }
+    });
 
     return (
         <motion.main
