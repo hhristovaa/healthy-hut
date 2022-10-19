@@ -21,7 +21,6 @@ const ToggleFavorites = (props) => {
     });
 
     const favoritesCtx = useContext(FavoritesContext);
-    const { recipes } = favoritesCtx;
 
     const auth = getAuth();
     const navigate = useNavigate();
@@ -73,17 +72,20 @@ const ToggleFavorites = (props) => {
         if (isLogged) {
             let userFavRecipes;
             const userRef = doc(db, 'users', auth.currentUser.uid);
+
             getDoc(userRef).then((docSnap) => {
                 if (docSnap?.exists()) {
                     let userFavs = docSnap?.data()?.favorites;
                     userFavRecipes = !!userFavs ? userFavs : [];
-                    // от него бъгва иконката
+                    
                     const newFavoriteRecipe = userFavRecipes.some(recipe => recipe.id === props?.recipe?.id);
+                    
                     setFavorite(newFavoriteRecipe);
                     setFavRecipeData({
                         ...props.recipe
                     });
                 }
+                
             }).catch(err => {
                 console.error(err);
             });

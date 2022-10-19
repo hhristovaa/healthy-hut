@@ -20,8 +20,6 @@
     }
 }
 
-
-
 .recipes__container {
     @include flex-setup($wrap: wrap, $justContent: space-around);
     margin: 1rem auto;
@@ -39,6 +37,7 @@
 
         button {
             margin-left: 1rem;
+            line-height: 14px;
         }
     }
 }

@@ -30,16 +30,16 @@ const Trending = () => {
         }
     });
 
-    // const { isLoading, isError, error, data } = useQuery('trending', getRandom);
+    const { isLoading, isError, error, data } = useQuery('trending', getRandom);
     
-    // let content;
-    // if (isLoading) {
-    //     return <Spinner />
-    // } else if (isError) {
-    //     return toast.error(error.message)
-    // } else {
-    //     content = data;
-    // }
+    let content;
+    if (isLoading) {
+        return <Spinner />
+    } else if (isError) {
+        return toast.error(error.message)
+    } else {
+        content = data;
+    }
 
 
 
@@ -55,9 +55,9 @@ const Trending = () => {
                 <main>
                     <h1>Trending Recipes</h1>
                     <section>
-                 
+                
 
-                        {/* <Splide options={SLIDER_OPTIONS}>
+                         <Splide options={SLIDER_OPTIONS}>
                             {content?.data?.recipes.map((recipe) => {
                                 return (
                                     <SplideSlide key={recipe.id}>
@@ -65,7 +65,7 @@ const Trending = () => {
                                     </SplideSlide>
                                 );
                             })}
-                        </Splide> */}
+                        </Splide> 
                     </section>
                 </main>
             </motion.div>

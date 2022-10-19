@@ -21,7 +21,6 @@ const HeaderFavoriteIcon = props => {
 
     const initFavorites = recipes => {
         favoritesCtx.initRecipes(recipes)
-
     }
 
     const { loggedIn, loadingStatus } = useAuthStatus();
@@ -36,12 +35,10 @@ const HeaderFavoriteIcon = props => {
             let userFavs = docSnap?.data()?.favorites;
             setFavorites(userFavs);
         }
-
     }
 
     useEffect(() => {
         const auth = getAuth();
-
         if (!!auth) {
             const userRef = doc(db, 'users', auth.currentUser.uid);
             getDoc(userRef).then(docSnap => {
@@ -71,7 +68,8 @@ const HeaderFavoriteIcon = props => {
     }, [isMounted]);
 
     useEffect(() => {
-        // if (favoritesCount=== 0) return;
+        if (favoritesCount === 0) return;
+
         setBtnIsAnimated(true);
         const timer = setTimeout(() => {
             setBtnIsAnimated(false);
@@ -81,7 +79,7 @@ const HeaderFavoriteIcon = props => {
             clearTimeout(timer);
         };
 
-    });
+}, [favoritesCount]);
 
     return (
         <button className={btnClasses}>

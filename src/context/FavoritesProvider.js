@@ -1,12 +1,7 @@
 import { useReducer } from 'react';
 
-import { doc, getDoc } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-import { db } from '../firebase.config';
 import FavoritesContext from './FavoritesContext';
 import { ACTIONS } from '../utils/constants';
-import { useAuthStatus } from '../hooks/useAuthStatus';
-
 
 const defaultFavoritesState = {
     recipes: []
@@ -15,7 +10,6 @@ const defaultFavoritesState = {
 const favoritesReducer = (state, action) => {
     if (action.type === ACTIONS.ADD) {
         const existingFavRecipeIndex = state.recipes.findIndex(recipe => recipe.id === action.recipe.id);
-        // const existingFavRecipe = state.recipes[existingFavRecipeIndex];
 
         if (existingFavRecipeIndex === -1) {
             let updatedRecipes = state.recipes.concat(action.recipe);
@@ -26,59 +20,21 @@ const favoritesReducer = (state, action) => {
         }
 
         return state;
+        
     } else if (action.type === ACTIONS.REMOVE) {
         let updatedRecipes = state.recipes.filter(recipe => recipe.id !== action.id);
-
-        // return {
-        //     recipes: updatedRecipes
-        // }
         return {
             recipes: updatedRecipes
         };
+
     } else if (action.type === ACTIONS.INIT) {
         return {
             recipes: action.recipes
         }
+        
     } else {
-        throw new Error('Reducera sguna banicata, bruH');
+        throw new Error(`An error occured while trying to ${action.type} favorite recipe. `);
     }
-
-    // TODO: delete
-    // if (action.type === ACTIONS.INIT) {
-    //     const auth = getAuth();
-
-    //     if (!!auth) {
-    //         const testAsyncrhonousShenanigans = async () => {
-    //             const userRef = doc(db, 'users', auth.currentUser.uid);
-    //             const docSnap = await getDoc(userRef);
-
-    //             if (docSnap?.exists()) {
-    //                 let userFavs = docSnap?.data()?.favorites;
-
-    //                 updatedRecipes = !!userFavs ? userFavs : [];
-    //             }
-
-    //             return updatedRecipes;
-    //         };
-
-    //         let updatedRecipes = testAsyncrhonousShenanigans();
-
-    //         console.log('updatedRecipes:');
-    //         console.dir(updatedRecipes);
-
-
-    //         return {
-    //             recipes: updatedRecipes
-    //         }
-    //     } else {
-    //         return {
-    //             recipes: state.recipes
-    //         }
-    //     }
-
-    // }
-
-    // return defaultFavoritesState;
 };
 
 const FavoritesProvider = props => {
