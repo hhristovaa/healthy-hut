@@ -1,37 +1,39 @@
 @use '../../styles/_variables.scss' as *;
 @use '../../styles/_mixins.scss' as *;
 
-.recipe__card {
-    @include flex-setup($direction: column, $justContent: space-between);
-    height: 19rem;
+.recipe {
+    &__card {
+        @include flex-setup($direction: column, $justContent: space-between);
+        height: 19rem;
+    }
+
+    &__card-img {
+        overflow: hidden;
+        border-radius: 14px;
+        position: relative;
+    }
+
+    &__card-title {
+        font-weight: 600;
+        margin: .5rem 0;
+    }
+
+    &__card-info {
+        @include flex-setup($justContent: space-between);
+        font-size: 12px;
+    }
+
+    &__card-details {
+        @include flex-setup($alItems: center, $gap: 5px);
+
+        ion-icon {
+            font-size: 14px;
+        }
+    }
 }
 
 .recipe-redirect {
     width: 33%;
-}
-
-.recipe__card-img {
-    overflow: hidden;
-    border-radius: 14px;
-    position: relative;
-}
-
-.recipe__card-title {
-    font-weight: 600;
-    margin: .5rem 0;
-}
-
-.recipe__card-info {
-    @include flex-setup($justContent: space-between);
-    font-size: 12px;
-}
-
-.recipe__card-details {
-    @include flex-setup($alItems: center, $gap: 5px);
-
-    ion-icon {
-        font-size: 14px;
-    }
 }
 
 @media screen and (max-width: 900px) {
@@ -61,7 +63,7 @@
         &:hover {
             overflow: hidden;
             filter: contrast(1.1);
-    
+
             img {
                 transition: all .3s ease-in;
                 transform: scale(1.2);

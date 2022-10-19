@@ -2,7 +2,7 @@
 @use '../../styles/_mixins.scss' as *;
 @use '../../styles/_typography.scss' as *;
 
-.button {
+.favorites {
   @include flex-setup($justContent: space-around);
   cursor: pointer;
   font: inherit;
@@ -15,8 +15,8 @@
   font-weight: bold;
 }
 
-.button:hover,
-.button:active {
+.favorites:hover,
+.favorites:active {
   background-color: darken($color-secondary, 10%);
 }
 

@@ -13,7 +13,6 @@ const Specials = () => {
     const isMounted = useRef(true);
 
     let params = useParams();
-    //runs fetch trending when the component is mounted
     const getSpecials = () => client.get();
     const getSpecialsApi = useApi(getSpecials);
 
@@ -26,8 +25,6 @@ const Specials = () => {
         }
     }, [isMounted]);
 
-    let type = params.type;
-
     const filtered = getSpecialsApi.data?.results.filter(obj => {
         return obj.type === true;
     });
@@ -38,7 +35,7 @@ const Specials = () => {
             {getSpecialsApi.loading && <Spinner />}
             {getSpecialsApi.error && toast.error(getSpecialsApi.error)}
             <section className={classes['recipes__container']}>
-                {filtered?.length === 0 && <NoResults/> }
+                {filtered?.length === 0 && <NoResults />}
                 {filtered?.length !== 0 && filtered?.map((recipe) => {
                     return <RecipeItem key={recipe.id} recipe={recipe} />
                 })}

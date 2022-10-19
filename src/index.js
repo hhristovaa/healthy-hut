@@ -10,7 +10,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 600 * 1000, // 10 minute
+      staleTime: 1000 * 1000, // 100 minute
       refetchOnWindowFocus: false,
     }
   }

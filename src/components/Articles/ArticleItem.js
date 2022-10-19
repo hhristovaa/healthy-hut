@@ -6,7 +6,6 @@ import Card from '../UI/Card';
 import Button from '../UI/Button';
 import classes from './ArticleItem.module.scss';
 
-
 const ArticleItem = ({ article, id, onDelete, onEdit }) => {
     return (
         <Card className={classes['article__card']}>

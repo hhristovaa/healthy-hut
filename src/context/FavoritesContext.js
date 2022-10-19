@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 const FavoritesContext = React.createContext({
     recipes: [],
     addRecipe: (recipe) => { },
     removeRecipe: (id) => { },
-    initRecipe: (recipes) => { }
+    initRecipes: (recipes) => { }
 });
 
 export default FavoritesContext;

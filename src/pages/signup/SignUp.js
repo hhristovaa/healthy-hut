@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
-import {motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import { IonIcon } from '@ionic/react';
 import { eyeOutline, eyeOffOutline, mailOutline, personOutline } from 'ionicons/icons';
 
@@ -14,6 +14,7 @@ import classes from '../signin/SignIn.module.scss';
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [isInvalidClass, setIsInvalidClass] = useState('');
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -27,19 +28,21 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const onChange = (e) => {
-       
-
+        let eTargetVal = e.target.value;
         setFormData((prevState) => ({
             ...prevState,
-            [e.target.id]: e.target.value
-
+            [e.target.id]: eTargetVal
         }));
+
+        if (eTargetVal.length === 0) {
+            setIsInvalidClass('invalid');
+            toast.error('All fields must be filled out');
+        }
+
     };
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
-
         try {
             const auth = getAuth();
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -65,11 +68,11 @@ const SignUp = () => {
 
     return (
         <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 3 }}
-    >
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1}}
+        >
             <h1 className={classes['g-title']}>Welcome!</h1>
             <form className={classes.form} onSubmit={onSubmit}>
                 <Input
@@ -80,6 +83,7 @@ const SignUp = () => {
                     onChange={onChange}
                     required
                     icon={personOutline}
+                    className={isInvalidClass}
                 />
                 <Input
                     type='text'
@@ -112,7 +116,7 @@ const SignUp = () => {
                     <IonIcon icon={showPassword ? eyeOutline : eyeOffOutline} onClick={() => setShowPassword(prevState => !prevState)} />
                 </div>
                 <div className={classes['btn-container']}>
-                    <Button version='primary'type='submit'><Link to='/sign-up' className={classes.registerLink}>Sign Up</Link></Button>
+                    <Button version='primary' type='submit'><Link to='/sign-up' className={classes.registerLink}>Sign Up</Link></Button>
                 </div>
             </form>
             <div className={classes['btn-container__social']}>

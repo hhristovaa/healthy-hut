@@ -12,7 +12,6 @@ import { motion } from 'framer-motion';
 import Spinner from '../../components/UI/Spinner';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
-import { isFieldEmpty } from '../../utils/utils';
 import classes from './Articles.module.scss';
 
 const CreateArticle = () => {
@@ -54,7 +53,6 @@ const CreateArticle = () => {
 
         if (name.length === 0 || content.length === 0 || source.length === 0) {
             setLoading(false);
-            let isField = isFieldEmpty(name);
             toast.error('Empty fields are not accepted.');
             return;
         }
@@ -84,7 +82,7 @@ const CreateArticle = () => {
                         // Observe state change events such as progress, pause, and resume
                         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                 
+
                         switch (snapshot.state) {
                             case 'paused':
                                 console.log('Upload is paused');
@@ -109,7 +107,6 @@ const CreateArticle = () => {
                 );
             });
         }
-
 
         const imageUrl = await Promise.all(
             [...articleImageUrl].map((img) => storeImage(img))).catch(() => {
@@ -143,7 +140,6 @@ const CreateArticle = () => {
         }
     }
 
-
     const handleUpload = e => {
         let eTarget = e.target;
         let uploadedFile = eTarget.files;
@@ -164,11 +160,11 @@ const CreateArticle = () => {
 
     return (
         <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 3 }}
-    >
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 3 }}
+        >
             <h1 className={classes['g-title']}>Create Article</h1>
             <form className={classes['articles__form']} onSubmit={onSubmit}>
                 <Input type='text' id='name' label='Name' onChange={onChange} value={name} />
@@ -179,7 +175,6 @@ const CreateArticle = () => {
                 <Button type='submit' version='primary'>Create Article</Button>
             </form>
         </motion.main>
-
     )
 }
 

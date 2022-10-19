@@ -48,7 +48,6 @@
             vertical-align: text-top;
         }
 
-
         &.is-active {
             color: $color-secondary;
         }
@@ -85,14 +84,11 @@
     }
 }
 
-
 @include hover {
     .navbar__item {
         &:hover {
             color: $color-secondary-light;
             transition: ease-in-out all 0.4s;
-
-
         }
     }
 

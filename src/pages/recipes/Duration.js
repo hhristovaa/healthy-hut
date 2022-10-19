@@ -25,11 +25,11 @@ const Duration = () => {
 
     return (
         <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 3 }}
-    >
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 3 }}
+        >
             <h1 className={classes['g-title']}>Up to 30 Minutes</h1>
             <section className={classes['recipes__container']}>
                 {content.data?.results.map((item) => {

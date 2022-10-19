@@ -20,8 +20,6 @@
     }
 }
 
-
-
 .recipes__container {
     @include flex-setup($wrap: wrap, $justContent: space-around);
     margin: 1rem auto;
@@ -31,7 +29,6 @@
     }
 }
 
-
 @media screen and (max-width: 425px) {
 
     .filters__actions {
@@ -39,15 +36,15 @@
 
         button {
             margin-left: 1rem;
+            line-height: 14px;
         }
     }
 }
 
 @media screen and (max-width: 680px) {
     .filters__form-section {
-        > div {
+        >div {
             width: 100%;
         }
     }
 }
-

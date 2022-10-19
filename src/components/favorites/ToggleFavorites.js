@@ -13,7 +13,6 @@ import Spinner from '../UI/Spinner';
 import classes from './ToggleFavorites.module.scss';
 
 const ToggleFavorites = (props) => {
-
     const { loggedIn } = useAuthStatus();
     const [loading, setLoading] = useState(false);
     const [favorite, setFavorite] = useState(false);
@@ -22,7 +21,6 @@ const ToggleFavorites = (props) => {
     });
 
     const favoritesCtx = useContext(FavoritesContext);
-    const { recipes } = favoritesCtx;
 
     const auth = getAuth();
     const navigate = useNavigate();
@@ -50,6 +48,7 @@ const ToggleFavorites = (props) => {
             onSubmit(e);
             addToFavorites(props.recipe);
         }
+
         setFavorite(!favorite);
     }
 
@@ -72,34 +71,33 @@ const ToggleFavorites = (props) => {
     useEffect(() => {
         if (isLogged) {
             let userFavRecipes;
-
             const userRef = doc(db, 'users', auth.currentUser.uid);
+
             getDoc(userRef).then((docSnap) => {
                 if (docSnap?.exists()) {
                     let userFavs = docSnap?.data()?.favorites;
                     userFavRecipes = !!userFavs ? userFavs : [];
-                    console.dir(userFavRecipes);
+
                     const newFavoriteRecipe = userFavRecipes.some(recipe => recipe.id === props?.recipe?.id);
-                    console.log(`nev fav ${newFavoriteRecipe}`);
+
                     setFavorite(newFavoriteRecipe);
                     setFavRecipeData({
                         ...props.recipe
                     });
                 }
+
             }).catch(err => {
                 console.error(err);
             });
-
-
         }
-    }, [favorite, recipes, isLogged, props.recipe]);
+    }, [isLogged]);
 
     const onSubmit = async (e) => {
         e.preventDefault();
         const docRef = doc(db, 'users', auth.currentUser.uid)
 
         setFavRecipeData({
-            favRecipeData
+            ...favRecipeData
         });
 
         updateDoc(docRef,

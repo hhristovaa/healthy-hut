@@ -1,70 +1,40 @@
 import { useReducer } from 'react';
 
-
-import { doc, getDoc } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-import { db } from '../firebase.config';
 import FavoritesContext from './FavoritesContext';
 import { ACTIONS } from '../utils/constants';
-import { useAuthStatus } from '../hooks/useAuthStatus';
-
 
 const defaultFavoritesState = {
     recipes: []
 };
 
-const favoritesReducer = async (state, action) => {
+const favoritesReducer = (state, action) => {
     if (action.type === ACTIONS.ADD) {
         const existingFavRecipeIndex = state.recipes.findIndex(recipe => recipe.id === action.recipe.id);
-        const existingFavRecipe = state.recipes[existingFavRecipeIndex];
 
-        if (!existingFavRecipe) {
+        if (existingFavRecipeIndex === -1) {
             let updatedRecipes = state.recipes.concat(action.recipe);
+
             return {
                 recipes: updatedRecipes,
             };
         }
-    }
 
-    if (action.type === ACTIONS.REMOVE) {
-        const existingFavRecipeIndex = state.recipes.findIndex(
-            (recipe) => recipe.id === action.id
-        );
+        return state;
 
-        let existingRecipe = state.recipes[existingFavRecipeIndex];
-        let updatedRecipes;
-
-        if (existingRecipe) {
-            updatedRecipes = state.recipes.filter(recipe => recipe.id !== action.id);
-        }
+    } else if (action.type === ACTIONS.REMOVE) {
+        let updatedRecipes = state.recipes.filter(recipe => recipe.id !== action.id);
         return {
             recipes: updatedRecipes
-        }
-    }
+        };
 
-    if (action.type === ACTIONS.INIT) {
-        const auth = getAuth();
-
-        if (!!auth) {
-            let updatedRecipes;
-
-            const userRef = doc(db, 'users', auth.currentUser.uid);
-            const docSnap = await getDoc(userRef);
-
-            if (docSnap?.exists()) {
-                let userFavs = docSnap?.data()?.favorites;
-
-                updatedRecipes = !!userFavs ? userFavs : [];
-            }
-
-            return {
-                recipes: updatedRecipes
-            }
+    } else if (action.type === ACTIONS.INIT) {
+        return {
+            recipes: action.recipes
         }
 
+    } else {
+        throw new Error(`An error occured while trying to ${action.type} favorite recipe. `);
     }
-
-    return defaultFavoritesState;
 };
 
 const FavoritesProvider = props => {
@@ -86,10 +56,8 @@ const FavoritesProvider = props => {
         recipes: favoritesState.recipes,
         addRecipe: addRecipeHandler,
         removeRecipe: removeRecipeHandler,
-        initRecipe: initRecipeHandler
+        initRecipes: initRecipeHandler
     };
-
-
 
     return (
         <FavoritesContext.Provider value={favoritesContext}>

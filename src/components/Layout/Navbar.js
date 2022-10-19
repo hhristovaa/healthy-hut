@@ -5,39 +5,36 @@ import { menuOutline, closeOutline, chevronDownOutline, chevronUpOutline } from 
 
 import Button from '../UI/Button';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
-import HeaderFavoriteIcon from './HeaderFavoriteIcon';
+import HeaderFavoriteIcon from '../Favorites/HeaderFavoriteIcon';
 import classes from './Navbar.module.scss';
 
 const Navbar = () => {
     const { loggedIn } = useAuthStatus();
     const [isMobile, setIsMobile] = useState(false);
-    const [isDropdown, setIsDropdown] = useState(true);
+    const [isDropdown, setIsDropdown] = useState(false);
 
     const closeMobileMenu = () => {
         setIsMobile(false);
         setIsDropdown(!isDropdown);
     }
 
-    const closeDropdownMenu = () => {
-        
-    }
     const isLinkActive = (({ isActive }) => (isActive ? `${classes['navbar__item']} ${classes['is-active']}` : classes['navbar__item']));
     const isMenuMobile = isMobile ? `${classes.header} ${classes['is-mobile']} ${classes['is-open']}` : classes.header;
-    const isNotExpanded = isDropdown ? `${classes.submenu} ${classes['is-hidden']}` : classes.submenu;
+    const isNotExpanded = !isDropdown ? `${classes.submenu} ${classes['is-hidden']}` : classes.submenu;
 
     return (
         <header className={isMenuMobile}>
             <Link to='/' className={classes.logo} onClick={closeMobileMenu}>HealthyHut</Link>
-
             <nav className={classes.navbar}>
                 <NavLink className={isLinkActive} to={'/'} onClick={closeMobileMenu}>Home</NavLink>
                 <NavLink className={isLinkActive} to={'/recipes'} onClick={closeMobileMenu}>All Recipes</NavLink>
                 <span className={classes['dropdown-menu']}>
+
                     {!isMobile && <span className={classes['navbar__item']}>Categories
                         <IonIcon icon={chevronDownOutline} />  </span>
                     }
-                    {isMobile && <span className={classes['navbar__item']} onClick={() => setIsDropdown(!isDropdown)}>Categories
-                        <IonIcon icon={isDropdown ? chevronDownOutline : chevronUpOutline} />  </span>
+                    {isMobile && <span className={classes['navbar__item']} onClick={() => setIsDropdown(true)}>Categories
+                        <IonIcon icon={!isDropdown ? chevronDownOutline : chevronUpOutline} />  </span>
                     }
 
                     <div className={isNotExpanded}>
@@ -54,23 +51,23 @@ const Navbar = () => {
                         </div>
                         <div className={classes['submenu__section']}>
                             <p>Diet Type</p>
-                            <NavLink to={'/diet/vegan'}> Vegan </NavLink>
-                            <NavLink to={'/diet/vegetarian'}> Vegetarian </NavLink>
-                            <NavLink to={'/diet/ketogenic'}> Keto </NavLink>
-                            <NavLink to={'/diet/gluten-free'}> Gluten Free </NavLink>
-                            <NavLink to={'/diet/dairy-free'}> Dairy Free </NavLink>
-                            <NavLink to={'/diet/paleo'}> Paleo</NavLink>
+                            <NavLink to={'/diet/vegan'} onClick={closeMobileMenu}> Vegan </NavLink>
+                            <NavLink to={'/diet/vegetarian'} onClick={closeMobileMenu}> Vegetarian </NavLink>
+                            <NavLink to={'/diet/ketogenic'} onClick={closeMobileMenu}> Keto </NavLink>
+                            <NavLink to={'/diet/gluten-free'} onClick={closeMobileMenu}> Gluten Free </NavLink>
+                            <NavLink to={'/diet/dairy-free'} onClick={closeMobileMenu}> Dairy Free </NavLink>
+                            <NavLink to={'/diet/paleo'} onClick={closeMobileMenu}> Paleo</NavLink>
                         </div>
                         <div className={classes['submenu__section']}>
                             <p>Cuisine</p>
                             <NavLink to={'/cuisine/american'} onClick={closeMobileMenu}> American </NavLink>
                             <NavLink to={'/cuisine/british'} onClick={closeMobileMenu}> British </NavLink>
-                            <NavLink to={'/cuisine/chinese'} onClick={closeMobileMenu}> Chinese </NavLink>
                             <NavLink to={'/cuisine/european'} onClick={closeMobileMenu}> European </NavLink>
                             <NavLink to={'/cuisine/mediterranean'} onClick={closeMobileMenu}> Mediterranean </NavLink>
-                            <NavLink to={'/cuisine/greek'} onClick={closeMobileMenu}> Greek</NavLink>
                             <NavLink to={'/cuisine/italian'} onClick={closeMobileMenu}> Italian</NavLink>
+                            <NavLink to={'/cuisine/chinese'} onClick={closeMobileMenu}> Chinese </NavLink>
                             <NavLink to={'/cuisine/thai'} onClick={closeMobileMenu}> Thai</NavLink>
+                            <NavLink to={'/cuisine/nordic'} onClick={closeMobileMenu}> Noridc</NavLink>
                         </div>
                         <div className={classes['submenu__section']}>
                             <p>Special Recipes</p>
@@ -81,14 +78,11 @@ const Navbar = () => {
                             <NavLink to={'/specials/lowFodmap'} onClick={closeMobileMenu}> Fodmap Friendly </NavLink>
                         </div>
                     </div>
-
                 </span>
-
                 <NavLink className={isLinkActive} to={'/articles'} onClick={closeMobileMenu}>Articles</NavLink>
                 <NavLink className={isLinkActive} to={'/about'} onClick={closeMobileMenu}>About</NavLink>
                 {loggedIn && <NavLink className={isLinkActive} to={'/profile'} onClick={closeMobileMenu}>Profile</NavLink>}
                 <div className={classes['header__buttons']}>
-
                     {loggedIn ? (
                         <NavLink to={'/favorites'} onClick={closeMobileMenu}>
                             <HeaderFavoriteIcon />

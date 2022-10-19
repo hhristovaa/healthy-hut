@@ -1,11 +1,10 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { doc, getDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../../firebase.config';
 import { motion } from 'framer-motion';
 
-import FavoritesContext from '../../context/FavoritesContext';
 import Spinner from '../../components/UI/Spinner';
 import RecipeItem from '../../components/Recipes/RecipeItem';
 import classes from '../recipes/Recipes.module.scss';
@@ -39,16 +38,16 @@ const Favorites = () => {
         return () => controller.abort();
     }, [auth.currentUser.uid]);
 
-if (loading) {
-    return <Spinner/>
-}
+    if (loading) {
+        return <Spinner />
+    }
     return (
         <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 3 }}
-    >
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 3 }}
+        >
             <h1 className={classes['g-title']}>Favorites </h1>
             <h3 className={classes['recipes__counter']}>You have marked {favorites?.length || 0} recipes as favorites.</h3>
             <section className={classes['recipes__container']}>

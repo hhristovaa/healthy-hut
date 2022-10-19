@@ -1,7 +1,4 @@
 import { useState } from "react";
-//
-//https://stackoverflow.com/questions/73175989/react-async-promises-not-resolving
-
 
 const useApi = (apiFunc) => {
   const [data, setData] = useState(null);
@@ -9,11 +6,10 @@ const useApi = (apiFunc) => {
   const [loading, setLoading] = useState(false);
 
   const request = async (...args) => {
-    setLoading(true);  
+    setLoading(true);
     try {
       const result = await apiFunc(...args);
       setData(result.data);
-     
     } catch (err) {
       setError(err.message || "Unexpected Error!");
     } finally {
