@@ -5,7 +5,6 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-import { useAuthStatus } from '../../hooks/useAuthStatus';
 import FavoritesContext from '../../context/FavoritesContext';
 import classes from './HeaderFavoriteIcon.module.scss';
 

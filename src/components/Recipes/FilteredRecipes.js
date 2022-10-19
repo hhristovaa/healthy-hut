@@ -22,20 +22,20 @@ const FilteredRecipes = () => {
   const intoleranceSelectInputRef = useRef();
   const cuisineSelectInputRef = useRef();
 
-  const getFiltered = (diet, dish, intolerance, cuisine) => client.get(`&type=${dish}&diet=${diet}&intolerance=${intolerance}&cuisine=${cuisine}`)
+  const getFiltered = async (diet, dish, intolerance, cuisine) => await client.get(`&type=${dish}&diet=${diet}&intolerance=${intolerance}&cuisine=${cuisine}`)
 
   const getFilteredApi = useApi(getFiltered);
 
   const resetFilters = () => {
-    const isDietEmpty = diet.length === 0;
-    const isIntoleranceEmpty = intolerance.length === 0;
-    const isCuisineEmpty = cuisine.length === 0;
-    const isDishEmpty = dish.length === 0;
+    const isDietEmpty = diet.length === 0 || undefined;
+    const isIntoleranceEmpty = intolerance.length === 0 || undefined;
+    const isCuisineEmpty = cuisine.length === 0 || undefined;
+    const isDishEmpty = dish.length === 0 || undefined;
 
     if (isDietEmpty && isIntoleranceEmpty && isCuisineEmpty && isDishEmpty) return;
 
     setDiets('');
-    setDishes('');
+    setDishes([]);
     setIntolerances('');
     setCuisines('');
     dietSelectInputRef.current.clearValue();
@@ -53,10 +53,10 @@ const FilteredRecipes = () => {
     let cuisines = e.target.cuisines.value;
     let disheshInput = e.target.dishes;
 
-    const isDietEmpty = diets.length === 0;
-    const isIntoleranceEmpty = intolerances.length === 0;
-    const isCuisineEmpty = cuisines.length === 0;
-    const isDishEmpty = disheshInput.value.length === 0;
+    const isDietEmpty = diets.length === 0 || undefined;
+    const isIntoleranceEmpty = intolerances.length === 0 || undefined;
+    const isCuisineEmpty = cuisines.length === 0 || undefined;
+    const isDishEmpty = disheshInput.value.length === 0 || undefined; 
 
     const isIterable = disheshInput.length > 1;
 
@@ -80,16 +80,18 @@ const FilteredRecipes = () => {
     setDiets(diets);
     setIntolerances(intolerances);
     setCuisines(cuisines);
+
+    if (getFilteredApi.loading) return;
     getFilteredApi.request(diet, dish, intolerance, cuisine);
+    console.count('submit');
+
   }
 
   useEffect(() => {
-    const controller = new AbortController();
     getFilteredApi.request(diet, dish, intolerance, cuisine);
-
-    return () => controller.abort();
-  }, [diet, dish, intolerance, cuisine])
-
+    console.count('effect');
+ 
+  }, []);
 
   return (
     <>
