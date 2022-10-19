@@ -34,8 +34,6 @@ const Articles = () => {
             } catch (err) {
                 toast.error('An error occured while loading the articles.');
             }
-
-
         }
         fetchArticles();
 
@@ -43,21 +41,18 @@ const Articles = () => {
 
     return (
         <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 3 }}
-    >
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 3 }}
+        >
             <h1 className={classes['g-title']}>All Articles</h1>
             {loading ? (<Spinner />) : articles && articles.length > 0 ? (
                 <section className={classes.articles}>{articles.map((article) => (
                     <ArticleItem article={article.data} id={article.id} key={article.id} />
                 ))}
-
                 </section>
-
-
-            ) : <NoResults/>}
+            ) : <NoResults />}
         </motion.main>
     )
 }

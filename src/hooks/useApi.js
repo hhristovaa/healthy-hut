@@ -6,7 +6,7 @@ const useApi = (apiFunc) => {
   const [loading, setLoading] = useState(false);
 
   const request = async (...args) => {
-    setLoading(true);  
+    setLoading(true);
     try {
       const result = await apiFunc(...args);
       setData(result.data);

@@ -29,7 +29,6 @@
     }
 }
 
-
 @media screen and (max-width: 425px) {
 
     .filters__actions {
@@ -44,9 +43,8 @@
 
 @media screen and (max-width: 680px) {
     .filters__form-section {
-        > div {
+        >div {
             width: 100%;
         }
     }
 }
-

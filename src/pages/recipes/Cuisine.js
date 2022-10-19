@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useQuery } from 'react-query';
@@ -9,7 +8,7 @@ import Spinner from '../../components/UI/Spinner';
 import client from '../../apis/client';
 import { capitalizeFirstLetter } from '../../utils/utils';
 import classes from './Recipes.module.scss';
-import NoResults from '../../components/UI/NoResults';
+
 
 const Cuisine = () => {
     let params = useParams();
@@ -28,6 +27,7 @@ const Cuisine = () => {
     } else {
         content = data;
     }
+
     return (
         <motion.main
             initial={{ opacity: 0 }}
@@ -47,8 +47,6 @@ const Cuisine = () => {
             </section>
         </motion.main>
     )
-
 }
-
 
 export default Cuisine;

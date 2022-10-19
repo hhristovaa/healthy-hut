@@ -20,7 +20,7 @@ const favoritesReducer = (state, action) => {
         }
 
         return state;
-        
+
     } else if (action.type === ACTIONS.REMOVE) {
         let updatedRecipes = state.recipes.filter(recipe => recipe.id !== action.id);
         return {
@@ -31,7 +31,7 @@ const favoritesReducer = (state, action) => {
         return {
             recipes: action.recipes
         }
-        
+
     } else {
         throw new Error(`An error occured while trying to ${action.type} favorite recipe. `);
     }

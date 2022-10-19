@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase.config';
-import {motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import { IonIcon } from '@ionic/react';
 import { eyeOutline, eyeOffOutline, mailOutline, personOutline } from 'ionicons/icons';
 
@@ -38,7 +38,7 @@ const SignUp = () => {
             setIsInvalidClass('invalid');
             toast.error('All fields must be filled out');
         }
-       
+
     };
 
     const onSubmit = async (e) => {
@@ -68,11 +68,11 @@ const SignUp = () => {
 
     return (
         <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 3 }}
-    >
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1}}
+        >
             <h1 className={classes['g-title']}>Welcome!</h1>
             <form className={classes.form} onSubmit={onSubmit}>
                 <Input
@@ -116,7 +116,7 @@ const SignUp = () => {
                     <IonIcon icon={showPassword ? eyeOutline : eyeOffOutline} onClick={() => setShowPassword(prevState => !prevState)} />
                 </div>
                 <div className={classes['btn-container']}>
-                    <Button version='primary'type='submit'><Link to='/sign-up' className={classes.registerLink}>Sign Up</Link></Button>
+                    <Button version='primary' type='submit'><Link to='/sign-up' className={classes.registerLink}>Sign Up</Link></Button>
                 </div>
             </form>
             <div className={classes['btn-container__social']}>

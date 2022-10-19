@@ -5,9 +5,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase.config';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-
 import { useAuthStatus } from '../../hooks/useAuthStatus';
-
 import FavoritesContext from '../../context/FavoritesContext';
 import classes from './HeaderFavoriteIcon.module.scss';
 
@@ -17,13 +15,11 @@ const HeaderFavoriteIcon = props => {
     const favoritesCtx = useContext(FavoritesContext);
     const { recipes } = favoritesCtx;
     const favoritesCount = recipes?.length;
-    const btnClasses = `${classes.button} ${btnIsAnimated ? classes.bump : ''}`;
+    const btnClasses = `${classes.favorites} ${btnIsAnimated ? classes.bump : ''}`;
 
     const initFavorites = recipes => {
         favoritesCtx.initRecipes(recipes)
     }
-
-    const { loggedIn, loadingStatus } = useAuthStatus();
 
     const auth = getAuth();
     const isMounted = useRef(true);
@@ -79,7 +75,7 @@ const HeaderFavoriteIcon = props => {
             clearTimeout(timer);
         };
 
-}, [favoritesCount]);
+    }, [favoritesCount]);
 
     return (
         <button className={btnClasses}>

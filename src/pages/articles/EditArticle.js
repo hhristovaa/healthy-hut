@@ -46,7 +46,6 @@ const EditArticle = () => {
         getArticle();
 
     }, [params.articleId, navigate]);
-    // redirect if article is not user's
 
     useEffect(() => {
         if (article && article.userRef !== auth.currentUser.uid) {
@@ -55,9 +54,7 @@ const EditArticle = () => {
         }
     });
 
-    //fetch articles to edit 
     useEffect(() => {
-
         const fetchArticle = async () => {
             const docRef = doc(db, 'articles', params.articleId);
             const docSnap = await getDoc(docRef);

@@ -13,7 +13,6 @@ const HeroBanner = () => {
         if (searchInput.length > 2) {
             navigate('/search/' + searchInput);
         }
-
     }
 
     return (
@@ -31,7 +30,6 @@ const HeroBanner = () => {
             </form>
         </section>
     )
-
 };
 
 export default HeroBanner;

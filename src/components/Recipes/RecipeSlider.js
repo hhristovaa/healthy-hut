@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import {useQuery} from 'react-query';
+import { useQuery } from 'react-query';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 
@@ -11,15 +11,13 @@ import { SLIDER_OPTIONS } from '../../utils/constants';
 
 const RecipeSlider = () => {
     let params = useParams();
-    
+
     const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/similar/?apiKey=${process.env.REACT_APP_RECIPE_API_KEY}&number=6`
     const getSimilar = () => client.get(BASE_URL)
-
 
     const { isLoading, isError, error, data } = useQuery(['similar', params.recipeId], getSimilar);
 
     let content;
-
 
     if (isLoading) {
         return <Spinner />
@@ -29,24 +27,20 @@ const RecipeSlider = () => {
         content = data;
     }
 
-
     return (
-
         <section>
             <h2>Similar Recipes</h2>
-            <Splide options={SLIDER_OPTIONS}>         
-                 {content?.data?.map((recipe) => {
+            <Splide options={SLIDER_OPTIONS}>
+                {content?.data?.map((recipe) => {
                     return (
                         <SplideSlide key={recipe.id}>
-                            <RecipeItem key={recipe.id} recipe={recipe}/>
+                            <RecipeItem key={recipe.id} recipe={recipe} />
                         </SplideSlide>
                     );
-                })} 
+                })}
             </Splide>
         </section>
-
     )
-
 }
 
 export default RecipeSlider;

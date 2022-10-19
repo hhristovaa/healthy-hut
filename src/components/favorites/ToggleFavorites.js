@@ -77,15 +77,15 @@ const ToggleFavorites = (props) => {
                 if (docSnap?.exists()) {
                     let userFavs = docSnap?.data()?.favorites;
                     userFavRecipes = !!userFavs ? userFavs : [];
-                    
+
                     const newFavoriteRecipe = userFavRecipes.some(recipe => recipe.id === props?.recipe?.id);
-                    
+
                     setFavorite(newFavoriteRecipe);
                     setFavRecipeData({
                         ...props.recipe
                     });
                 }
-                
+
             }).catch(err => {
                 console.error(err);
             });

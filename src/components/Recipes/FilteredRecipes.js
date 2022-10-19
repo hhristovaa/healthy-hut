@@ -110,7 +110,7 @@ const FilteredRecipes = () => {
       {getFilteredApi.loading && <Spinner />}
       {getFilteredApi.error && toast.error(getFilteredApi.error)}
       <section className={classes['recipes__container']}>
-        {getFilteredApi.data?.results?.length === 0 && <NoResults/>}
+        {getFilteredApi.data?.results?.length === 0 && <NoResults />}
         {getFilteredApi.data?.results?.length !== 0 && getFilteredApi.data?.results.map((filtered) => {
           return (
             <RecipeItem key={filtered.id} recipe={filtered} />

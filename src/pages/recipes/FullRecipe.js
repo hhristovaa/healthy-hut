@@ -30,13 +30,13 @@ const FullRecipe = () => {
         data: detailsData,
       } = useQuery(['details', params.recipeId], getDetails);
 
-    //   const {
-    //     isLoading: loadingNutrition,
-    //     error: errorNutrition,
-    //     data: nutritionData,
-    //   } = useQuery(['nutrition', 'details', params.recipeId], getNutrition,  {
-    //     enabled: detailsData && Object.keys(detailsData).length > 0,
-    //   });
+      const {
+        isLoading: loadingNutrition,
+        error: errorNutrition,
+        data: nutritionData,
+      } = useQuery(['nutrition', 'details', params.recipeId], getNutrition,  {
+        enabled: detailsData && Object.keys(detailsData).length > 0,
+      });
 
           
     // const onMouseOver = (e) => {
@@ -117,7 +117,7 @@ const FullRecipe = () => {
                     <p>Currently the instructions are not available.</p>
                 )}
             </section> 
-            {/* <section className={classes['recipe__facts']}>
+            <section className={classes['recipe__facts']}>
                 <h4 className={classes['recipe__desc-title']}>
                     Nutrition Facts per Serving
                 </h4>
@@ -130,7 +130,7 @@ const FullRecipe = () => {
                 )}
             </section>
 
-         <RecipeSlider recipeId={params.recipeId}/> */}
+         <RecipeSlider recipeId={params.recipeId}/>
         </motion.main>
 
     )
