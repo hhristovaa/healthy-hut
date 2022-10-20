@@ -56,7 +56,7 @@ const FilteredRecipes = () => {
     const isDietEmpty = diets.length === 0 || undefined;
     const isIntoleranceEmpty = intolerances.length === 0 || undefined;
     const isCuisineEmpty = cuisines.length === 0 || undefined;
-    const isDishEmpty = disheshInput.value.length === 0 || undefined; 
+    const isDishEmpty = disheshInput.value.length === 0 || undefined;
 
     const isIterable = disheshInput.length > 1;
 
@@ -84,14 +84,13 @@ const FilteredRecipes = () => {
     if (getFilteredApi.loading) return;
     getFilteredApi.request(diet, dish, intolerance, cuisine);
     console.count('submit');
-
   }
 
   useEffect(() => {
     getFilteredApi.request(diet, dish, intolerance, cuisine);
     console.count('effect');
- 
-  }, []);
+
+  }, [diet, dish, intolerance, cuisine]);
 
   return (
     <>
