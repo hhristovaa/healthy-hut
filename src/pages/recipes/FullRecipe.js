@@ -4,6 +4,8 @@ import { useQuery } from 'react-query';
 import { motion } from 'framer-motion';
 import { IonIcon } from '@ionic/react';
 import { restaurantOutline, globeOutline, starOutline, timerOutline, manOutline, flagOutline, cashOutline, nutrition, leafOutline } from 'ionicons/icons';
+import { useEffect } from 'react';
+import DOMPurify from 'dompurify';
 
 import client from '../../apis/client';
 import Spinner from '../../components/UI/Spinner';
@@ -15,9 +17,6 @@ const FullRecipe = () => {
     let params = useParams();
 
     const BASE_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/information?includeNutrition=true&apiKey=${process.env.REACT_APP_RECIPE_API_KEY}`;
-
-    // const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionLabel.png?showOptionalNutrients=false&showZeroValues=false&showIngredients=false&apiKey=${apiKey}`
-    // const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionLabel?defaultCss=true&showOptionalNutrients=false&showZeroValues=false&showIngredients=false&apiKey=${apiKey}`
     const NUTRITION_URL = `https://api.spoonacular.com/recipes/${params.recipeId}/nutritionWidget?defaultCss=true&apiKey=${process.env.REACT_APP_RECIPE_API_KEY}`
 
     const getDetails = async () => await client.get(BASE_URL);
@@ -36,18 +35,6 @@ const FullRecipe = () => {
       } = useQuery(['nutrition', 'details', params.recipeId], getNutrition,  {
         enabled: detailsData && Object.keys(detailsData).length > 0,
       });
-
-          
-    // const onMouseOver = (e) => {
-    //     e.preventDefault();
-        
-    //  }
-
-    // useEffect(() => {
-    //   window.addEventListener('mouseover', onMouseOver)
-  
-    //   return () => { window.removeEventListener('mouseover', onMouseOver) }
-    // }, [])
 
     let content;
 
@@ -81,7 +68,6 @@ const FullRecipe = () => {
                                 <li key={ingredient.id}>{ingredient.original}</li>
                             ))}
                         </ul>
-
                     </div>
 
                 </aside>
@@ -110,7 +96,7 @@ const FullRecipe = () => {
                 {content.data?.instructions ? (
                     <div className={classes['recipe__instructions']}>
                         <h4 className={classes['recipe__desc-title']}>Instructions</h4>
-                        <div dangerouslySetInnerHTML={{ __html: content.data?.instructions }}></div>
+                        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content.data?.instructions) }}></div>
                     </div>
                 ) : (
                     <p>Currently the instructions are not available.</p>
@@ -123,7 +109,7 @@ const FullRecipe = () => {
                 {loadingNutrition && <p>Currently the nutrition facts are not available.</p>}
                 {errorNutrition && toast.error(errorNutrition.message)}
                 {nutritionData?.data ? (<div className={classes['recipe__nutrition']}
-                    dangerouslySetInnerHTML={{ __html: nutritionData?.data }}>
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(nutritionData?.data) }}>
                 </div>) : (
                     <p>Currently the nutrition facts are not available.</p>
                 )}

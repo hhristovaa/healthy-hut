@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
+import { useQuery } from 'react-query';
 
 import { DIETS, DISHES, INTOLERANCES, CUISINES } from '../../utils/constants';
 import client from '../../apis/client';
@@ -22,15 +23,15 @@ const FilteredRecipes = () => {
   const intoleranceSelectInputRef = useRef();
   const cuisineSelectInputRef = useRef();
 
-  const getFiltered = async (diet, dish, intolerance, cuisine) => await client.get(`&type=${dish}&diet=${diet}&intolerance=${intolerance}&cuisine=${cuisine}`)
+  const getFiltered = (diet, dish, intolerance, cuisine) => client.get(`&type=${dish}&diet=${diet}&intolerance=${intolerance}&cuisine=${cuisine}`)
 
-  const getFilteredApi = useApi(getFiltered);
+  const { isLoading, isFetching, isError, error, data, refetch } = useQuery(['filtered', dish, diet, intolerance, cuisine], () => getFiltered(dish, diet, intolerance, cuisine));
 
   const resetFilters = () => {
-    const isDietEmpty = diet.length === 0 || undefined;
-    const isIntoleranceEmpty = intolerance.length === 0 || undefined;
-    const isCuisineEmpty = cuisine.length === 0 || undefined;
-    const isDishEmpty = dish.length === 0 || undefined;
+    const isDietEmpty = diet.length === 0;
+    const isIntoleranceEmpty = intolerance.length === 0;
+    const isCuisineEmpty = cuisine.length === 0;
+    const isDishEmpty = dish.length === 0;
 
     if (isDietEmpty && isIntoleranceEmpty && isCuisineEmpty && isDishEmpty) return;
 
@@ -42,8 +43,7 @@ const FilteredRecipes = () => {
     dishSelectInputRef.current.clearValue();
     intoleranceSelectInputRef.current.clearValue();
     cuisineSelectInputRef.current.clearValue();
-
-    getFilteredApi.request();
+    refetch()
   }
 
   const submitFilters = (e) => {
@@ -53,10 +53,10 @@ const FilteredRecipes = () => {
     let cuisines = e.target.cuisines.value;
     let disheshInput = e.target.dishes;
 
-    const isDietEmpty = diets.length === 0 || undefined;
-    const isIntoleranceEmpty = intolerances.length === 0 || undefined;
-    const isCuisineEmpty = cuisines.length === 0 || undefined;
-    const isDishEmpty = disheshInput.value.length === 0 || undefined;
+    const isDietEmpty = diets.length === 0;
+    const isIntoleranceEmpty = intolerances.length === 0;
+    const isCuisineEmpty = cuisines.length === 0;
+    const isDishEmpty = disheshInput.value.length === 0;
 
     const isIterable = disheshInput.length > 1;
 
@@ -80,17 +80,18 @@ const FilteredRecipes = () => {
     setDiets(diets);
     setIntolerances(intolerances);
     setCuisines(cuisines);
-
-    if (getFilteredApi.loading) return;
-    getFilteredApi.request(diet, dish, intolerance, cuisine);
-    console.count('submit');
+    refetch()
   }
 
-  useEffect(() => {
-    getFilteredApi.request(diet, dish, intolerance, cuisine);
-    console.count('effect');
+  let content;
 
-  }, [diet, dish, intolerance, cuisine]);
+  if (isLoading || isFetching) {
+    return <Spinner />
+  } else if (isError) {
+    return toast.error(error.message)
+  } else {
+    content = data;
+  }
 
   return (
     <>
@@ -108,11 +109,9 @@ const FilteredRecipes = () => {
           </div>
         </form>
       </section>
-      {getFilteredApi.loading && <Spinner />}
-      {getFilteredApi.error && toast.error(getFilteredApi.error)}
       <section className={classes['recipes__container']}>
-        {getFilteredApi.data?.results?.length === 0 && <NoResults />}
-        {getFilteredApi.data?.results?.length !== 0 && getFilteredApi.data?.results.map((filtered) => {
+        {content.data?.results?.length === 0 && <NoResults />}
+        {content.data?.results?.length !== 0 && content.data?.results.map((filtered) => {
           return (
             <RecipeItem key={filtered.id} recipe={filtered} />
           );
