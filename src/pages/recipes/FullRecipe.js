@@ -4,8 +4,6 @@ import { useQuery } from 'react-query';
 import { motion } from 'framer-motion';
 import { IonIcon } from '@ionic/react';
 import { restaurantOutline, globeOutline, starOutline, timerOutline, manOutline, flagOutline, cashOutline, nutrition, leafOutline } from 'ionicons/icons';
-import { useEffect } from 'react';
-import DOMPurify from 'dompurify';
 
 import client from '../../apis/client';
 import Spinner from '../../components/UI/Spinner';
@@ -96,7 +94,7 @@ const FullRecipe = () => {
                 {content.data?.instructions ? (
                     <div className={classes['recipe__instructions']}>
                         <h4 className={classes['recipe__desc-title']}>Instructions</h4>
-                        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content.data?.instructions) }}></div>
+                        <div dangerouslySetInnerHTML={{ __html: content.data?.instructions }}></div>
                     </div>
                 ) : (
                     <p>Currently the instructions are not available.</p>
@@ -109,7 +107,7 @@ const FullRecipe = () => {
                 {loadingNutrition && <p>Currently the nutrition facts are not available.</p>}
                 {errorNutrition && toast.error(errorNutrition.message)}
                 {nutritionData?.data ? (<div className={classes['recipe__nutrition']}
-                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(nutritionData?.data) }}>
+                    dangerouslySetInnerHTML={{ __html: nutritionData?.data}}>
                 </div>) : (
                     <p>Currently the nutrition facts are not available.</p>
                 )}
