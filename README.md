@@ -1,3 +1,16 @@
+# Web site with hiearchically structured recipe catalog with multiple categories
+
+## Features:
+
+User groups and permissions (using Firebase)
+
+Created filtering logic
+
+Implemented and utilized 'favorites' feature
+
+Articles feature with CRUD operations
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
