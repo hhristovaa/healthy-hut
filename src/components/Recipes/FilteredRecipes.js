@@ -23,7 +23,7 @@ const FilteredRecipes = () => {
   const intoleranceSelectInputRef = useRef();
   const cuisineSelectInputRef = useRef();
 
-  const getFiltered = (diet, dish, intolerance, cuisine) => client.get(`&type=${dish}&diet=${diet}&intolerance=${intolerance}&cuisine=${cuisine}`)
+  const getFiltered = (dish, diet, intolerance, cuisine) => client.get(`&type=${dish}&diet=${diet}&intolerance=${intolerance}&cuisine=${cuisine}`)
 
   const { isLoading, isFetching, isError, error, data, refetch } = useQuery(['filtered', dish, diet, intolerance, cuisine], () => getFiltered(dish, diet, intolerance, cuisine));
 
@@ -35,15 +35,15 @@ const FilteredRecipes = () => {
 
     if (isDietEmpty && isIntoleranceEmpty && isCuisineEmpty && isDishEmpty) return;
 
-    setDiets('');
     setDishes([]);
+    setDiets('');
     setIntolerances('');
     setCuisines('');
     dietSelectInputRef.current.clearValue();
     dishSelectInputRef.current.clearValue();
     intoleranceSelectInputRef.current.clearValue();
     cuisineSelectInputRef.current.clearValue();
-    refetch()
+    refetch();
   }
 
   const submitFilters = (e) => {
@@ -80,7 +80,7 @@ const FilteredRecipes = () => {
     setDiets(diets);
     setIntolerances(intolerances);
     setCuisines(cuisines);
-    refetch()
+    refetch();
   }
 
   let content;

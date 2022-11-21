@@ -125,7 +125,7 @@ const SignUp = () => {
                     <IonIcon icon={showPassword ? eyeOutline : eyeOffOutline} onClick={() => setShowPassword(prevState => !prevState)} />
                 </div>
                 <div className={classes['btn-container']}>
-                    <Button version='primary' type='submit'><Link to='/sign-up' className={classes.registerLink}>Sign Up</Link></Button>
+                    <Button version='primary' type='submit'>Sign Up</Button>
                 </div>
             </form>
             <div className={classes['btn-container__social']}>
