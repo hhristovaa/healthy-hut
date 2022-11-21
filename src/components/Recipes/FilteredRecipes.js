@@ -1,11 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
 import { useQuery } from 'react-query';
 
 import { DIETS, DISHES, INTOLERANCES, CUISINES } from '../../utils/constants';
 import client from '../../apis/client';
-import useApi from '../../hooks/useApi';
 import RecipeItem from './RecipeItem';
 import NoResults from '../UI/NoResults';
 import Spinner from '../UI/Spinner';
