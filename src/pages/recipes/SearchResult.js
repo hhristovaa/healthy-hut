@@ -39,7 +39,7 @@ const SearchResult = () => {
                     return (
                         <RecipeItem key={recipe.id} recipe={recipe} />
                     )
-                })};
+                })}
                 {content?.data?.results.length === 0 && <NoResults />}
             </section>
         </motion.main>

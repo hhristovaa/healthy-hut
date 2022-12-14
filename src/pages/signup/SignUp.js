@@ -122,7 +122,7 @@ const SignUp = () => {
                         onChange={onChange}
                         required
                     />
-                    <IonIcon icon={showPassword ? eyeOutline : eyeOffOutline} onClick={() => setShowPassword(prevState => !prevState)} />
+                    <IonIcon icon={showPassword ? eyeOffOutline : eyeOutline} onClick={() => setShowPassword(prevState => !prevState)} />
                 </div>
                 <div className={classes['btn-container']}>
                     <Button version='primary' type='submit'>Sign Up</Button>
